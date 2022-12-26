@@ -11,7 +11,7 @@ $user = Auth::user();
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini">پنل</span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>کنترل پنل مدیریت</b></span>
+    <span class="logo-lg"><b>کنترل پنل مدیریت</b></span><br>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
