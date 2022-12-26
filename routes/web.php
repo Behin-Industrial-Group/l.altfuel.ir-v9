@@ -31,7 +31,7 @@ Route::get('hamayesh/barname', function(){
 });
 
 Route::get('/migrate', function(){
-    Artisan::call('catch:clear');
+    Artisan::call('cache:clear');
     Artisan::call('migrate');
 });
 
