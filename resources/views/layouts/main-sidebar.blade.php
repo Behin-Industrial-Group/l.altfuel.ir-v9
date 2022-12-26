@@ -180,7 +180,7 @@ $videosCatagories = VideosCatagoriesModel::get();
               </ul>
             </li>
             -->
-            @can('Level1')
+            @if(Access::checkView('report'))
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-envelope"></i> <span>کاربران</span>
@@ -192,7 +192,7 @@ $videosCatagories = VideosCatagoriesModel::get();
                         <li><a href="{{ Url('admin/user/all') }}"><i class="fa fa-minus"></i>همه</a></li>
                   </ul>
                 </li>
-            @endcan
+            @endif
             @if(Access::checkView('report'))
                 <li class="treeview">
                   <a href="#">
