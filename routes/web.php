@@ -35,6 +35,11 @@ Route::get('/migrate', function(){
     Artisan::call('migrate');
 });
 
+Route::get('test-sms', function(){
+    $s = new SMSController();
+    $s->send("09376922176", "test");
+});
+
 Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sms']);
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);
 
