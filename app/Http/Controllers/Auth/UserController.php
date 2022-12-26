@@ -48,10 +48,7 @@ class UserController extends Controller
 
     public function index($id)
     {
-        if(Gate::allows('Level1')):
-        else:
-            abort(403);
-        endif;
+        Access::check('user_show_all');
         if($id == 'all'):
             $users = User::get();
             return view('admin.user.all')->with(['users' => $users]);
@@ -65,10 +62,7 @@ class UserController extends Controller
     
     public function AccessReg(Request $request, $id)
     {
-        if(Gate::allows('Level1')):
-        else:
-            abort(403);
-        endif;
+        Access::check('user_show_all');
         $methods = MethodsModel::get()->toArray();
         
         foreach($methods as $method)
