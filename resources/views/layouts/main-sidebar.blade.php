@@ -180,7 +180,7 @@ $videosCatagories = VideosCatagoriesModel::get();
               </ul>
             </li>
             -->
-            @if(Access::checkView('report'))
+            @if(Access::checkView('user_show_all'))
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-envelope"></i> <span>کاربران</span>
