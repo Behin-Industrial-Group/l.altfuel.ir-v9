@@ -39,6 +39,13 @@ use App\Models\User;
                             <td>{{$user->email}}</td>
                         </tr>
                         <tr>
+                            <form method="post" action="{{ route('change-user-ip', ['id'=> $user->id]) }}">
+                                @csrf
+                                <td>valid ip:<input type="text" name="valid_ip" id="" value="{{ $user->valid_ip }}"></td>
+                                <td><input type="submit" value="ثبت ip" name="" id=""></td>
+                            </form>
+                        </tr>
+                        <tr>
                             <form method="post" action="{{$user->id}}/changepass">
                                 @csrf
                                 <input type="password" name="pass">

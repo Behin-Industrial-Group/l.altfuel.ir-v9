@@ -291,6 +291,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
         Route::post('/{id}',[Auth\UserController::class, 'AccessReg']);
 
         Route::post('/{id}/changepass',[Auth\UserController::class, 'ChangePass']);
+        Route::post('/{id}/change-ip',[Auth\UserController::class, 'ChangeIp'])->name('change-user-ip');
 
         Route::post('/{id}/changeShowInReport', [Auth\UserController::class, 'changeShowInReport']);
     });

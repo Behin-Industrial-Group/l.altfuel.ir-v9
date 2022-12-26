@@ -83,6 +83,12 @@ class UserController extends Controller
         User::where('id', $id)->update([ 'password' => Hash::make($request->pass) ]);
         return redirect()->back();
     }
+
+    public function ChangeIp(Request $r, $user_id)
+    {
+        User::where('id',$user_id)->update([ 'valid_ip' => $r->valid_ip ]);
+        return redirect()->back();
+    }
     
     public function changeShowInReport(Request $r, $id){
         if(isset($r->showInReport))
