@@ -33,6 +33,7 @@ class ApiAuth
         if(!Hash::check($request->password, $user->password)){
             return $this->jsonResponse("نام کاربری یا رمز عبور صحیح نیست", 403);
         }
+        Auth::loginUsingId($user->id);
         // if(!Auth::attempt([ 'valid_ip' => $request->ip(), 'email' => $request->username, 'password' => $request->password ])){
         //     return $this->jsonResponse("نام کاربری یا رمز عبور صحیح نیست", 403);
         // }
