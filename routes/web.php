@@ -44,7 +44,6 @@ Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sm
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);
 
 
-
 Route::get('/GenCode/{type}/{province}', function($type,$province){
     $a = new RGenCode($province);
     if($type === 'markaz')
@@ -79,6 +78,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+require __DIR__.'/irngv.php';
 
 
 Route::get('/rsgs', function(){
@@ -233,6 +233,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
         //ISSUES SEARCH
         Route::get('/', [SearchBoxController::class, 'search']);
         Route::get('/gettablecolumns/{q}', [SearchBoxController::class, 'getTableColumns']);
+    });
+
+    Route::prefix('/irngv/')->group(function(){
+        Route::get('receive-data', [IrngvUsersInfoController::class, 'show'])->name('admin.irngv.show.list');
+        Route::get('get-data', [IrngvUsersInfoController::class, 'get_users_info'])->name('admin.irngv.get.users.info');
     });
 
 
