@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class ApiAuth
 {
@@ -21,6 +22,7 @@ class ApiAuth
      */
     public function handle(Request $request, Closure $next)
     {
+        Log::info($request->ip());
         $user = User::where('valid_ip', $request->ip())->first();
         if(!$user){
             return $this->jsonResponse("ip یافت نشد", 403);
