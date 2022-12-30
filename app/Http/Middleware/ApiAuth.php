@@ -23,7 +23,7 @@ class ApiAuth
     {
         $user = User::where('valid_ip', $request->ip())->first();
         if(!$user){
-            return $this->jsonResponse("نام کاربری یا رمز عبور صحیح نیست", 403);
+            return $this->jsonResponse("ip یافت نشد", 403);
         }
 
         if($user->email != $request->username){
