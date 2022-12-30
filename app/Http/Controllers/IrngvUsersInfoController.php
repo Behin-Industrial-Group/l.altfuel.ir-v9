@@ -37,7 +37,9 @@ class IrngvUsersInfoController extends Controller
     {
         return json_encode(
             [
-                'data' => IrngvUsersInfo::get(),
+                'data' => IrngvUsersInfo::get()->each(function($c){
+                    $c->link = config('irngv')['irngv-poll-link'] . "$c->link";
+                }),
             ]
         );
     }
