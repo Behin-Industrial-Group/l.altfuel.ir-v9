@@ -21,10 +21,21 @@ class ApiAuth
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if(!Auth::attempt([ 'valid_ip' => $request->ip(), 'email' => $request->username, 'password' => $request->password ])){
+        $user = User::where('valid_ip', $request->ip())->first();
+        if(!$user){
             return $this->jsonResponse("نام کاربری یا رمز عبور صحیح نیست", 403);
         }
+
+        if($user->email != $request->username){
+            return $this->jsonResponse("نام کاربری یا رمز عبور صحیح نیست", 403);
+        }
+
+        if(!Hash::check($request->password, $user->password)){
+            return $this->jsonResponse("نام کاربری یا رمز عبور صحیح نیست", 403);
+        }
+        // if(!Auth::attempt([ 'valid_ip' => $request->ip(), 'email' => $request->username, 'password' => $request->password ])){
+        //     return $this->jsonResponse("نام کاربری یا رمز عبور صحیح نیست", 403);
+        // }
         return $next($request);
     }
 }
