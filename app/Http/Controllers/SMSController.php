@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SMSController extends Controller
 {
@@ -41,11 +42,14 @@ class SMSController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, True);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, True);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
     
         # Return response instead of printing.
         # Send request.
+        $er = curl_error($ch);
+        Log::info($er);
+        var_dump($er);
         $result = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($result);
