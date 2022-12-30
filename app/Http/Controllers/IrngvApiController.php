@@ -16,7 +16,7 @@ class IrngvApiController extends Controller
     private $poll_link;
 
     public function __construct() {
-        $this->poll_link = "https://l.altfuel.ir/irngv-poll/";
+        $this->poll_link = "https://l.altfuel.ir/irngv/poll/";
     }
 
     public function get_token(Request $r)

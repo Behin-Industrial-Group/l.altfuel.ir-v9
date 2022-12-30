@@ -283,6 +283,19 @@ $videosCatagories = VideosCatagoriesModel::get();
                   </ul>
                 </li>
             @endif
+            @if(Access::checkView('irngv'))
+                <li class="treeview">
+                  <a href="#">
+                    <i class="fa fa-envelope"></i> <span>اطلاعات دریافتی از irngv</span>
+                    <span class="pull-left-container">
+                      <i class="fa fa-angle-right pull-left"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu" style="display: none;">
+                        <li><a href="{{ route('admin.irngv.show.list') }}"><i class="fa fa-minus"></i>اطلاعات دریافتی</a></li>
+                  </ul>
+                </li>
+            @endif
             @if(Access::checkView('Disable_App'))
               <li>
                 <a href="{{ Url('admin/disable') }}"><i class="fa fa-book"></i> <span>غیرفعال کردن نرم افزار</span></a>
