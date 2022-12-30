@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use App\Traits\ResponseTrait;
 use Closure;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class ApiAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::attempt([ 'email' => $request->username, 'password' => $request->password ])){
+
+        if(!Auth::attempt([ 'valid_ip' => $request->ip(), 'email' => $request->username, 'password' => $request->password ])){
             return $this->jsonResponse("نام کاربری یا رمز عبور صحیح نیست", 403);
         }
         return $next($request);
