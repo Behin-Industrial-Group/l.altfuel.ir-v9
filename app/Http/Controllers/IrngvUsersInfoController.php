@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomClasses\Access;
 use App\Http\Validations\IrngvUsersInfoValidation;
 use App\Models\IrngvUsersInfo;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class IrngvUsersInfoController extends Controller
 
     public function show()
     {
+        Access::check('irngv');
         return view('admin.irngv.list');
     }
 
