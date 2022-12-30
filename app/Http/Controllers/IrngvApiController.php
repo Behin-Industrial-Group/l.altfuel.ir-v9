@@ -38,11 +38,11 @@ class IrngvApiController extends Controller
         $irngv_user_info = new IrngvUsersInfoController();
         $store = $irngv_user_info->store($r);
 
-        $sms = new SMSController();
-        $full_poll_link = $this->poll_link . $store->link;
-        $msg = "متقاضی محترم با ورود به لینک زیر و تکمیل فرم نظرسنجی ما را در ارائه بهتر خدمات یاری کنید.\n";
-        $msg .= $full_poll_link;
-        $sms->send($r->owner_mobile, $msg);
+        // $sms = new SMSController();
+        // $full_poll_link = $this->poll_link . $store->link;
+        // $msg = "متقاضی محترم با ورود به لینک زیر و تکمیل فرم نظرسنجی ما را در ارائه بهتر خدمات یاری کنید.\n";
+        // $msg .= $full_poll_link;
+        // $sms->send($r->owner_mobile, $msg);
         return $this->jsonResponse("پیامک با موفقیت ارسال شد", 200, [ "poll-link" => $full_poll_link ]);
     }
 }
