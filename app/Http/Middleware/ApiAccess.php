@@ -23,6 +23,9 @@ class ApiAccess
     {
         $guards = empty($guards) ? [null] : $guards;
 
+        if(!$request->ip()){
+            return $this->jsonResponse("ip خالی است", 403);
+        }
         $user = User::where('valid_ip', $request->ip())->first();
         Log::info($request->input('api_token'));
         Log::info($request->ip());
