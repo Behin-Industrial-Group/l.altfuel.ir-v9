@@ -9,8 +9,11 @@ use App\Models\ProvinceModel;
 use App\CustomClasses\Access;
 use App\CustomClasses\Date;
 use App\Repository\RGenCode;
+use Carbon\Carbon;
 use Exception;
 use File;
+use Hekmatinasser\Verta\Verta;
+
 
 class HidroController extends Controller
 {
@@ -298,7 +301,7 @@ class HidroController extends Controller
         ->get();
 
         $data = [];
-        foreach($m as $m){
+        foreach($hidros as $m){
             $m->ExpDate = Date::toArray($m->ExpDate);
             $m->GregorianExpDate = Verta::jalaliToGregorian($m->ExpDate[0], $m->ExpDate[1], $m->ExpDate[2]);
             $m->GregorianExpDate = Date::gregorianToCarbon($m->GregorianExpDate);
