@@ -77,8 +77,7 @@ use App\CustomClasses\Logs;
                                             <th>فایل پیوست</th>
                                             <td>
                                                 @if ($issue->file)
-                                                    <a href="{{ "https://l.altfuel.ir/$issue->file" }}" target="_blank">نمایش</a> | 
-                                                    <a href="{{ "https://label.altfuel.ir/$issue->file" }}" target="_blank">نمایش</a>
+                                                    <a href="{{ "https://l.altfuel.ir/$issue->file" }}" target="_blank">نمایش</a>
                                                 @else
                                                     ندارد
                                                 @endif
