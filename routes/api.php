@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/hidro/base64:F+7j4LuufsQrddgaOV5/nT7YMQH/E9DvQkVG9MyV1+o=', [HidroController::class, 'createApi']);
-Route::get('/marakez/base64:F+7j4LuufsQrddgaOV5/nT7YMQH/E9DvQkVG9MyV1+o=', [MarakezController::class, 'createApi']);
+Route::get('/hidro/get', [HidroController::class, 'createApi']);
+Route::get('/agencies/get', [MarakezController::class, 'createApi']);
 
 Route::prefix('/hamayesh/')->group(function(){
     Route::post('workshop', [HamayeshController::class, 'register_workshop'])->name('register_workshop');
