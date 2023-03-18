@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\HidroModel;
 use App\Models\ProvinceModel;
 use App\CustomClasses\Access;
+use App\CustomClasses\Date;
 use App\Repository\RGenCode;
 use Exception;
 use File;
@@ -292,7 +293,22 @@ class HidroController extends Controller
         ->whereNotNull('ExpDate')
         ->where( 'GuildNumber', '!=', '' )
         ->where('enable', 1)
-        ->orderBy( 'CodeEtehadie' )->get();
+        ->orderBy( 'CodeEtehadie' )
+        ->select('Name', 'Province', 'City', 'CodeEtehadie', 'GuildNumber', 'Address', 'Tel', 'IssueDate', 'ExpDate')
+        ->get();
+
+        $data = [];
+        foreach($m as $m){
+            $m->ExpDate = Date::toArray($m->ExpDate);
+            $m->GregorianExpDate = Verta::jalaliToGregorian($m->ExpDate[0], $m->ExpDate[1], $m->ExpDate[2]);
+            $m->GregorianExpDate = Date::gregorianToCarbon($m->GregorianExpDate);
+            $now_carbon = Carbon::now();
+            $m->diff = $now_carbon->diffInDays($m->GregorianExpDate, false);
+            if($m->diff >= 0){
+                $data[] = $m;
+            }
+        }
+        return $data;
 
         return $hidros;
     }
