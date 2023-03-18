@@ -94,7 +94,7 @@ class MarakezController extends Controller
             $markaz->ReceivingCodeYear = $r->ReceivingCodeYear;
             $markaz->GuildNumber = $r->GuildNumber;
             $markaz->IssueDate = $r->IssueDate;
-            $markaz->ExpDate = $r->ExpDate;
+            $markaz->GregorianExpDate = $r->ExpDate;
             $markaz->PostalCode = $r->PostalCode;
             $markaz->Cellphone = $r->Cellphone;
             $markaz->Tel = $r->Tel;
@@ -451,10 +451,10 @@ class MarakezController extends Controller
         $data = [];
         foreach($m as $m){
             $m->ExpDate = Date::toArray($m->ExpDate);
-            $m->ExpDate = Verta::jalaliToGregorian($m->ExpDate[0], $m->ExpDate[1], $m->ExpDate[2]);
-            $m->ExpDate = Date::gregorianToCarbon($m->ExpDate);
+            $m->GregorianExpDate = Verta::jalaliToGregorian($m->ExpDate[0], $m->ExpDate[1], $m->ExpDate[2]);
+            $m->GregorianExpDate = Date::gregorianToCarbon($m->GregorianExpDate);
             $now_carbon = Carbon::now();
-            $m->diff = $now_carbon->diffInDays($m->ExpDate, false);
+            $m->diff = $now_carbon->diffInDays($m->GregorianExpDate, false);
             if($m->diff >= 0){
                 $data[] = $m;
             }
