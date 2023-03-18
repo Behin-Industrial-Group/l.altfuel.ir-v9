@@ -63,11 +63,6 @@
                     @endif
                     
                     @include('includes.answer-link')
-                    <div class="alert alert-warning">
-                        <p style="font-size:20px">
-                            به سوالهای نادقیق و مبهم و مواردی که قبلا  در پرسش های متداول پاسخ داده شده اند، پاسخ مجدد داده  نخواهد شد. لطفا قبلا پرسش های متداول را مطالعه کنید.
-                        </p>
-                    </div>
                     <form action="javascript:void(0)" id="form" method="POST" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
                             @if(isset($catagories))

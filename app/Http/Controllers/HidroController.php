@@ -113,6 +113,7 @@ class HidroController extends Controller
             $hidro->Address = $r->Address;
             $hidro->Location = $r->Location;
             $hidro->Details = $r->Details;
+            $hidro->enable = isset($r->enable) ? 1 : 0;
 
             $file = $r->file( 'DeliveryReceipts' );
             if( !empty($file) )
@@ -287,7 +288,11 @@ class HidroController extends Controller
 
     public function createApi()
     {
-        $hidros = HidroModel::whereNotNull( 'CodeEtehadie' )->where( 'GuildNumber', '!=', '' )->orderBy( 'CodeEtehadie' )->get();
+        $hidros = HidroModel::whereNotNull( 'CodeEtehadie' )
+        ->whereNotNull('ExpDate')
+        ->where( 'GuildNumber', '!=', '' )
+        ->where('enable', 1)
+        ->orderBy( 'CodeEtehadie' )->get();
 
         return $hidros;
     }

@@ -53,6 +53,7 @@ class KamFesharController extends Controller
             $hidro->Address = $r->Address;
             $hidro->Location = $r->Location;
             $hidro->Details = $r->Details;
+            $hidro->enable = isset($r->enable) ? 1 : 0;
 
             $file = $r->file( 'DeliveryReceipts' );
             if( !empty($file) )

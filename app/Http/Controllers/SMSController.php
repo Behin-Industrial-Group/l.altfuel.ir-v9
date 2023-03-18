@@ -48,8 +48,41 @@ class SMSController extends Controller
         # Return response instead of printing.
         # Send request.
         $er = curl_error($ch);
-        Log::info($er);
-        var_dump($er);
+        if($er)
+            Log::info("send sms curl error: $er ");
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $result = json_decode($result);
+        if(isset($result->data[0]->serverId))
+            return 'ok';
+        return $result;
+    }
+
+    public function send_multiple(array $messages)
+    {
+        $data = array(
+            'organization' => $this->org,
+            'username' => $this->user,
+            'password' => $this->pass,
+            'method' => 'send',
+            'messages' => $messages
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->url);
+        # Setup request to send json via GET.
+        $payload = json_encode($data);
+        
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
+    
+        # Return response instead of printing.
+        # Send request.
+        $er = curl_error($ch);
+        if($er)
+            Log::info("send sms curl error: $er ");
         $result = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($result);

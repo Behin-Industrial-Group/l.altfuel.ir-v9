@@ -24,7 +24,7 @@
                           <th>تاریخ صدور</th>
                           <th>تاریخ انقضا</th>
                           <th>فعال</th>
-                          <th>تحویل گیرنده قفل</th>
+                          <th>توضیحات</th>
                           <th>ویرایش</th>
                         </tr>
                     </thead>
@@ -45,7 +45,7 @@
                                 <td><?php echo $markaz->IssueDate ?></td>
                                 <td><?php echo $markaz->ExpDate ?></td>
                                 <td><?php echo $markaz->enable ? 'فعال' : 'غیرفعال' ?></td>
-                                <td><?php echo $markaz->Receiver ?></td>
+                                <td><?php echo $markaz->Details ?></td>
                                 <td>
                                     <a href="{{url("admin/marakez/edit/$markaz->id")}}">
                                         <i class="fa fa-edit"></i>

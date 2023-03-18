@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EnumsEntity;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Validations\IrngvUsersInfoValidation;
 use App\Models\User;
@@ -16,16 +17,18 @@ class IrngvApiController extends Controller
     private $poll_link;
 
     public function __construct() {
-        $this->poll_link = "https://l.altfuel.ir/irngv/poll/";
+        $this->poll_link = config('irngv')['irngv-poll-link'];
     }
 
     public function get_token(Request $r)
     {
         return $this->jsonResponse(
-            "توکن با موفقیت ایجاد شد.", 200, 
+            EnumsEntity::irngv_api_msg_code[0], 
+            200, 
             [
                 "api_token" => UserController::create_api_token(Auth::user())->api_token,
-            ]
+            ],
+            0
             );
     }
 
@@ -38,11 +41,15 @@ class IrngvApiController extends Controller
         $irngv_user_info = new IrngvUsersInfoController();
         $store = $irngv_user_info->store($r);
 
-        // $sms = new SMSController();
-        // $full_poll_link = $this->poll_link . $store->link;
-        // $msg = "متقاضی محترم با ورود به لینک زیر و تکمیل فرم نظرسنجی ما را در ارائه بهتر خدمات یاری کنید.\n";
-        // $msg .= $full_poll_link;
-        // $sms->send($r->owner_mobile, $msg);
-        return $this->jsonResponse("پیامک با موفقیت ارسال شد", 200, [ "poll-link" => $full_poll_link ]);
+        $sms = new SMSController();
+        $msg = "مالک محترم خودروی گازسوز $store->car_name به شماره شاسی $store->chassis ضمن تشکر از مراجعه شما به مرکز خدمات فنی شماره ";
+        $msg .= "$store->agency_code ، خواهشمند است با تخصیص زمان ارزشمندتان و شرکت در نظرسنجی ذیل، ما را در ارائه هر چه بهتر خدمات یاری رسانید. لینک نظرسنجی: \n";
+        $msg .= config('irngv')['irngv-poll-link'] ."$store->link \n";
+        $msg .= "برای ورود به لینک نظرسنجی لازم است فیلترشکن خود را خاموش کنید.\n";
+        $msg .= "شماره مرکز تماس اتحادیه کشوری سوخت های جایگزین و خدمات وابسته: 02191013791";
+        $sms->send($r->owner_mobile, $msg);
+        $store->sms_delivery = 1;
+        $store->save();
+        return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[0], 200, [], 0);
     }
 }

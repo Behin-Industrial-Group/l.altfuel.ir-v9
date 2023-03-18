@@ -21,6 +21,9 @@ use App\CustomClasses\Access;
             <div class="box-body">
                 <form class="form-horizontal" method="POST" action="{{Url("admin/kamfeshar/edit/$markaz->id") }}" enctype="multipart/form-data">
                     @csrf
+                    <div class="col-sm-12">
+                        فعال: <input type="checkbox" name="enable" @if($markaz->enable) {{'checked'}} @endif data-toggle="toggle" data-size="sm">                        
+                    </div>
                     <div class="box-body col-md-6"  style="border:solid 1px">
 
                         <div class="form-group alert alert-warning">

@@ -63,11 +63,6 @@
                     @endif
                     
                     @include('includes.answer-link')
-                    <div class="alert alert-warning">
-                        <p style="font-size:20px">
-                            به سوالهای نادقیق و مبهم و مواردی که قبلا  در پرسش های متداول پاسخ داده شده اند، پاسخ مجدد داده  نخواهد شد. لطفا قبلا پرسش های متداول را مطالعه کنید.
-                        </p>
-                    </div>
                            
                     <div class="form-group">
                         <label class="col-sm-4 control-lable">

@@ -21,6 +21,7 @@ use Carbon\Carbon;
 use Exception;
 use Hekmatinasser\Verta\Facades\Verta as FacadesVerta;
 use Hekmatinasser\Verta\Verta as VertaVerta;
+use Illuminate\Support\Facades\Log;
 
 class ReportController extends Controller
 {
@@ -47,9 +48,13 @@ class ReportController extends Controller
 
     public function GetCallReport($date)
     {
-        $date = explode("-", $date);
-        $date = VertaVerta::jalaliToGregorian($date[0], $date[1], $date[2]);
-        $date = Carbon::create($date[0], $date[1], $date[2])->toDateString();
+        // $date = explode("-", $date);
+        // Log::info($date);
+
+        $date = VertaVerta::getGregorian($date);
+        // Log::info(gettype($date));
+        // $date = Carbon::create($date[0], $date[1], $date[2])->toDateString();
+
         return $this->RReport->GetCallReport($date);
     }
 

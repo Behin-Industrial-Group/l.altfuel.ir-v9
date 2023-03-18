@@ -440,7 +440,10 @@ class MarakezController extends Controller
     {
         $now = Verta();
         $m = MarakezModel::whereNotNull( 'CodeEtehadie' )
-        ->whereNotNull('ExpDate')->where( 'GuildNumber', '!=', '' )->where('enable', 1)->orderBy( 'CodeEtehadie' )->get();
+        ->whereNotNull('ExpDate')
+        ->where( 'GuildNumber', '!=', '' )
+        ->where('enable', 1)
+        ->orderBy( 'CodeEtehadie' )->get();
         
         $data = [];
         foreach($m as $m){

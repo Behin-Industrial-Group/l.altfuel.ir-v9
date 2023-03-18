@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\EnumsEntity;
 use App\Models\User;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
@@ -24,25 +25,25 @@ class ApiAccess
         $guards = empty($guards) ? [null] : $guards;
 
         if(!$request->ip()){
-            return $this->jsonResponse("ip خالی است", 403);
+            return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[1], 403,[], 1);
         }
         $user = User::where('valid_ip', $request->ip())->first();
-        Log::info($request->input('api_token'));
-        Log::info($request->ip());
+        // Log::info($request->input('api_token'));
+        // Log::info($request->ip());
         if(!$user){
-            return $this->jsonResponse('ip شما مورد تایید نیست',403);
+            return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[2],403, [], 2);
         }
         if( !$request->input('api_token')){
-            return $this->jsonResponse('توکن را نیز ارسال کنید', 403);
+            return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[3], 403, [], 3);
         }
         if($user->api_token != $request->input('api_token')){
-            return $this->jsonResponse('توکن ارسالی مورد تایید نیست',403);
+            return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[4],403, [], 4);
         }
 
         $now = Carbon::now();
         $diff = $now->diffInMinutes($user->updated_at);
         if($diff >= 10){
-            return $this->jsonResponse("توکن منقضی شده است", 403);
+            return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[5], 403, [], 5);
         }
 
         return $next($request);

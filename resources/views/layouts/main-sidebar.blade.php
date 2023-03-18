@@ -222,6 +222,9 @@ $videosCatagories = VideosCatagoriesModel::get();
                         @if(Access::checkView('report_license'))
                         <li><a href="{{ Url('admin/report/license') }}"><i class="fa fa-minus"></i>پروانه کسب</a></li>
                         @endif
+                        @if(Access::checkView('irngv_poll_report'))
+                        <li><a href="{{ route('show-irngv-poll-report') }}"><i class="fa fa-minus"></i>نظرسنجی irngv</a></li>
+                        @endif
                   </ul>
                 </li>
             @endif
@@ -292,7 +295,12 @@ $videosCatagories = VideosCatagoriesModel::get();
                     </span>
                   </a>
                   <ul class="treeview-menu" style="display: none;">
+                      @if(Access::checkView('irngv_recive_car_info'))
                         <li><a href="{{ route('admin.irngv.show.list') }}"><i class="fa fa-minus"></i>اطلاعات دریافتی</a></li>
+                      @endif
+                      @if(Access::checkView('irngv_poll_info'))
+                        <li><a href="{{ route('admin.irngv.show.answers') }}"><i class="fa fa-minus"></i>اطلاعات نظرسنجی </a></li>
+                      @endif
                   </ul>
                 </li>
             @endif

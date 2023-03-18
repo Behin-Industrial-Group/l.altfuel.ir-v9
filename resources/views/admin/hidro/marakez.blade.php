@@ -19,6 +19,7 @@
                           <th>شماره صنفی</th>
                           <th>تاریخ صدور</th>
                           <th>تاریخ انقضا</th>
+                          <th>توضیحات</th>
                           <th>ویرایش</th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                                 <td><?php echo $markaz->GuildNumber ?></td>
                                 <td><?php echo $markaz->IssueDate ?></td>
                                 <td><?php echo $markaz->ExpDate ?></td>
+                                <td><?php echo $markaz->Details ?></td>
                                 <td>
                                     <a href="kamfeshar/show/{{$markaz->id}}">
                                         <i class="fa fa-edit"></i>

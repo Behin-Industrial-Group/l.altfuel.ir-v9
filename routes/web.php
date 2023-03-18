@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LableController;
 use App\Http\Controllers\QrController;
+use App\Models\IrngvUsersInfo;
 use App\Models\KamFesharModel;
 use App\Models\MarakezModel;
 use App\Models\MessageModel;
@@ -30,14 +31,46 @@ Route::get('hamayesh/barname', function(){
     header("Location: http://altfuel.ir/wp-content/uploads/2022/06/همایش-1401-VER-24.pdf");
 });
 
+Route::get('redirect/{site}', function($site){
+   
+    return file_get_contents($site);
+});
+
 Route::get('/migrate', function(){
     Artisan::call('cache:clear');
     Artisan::call('migrate');
 });
 
 Route::get('test-sms', function(){
-    $s = new SMSController();
-    $s->send("09376922176", "test");
+    // $s = new SMSController();
+    // $c = true;
+    // while($c){
+    //     $lists = IrngvUsersInfo::where('sms_delivery', '0')->take(5)->get();
+    //     $messages = array();
+    //     foreach($lists as $li){
+    //         $msg = "مالک محترم خودروی گازسوز $li->car_name به شماره شاسی $li->chassis ضمن تشکر از مراجعه شما به مرکز خدمات فنی شماره ";
+    //         $msg .= "$li->agency_code ، خواهشمند است با تخصیص زمان ارزشمندتان و شرکت در نظرسنجی ذیل، ما را در ارائه هر چه بهتر خدمات یاری رسانید. لینک نظرسنجی: \n";
+    //         $msg .= config('irngv')['irngv-poll-link'] ."$li->link \n";
+    //         $msg .= "برای ورود به لینک نظرسنجی لازم است فیلترشکن خود را خاموش کنید.\n";
+    //         $msg .= "شماره مرکز تماس اتحادیه کشوری سوخت های جایگزین و خدمات وابسته: 02191013791";
+    //         $messages[] = [
+    //             'sender' => '9820003807',
+    //             'recipient' => $li->owner_mobile,
+    //             'body' => $msg,
+    //             'customerId' => 1,
+    //         ];
+    //         $li->sms_delivery = 1;
+    //         $li->save();
+    //         echo "sms send for id: $li->id </br>";
+    //     }
+    //     $s->send_multiple($messages);
+    //     $lists = IrngvUsersInfo::where('sms_delivery', '0')->take(5)->get();
+    //     if(!$lists){
+    //         $c=false;
+    //     }
+    // }
+    
+    
 });
 
 Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sms']);
@@ -133,7 +166,6 @@ Route::prefix('/bedehi')->group(function(){
     Route::get( '/success/{type}/{code}/{price}', [FinController::class, 'success']);
     Route::get('/{type}/{nid}/{mobile}/{code}', [FinController::class, 'confirmForm'])->name('confirm-form');
 });
-
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
     Route::get('/', [HomeController::class, 'index']);
@@ -238,6 +270,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
     Route::prefix('/irngv/')->group(function(){
         Route::get('receive-data', [IrngvUsersInfoController::class, 'show'])->name('admin.irngv.show.list');
         Route::get('get-data', [IrngvUsersInfoController::class, 'get_users_info'])->name('admin.irngv.get.users.info');
+        Route::get('poll-answers', [IrngvUsersInfoController::class, 'show_poll_answers_list'])->name('admin.irngv.show.answers');
+
     });
 
 
@@ -326,6 +360,10 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
             Route::post('/',[ReportController::class, 'CreateCallReport']);
             Route::get('/show', [ReportController::class, 'ShowCallReport']);
             Route::get('/show/{date}', [ReportController::class, 'GetCallReport']);
+        });
+
+        Route::prefix('irngv-poll')->group(function(){
+            Route::get('', [ReportIrngvPollController::class, 'show_list'])->name('show-irngv-poll-report');
         });
     });
 
