@@ -445,7 +445,7 @@ class MarakezController extends Controller
         ->where( 'GuildNumber', '!=', '' )
         ->where('enable', 1)
         ->orderBy( 'CodeEtehadie' )
-        ->select('Name', 'Province', 'City', 'CodeEtehadie', 'GuildNumber', 'Address', 'IssueDate', 'ExpDate')
+        ->select('Name', 'Province', 'City', 'CodeEtehadie', 'GuildNumber', 'Address', 'Tel', 'IssueDate', 'ExpDate')
         ->get();
         
         $data = [];
