@@ -9,12 +9,13 @@ use App\Models\ProvinceModel;
 use App\Models\PelakkhanModel;
 use File;
 use App\CustomClasses\Access;
+use App\CustomClasses\Date;
 use App\Repository\RGenCode;
 use Illuminate\Support\Facades\DB;
 use App\Repository\RMarakez;
 use Carbon\Carbon;
 use Exception;
-use Hekmatinasser\Verta\Facades\Verta;
+use Hekmatinasser\Verta\Verta;
 
 class MarakezController extends Controller
 {
@@ -443,18 +444,19 @@ class MarakezController extends Controller
         ->whereNotNull('ExpDate')
         ->where( 'GuildNumber', '!=', '' )
         ->where('enable', 1)
-        ->orderBy( 'CodeEtehadie' )->get();
+        ->orderBy( 'CodeEtehadie' )
+        ->select('Name', 'Province', 'City', 'CodeEtehadie', 'GuildNumber', 'IssueDate', 'ExpDate')
+        ->get();
         
         $data = [];
         foreach($m as $m){
-            $exp_date_miladi = Verta::getGregorian($m->ExpDate);
-            if($exp_date_miladi){
-                $exp_date_carbon = Carbon::createFromFormat('Y-m-d', $exp_date_miladi);
-                $now_carbon = Carbon::now();
-                $diff = $now_carbon->diffInDays($exp_date_carbon, false);
-                if($diff >= 0){
-                    $data[] = $m;
-                }
+            $m->ExpDate = Date::toArray($m->ExpDate);
+            $m->ExpDate = Verta::jalaliToGregorian($m->ExpDate[0], $m->ExpDate[1], $m->ExpDate[2]);
+            $m->ExpDate = Date::gregorianToCarbon($m->ExpDate);
+            $now_carbon = Carbon::now();
+            $m->diff = $now_carbon->diffInDays($m->ExpDate, false);
+            if($m->diff >= 0){
+                $data[] = $m;
             }
         }
         return $data;
