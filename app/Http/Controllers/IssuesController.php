@@ -91,6 +91,22 @@ class IssuesController extends Controller
             if($c)
                 return $c;
         }
+
+        if(!$request->issue){
+            return "متن پیام نباید خالی باشد";
+        }
+
+        if(!$request->name){
+            return "نام و نام خانوادگی نباید خالی باشد";
+        }
+
+        if(!$request->NationalID){
+            return "کدملی نباید خالی باشد";
+        }
+
+        if(!$request->cellphone){
+            return "شماره موبایل نباید خالی باشد";
+        }
          
         if(empty($file))
         {
