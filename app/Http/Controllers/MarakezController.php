@@ -94,7 +94,7 @@ class MarakezController extends Controller
             $markaz->ReceivingCodeYear = $r->ReceivingCodeYear;
             $markaz->GuildNumber = $r->GuildNumber;
             $markaz->IssueDate = $r->IssueDate;
-            $markaz->GregorianExpDate = $r->ExpDate;
+            $markaz->ExpDate = $r->ExpDate;
             $markaz->PostalCode = $r->PostalCode;
             $markaz->Cellphone = $r->Cellphone;
             $markaz->Tel = $r->Tel;
