@@ -16,6 +16,26 @@ $catagories = IssuesCatagoryModel::get();
 
 @section('content')
     <div class="row">
+        <form action="javascript:void(0)" id="created-form">
+            <div class="box box-default col-sm-12">
+                <div class="col-sm-3">
+                    تاریخ ایجاد:
+                </div>
+                <div class="col-sm-3">
+                    <label for="">از: </label>
+                    <input type="text" name="created_from" id="created-from">
+                </div>
+                <div class="col-sm-3">
+                    <label for="">تا: </label>
+                    <input type="text" name="created_to" id="created-to">
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-default" onclick="filtered()">اعمال فیلتر</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
         <div class="box table-responsive">
             <div class="box-body">
                 <table class="table table-bordered" id="issue_tbl">
@@ -76,5 +96,33 @@ $catagories = IssuesCatagoryModel::get();
             ],
             'ajax': "{{ route('admin.irngv.get.users.info') }}"
         });
+
+        $(document).ready(function () {
+            $('#created-from').persianDatepicker({
+                altFormat: 'X',
+                format: 'YYYY-MM-D',
+                observer: true
+            });
+        });
+        $(document).ready(function () {
+            $('#created-to').persianDatepicker({
+                altFormat: 'X',
+                format: 'YYYY-MM-D',
+                observer: true
+            });
+        });
+
+        function filtered(){
+            var data = $('#created-form').serialize();
+            send_ajax_request(
+                "{{ route('admin.irngv.get.users.info') }}",
+                data,
+                function(data){
+                    console.log(data);
+                    $('#issue_tbl').dataTable().fnClearTable();
+                    $('#issue_tbl').dataTable().fnAddData(data);
+                }
+            )
+        }
     </script>
 @endsection

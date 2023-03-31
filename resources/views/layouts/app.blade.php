@@ -148,6 +148,9 @@ $videosCatagories = VideosCatagoriesModel::get();
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
     <script src="{{ url('public/js/num2persian.js') }}"></script>
+    <script src="{{ url('public/js/ajax.js') }}"></script>
+    <script src="{{ url('public/js/dataTable.js') }}"></script>
+    <script src="{{ url('public/js/dropzone.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('#table').DataTable({

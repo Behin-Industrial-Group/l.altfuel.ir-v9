@@ -35,8 +35,11 @@ class IrngvUsersInfoController extends Controller
         return view('admin.irngv.list');
     }
 
-    public function get_users_info()
+    public function get_users_info(Request $r)
     {
+        if($r->created_from || $r->created_to){
+            return IrngvUserInfoFilterController::created_at($r->created_from, $r->created_to);
+        }
         return json_encode(
             [
                 'data' => IrngvUsersInfo::get()->each(function($c){
