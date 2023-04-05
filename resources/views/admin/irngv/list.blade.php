@@ -67,9 +67,6 @@ $catagories = IssuesCatagoryModel::get();
 
 @section('script')
     <script>
-        $.get(`{{ route('admin.irngv.get.users.info') }}`, function(data){
-            console.log(data);
-        })
         $('#issue_tbl').DataTable({
             dom: 'Bfltip',
             buttons: [

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\IrngvUsersInfo;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class IrngvUserInfoFilterBy extends Controller
 {
@@ -26,7 +27,6 @@ class IrngvUserInfoFilterBy extends Controller
         $date = Date::toArray($created_to);
         $created_to = Verta::jalaliToGregorian($date[0], $date[1], $date[2]);
         $created_to = Date::gregorianToCarbon($created_to);
-
         return IrngvUsersInfo::whereBetween('created_at', [$created_from, $created_to])->get() ;
     }
 }
