@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\CustomClasses\Access;
+use App\CustomClasses\IrngvUserInfoFilterBy;
 use App\Enums\EnumsEntity;
 use App\Http\Validations\IrngvUsersInfoValidation;
 use App\Models\IrngvPollAnswer;
 use App\Models\IrngvUsersInfo;
+use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 
 class IrngvUsersInfoController extends Controller
@@ -38,13 +40,12 @@ class IrngvUsersInfoController extends Controller
     public function get_users_info(Request $r)
     {
         if($r->created_from || $r->created_to){
-            return IrngvUserInfoFilterController::created_at($r->created_from, $r->created_to);
+            return IrngvUserInfoFilterBy::created_at($r->created_from, $r->created_to);
         }
+
         return json_encode(
             [
-                'data' => IrngvUsersInfo::get()->each(function($c){
-                    $c->link = config('irngv')['irngv-poll-link'] . "$c->link";
-                }),
+                'data' => IrngvUserInfoFilterBy::created_at(Verta::today(), Verta::yesterday()),
             ]
         );
     }

@@ -92,7 +92,9 @@ $catagories = IssuesCatagoryModel::get();
                 { data: 'agency_name' },
                 { data: 'created_at' },
                 { data: 'updated_at' },
-                { data: 'link' },
+                { data: 'link' , render: function(link){
+                    return "{{ config('irngv.irngv-poll-link') }}" + link;
+                } },
             ],
             'ajax': "{{ route('admin.irngv.get.users.info') }}"
         });

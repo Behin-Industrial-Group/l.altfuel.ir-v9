@@ -15,10 +15,10 @@ class Date
     public static function toArray($date)
     {
         if(str_contains($date, "-")){
-            return explode("-", $date);
+            return array_map('intval', explode("-", $date));
         }
         if(str_contains($date, "/")){
-            return explode("/", $date);
+            return array_map('intval', explode("/", $date));
         }
     }    
 
