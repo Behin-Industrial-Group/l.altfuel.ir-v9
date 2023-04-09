@@ -4,7 +4,6 @@ function create_datatable(element_id, url ='', cols){
         order: [[0, 'desc']],
         ajax: {
             url: url,
-            dataSrc: '',
         },
         columns: cols,
         // buttons: [
@@ -24,4 +23,10 @@ function dblclick_on_inbox_row(element_id,  table, callback){
 
 function refresh_table(){
     table.ajax.reload( null, false);
+}
+
+function update_datatable(data){
+    table.clear();
+    table.rows.add(data);
+    table.draw();
 }

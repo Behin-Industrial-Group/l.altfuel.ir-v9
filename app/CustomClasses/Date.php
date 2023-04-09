@@ -8,6 +8,7 @@ use App\Models\DisableModel;
 use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Psr7\Request;
+use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Support\Facades\Auth;
 
 class Date
@@ -33,5 +34,18 @@ class Date
         if(str_contains($date, "/")){
             return Carbon::createFromFormat('Y/m/d', $date);
         }
+    }
+
+    public static function jalaliToGregorian($date, $return_array = true)
+    {
+        if( !is_array($date) ){
+            $date = self::toArray($date);
+        }
+        $date = Verta::jalaliToGregorian($date[0], $date[1], $date[2]);
+        if($return_array){
+            return $date;
+        }
+        $date = $date[0] . '-' . $date[1] . '-' . $date[2];
+        return $date;
     }
 }

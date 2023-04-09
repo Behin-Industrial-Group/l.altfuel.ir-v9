@@ -340,7 +340,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
         Route::post('/{id}/changeShowInReport', [Auth\UserController::class, 'changeShowInReport']);
     });
 
-    Route::prefix('/report')->group(function(){
+    Route::name('report.')->prefix('/report')->group(function(){
         Route::get('/count-issues',[RReport::class, 'get_number_of_issues']);
         Route::get('/count-today-issues',[RReport::class, 'number_of_today_issues']);
         Route::get('/count-my-answered-issues',[RReport::class, 'my_answered_issues']);
@@ -355,15 +355,15 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
             Route::get('/calculate-time', [RReport::class, 'calculate_issued_request_diff_date']);
         });
         
-        Route::prefix('/call')->group(function(){
+        Route::name('call.')->prefix('/call')->group(function(){
             Route::get('/',[ReportController::class, 'CreateCallReportForm']);
             Route::post('/',[ReportController::class, 'CreateCallReport']);
             Route::get('/show', [ReportController::class, 'ShowCallReport']);
-            Route::get('/show/{date}', [ReportController::class, 'GetCallReport']);
+            Route::get('/get-data/{date?}', [ReportController::class, 'GetCallReport'])->name('get_data');
         });
 
-        Route::prefix('irngv-poll')->group(function(){
-            Route::get('', [ReportIrngvPollController::class, 'show_list'])->name('show-irngv-poll-report');
+        Route::name('irngv.')->prefix('irngv-poll')->group(function(){
+            Route::get('', [ReportIrngvPollController::class, 'show_list'])->name('poll');
         });
     });
 

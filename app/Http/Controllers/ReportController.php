@@ -8,19 +8,18 @@ use App\Models\IssuesModel;
 use App\Models\IssuesCatagoryModel;
 use App\Models\MarakezModel;
 use File;
-use Verta;
 use App\Traits\reCAPTCHA;
 use App\CustomClasses\IssuesCatagory;
 use App\CustomClasses\Logs;
 use App\CustomClasses\Access;
+use App\CustomClasses\Date;
 use SoapClient;
 use App\Models\User;
 use App\Models\LogsModel;
 use App\Repository\RReport;
 use Carbon\Carbon;
 use Exception;
-use Hekmatinasser\Verta\Facades\Verta as FacadesVerta;
-use Hekmatinasser\Verta\Verta as VertaVerta;
+use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Support\Facades\Log;
 
 class ReportController extends Controller
@@ -46,16 +45,12 @@ class ReportController extends Controller
         return view('admin.report.call.show');
     }
 
-    public function GetCallReport($date)
+    public function GetCallReport($date = null)
     {
-        // $date = explode("-", $date);
-        // Log::info($date);
-
-        $date = VertaVerta::getGregorian($date);
-        // Log::info(gettype($date));
-        // $date = Carbon::create($date[0], $date[1], $date[2])->toDateString();
-
-        return $this->RReport->GetCallReport($date);
+        if(!$date){
+            return ['data' => []];
+        }
+        return $this->RReport->GetCallReport( Date::jalaliToGregorian($date, false) );
     }
 
     public function ticketform()

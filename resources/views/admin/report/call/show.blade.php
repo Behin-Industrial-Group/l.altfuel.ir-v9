@@ -1,15 +1,16 @@
 @extends('layouts.app')
 @section('content')
     <div class="box table-responsive">
+        <div class="box ">
+            <form action="javascript:void(0)" id="date-form"></form>
+            <label for="date">تاریخ:</label>        
+            <input list="date_list" id="date" class="form-control">
+            <button id="get_data" onclick="get_data()">نمایش</button>
+        </div>
         <p id="test"></p>
         <div>
             <table class="table table-striped" id="report_tbl">
                 <thead>
-                    <tr>
-                        <td><label for="date">تاریخ</label></td>
-                        <td colspan="2"><input list="date_list" id="date" class="form-control"></td>
-                        <td><button id="get_data">نمایش</button></td>
-                    </tr>
                     <tr>
                         <th>شناسه</th>
                         <th>داخلی</th>
@@ -25,12 +26,6 @@
                         <th>میانگین</th>
                     </tr>
                 </thead>
-                <tbody>
-
-                </tbody>
-                <tfoot>
-
-                </tfoot>
             </table>
         </div>
     </div>
@@ -48,36 +43,37 @@
                 },
             });
         });
-        $('#get_data').on('click', function(){
-            $('#report_tbl tbody').html('');
-            var date = $('#date').val();
-            if(date.length == 10){
-                $.get("{{url('admin/report/call/show')}}/" + date, function(data){
-                    data = jQuery.parseJSON(data);
-                    $.each(data,function(index, value){
-                        var answer_eff = parseFloat(data[index].answer_percent)*100 / (parseFloat(data[index].answer_percent) + parseFloat(data[index].unanswer_percent));
-                        var a = data[index].answer_time / 8;
-                        var b = parseFloat(data[index].busy_percent) * data[index].total /100;
-                        var busy_eff = (a-b)/a *100;
-                        var avg = (answer_eff + busy_eff) / 2;
-                        var tr = "<tr>";
-                            tr += "<td>"+ data[index].id + "</td>";
-                            tr += "<td>"+ data[index].ext + "</td>";
-                            tr += "<td>"+ data[index].name + "</td>";
-                            tr += "<td>"+ data[index].answer_percent + "</td>";
-                            tr += "<td>"+ data[index].answer_time + "</td>";
-                            tr += "<td>"+ data[index].unanswer_percent + "</td>";
-                            tr += "<td>"+ data[index].unanswer_time + "</td>";
-                            tr += "<td>"+ data[index].busy_percent + "</td>";
-                            tr += "<td>"+ data[index].total + "</td>";
-                            tr += "<td>"+ parseInt(answer_eff) + "</td>";
-                            tr += "<td>"+ parseInt(busy_eff)  + "</td>";
-                            tr += "<td id='avg'>"+ parseInt(avg)  + "</td>";
-                            tr += "</tr>";
-                        $('#report_tbl').append(tr);
-                    });
-                });
-            }
-        });
+        var table = create_datatable(
+            'report_tbl',
+            "{{ route('report.call.get_data') }}",
+            [
+                {data: 'id'},
+                {data: 'ext'},
+                {data: 'name'},
+                {data: 'answer_percent'},
+                {data: 'answer_time'},
+                {data: 'unanswer_percent'},
+                {data: 'unanswer_time'},
+                {data: 'busy_percent'},
+                {data: 'total'},
+                {data: 'answer_eff'},
+                {data: 'busy_eff'},
+                {data: 'avg'},
+            ]
+        )
+
+        
+
+        function get_data(){
+            var url = "{{ route('report.call.get_data', [ 'date' => 'date' ]) }}";
+            url = url.replace('date', $('#date').val() );
+            send_ajax_get_request(
+                url,
+                function(data){
+                    console.log(data);
+                    update_datatable(data)
+                }
+            );
+        }
     </script>
 @endsection

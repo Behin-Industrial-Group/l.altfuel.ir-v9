@@ -223,7 +223,7 @@ $videosCatagories = VideosCatagoriesModel::get();
                         <li><a href="{{ Url('admin/report/license') }}"><i class="fa fa-minus"></i>پروانه کسب</a></li>
                         @endif
                         @if(Access::checkView('irngv_poll_report'))
-                        <li><a href="{{ route('show-irngv-poll-report') }}"><i class="fa fa-minus"></i>نظرسنجی irngv</a></li>
+                          <li><a href="{{ route('report.irngv.poll') }}"><i class="fa fa-minus"></i>نظرسنجی irngv</a></li>
                         @endif
                   </ul>
                 </li>

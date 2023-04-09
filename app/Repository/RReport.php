@@ -10,6 +10,7 @@ use App\Models\IssuesModel;
 use App\Models\License;
 use App\Models\LicenseRequest;
 use Carbon\Carbon;
+use DivisionByZeroError;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,7 +90,28 @@ class RReport
 
     public function GetCallReport($date)
     {
-        return json_encode($this->model->where('created_at', 'like', "%$date%")->get());
+        $data = $this->model->where('created_at', 'like', "%$date%")->get()->each(function($raw){
+            
+            try{
+                $raw->answer_eff = (int)($raw->answer_percent *100 / ($raw->answer_percent + $raw->unanswer_percent));
+            }
+            catch(DivisionByZeroError  $e){
+                $raw->answer_eff = "بدون مقدار"; 
+            }
+
+            try{
+                $a = $raw->answer_time / 8;
+                $b = $raw->busy_percent * $raw->total / 100;
+                $raw->busy_eff = (int)(($a - $b) / $a * 100);
+            }
+            catch(DivisionByZeroError $e){
+                $raw->busy_eff = "بدون مقدار";
+            }
+
+            $raw->avg = (int)((int)$raw->answer_eff + (int)$raw->busy_eff) / 2;
+
+        });
+        return $data;
     }
 
     public function get_number_of_issues()
