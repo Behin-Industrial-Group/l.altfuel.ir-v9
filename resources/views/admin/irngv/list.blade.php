@@ -15,7 +15,12 @@ $catagories = IssuesCatagoryModel::get();
 </style>
 
 @section('content')
-    <div class="row">
+    <div class="panel" style="padding: 3px">
+        <button class="btn btn-default" onclick="show_filters()" data-toggle="tooltip" title="نمایش فیلترها">
+            <i class="fa fa-filter" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="row" id="filters" style="display: none">
         <form action="javascript:void(0)" id="created-form">
             <div class="box box-default col-sm-12">
                 <div class="col-sm-3">
@@ -110,6 +115,15 @@ $catagories = IssuesCatagoryModel::get();
                 observer: true
             });
         });
+
+        function show_filters(){
+            if ($("#filters").css("display") == "none") {
+                $('#filters').fadeIn(500);
+            } else {
+                $('#filters').fadeOut(500);
+            }
+            
+        }
 
         function filtered(){
             var data = $('#created-form').serialize();
