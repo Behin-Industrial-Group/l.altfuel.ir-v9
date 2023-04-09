@@ -87,7 +87,7 @@ trait Transformation
             $gregorianDay -= (static::$daysMonthGregorian[$gregorianMonth] + ($gregorianMonth == 1 && $leap));
         }
 
-        return [$gregorianYear, str_pad( ($gregorianMonth + 1), 8, '0', STR_PAD_LEFT), str_pad( ($gregorianDay + 1), 8, '0', STR_PAD_LEFT)];
+        return [$gregorianYear, str_pad( ($gregorianMonth + 1), 2, '0', STR_PAD_LEFT), str_pad( ($gregorianDay + 1), 2, '0', STR_PAD_LEFT)];
     }
 
     /**
