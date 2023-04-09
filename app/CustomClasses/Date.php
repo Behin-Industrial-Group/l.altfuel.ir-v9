@@ -10,6 +10,7 @@ use Exception;
 use GuzzleHttp\Psr7\Request;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class Date
 {
@@ -38,6 +39,7 @@ class Date
 
     public static function jalaliToGregorian($date, $return_array = true)
     {
+        Log::info("input date : $date");
         if( !is_array($date) ){
             $date = self::toArray($date);
         }
@@ -46,6 +48,7 @@ class Date
             return $date;
         }
         $date = $date[0] . '-' . $date[1] . '-' . $date[2];
+        Log::info("return date : $date");
         return $date;
     }
 }
