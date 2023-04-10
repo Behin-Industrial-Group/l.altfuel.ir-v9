@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomClasses\Date;
 use App\Enums\EnumsEntity;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Validations\IrngvUsersInfoValidation;
@@ -43,7 +44,9 @@ class IrngvPollAnswerController extends Controller
     public function get(Request $r)
     {
         if($r->created_from and $r->created_to){
-            return $this->repository->getByCreatedAtRange('2023-01-21', '2023-01-22');
+            $created_from = Date::jalaliToGregorian($r->created_from, false);
+            $created_to = Date::jalaliToGregorian($r->created_to, false);
+            return $this->repository->getByCreatedAtRange($created_from, $created_to);
         }
         return [ 'data' => [] ];
     }
