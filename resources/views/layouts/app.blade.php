@@ -151,6 +151,7 @@ $videosCatagories = VideosCatagoriesModel::get();
     <script src="{{ url('public/js/ajax.js') }}"></script>
     <script src="{{ url('public/js/dataTable.js') }}"></script>
     <script src="{{ url('public/js/dropzone.js') }}"></script>
+    <script src="{{ url('public/js/loader.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('#table').DataTable({
