@@ -12,4 +12,10 @@ class IrngvPollAnswer extends Model
     protected $fillable = [
         'irngv_user_id', 'question', 'answer'
     ];
+
+
+    public function irngv_user()
+    {
+        return IrngvUsersInfo::find($this->irngv_user_id);
+    }
 }

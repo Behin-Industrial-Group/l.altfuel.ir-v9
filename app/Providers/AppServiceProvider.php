@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\CustomClasses\Access;
+use App\Interfaces\DateFilterInterface;
+use App\Repository\IrngvPollRepository;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(DateFilterInterface::class, IrngvPollRepository::class);
     }
 
     /**

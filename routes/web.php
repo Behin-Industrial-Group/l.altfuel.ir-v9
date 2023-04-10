@@ -271,7 +271,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
         Route::get('receive-data', [IrngvUsersInfoController::class, 'show'])->name('admin.irngv.show.list');
         Route::any('get-data', [IrngvUsersInfoController::class, 'get_users_info'])->name('admin.irngv.get.users.info');
         Route::get('poll-answers', [IrngvUsersInfoController::class, 'show_poll_answers_list'])->name('admin.irngv.show.answers');
-
+        Route::any('get-poll-asnwers', [IrngvPollAnswerController::class, 'get'])->name('admin.irngv.get.poll-answers');
     });
 
 

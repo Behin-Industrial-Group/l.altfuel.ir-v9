@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\EnumsEntity;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Validations\IrngvUsersInfoValidation;
+use App\Interfaces\DateFilterInterface;
 use App\Models\IrngvPollAnswer;
 use App\Models\IrngvUsersInfo;
 use App\Models\User;
@@ -15,6 +16,12 @@ use Illuminate\Support\Facades\Auth;
 class IrngvPollAnswerController extends Controller
 {
     use ResponseTrait;
+    private $repository;
+
+    public function __construct(DateFilterInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
     public function register_answer(Request $r)
     {
@@ -31,6 +38,14 @@ class IrngvPollAnswerController extends Controller
             }
         }
         return $this->jsonResponse("ثبت شد");
+    }
+
+    public function get(Request $r)
+    {
+        if($r->created_from and $r->created_to){
+            return $this->repository->getByCreatedAtRange('2023-01-21', '2023-01-22');
+        }
+        return [ 'data' => [] ];
     }
 
     public function store($irngv_user_id, $question, $answer)
