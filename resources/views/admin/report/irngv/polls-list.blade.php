@@ -5,6 +5,16 @@
 @endsection
 
 @section('content')
+    <div class="panel" style="padding: 3px">
+        <button class="btn btn-default" onclick="show_filters()" data-toggle="tooltip" title="نمایش فیلترها">
+            <i class="fa fa-filter" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="row" id="filters" style="display: none">
+        <div class="box">
+            @livewire('filter-component', ['model' => new \App\Models\IrngvPollAnswer])
+        </div>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -59,4 +69,27 @@
             @endforeach
         </tbody>
     </table>
+@endsection
+
+@section('script')
+    <script>
+        function show_filters(){
+            if ($("#filters").css("display") == "none") {
+                $('#filters').fadeIn(500);
+            } else {
+                $('#filters').fadeOut(500);
+            }
+            
+        }
+        function filter(){
+            send_ajax_request(
+                "{{ route('report.irngv.poll.get')}}",
+                $('#filter-form').serialize(),
+                function(data){
+                    console.log(data);
+                }
+            );
+        }
+        
+    </script>
 @endsection

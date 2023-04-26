@@ -1,8 +1,9 @@
 <?php 
 use App\CustomClasses\Access;
 ?>
- @if(Access::checkView('show_fin_form'))
- <form class="form-horizontal" method="POST" action="javascript:void(0)" id="fin-form">
+
+ 
+ {{-- <form class="form-horizontal" method="POST" action="javascript:void(0)" id="fin-form">
      @csrf
      <input type="hidden" class="form-control" id="" name="id">
      <input type="hidden" class="form-control" id="" name="FormType" value="FinForm">
@@ -155,7 +156,7 @@ use App\CustomClasses\Access;
                  <td></td>
              </tr>
          </table>
- </form>
+ </form> --}}
  <button type="button" class="btn btn-primary" id="submit-fin-form">ذخیره</button>
 
  <script>

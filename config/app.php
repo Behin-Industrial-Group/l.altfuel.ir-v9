@@ -2,6 +2,27 @@
 
 return [
 
+    'agencies' => [
+        'high-pressure' => [
+            'name' => 'high-pressure',
+            'fa_name' => 'مراکز خدمات فنی',
+            'table' => 'marakez1'
+            // 'paymnet' and 'extra-payments' => from ConfigServiceProvider.php
+        ],
+        'hidro' => [
+            'name' => 'hidro',
+            'fa_name' => 'آزمایشگاه هیدرواستاتیک',
+            'table' => 'hidro'
+            // 'paymnet' and 'extra-payments' => from ConfigServiceProvider.php
+        ],
+        'low-pressure' => [
+            'name' => 'low-pressure',
+            'fa_name' => 'مراکز خدمات کم فشار',
+            'table' => 'kamfeshar'
+            // 'paymnet' and 'extra-payments' => from ConfigServiceProvider.php
+        ]
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -165,7 +186,10 @@ return [
         /*
          * Package Service Providers...
          */
-
+        App\Providers\ColumnFilterServiceProvider::class,
+        Livewire\LivewireServiceProvider::class,
+        App\Providers\FinanceServiceProvider::class,
+        App\Providers\ConfigServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -174,6 +198,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
 
     ],
 

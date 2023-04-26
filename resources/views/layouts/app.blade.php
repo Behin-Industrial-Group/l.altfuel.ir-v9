@@ -68,6 +68,8 @@ $videosCatagories = VideosCatagoriesModel::get();
         <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.css"/>
+
+
         <!-- jQuery 3 -->
     <script src="{{ Url('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
        
@@ -147,15 +149,15 @@ $videosCatagories = VideosCatagoriesModel::get();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
-    <script src="{{ url('public/js/num2persian.js') }}"></script>
     <script src="{{ url('public/js/ajax.js') }}"></script>
     <script src="{{ url('public/js/dataTable.js') }}"></script>
     <script src="{{ url('public/js/dropzone.js') }}"></script>
     <script src="{{ url('public/js/loader.js') }}"></script>
     <script src="{{ url('public/js/clearcach.js') }}"></script>
+    {{-- <script src="{{ asset('livewire/livewire.js') }}"></script> --}}
     <script>
         $(document).ready(function(){
-            $('#table').DataTable({
+            var table = $('#table').DataTable({
                 dom: 'Bfltip',
                 buttons: [
                     { 'extend': 'excel', 'text': 'Excel', className: 'btn btn-info'},

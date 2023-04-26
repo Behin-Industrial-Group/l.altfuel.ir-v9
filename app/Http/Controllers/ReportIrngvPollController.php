@@ -15,10 +15,14 @@ use App\CustomClasses\Logs;
 use App\CustomClasses\Access;
 use App\CustomClasses\ExcelReader;
 use App\Enums\EnumsEntity;
+use App\Interfaces\ColumnFilterServiceInterface;
+use App\Interfaces\Filterable;
 use SoapClient;
 use App\User;
 use App\LogsModel;
-
+use App\Models\IrngvPollAnswer;
+use App\Services\FilterModel;
+use Illuminate\Support\Facades\Schema;
 
 class ReportIrngvPollController extends Controller
 {
@@ -31,6 +35,14 @@ class ReportIrngvPollController extends Controller
             'report' => IrngvPollAnswerController::get_answer_avg_of_all_question(),
             'number_report' => IrngvPollAnswerController::get_number_of_special_answer_of_all_question(),
         ]);
+    }
+
+    public function get(Request $request, ColumnFilterServiceInterface $filterService) {
+        $model = IrngvPollAnswer::query();
+        $filters = $request->only(Schema::getColumnListing((new IrngvPollAnswer())->getTable()));
+
+        $model = $filterService->applyFilters($model, $filters);
+        return $model->get();
     }
     
 }

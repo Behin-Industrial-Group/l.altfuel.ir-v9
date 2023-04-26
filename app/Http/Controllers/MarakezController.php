@@ -16,6 +16,7 @@ use App\Repository\RMarakez;
 use Carbon\Carbon;
 use Exception;
 use Hekmatinasser\Verta\Verta;
+use Illuminate\Support\Facades\Log;
 
 class MarakezController extends Controller
 {
@@ -50,6 +51,11 @@ class MarakezController extends Controller
         ]);
     }
 
+    public function get($id)
+    {
+        return MarakezModel::find($id);
+    }
+
     public function editmarkazform(Request $request, $id)
     {
         Access::check('Marakez_editmarkazform');
@@ -68,11 +74,18 @@ class MarakezController extends Controller
                         ->first();
         //$lock = PelakkhanModel::where('CodeEtehadie', $markaz->CodeEtehadie)->first();
 
-        return view('admin.marakez.editmarkaz', [
+        return view('admin.marakez.edit', [
             'markaz' => $markaz,
             //'lock' => $lock,
         ]);
 
+    }
+
+    public function editMarkazFinInfo(Request $r, $id)
+    {
+        $data = $r->all();
+        $data['FinGreen'] = ($r->FinGreen) ? 'ok' : 'not ok';
+        return $this->get($id)->update($data);
     }
 
     public function editmarkaz(Request $r,$id)
@@ -401,33 +414,17 @@ class MarakezController extends Controller
         }
     }
 
-    public function edit_markaz_info(Request $r, $id)
+    public function edit_markaz_info(Request $r, $id = null)
     {
+        $id = $id ? $id : $r->id;
         try{
             Access::check('Marakez_editmarkaz');
-
-            $markaz = MarakezModel::find($id);
-
-            $markaz->enable = isset($r->enable) ? 1 : 0;
-            $markaz->NationalID = $r->NationalID;
-            $markaz->Name = $r->Name;
-            $markaz->Province = $r->Province;
-            $markaz->City = $r->City;
-            $markaz->CodeEtehadie = $r->CodeEtehadie;
-            $markaz->ReceivingCodeYear = $r->ReceivingCodeYear;
-            $markaz->GuildNumber = $r->GuildNumber;
-            $markaz->IssueDate = $r->IssueDate;
-            $markaz->ExpDate = $r->ExpDate;
-            $markaz->PostalCode = $r->PostalCode;
-            $markaz->Cellphone = $r->Cellphone;
-            $markaz->Tel = $r->Tel;
-            $markaz->Address = $r->Address;
-            $markaz->Location = $r->Location;
-            $markaz->Details = $r->Details;
-
-            $markaz->InsUserDelivered = isset($r->InsUserDelivered) ? 'ok' : 'not ok';
-            $markaz->save();
-            return response('ویرایش شد');
+            
+            $data = $r->all();
+            $data['enable'] = ($r->enable) ? 1 : 0;
+            $data['InsUserDelivered'] = ($r->InsUserDelivered) ? 'ok' : 'not ok';
+            Log::info($data);
+            return $this->get($id)->update($data);
         }
         catch(Exception $e){
             return response('خطا: '. $e->getMessage());

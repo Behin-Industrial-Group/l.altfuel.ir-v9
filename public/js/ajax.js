@@ -83,12 +83,35 @@ function hide_loading(){
     $('#preloader').hide();
 }
 
-function open_admin_modal(url){
+function open_admin_modal(url, title = ''){
+    var modal = $('<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+                    '<div class="modal-dialog modal-lg">' +
+                    '<div class="modal-content">' +
+                    '<div class="modal-header">' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                    '<h4 class="modal-title" id="myModalLabel">'+ title +'</h4>' +
+                    '</div>' +
+                    '<div class="modal-body" id="modal-body">' +
+                    '<p>Modal content goes here.</p>' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>');
+    
+    $('body').append(modal);
+    
+    $('#admin-modal').on('hidden.bs.modal', function () {
+        $(this).remove();
+      });
+      
+      
     send_ajax_get_request(
         url,
         function(data){
-            $('#modal #modal-body').html(data);
-            $('#modal').modal('show')
+            $('#admin-modal #modal-body').html(data);
+            $('#admin-modal').modal('show')
         }
     )
 }

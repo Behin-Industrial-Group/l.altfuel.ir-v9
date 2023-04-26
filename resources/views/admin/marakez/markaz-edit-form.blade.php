@@ -8,37 +8,37 @@ use App\CustomClasses\Access;
     
 </script>
 
-<form action="javascript:void(0)" id="markaz-info-form">
-    <input type="hidden" class="form-control" id="" name="id">
+<form action="javascript:void(0)" id="agency-info-form">
+    <input type="hidden" class="form-control" id="" name="id" value="{{ $agency->id }}">
     <table class="table table-bordered table-striped">
         <tr>
             <td>فعال</td>
-            <td><input type="checkbox" name="enable"> </td>
+            <td><input type="checkbox" name="enable" {{ ($agency->enable) ? 'checked' : '' }}> </td>
         </tr>
         <tr>
             <td>سال دریافت کد</td>
-            <td><input type="text" class="form-control" id="" name="ReceivingCodeYear"></td>
+            <td><input type="text" class="form-control" id="" name="ReceivingCodeYear" value="{{ $agency->ReceivingCodeYear }}"></td>
         </tr>
         <tr>
             <td>کدملی</td>
-            <td><input type="text" class="form-control" id="" name="NationalID"></td>
+            <td><input type="text" class="form-control" id="" name="NationalID"  value="{{ $agency->NationalID }}"></td>
         </tr>
         <tr>
             <td>نام</td>
-            <td><input type="text" class="form-control" id="" name="Name"></td>
+            <td><input type="text" class="form-control" id="" name="Name" value="{{ $agency->Name }}"></td>
         </tr>
         <tr>
             <td>استان</td>
-            <td><input type="text" class="form-control" id="Province" name="Province"></td>
+            <td><input type="text" class="form-control" id="Province" name="Province" value="{{ $agency->Province }}"></td>
         </tr>
         <tr>
             <td>شهرستان</td>
-            <td><input type="text" class="form-control" id="" name="City" ></td>
+            <td><input type="text" class="form-control" id="" name="City" value="{{ $agency->City }}"></td>
         </tr>
         <tr>
             <td>کدمرکز</td>
             <td>
-                <input type="text" class="form-control col-sm-9" id="CodeEtehadie" name="CodeEtehadie">
+                <input type="text" class="form-control col-sm-9" id="CodeEtehadie" name="CodeEtehadie" value="{{ $agency->CodeEtehadie }}">
                 <span id="gen_code" class="col-sm-3"  style="background: #db4f4f;padding-top:5px; height:32px; text-align:center; font-weight:bold; cursor:pointer">
                     تولید کد
                 </span>
@@ -46,47 +46,47 @@ use App\CustomClasses\Access;
         </tr>
         <tr>
             <td>شماره صنفی</td>
-            <td><input type="text" class="form-control" id="" name="GuildNumber"></td>
+            <td><input type="text" class="form-control" id="" name="GuildNumber" value="{{ $agency->GuildNumber }}"></td>
         </tr>
         <tr>
             <td>تاریخ صدور</td>
-            <td><input type="text" class="form-control" id="" name="IssueDate" ></td>
+            <td><input type="text" class="form-control" id="" name="IssueDate" value="{{ $agency->IssueDate }}"></td>
         </tr>
         <tr>
             <td>تاریخ انقضا</td>
-            <td><input type="text" class="form-control" id="" name="ExpDate" ></td>
+            <td><input type="text" class="form-control" id="" name="ExpDate" value="{{ $agency->ExpDate }}"></td>
         </tr>
         <tr>
             <td>کدپستی</td>
-            <td><input type="text" class="form-control" id="" name="PostalCode" ></td>
+            <td><input type="text" class="form-control" id="" name="PostalCode" value="{{ $agency->PostalCode }}"></td>
         </tr>
         <tr>
             <td>شماره همراه</td>
-            <td><input type="text" class="form-control" id="" name="Cellphone" ></td>
+            <td><input type="text" class="form-control" id="" name="Cellphone" value="{{ $agency->Cellphone }}"></td>
         </tr>
         <tr>
             <td>تلفن ثابت</td>
-            <td><input type="text" class="form-control" id="" name="Tel" ></td>
+            <td><input type="text" class="form-control" id="" name="Tel" value="{{ $agency->Tel }}"></td>
         </tr>
         <tr>
             <td>آدرس</td>
-            <td><input type="text" class="form-control" id="" name="Address" ></td>
+            <td><input type="text" class="form-control" id="" name="Address" value="{{ $agency->Address }}"></td>
         </tr>
         <tr>
             <td>موقعیت مکانی</td>
-            <td><input type="text" class="form-control" id="" name="Location" ></td>
+            <td><input type="text" class="form-control" id="" name="Location" value="{{ $agency->Location }}"></td>
         </tr>
         <tr>
             <td>توضیحات</td>
-            <td><input type="text" class="form-control" id="" name="Details" ></td>
+            <td><textarea type="text" class="form-control" id="" name="Details">{{ $agency->Details }}</textarea></td>
         </tr>
         <tr>
             <td>یوزر بازرسی تحویل داده شد</td>
-            <td><input type="checkbox" class="" id="" name="InsUserDelivered" ></td>
+            <td><input type="checkbox" class="" id="" name="InsUserDelivered" {{ ($agency->InsUserDelivered == 'ok') ? 'checked' : '' }}></td>
         </tr>
     </table>
 </form>
-<button type="button" class="btn btn-primary" id="submit-markaz-form">ذخیره</button>
+<button type="button" class="btn btn-primary" id="submit-markaz-form" onclick="save_agency_info()">ذخیره</button>
 
 <script>
     $('#gen_code').on('click', function(){
@@ -98,18 +98,20 @@ use App\CustomClasses\Access;
 </script>
 
 <script>
-    $('#submit-markaz-form').click(function(){
-        var id = $('input[name=id]').val();
-        $.ajax({
-            url: `{{url("admin/marakez/edit-markaz-info")}}/${id}`,
-            data: $('#markaz-info-form').serialize(),
-            processData: false,
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            method: 'post',
-            success: function(data){
+
+    function save_agency_info(){
+        send_ajax_request(
+            "{{ route('edit-markaz-info') }}",
+            $('#agency-info-form').serialize(),
+            function(data){
+                console.log(data);
+                open_admin_modal("{{ route('admin.markaz.edit-form', [ 'id' => $agency->id ]) }}")
+            },
+            function(data){
+                console.log(data);
                 alert(data);
-                $('#modal-fin-edit').modal('hide');
+                open_admin_modal("{{ route('admin.markaz.edit-form', [ 'id' => $agency->id ]) }}")
             }
-        })
-    })
+        )
+    }
 </script>

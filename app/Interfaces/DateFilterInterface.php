@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface DateFilterInterface
+interface DateFilterInterface 
 {
     public function getByCreatedAtRange(string $startDate, string $endDate);
 }

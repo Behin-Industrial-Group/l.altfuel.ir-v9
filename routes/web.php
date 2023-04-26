@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LableController;
 use App\Http\Controllers\QrController;
+use App\Models\FinInfo;
+use App\Models\HidroModel;
 use App\Models\IrngvUsersInfo;
 use App\Models\KamFesharModel;
 use App\Models\MarakezModel;
@@ -15,6 +17,8 @@ use App\Repository\RReport;
 use App\Repository\RSendExpSms;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Translation\MessageCatalogue;
+
+use function PHPSTORM_META\type;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +35,98 @@ Route::get('hamayesh/barname', function(){
     header("Location: http://altfuel.ir/wp-content/uploads/2022/06/همایش-1401-VER-24.pdf");
 });
 
-Route::get('redirect/{site}', function($site){
+Route::get('test', function(){
+   foreach(config('app.agencies') as $agency){
+        $table = $agency['table'];
+
+        if($table == 'marakez1'){
+            $marakez = MarakezModel::get();
+        }
+
+        if($table == 'hidro'){
+            $marakez = HidroModel::get();
+        }
+
+        if($table == 'kamfeshar'){
+            $marakez = KamFesharModel::get();
+        }
+
+        foreach($marakez as $m){
+            FinInfo::create([
+                'agency_table' => $table,
+                'agency_id' => $m->id,
+                'name' => 'membership_96',
+                'price' => $m->MembershipFee96,
+                'ref_id' => $m->MembershipFee96_Refid,
+                'pay_date' => $m->MembershipFee96_PayDate,
+            ]);
+    
+            FinInfo::create([
+                'agency_table' => $table,
+                'agency_id' => $m->id,
+                'name' => 'membership_97',
+                'price' => $m->MembershipFee97,
+                'ref_id' => $m->MembershipFee97_Refid,
+                'pay_date' => $m->MembershipFee97_PayDate,
+            ]);
+    
+            FinInfo::create([
+                'agency_table' => $table,
+                'agency_id' => $m->id,
+                'name' => 'membership_98',
+                'price' => $m->MembershipFee98,
+                'ref_id' => $m->MembershipFee98_Refid,
+                'pay_date' => $m->MembershipFee98_PayDate,
+            ]);
+    
+            FinInfo::create([
+                'agency_table' => $table,
+                'agency_id' => $m->id,
+                'name' => 'membership_99',
+                'price' => $m->MembershipFee99,
+                'ref_id' => $m->MembershipFee99_Refid,
+                'pay_date' => $m->MembershipFee99_PayDate,
+            ]);
+    
+            FinInfo::create([
+                'agency_table' => $table,
+                'agency_id' => $m->id,
+                'name' => 'membership_00',
+                'price' => $m->Membership00,
+                'ref_id' => $m->Membership00_Refid,
+                'pay_date' => $m->Membership00_PayDate,
+            ]);
+    
+            FinInfo::create([
+                'agency_table' => $table,
+                'agency_id' => $m->id,
+                'name' => 'membership_01',
+                'price' => $m->Membership01,
+                'ref_id' => $m->Membership01_Refid,
+                'pay_date' => $m->Membership01_PayDate,
+            ]);
+    
+            FinInfo::create([
+                'agency_table' => $table,
+                'agency_id' => $m->id,
+                'name' => 'irngv_fee',
+                'price' => $m->IrngvFee,
+                'ref_id' => $m->IrngvFee_Refid,
+                'pay_date' => $m->IrngvFee_PayDate,
+            ]);
+    
+            FinInfo::create([
+                'agency_table' => $table,
+                'agency_id' => $m->id,
+                'name' => 'lock_fee',
+                'price' => $m->LockFee,
+                'ref_id' => $m->LockFee_Refid,
+                'pay_date' => $m->LockFee_PayDate,
+            ]);
+       }
+   }
    
-    return file_get_contents($site);
+   
 });
 
 Route::get('/migrate', function(){
@@ -194,18 +287,21 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
     Route::prefix('/marakez')->group(function(){
         Route::get('/',[MarakezController::class, 'index'] );
         Route::get('/addyear',[MarakezController::class, 'addCodeYear']);
-        Route::get('/edit/{id}',[MarakezController::class, 'editmarkazform']);
+        Route::get('/edit/{id}',[MarakezController::class, 'editmarkazform'])->name('admin.markaz.edit-form');
         Route::post('/edit/{id}',[MarakezController::class, 'editmarkaz']);
         Route::get('/get-all',[MarakezController::class, 'get_all'])->name('get-all-marakez');
         Route::get('/get-info/{id}',[MarakezController::class, 'get_fin_info'])->name('get-markaz-fin-info');
-        Route::any('/edit-fin-info/{id}',[MarakezController::class, 'edit_fin_info'])->name('edit-markaz-fin-info');
-        Route::any('/edit-markaz-info/{id}',[MarakezController::class, 'edit_markaz_info'])->name('edit-markaz-info');
+        Route::any('/edit-markaz-info/{id?}',[MarakezController::class, 'edit_markaz_info'])->name('edit-markaz-info');
         Route::post('/edit-pelakkhan', [MarakezController::class, 'EditPelakkhan']);
         Route::get('/{fin}',[MarakezController::class, 'index'] );
 
         Route::get('/get/{code}', [MarakezController::class, 'getMarakez']);
 
 
+    });
+
+    Route::name('fin-info.')->prefix('/fin-info')->group(function(){
+        Route::post('/edit',[FinInfoController::class, 'update'])->name('edit');
     });
 
     Route::get('/editmarkaz',[MarakezController::class, 'editmarkazform']);
@@ -223,8 +319,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
         Route::get('/fin',[HidroController::class, 'show_fin_form_view'] )->name('show-hidro-fin-form');
         Route::get('/get-all',[HidroController::class, 'get_all'])->name('get-all-marakez');
         Route::get('/get-info/{id}',[HidroController::class, 'get_fin_info'])->name('get-markaz-fin-info');
-        Route::any('/edit-fin-info/{id}',[HidroController::class, 'edit_fin_info'])->name('edit-markaz-fin-info');
-        Route::any('/edit-markaz-info/{id}',[HidroController::class, 'edit_markaz_info'])->name('edit-markaz-info');
+        // Route::any('/edit-fin-info/{id}',[HidroController::class, 'edit_fin_info'])->name('edit-markaz-fin-info');
+        Route::any('/edit-markaz-info/{id?}',[HidroController::class, 'edit_markaz_info'])->name('edit-hidro-info');
 
         Route::get('/add',[HidroController::class, 'addform']);
         Route::post('/add',[HidroController::class, 'addmarkaz']);
@@ -239,8 +335,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
         Route::get('/fin',[KamFesharController::class, 'show_fin_from_view'] )->name('show_fin_from_view');
         Route::get('/get-all',[KamFesharController::class, 'get_all'])->name('get-all-marakez');
         Route::get('/get-info/{id}',[KamFesharController::class, 'get_fin_info'])->name('get-markaz-fin-info');
-        Route::any('/edit-fin-info/{id}',[KamFesharController::class, 'edit_fin_info'])->name('edit-markaz-fin-info');
-        Route::any('/edit-markaz-info/{id}',[KamFesharController::class, 'edit_markaz_info'])->name('edit-markaz-info');
+        // Route::any('/edit-fin-info/{id}',[KamFesharController::class, 'edit_fin_info'])->name('edit-markaz-fin-info');
+        Route::any('/edit-markaz-info/{id?}',[KamFesharController::class, 'edit_markaz_info'])->name('edit-kamfeshar-info');
 
         Route::get('/add',[KamFesharController::class, 'addform']);
         Route::post('/add',[KamFesharController::class, 'addmarkaz']);
@@ -364,6 +460,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
 
         Route::name('irngv.')->prefix('irngv-poll')->group(function(){
             Route::get('', [ReportIrngvPollController::class, 'show_list'])->name('poll');
+            Route::post('', [ReportIrngvPollController::class, 'get'])->name('poll.get');
         });
     });
 
