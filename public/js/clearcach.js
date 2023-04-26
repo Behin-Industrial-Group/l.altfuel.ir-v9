@@ -1,4 +1,4 @@
-var appVersion = "9.0";
+var appVersion = "9.1";
 
 window.onload = function() {
     if ('caches' in window) {
