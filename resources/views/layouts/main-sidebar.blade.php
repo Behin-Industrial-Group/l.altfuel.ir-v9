@@ -84,8 +84,8 @@ $videosCatagories = VideosCatagoriesModel::get();
                     </span>
                   </a>
                   <ul class="treeview-menu" style="display: none;">
-                        <li><a href="{{ Url('admin/marakez') }}"><i class="fa fa-minus"></i>مراکز</a></li>
-                        <li><a href="{{ Url('admin/marakez/fin') }}"><i class="fa fa-minus"></i>مراکز - لیست مالی</a></li>
+                        {{-- <li><a href="{{ Url('admin/marakez') }}"><i class="fa fa-minus"></i>مراکز</a></li> --}}
+                        <li><a href="{{ Url('admin/marakez/fin') }}"><i class="fa fa-minus"></i>همه</a></li>
                         <li><a href="{{ Url('admin/addmarkaz') }}"><i class="fa fa-minus"></i>افزودن مرکز</a></li>
                   </ul>
                 </li>
