@@ -34,7 +34,6 @@ function send_ajax_get_request(url, callback, erCallback = null){
     return $.ajax({
         url: url,
         processData: false,
-        async: false,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
