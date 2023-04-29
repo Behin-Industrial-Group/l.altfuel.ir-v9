@@ -70,7 +70,7 @@ use App\CustomClasses\Access;
         </tr>
         <tr>
             <td>آدرس</td>
-            <td><input type="text" class="form-control" id="" name="Address" value="{{ $agency->Address }}"></td>
+            <td><textarea type="text" class="form-control" id="" name="Address">{{ $agency->Address }}</textarea></td>
         </tr>
         <tr>
             <td>موقعیت مکانی</td>

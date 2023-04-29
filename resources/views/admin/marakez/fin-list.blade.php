@@ -17,7 +17,9 @@
                           <th>استان</th>
                           <th>شهر</th>
                           <th>کداتحادیه</th>
+                          <th>آدرس</th>
                           <th>موبایل</th>
+                          <th>شناسه صنفی</th>
                           <th>تاریخ صدور</th>
                           <th>تاریخ انقضا</th>
                           <th>حق عضویت 96</th>
@@ -42,7 +44,9 @@
                                 <td><?php echo $markaz->Province ?></td>
                                 <td><?php echo $markaz->City ?></td>
                                 <td><?php echo $markaz->CodeEtehadie ?></td>
+                                <td>{{ $markaz->Address }}</td>
                                 <td><?php echo $markaz->Cellphone ?></td>
+                                <td><?php echo $markaz->GuildNumber ?></td>
                                 <td><?php echo $markaz->IssueDate ?></td>
                                 <td><?php echo $markaz->ExpDate ?></td>
                                 <td class="cama-seprator"><?php echo $markaz->MembershipFee96 ?></td>
