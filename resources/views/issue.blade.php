@@ -110,7 +110,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-lable">
                                         آپلود تصویر:  
-                                        (حجم فایل کمتر از 300 کیلوبایت و فقط فرمت های jpg,png,jpeg)
+                                        (حجم فایل کمتر از 2 مگابایت و فقط فرمت های jpg,png,jpeg,pdf)
                                     </label>
                                     <input type="file" name="issue_file" class="col-sm-8 form-control">
                                 </div>

@@ -131,7 +131,7 @@ class IssuesController extends Controller
 
         $file_type = strtolower($file->getClientOriginalExtension());
 
-        if($file_type == 'jpg' || $file_type == 'png' || $file_type == 'jpeg')
+        if($file_type == 'jpg' || $file_type == 'png' || $file_type == 'jpeg' || $file_type == 'pdf')
         {
             $path = 'public/uploads/' . $request->input('cellphone') ;
             $filename = rand(10000,99999). "." . strtolower($file->getClientOriginalExtension());
