@@ -24,6 +24,32 @@ function send_ajax_request(url, data, callback, erCallback = null){
     .catch(erCallback);
 }
 
+function send_ajax_formdata_request(url, data, callback, erCallback = null){
+    show_loading()
+    if(erCallback == null){
+        erCallback= function(data){ 
+            hide_loading();
+            error_notification('<p dir="ltr">' + JSON.stringify(data) + '</p>');
+        }
+    }
+    return $.ajax({
+        url: url,
+        data: data,
+        processData: false,
+        contentType: false,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'post',
+        success: function(){
+            hide_loading();
+        },
+        error: erCallback
+    })
+    .done(callback)
+    .catch(erCallback);
+}
+
 function send_ajax_get_request(url, callback, erCallback = null){
     show_loading()
     if(erCallback == null){
@@ -114,6 +140,33 @@ function open_admin_modal(url, title = ''){
             $('#admin-modal').modal('show')
         }
     )
+}
+
+function open_admin_modal_with_data(data, title = ''){
+    var modal = $('<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+                    '<div class="modal-dialog modal-lg">' +
+                    '<div class="modal-content">' +
+                    '<div class="modal-header">' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                    '<h4 class="modal-title" id="myModalLabel" style="font-weight: bold">'+ title +'</h4>' +
+                    '</div>' +
+                    '<div class="modal-body" id="modal-body">' +
+                    '<p>Modal content goes here.</p>' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>');
+    
+    $('body').append(modal);
+    
+    $('#admin-modal').on('hidden.bs.modal', function () {
+        $(this).remove();
+      });
+
+    $('#admin-modal #modal-body').html(data);
+    $('#admin-modal').modal('show')
 }
 
 

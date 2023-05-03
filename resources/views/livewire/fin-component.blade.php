@@ -55,8 +55,9 @@
                 @foreach ($agency['extra-payment'] as $item)
                     <tr>
                         <td>
+                            {{__($item['fa_name'])}}
                             <input 
-                                type="text"
+                                type="hidden"
                                 class="form-control" 
                                 name="{{$item['name']}}[name]" 
                                 value="{{ $results->where('name', $item['name'])->first()->name ?? $item['name'] }}"
@@ -162,11 +163,12 @@
             "{{ route('fin-info.edit') }}",
             $('#fin-form').serialize(),
             function(data){
+                toastr.success("اطلاعات ویرایش شد")
                 console.log(data);
             },
             function(data){
                 console.log(data);
-                alert(data);
+                show_error(data);
             }
         )
     }

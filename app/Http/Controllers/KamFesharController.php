@@ -24,7 +24,7 @@ class KamFesharController extends Controller
     {
         $markaz = KamFesharModel::where('id', $id)->first();
 
-        return view('admin.kamFeshar.editmarkaz', [
+        return view('admin.kamFeshar.edit', [
             'markaz' => $markaz
         ]);
     }

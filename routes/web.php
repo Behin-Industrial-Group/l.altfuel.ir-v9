@@ -284,6 +284,13 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
     Route::get('/addstatus', 'ArchiveController@addstatusform');
     Route::post('/addstatus', 'ArchiveController@addstatus');
 
+    Route::name('agency.')->prefix('/agency/')->group(function(){
+        Route::get('', [AgencyController::class, 'listForm'])->name('list-form');
+        Route::any('/list/{table_name?}', [AgencyController::class, 'list'])->name('list');
+        Route::any('agency/edit-form', [AgencyController::class, 'editForm'])->name('edit-form');
+        Route::post('agency/edit', [AgencyController::class, 'edit'])->name('edit');
+    });
+
     Route::prefix('/marakez')->group(function(){
         Route::get('/',[MarakezController::class, 'index'] );
         Route::get('/addyear',[MarakezController::class, 'addCodeYear']);

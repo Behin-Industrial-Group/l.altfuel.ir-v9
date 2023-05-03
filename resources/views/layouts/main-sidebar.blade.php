@@ -75,7 +75,18 @@ $videosCatagories = VideosCatagoriesModel::get();
                 </li>
             @endif
             -->
-            @if(Access::checkView('Marakez_index'))
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-pie-chart"></i> <span>مراکز</span>
+                <span class="pull-left-container">
+                  <i class="fa fa-angle-right pull-left"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu" style="display: none;">
+                    <li><a href="{{ route('agency.list-form') }}"><i class="fa fa-minus"></i>همه</a></li>
+              </ul>
+            </li>
+            {{-- @if(Access::checkView('Marakez_index'))
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-pie-chart"></i> <span>خدمات فنی</span>
@@ -84,13 +95,13 @@ $videosCatagories = VideosCatagoriesModel::get();
                     </span>
                   </a>
                   <ul class="treeview-menu" style="display: none;">
-                        {{-- <li><a href="{{ Url('admin/marakez') }}"><i class="fa fa-minus"></i>مراکز</a></li> --}}
+                        <li><a href="{{ Url('admin/marakez') }}"><i class="fa fa-minus"></i>مراکز</a></li>
                         <li><a href="{{ Url('admin/marakez/fin') }}"><i class="fa fa-minus"></i>همه</a></li>
                         <li><a href="{{ Url('admin/addmarkaz') }}"><i class="fa fa-minus"></i>افزودن مرکز</a></li>
                   </ul>
                 </li>
-            @endif
-            @if(Access::checkView('Hidro_index'))
+            @endif --}}
+            {{-- @if(Access::checkView('Hidro_index'))
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-pie-chart"></i> <span>هیدرو استاتیک</span>
@@ -104,8 +115,8 @@ $videosCatagories = VideosCatagoriesModel::get();
                         <li><a href="{{ Url('admin/hidro/add') }}"><i class="fa fa-minus"></i>افزودن مرکز</a></li>
                   </ul>
                 </li>
-            @endif
-            @if(Access::checkView('kamfeshar_list'))
+            @endif --}}
+            {{-- @if(Access::checkView('kamfeshar_list'))
                 <li class="treeview">
                   <a href="#">
                     <i class="fa fa-pie-chart"></i> <span>کم فشار</span>
@@ -119,7 +130,7 @@ $videosCatagories = VideosCatagoriesModel::get();
                     <li><a href="{{ Url('admin/kamfeshar/add') }}"><i class="fa fa-minus"></i>افزودن مرکز کم فشار</a></li>
                   </ul>
                 </li>
-            @endif
+            @endif --}}
             <!--
             @if(Access::checkView('inspection_list'))
                 <li class="treeview">

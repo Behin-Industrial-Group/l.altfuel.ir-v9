@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\CustomClasses\Access;
 use App\Interfaces\FinanceServiceInterface;
 use App\Models\FinInfo;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,7 @@ class FinanceService implements FinanceServiceInterface
 
     public function updateFinInfo(string $agency, int $agency_id, object $request)
     {
+        Access::check(config("app.agencies.$agency.table") . "-edit-fin-info");
         $this->updateAgencyFinInfo($agency, $agency_id, $request);
         $agency_table = config("app.agencies.$agency.table");
         $agency_payment = "app.agencies." . $agency . ".payment" ; 

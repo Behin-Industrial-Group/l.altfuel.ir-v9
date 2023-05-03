@@ -13,14 +13,14 @@ return [
 
     'extra-payments' => [
         'high-pressure' => [
-            'irngvFee' => [ 'name' => 'irngv_fee' ],
-            'lockFee' => [ 'name' => 'lock_fee' ]
+            'irngvFee' => [ 'name' => 'irngv_fee' , 'fa_name' => 'پشتیبانی سامانه irngv' ],
+            'lockFee' => [ 'name' => 'lock_fee', 'fa_name' => 'قفل سخت افزاری' ]
         ],
         'hidro' => [
-            'irngvFee' => [ 'name' => 'irngv_fee' ],
+            'irngvFee' => [ 'name' => 'irngv_fee', 'fa_name' => 'پشتیبانی سامانه irngv' ],
         ],
         'low-pressure' => [
-            'irngvFee' => [ 'name' => 'irngv_fee' ],
+            'irngvFee' => [ 'name' => 'irngv_fee', 'fa_name' => 'پشتیبانی سامانه irngv' ],
         ],
     ]
 ];

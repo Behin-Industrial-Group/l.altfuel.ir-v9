@@ -64,40 +64,8 @@
             </div>
         </div>
     </div>
-    @include('admin.kamFeshar.edit-modal')
     <script>
-        // $.get('{{ route("get-all-marakez") }}', function (rows) {
-        //     $('#marakez').DataTable({
-        //         data: rows, 
-        //         columns: [
-        //                 { data: 'id' },
-        //                 { data: 'Name' },
-        //                 { data: 'NationalID' },
-        //                 { data: 'Province' },
-        //                 { data: 'City' },
-        //                 { data: 'CodeEtehadie' },
-        //                 { data: 'Cellphone' },
-        //                 { data: 'IssueDate' },
-        //                 { data: 'ExpDate' },
-        //                 { data: 'MembershipFee96' },
-        //                 { data: 'MembershipFee97' },
-        //                 { data: 'MembershipFee98' },
-        //                 { data: 'MembershipFee99' },
-        //                 { data: 'Membership00' },
-        //                 { data: 'LockFee' },
-        //                 { data: 'IrngvFee' },
-        //                 { data: 'debt' },
-        //                 { data: 'FinGreen' },
-        //             ],
-        //         "initComplete": function(settings, json) {
-        //             click_tr_to_edit();
-        //             open_edit_modal();
-        //         },
-        //         createdRow: function( row, data, dataIndex ) {
-        //             $( row ).addClass(data);
-        //         }
-        //     })
-        // })
+        
         click_tr_to_edit()
         open_edit_modal()
 

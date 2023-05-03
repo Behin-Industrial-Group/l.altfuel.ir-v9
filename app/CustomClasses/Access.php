@@ -8,6 +8,7 @@ use App\Models\DisableModel;
 use Exception;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class Access
 {
@@ -44,7 +45,7 @@ class Access
     public static function check($method_name)
     {
         try{
-            $method = MethodsModel::where('name', $method_name)->first();
+            $method = MethodsModel::firstOrCreate(['name' => $method_name]);
             $user = Auth::user();
             $access = AccessModel::where('method_id', $method->id)->where('user_id', $user->id)->first();
 
@@ -68,7 +69,7 @@ class Access
     public static function checkView($method_name)
     {
         try{
-            $method = MethodsModel::where('name', $method_name)->first();
+            $method = MethodsModel::firstOrCreate(['name' => $method_name]);
             $user = Auth::user();
             $access = AccessModel::where('method_id', $method->id)->where('user_id', $user->id)->first();
 

@@ -72,6 +72,8 @@ $videosCatagories = VideosCatagoriesModel::get();
 
         <!-- jQuery 3 -->
     <script src="{{ Url('public/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
        
         <style>
         body{ 
@@ -154,6 +156,9 @@ $videosCatagories = VideosCatagoriesModel::get();
     <script src="{{ url('public/js/dropzone.js') }}"></script>
     <script src="{{ url('public/js/loader.js') }}"></script>
     <script src="{{ url('public/js/clearcach.js') }}"></script>
+    <script src="{{ url('public/js/scripts.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     {{-- <script src="{{ asset('livewire/livewire.js') }}"></script> --}}
     <script>
         $(document).ready(function(){

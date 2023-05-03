@@ -86,7 +86,7 @@ use App\Models\User;
                             </thead>
                             @foreach($methods as $method)
                                     <tr>
-                                        <td>{{$method->fa_name}}</td>
+                                        <td>{{ $method->fa_name != '' ? $method->fa_name : $method->name }}</td>
                                         <td>
                                             <?php
                                             $access = AccessModel::where('user_id',$user->id)->where('method_id',$method->id)->first();
