@@ -99,7 +99,7 @@
             "{{ route('agency.edit') }}",
             $('#agency-info-form').serialize(),
             function(data){
-                console.log(data);
+                toastr.success("اطلاعات مرکز ویرایش شد")
                 // refresh_table()
                 // open_admin_modal("{{ route('admin.markaz.edit-form', [ 'id' => $agency->id ]) }}")
             },
