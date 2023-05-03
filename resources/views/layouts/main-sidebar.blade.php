@@ -78,7 +78,9 @@ $videosCatagories = VideosCatagoriesModel::get();
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i> <span>مراکز</span>
+                
                 <span class="pull-left-container">
+                  <i class="label pull-right bg-green">جدید</i>
                   <i class="fa fa-angle-right pull-left"></i>
                 </span>
               </a>
