@@ -1,7 +1,7 @@
 
 <form action="javascript:void(0)" id="agency-info-form">
-    <input type="text" class="form-control" id="" name="id" value="{{ $agency->id }}">
-    <input type="text" class="form-control" id="" name="agency_table" value="{{ $agency_table }}">
+    <input type="hidden" class="form-control" id="" name="id" value="{{ $agency->id }}">
+    <input type="hidden" class="form-control" id="" name="agency_table" value="{{ $agency_table }}">
     <table class="table table-bordered table-striped">
         <tr>
             <td>فعال</td>
