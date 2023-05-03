@@ -34,6 +34,7 @@ class AgencyController extends Controller
         Access::check($r->agency_table . "-edit");
         $data = $r->except(['agency_table']);
         $data['enable'] = $r->enable ? 1 : 0;
+        $data['InsUserDelivered'] = $r->InsUserDelivered ? 'ok' : 'not ok';
         return DB::table($r->agency_table)->where('id', $r->id)->update($data);
     }
 
