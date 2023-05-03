@@ -163,8 +163,7 @@
             "{{ route('fin-info.edit') }}",
             $('#fin-form').serialize(),
             function(data){
-                toastr.success("اطلاعات ویرایش شد")
-                console.log(data);
+                toastr.success("اطلاعات مالی مرکز ویرایش شد")
             },
             function(data){
                 console.log(data);
