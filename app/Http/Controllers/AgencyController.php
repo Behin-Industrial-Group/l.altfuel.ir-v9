@@ -65,6 +65,7 @@ class AgencyController extends Controller
 
     public function add(Request $r)
     {
+        Access::check($r->agency_table . "-add");
         return DB::table($r->agency_table)->insert($r->only('Name'));
     }
 }
