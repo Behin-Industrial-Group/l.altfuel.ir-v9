@@ -16,7 +16,10 @@ use App\Repository\RGenCode;
 use App\Repository\RReport;
 use App\Repository\RSendExpSms;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Translation\MessageCatalogue;
+use Illuminate\Support\Facades\Schema;
+
 
 use function PHPSTORM_META\type;
 
@@ -36,7 +39,7 @@ Route::get('hamayesh/barname', function(){
 });
 
 Route::get('test', function(){
-   foreach(config('app.agencies') as $agency){
+    foreach(config('app.agencies') as $agency){
         $table = $agency['table'];
 
         if($table == 'marakez1'){
@@ -289,6 +292,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
         Route::any('/list/{table_name?}', [AgencyController::class, 'list'])->name('list');
         Route::any('agency/edit-form', [AgencyController::class, 'editForm'])->name('edit-form');
         Route::post('agency/edit', [AgencyController::class, 'edit'])->name('edit');
+        Route::get('add-form', [AgencyController::class, 'addForm'])->name('addForm');
+        Route::post('add', [AgencyController::class, 'add'])->name('add');
     });
 
     Route::prefix('/marakez')->group(function(){

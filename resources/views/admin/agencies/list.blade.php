@@ -3,6 +3,9 @@
 @section('content')
     <div class="row">
         <div class="box">
+            <button class="btn btn-info" onclick="open_admin_modal('{{ route('agency.addForm') }}')">افزودن مرکز</button>
+        </div>
+        <div class="box">
             <form action="javascript:void(0)" id="agency-table-form">
                 <select name="agency_name" id="agency_name">
                     @foreach (config('app.agencies') as $agency)

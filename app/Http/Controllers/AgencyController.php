@@ -57,4 +57,14 @@ class AgencyController extends Controller
     {
         return config("app.agencies.$agency_name");
     }
+
+    public function addForm()
+    {
+        return view('admin.agencies.add');
+    }
+
+    public function add(Request $r)
+    {
+        return DB::table($r->agency_table)->insert($r->only('Name'));
+    }
 }

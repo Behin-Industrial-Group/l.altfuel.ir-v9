@@ -190,6 +190,7 @@ return [
         Livewire\LivewireServiceProvider::class,
         App\Providers\FinanceServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
+        // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
         /*
          * Application Service Providers...
          */
