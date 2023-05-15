@@ -2817,7 +2817,6 @@ return array(
     'Livewire\\Wireable' => $vendorDir . '/livewire/livewire/src/Wireable.php',
     'Livewire\\WithFileUploads' => $vendorDir . '/livewire/livewire/src/WithFileUploads.php',
     'Livewire\\WithPagination' => $vendorDir . '/livewire/livewire/src/WithPagination.php',
-    'Mkhodroo\\ShahabTicketSystem\\ShahabTicketServiceProvider' => $baseDir . '/packages/ticket/src/ShahabTicketServiceProvider.php',
     'Mockery' => $vendorDir . '/mockery/mockery/library/Mockery.php',
     'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
     'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
