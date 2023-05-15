@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::table('kamfeshar', function (Blueprint $table) {
             $table->string('InsUserDelivered')->after('FinDetails')->nullable();
         });
+
+        Schema::table('hidro', function (Blueprint $table) {
+            $table->string('InsUserDelivered')->after('FinDetails')->nullable();
+        });
     }
 
     /**

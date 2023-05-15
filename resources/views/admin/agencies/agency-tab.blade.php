@@ -72,12 +72,10 @@
             <td>توضیحات</td>
             <td><textarea type="text" class="form-control" id="" name="Details">{{ $agency->Details }}</textarea></td>
         </tr>
-        @isset($agency->InsUserDelivered)
             <tr>
                 <td>یوزر بازرسی تحویل داده شد</td>
                 <td><input type="checkbox" class="" id="" name="InsUserDelivered" {{ ($agency->InsUserDelivered == 'ok') ? 'checked' : '' }}></td>
             </tr>
-        @endisset
         
     </table>
 </form>
