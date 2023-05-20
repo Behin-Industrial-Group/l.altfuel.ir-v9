@@ -23,7 +23,7 @@ class BlogController extends Controller
             DB::table('binshops_blog_post_categories')->whereIn('binshops_blog_category_id', $catagory_ids)->pluck('id')
         )
         ->where('is_published', 1)
-        ->select('id', 'title', 'meta_desc', 'slug')->get()->each(function($row){
+        ->select('id', 'title', 'meta_desc', 'slug')->orderBy('id', 'desc')->get()->each(function($row){
             $row->readMoreLink = route('blog.getById', ['id' => $row->id]);
         });
     }
