@@ -27,7 +27,8 @@ Route::prefix('irngv')->group(function(){
     Route::post('poll-link', [IrngvApiController::class, 'send_sms'])->middleware('api_access');
 });
 
-Route::prefix('news')->group(function(){
+Route::name('blog.')->prefix('blog')->group(function(){
     Route::get('/get', []);
     Route::get('/get-by-catagory/{catagory}', [BlogController::class, 'getByCatagory']);
+    Route::get('get-by-id/{id}', [[BlogController::class, 'getById']])->name('getById');
 });
