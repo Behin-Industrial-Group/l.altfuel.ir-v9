@@ -17,6 +17,7 @@ use BinshopsBlog\Requests\CreateBinshopsBlogPostRequest;
 use BinshopsBlog\Requests\DeleteBinshopsBlogPostRequest;
 use BinshopsBlog\Requests\UpdateBinshopsBlogPostRequest;
 use BinshopsBlog\Traits\UploadFileTrait;
+use Illuminate\Support\Facades\Log;
 use Swis\Laravel\Fulltext\Search;
 
 /**
@@ -71,21 +72,22 @@ class BinshopsBlogAdminController extends Controller
      */
     public function store_post(CreateBinshopsBlogPostRequest $request)
     {
+        Log::info($request->title);
         $new_blog_post = new BinshopsBlogPost($request->all());
-
+        Log::info('1');
         // $this->processUploadedImages($request, $new_blog_post);
 
         if (!$new_blog_post->posted_at) {
             $new_blog_post->posted_at = Carbon::now();
         }
-
+        Log::info('2');
         $new_blog_post->user_id = \Auth::user()->id;
         $new_blog_post->save();
-
+        Log::info('3');
         $new_blog_post->categories()->sync($request->categories());
-
-        Helpers::flash_message("Added post");
-        event(new BlogPostAdded($new_blog_post));
+        Log::info('4');
+        Helpers::flash_message("Added post");Log::info('5');
+        event(new BlogPostAdded($new_blog_post));Log::info('6');
         return redirect($new_blog_post->edit_url());
     }
 
