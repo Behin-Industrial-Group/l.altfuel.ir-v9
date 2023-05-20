@@ -4,6 +4,7 @@ namespace BinshopsBlog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use BinshopsBlog\Baum\Node;
+use Illuminate\Support\Facades\DB;
 
 class BinshopsBlogCategory extends Node
 {
@@ -22,6 +23,12 @@ class BinshopsBlogCategory extends Node
      */
     public function posts()
     {
+        return BinshopsBlogPost::whereIn(
+            'id', 
+            DB::table('binshops_blog_post_categories')->where('binshops_blog_category_id', $this->id)->pluck('id')
+        )
+        ->where('is_published', 1)
+        ->select('id', 'title', 'slug')->get();
         return $this->belongsToMany(BinshopsBlogPost::class, 'binshops_blog_post_categories');
     }
 
