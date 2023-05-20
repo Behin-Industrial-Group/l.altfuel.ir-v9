@@ -73,7 +73,7 @@ class BinshopsBlogAdminController extends Controller
     {
         $new_blog_post = new BinshopsBlogPost($request->all());
 
-        $this->processUploadedImages($request, $new_blog_post);
+        // $this->processUploadedImages($request, $new_blog_post);
 
         if (!$new_blog_post->posted_at) {
             $new_blog_post->posted_at = Carbon::now();
