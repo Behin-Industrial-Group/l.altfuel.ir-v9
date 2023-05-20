@@ -1,0 +1,61 @@
+{
+    "name": "swisnl/laravel-fulltext",
+    "type": "library",
+    "description": "Fulltext indexing and searching for Laravel",
+    "keywords": [
+        "swisnl",
+        "laravel-fulltext"
+    ],
+    "homepage": "https://github.com/swisnl/laravel-fulltext",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Björn Brala",
+            "email": "bbrala@swis.nl",
+            "homepage": "https://www.swis.nl/over-ons/bjorn-brala",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0",
+        "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0|^10.0",
+        "illuminate/database": "^6.0|^7.0|^8.0|^9.0|^10.0",
+        "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "mockery/mockery": "^1.5",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Swis\\Laravel\\Fulltext\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Swis\\Laravel\\Fulltext\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "php-cs-fixer fix --dry-run -v",
+        "fix-style": "php-cs-fixer fix"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Swis\\Laravel\\Fulltext\\FulltextServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
