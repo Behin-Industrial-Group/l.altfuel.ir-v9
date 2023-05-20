@@ -30,5 +30,5 @@ Route::prefix('irngv')->group(function(){
 Route::name('blog.')->prefix('blog')->group(function(){
     Route::get('/get', []);
     Route::get('/get-by-catagory/{catagory}', [BlogController::class, 'getByCatagory']);
-    Route::get('get-by-id/{id}', [[BlogController::class, 'getById']])->name('getById');
+    Route::get('get-by-id/{id}', [BlogController::class, 'getById'])->name('getById');
 });

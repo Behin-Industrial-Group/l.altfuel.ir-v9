@@ -71,7 +71,6 @@ class BinshopsBlogAdminController extends Controller
      */
     public function store_post(CreateBinshopsBlogPostRequest $request)
     {
-        return $request->title;
         $new_blog_post = new BinshopsBlogPost($request->all());
 
         // $this->processUploadedImages($request, $new_blog_post);

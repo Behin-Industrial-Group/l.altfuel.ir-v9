@@ -30,6 +30,6 @@ class BlogController extends Controller
 
     public function getById($id)
     {
-        return BinshopsBlogPost::whereIn('id', $id)->where('is_published', 1)->first();
+        return BinshopsBlogPost::where('id', $id)->where('is_published', 1)->first();
     }
 }
