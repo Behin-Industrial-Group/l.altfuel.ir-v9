@@ -26,3 +26,8 @@ Route::prefix('irngv')->group(function(){
     Route::post('get-token', [IrngvApiController::class, 'get_token'])->middleware('api_auth');
     Route::post('poll-link', [IrngvApiController::class, 'send_sms'])->middleware('api_access');
 });
+
+Route::prefix('news')->group(function(){
+    Route::get('/get', []);
+    Route::get('/get-by-catagory/{catagory}', [BlogController::class, 'getByCatagory']);
+});
