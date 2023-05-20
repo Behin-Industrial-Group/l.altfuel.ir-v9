@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use BinshopsBlog\Models\BinshopsBlogCategory;
 use BinshopsBlog\Models\BinshopsBlogPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -16,8 +17,12 @@ class BlogController extends Controller
 
     public function getByCatagory($catagory)
     {
-        return BinshopsBlogCategory::where('category_name', $catagory)->orWhere('slug', $catagory)->get()->each(function($c){
-            $c->posts = $c->posts();
-        });
+        $catagory_ids = BinshopsBlogCategory::where('category_name', $catagory)->orWhere('slug', $catagory)->pluck('id');
+        return BinshopsBlogPost::whereIn(
+            'id', 
+            DB::table('binshops_blog_post_categories')->whereIn('binshops_blog_category_id', $catagory_ids)->pluck('id')
+        )
+        ->where('is_published', 1)
+        ->select('id', 'title', 'meta_desc', 'slug')->get();
     }
 }
