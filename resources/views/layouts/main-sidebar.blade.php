@@ -75,6 +75,11 @@ $videosCatagories = VideosCatagoriesModel::get();
                 </li>
             @endif
             -->
+            @if(Access::checkView('blog'))
+                <li>
+                    <a href="{{ route('binshopsblog.admin.index') }}"><i class="fa fa-book"></i> <span>محتوا</span></a>
+                </li>
+            @endif
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i> <span>مراکز</span>
