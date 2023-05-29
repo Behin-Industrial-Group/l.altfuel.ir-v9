@@ -30,7 +30,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="13">
-                            <div>حداکثر تعداد تماس بی پاسخ = {{ config('app.report.call.max_unanswer_number') }}</div>
+                            <div class="alert alert-danger">حداکثر تعداد تماس بی پاسخ = {{ config('app.report.call.max_unanswer_number') }}</div>
                         </td>
                     </tr>
                 </tfoot>
