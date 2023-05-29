@@ -14,6 +14,7 @@ use DivisionByZeroError;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\BranchAndPathCoverageNotSupportedException;
 
 class RReport
 {
@@ -91,7 +92,7 @@ class RReport
     public function GetCallReport($date)
     {
         $data = $this->model->where('created_at', 'like', "%$date%")->get()->each(function($raw){
-            
+        $max_unanswer_number = config('app.report.call.max_unanswer_number');   
             try{
                 $raw->answer_eff = (int)($raw->answer_percent *100 / ($raw->answer_percent + $raw->unanswer_percent));
             }
@@ -100,7 +101,7 @@ class RReport
             }
 
             try{
-                $a = $raw->answer_time / 8;
+                $a = $raw->answer_time / 60 * 8; // در هر دقیقه 8 بار مشغولی ثبت میشود
                 $b = $raw->busy_percent * $raw->total / 100;
                 $raw->busy_eff = (int)(($a - $b) / $a * 100);
             }
@@ -109,6 +110,65 @@ class RReport
             }
 
             $raw->avg = (int)((int)$raw->answer_eff + (int)$raw->busy_eff) / 2;
+            $unanswer_number = round($raw->unanswer_percent * $raw->total / 100);
+            $unanswer_color_opacity = (1 - ( $max_unanswer_number - $unanswer_number ) / $max_unanswer_number);
+            $unanswer_color = "rgba(245, 66, 66, $unanswer_color_opacity)";
+            switch($unanswer_number){
+                case 0:
+                    $unanswer_eff = 'عالی';
+                    $unanswer_color = 'rgb(0, 181, 33)';
+                    break;
+                case 1: 
+                    $unanswer_eff = 'خیلی خوب';
+                    $unanswer_color = "rgba(0, 181, 33,0.7)";
+                    break;
+                case 2: 
+                    $unanswer_eff = 'خوب';
+                    $unanswer_color = "rgba(0, 181, 33,0.5)";
+                    break;
+                case 3: 
+                    $unanswer_eff = 'متوسط';
+                    $unanswer_color = "rgba(0, 181, 33,0.3)";
+                    break;
+                case 4: 
+                    $unanswer_eff = 'متوسط';
+                    $unanswer_color = "rgba(0, 181, 33,0.2)";
+                    break;
+                case 5: 
+                    $unanswer_eff = 'متوسط';
+                    $unanswer_color = "rgba(0, 181, 33,0.1)";
+                    break;
+                case 6: 
+                    $unanswer_eff = 'قابل قبول';
+                    $unanswer_color = "rgba(255, 255, 255,0.7)";
+                    break;
+                case 7: 
+                    $unanswer_eff = 'قابل قبول';
+                    $unanswer_color = "rgba(255, 255, 255,0.7)";
+                    break;
+                case 8: 
+                    $unanswer_eff = 'نیاز به تلاش بیشتر';
+                    $unanswer_color = "rgba(252, 3, 3,0.3)";
+                    break;
+                case 9: 
+                    $unanswer_eff = 'نیاز به تلاش بیشتر';
+                    $unanswer_color = "rgba(252, 3, 3,0.4)";
+                    break;
+                case 10: 
+                    $unanswer_eff = 'بالاتر از حد مجاز و غیر قابل قبول';
+                    $unanswer_color = "rgba(252, 3, 3,1)";
+                    break;
+                default:
+                    $unanswer_eff = 'بالاتر از حد مجاز و غیر قابل قبول';
+                    $unanswer_color = "rgba(252, 3, 3,0.7)";
+                    break;
+                    
+            }
+            $raw->unanswer = [
+                'number' => $unanswer_number,
+                'color' => $unanswer_color,
+                'eff' => $unanswer_eff
+            ];
 
         });
         return $data;

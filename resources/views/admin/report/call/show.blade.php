@@ -18,14 +18,22 @@
                         <th>درصد پاسخ</th>
                         <th>مدت پاسخ</th>
                         <th>درصد بی پاسخ</th>
-                        <th>مدت بی پاسخ</th>
+                        <th>تعداد بی پاسخ</th>
                         <th>درصد مشغولی</th>
                         <th>تعداد کل</th>
+                        <th>عملکرد بی پاسخ</th>
                         <th>عملکرد پاسخ</th>
                         <th>عملکرد مشغولی</th>
                         <th>میانگین</th>
                     </tr>
                 </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="13">
+                            <div>حداکثر تعداد تماس بی پاسخ = {{ config('app.report.call.max_unanswer_number') }}</div>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -53,9 +61,12 @@
                 {data: 'answer_percent'},
                 {data: 'answer_time'},
                 {data: 'unanswer_percent'},
-                {data: 'unanswer_time'},
+                {data: 'unanswer.number'},
                 {data: 'busy_percent'},
                 {data: 'total'},
+                {data: 'unanswer', render: function(data){
+                    return `<span style='width: 100%; display: block; background: ${data.color}'>${data.eff}</span>`;
+                }},
                 {data: 'answer_eff'},
                 {data: 'busy_eff'},
                 {data: 'avg'},
