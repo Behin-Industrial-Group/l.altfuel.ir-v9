@@ -11,9 +11,15 @@ function create_datatable(element_id, url ='', cols, rowCallback = null){
             url: url,
         },
         columns: cols,
-        // buttons: [
-        //     'copy', 'csv', 'excel', 'pdf', 'print'
-        // ],
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'copy','print'
+        ],
         "displayLength": 25,
         language: {
             url: '../resources/lang/fa.json' 
