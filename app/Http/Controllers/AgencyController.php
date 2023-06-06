@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\CustomClasses\Access;
 use App\Http\Controllers\Controller;
+use App\Interfaces\FinanceServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AgencyController extends Controller
 {
+    private $finServiceInterface;
+    public function __construct(FinanceServiceInterface $finServiceInterface) {
+        $this->finServiceInterface = $finServiceInterface;
+    }
 
     public function listForm()
     {
@@ -50,7 +55,9 @@ class AgencyController extends Controller
             ];
         }
         Access::check($agency_config['table'] . "-list");
-        return DB::table($table_name)->get();
+        return DB::table($table_name)->get()->each(function($row) use( $agency_config){
+            $row->fin_info = $this->finServiceInterface->getFinInfo($agency_config['table'], $row->id); 
+        });
     }
 
     public function getAgencyConfigByName($agency_name)
