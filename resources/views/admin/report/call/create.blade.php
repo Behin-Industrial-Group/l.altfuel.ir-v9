@@ -4,13 +4,24 @@
     <div class="box table-responsive">
         <p id="test"></p>
         @include('includes.success')
-        <form id="form" action="javascript:void(0)">
-            <table>
+        <form id="form" action="{{url('admin/report/call')}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <table class="table table-stripped">
                 <tr>
+                    <td>تاریخ: </td>
                     <td colspan="2"><input name="date" list="date_list" id="date" class="form-control"></td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        فایل اکسل: 
+                    </td>
+                    <td>
+                        <input type="file" name="file" id="">
+                    </td>
                 </tr>
             </table>
-            <table class="table table-striped table-bordered" id="table">
+            {{-- <table class="table table-striped table-bordered" id="table">
                 @csrf
                 <thead>
                     <tr>
@@ -71,7 +82,8 @@
                     </tr>
                 </tfoot>
                 
-            </table>
+            </table> --}}
+            <button class="btn btn-success" id="submit">ثبت</button>
         </form>
     </div>
 @endsection

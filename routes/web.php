@@ -137,37 +137,11 @@ Route::get('/migrate', function(){
     Artisan::call('migrate');
 });
 
-Route::get('test-sms', function(){
-    // $s = new SMSController();
-    // $c = true;
-    // while($c){
-    //     $lists = IrngvUsersInfo::where('sms_delivery', '0')->take(5)->get();
-    //     $messages = array();
-    //     foreach($lists as $li){
-    //         $msg = "مالک محترم خودروی گازسوز $li->car_name به شماره شاسی $li->chassis ضمن تشکر از مراجعه شما به مرکز خدمات فنی شماره ";
-    //         $msg .= "$li->agency_code ، خواهشمند است با تخصیص زمان ارزشمندتان و شرکت در نظرسنجی ذیل، ما را در ارائه هر چه بهتر خدمات یاری رسانید. لینک نظرسنجی: \n";
-    //         $msg .= config('irngv')['irngv-poll-link'] ."$li->link \n";
-    //         $msg .= "برای ورود به لینک نظرسنجی لازم است فیلترشکن خود را خاموش کنید.\n";
-    //         $msg .= "شماره مرکز تماس اتحادیه کشوری سوخت های جایگزین و خدمات وابسته: 02191013791";
-    //         $messages[] = [
-    //             'sender' => '9820003807',
-    //             'recipient' => $li->owner_mobile,
-    //             'body' => $msg,
-    //             'customerId' => 1,
-    //         ];
-    //         $li->sms_delivery = 1;
-    //         $li->save();
-    //         echo "sms send for id: $li->id </br>";
-    //     }
-    //     $s->send_multiple($messages);
-    //     $lists = IrngvUsersInfo::where('sms_delivery', '0')->take(5)->get();
-    //     if(!$lists){
-    //         $c=false;
-    //     }
-    // }
-    
+Route::get('test', function(){
+    return view('test');
     
 });
+Route::post('test', [RReport::class, 'SetCallReportFromExcel'])->name('test');
 
 Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sms']);
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);

@@ -1,27 +1,36 @@
 @extends('layouts.app')
 @section('content')
+    <div class="box box-info">
+        <form action="javascript:void(0)" id="date-form"></form>
+        <table>
+            <tr>
+                <td>
+                    <label for="date">تاریخ:</label>        
+                </td>
+                <td>
+                    <input list="date_list" id="date" class="form-control">
+                </td>
+                <td>
+                    <button id="get_data" onclick="get_data()">نمایش</button>
+                </td>
+            </tr>
+        </table>
+    </div>
     <div class="box table-responsive">
-        <div class="box ">
-            <form action="javascript:void(0)" id="date-form"></form>
-            <label for="date">تاریخ:</label>        
-            <input list="date_list" id="date" class="form-control">
-            <button id="get_data" onclick="get_data()">نمایش</button>
-        </div>
+        
         <p id="test"></p>
         <div>
-            <table class="table table-striped" id="report_tbl">
+            <table class="table table-striped" id="report_tbl" style="text-align: center">
                 <thead>
                     <tr>
                         <th>شناسه</th>
                         <th>داخلی</th>
                         <th>نام</th>
-                        <th>درصد پاسخ</th>
+                        <th>پاسخ</th>
                         <th>مدت پاسخ</th>
-                        <th>درصد بی پاسخ</th>
-                        <th>تعداد بی پاسخ</th>
-                        <th>درصد مشغولی</th>
+                        <th>بی پاسخ</th>
+                        <th>مشغولی</th>
                         <th>تعداد کل</th>
-                        <th>عملکرد بی پاسخ</th>
                         <th>عملکرد پاسخ</th>
                         <th>عملکرد مشغولی</th>
                         <th>میانگین</th>
@@ -58,15 +67,21 @@
                 {data: 'id'},
                 {data: 'ext'},
                 {data: 'name'},
-                {data: 'answer_percent'},
-                {data: 'answer_time'},
-                {data: 'unanswer_percent'},
-                {data: 'unanswer.number'},
-                {data: 'busy_percent'},
-                {data: 'total'},
-                {data: 'unanswer', render: function(data){
-                    return `<span style='width: 100%; display: block; background: ${data.color}'>${data.eff}</span>`;
+                {data: 'answer', render: function(data){
+                    return `${data.number}<br><span style="color: rgba(0,0,0,0.3)">(${data.percent} %)</span>`;
                 }},
+                {data: 'answer_time', render: function(data){
+                    var answer_min = Math.round(data /60);
+                    return `${answer_min} دقیقه`;
+                }},
+                {data: 'unanswer', render: function(data){
+                    return `<span style="width: 100%; display: block;background: rgba(252, 3, 3,${data.percent/100})">${data.number}
+                        <br> <span style="color: rgba(0,0,0,0.3)">(${data.percent} %)</span></span>`;
+                }},
+                {data: 'busy', render: function(data){
+                    return `${data.number}<br> <span style="color: rgba(0,0,0,0.3)">(${data.percent} %)</span>`;
+                }},
+                {data: 'total'},
                 {data: 'answer_eff'},
                 {data: 'busy_eff'},
                 {data: 'avg'},

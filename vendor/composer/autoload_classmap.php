@@ -36,6 +36,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\UserController' => $baseDir . '/app/Http/Controllers/Auth/UserController.php',
     'App\\Http\\Controllers\\Auth\\VerifyEmailController' => $baseDir . '/app/Http/Controllers/Auth/VerifyEmailController.php',
     'App\\Http\\Controllers\\BimehController' => $baseDir . '/app/Http/Controllers/BimehController.php',
+    'App\\Http\\Controllers\\BlogController' => $baseDir . '/app/Http/Controllers/BlogController.php',
     'App\\Http\\Controllers\\CommentsController' => $baseDir . '/app/Http/Controllers/CommentsController.php',
     'App\\Http\\Controllers\\ContractorsController' => $baseDir . '/app/Http/Controllers/ContractorsController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',

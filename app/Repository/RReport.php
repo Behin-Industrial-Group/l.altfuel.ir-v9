@@ -22,6 +22,7 @@ class RReport
     private $license_req_model;
     private $license_model;
     private $asnaf_report_dir;
+    private $report_dir;
 
     public function __construct()
     {
@@ -29,6 +30,7 @@ class RReport
         $this->license_model = new License();
         $this->license_req_model = new LicenseRequest();
         $this->asnaf_report_dir = 'public/uploads/asnaf_report';
+        $this->report_dir = public_path('uploads/report');
     }
     public function SetCallReport($r)
     {
@@ -40,6 +42,32 @@ class RReport
             $date = Carbon::now();
         }
         $i=0;
+        $results = $this->SetCallReportFromExcel($r);
+        foreach($results as $key => $value){
+            echo "$key: $key ";
+            print_r($value);
+            echo "<br>";
+            $date = $date;
+            $row = Call::where('ext', $key)->where('created_at', 'like', "%$date%")->first();
+            if(is_null($row)){
+                $row = new Call();
+            }
+            $row->ext = $key;
+            $row->name = config("app.report.call.extensions.$key.name");
+            $row->answer_percent = isset($value['answer']) ? round($value['answer'] / $value['total'] *100) : 0;
+            $row->answer = isset($value['answer']) ? $value['answer'] : 0;
+            $row->answer_time = isset($value['answer-time']) ? $value['answer-time'] : 0;
+            $row->unanswer_percent = isset($value['unanswer']) ? round($value['unanswer'] / $value['total'] *100) : 0;
+            $row->unanswer = isset($value['unanswer']) ? $value['unanswer'] : 0;
+            $row->unanswer_time = 0;
+            $row->busy_percent = isset($value['busy']) ? round($value['busy'] / $value['total'] *100) : 0;
+            $row->busy = isset($value['busy']) ?$value['busy'] : 0;
+            $row->total = $value['total'];
+            $row->created_at = $date;
+            $row->save();
+        }
+        return redirect()->back();
+        exit;
         $rows = count($r->ext);
         for($i=0; $i<$rows; $i++){
             if(!is_null($r->ext[$i])){
@@ -110,68 +138,86 @@ class RReport
             }
 
             $raw->avg = (int)((int)$raw->answer_eff + (int)$raw->busy_eff) / 2;
-            $unanswer_number = round($raw->unanswer_percent * $raw->total / 100);
-            $unanswer_color_opacity = (1 - ( $max_unanswer_number - $unanswer_number ) / $max_unanswer_number);
-            $unanswer_color = "rgba(245, 66, 66, $unanswer_color_opacity)";
-            switch($unanswer_number){
-                case 0:
-                    $unanswer_eff = 'عالی';
-                    $unanswer_color = 'rgb(0, 181, 33)';
-                    break;
-                case 1: 
-                    $unanswer_eff = 'خیلی خوب';
-                    $unanswer_color = "rgba(0, 181, 33,0.7)";
-                    break;
-                case 2: 
-                    $unanswer_eff = 'خوب';
-                    $unanswer_color = "rgba(0, 181, 33,0.5)";
-                    break;
-                case 3: 
-                    $unanswer_eff = 'متوسط';
-                    $unanswer_color = "rgba(0, 181, 33,0.3)";
-                    break;
-                case 4: 
-                    $unanswer_eff = 'متوسط';
-                    $unanswer_color = "rgba(0, 181, 33,0.2)";
-                    break;
-                case 5: 
-                    $unanswer_eff = 'متوسط';
-                    $unanswer_color = "rgba(0, 181, 33,0.1)";
-                    break;
-                case 6: 
-                    $unanswer_eff = 'قابل قبول';
-                    $unanswer_color = "rgba(255, 255, 255,0.7)";
-                    break;
-                case 7: 
-                    $unanswer_eff = 'قابل قبول';
-                    $unanswer_color = "rgba(255, 255, 255,0.7)";
-                    break;
-                case 8: 
-                    $unanswer_eff = 'نیاز به تلاش بیشتر';
-                    $unanswer_color = "rgba(252, 3, 3,0.3)";
-                    break;
-                case 9: 
-                    $unanswer_eff = 'نیاز به تلاش بیشتر';
-                    $unanswer_color = "rgba(252, 3, 3,0.4)";
-                    break;
-                case 10: 
-                    $unanswer_eff = 'بالاتر از حد مجاز و غیر قابل قبول';
-                    $unanswer_color = "rgba(252, 3, 3,1)";
-                    break;
-                default:
-                    $unanswer_eff = 'بالاتر از حد مجاز و غیر قابل قبول';
-                    $unanswer_color = "rgba(252, 3, 3,0.7)";
-                    break;
-                    
-            }
-            $raw->unanswer = [
-                'number' => $unanswer_number,
-                'color' => $unanswer_color,
-                'eff' => $unanswer_eff
+            $raw->answer = [
+                'number' => $raw->answer,
+                'percent' => $raw->answer_percent
             ];
+            $raw->unanswer = [
+                'number' => $raw->unanswer,
+                'percent' => $raw->unanswer_percent
+            ];
+            $raw->busy = [
+                'number' => $raw->busy,
+                'percent' => $raw->busy_percent
+            ];
+
 
         });
         return $data;
+    }
+
+    public function SetCallReportFromExcel(Request $r)
+    {
+        $file = $r->file->move($this->report_dir, 'text.xlsx');
+        if ($xlsx = SimpleXLSX::parse($file)) {
+            $rows = $xlsx->rows();
+            $counter = 0;
+            // $data = [] ;
+            for($i=1; $i < count($rows); $i++){
+                if(isset($rows[$i+1]) and
+                    $rows[$i][1] === $rows[$i+1][1] and 
+                    $rows[$i][2] === $rows[$i+1][2] 
+                ){
+                    $counter++;
+                }else{
+                    if(strlen($rows[$i][1]) > 3 and
+                        in_array($rows[$i][2], array_keys(config('app.report.call.extensions')))){
+                        $data[] = $rows[$i];
+                    }
+                    $counter = 0;
+                }
+            }
+            // return $data;
+            $total = count($data);
+            $result = [];
+            foreach($data as $row){
+                $result[$row[2]]['total'] = (isset($result[$row[2]]['total'])) ? $result[$row[2]]['total'] +1 : 1;
+                switch($row[4]){
+                    case 'بدون پاسخ':
+                        $result[$row[2]]['unanswer'] = (isset($result[$row[2]]['unanswer'])) ? $result[$row[2]]['unanswer'] +1 : 1;
+                        break;
+                    case 'پاسخ داده شده':
+                        $result[$row[2]]['answer'] = (isset($result[$row[2]]['answer'])) ? $result[$row[2]]['answer'] +1 : 1;
+                        $result[$row[2]]['answer-time'] = (isset($result[$row[2]]['answer-time'])) ? 
+                            $result[$row[2]]['answer-time'] + $this->convertTimeToSeconds($row[3]) :
+                            $this->convertTimeToSeconds($row[3]);
+                        break;
+                    case 'مشغول':
+                        $result[$row[2]]['busy'] = (isset($result[$row[2]]['busy'])) ? $result[$row[2]]['busy'] +1 : 1;
+                        break;
+                    default:
+                        $result[$row[2]]['not-success'] = (isset($result[$row[2]]['not-success'])) ? $result[$row[2]]['not-success'] +1 : 1;
+                        break;
+                }
+            }
+            return $result;
+        } 
+    }
+
+    public function convertTimeToSeconds($str_time)
+    {
+        sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
+
+        return isset($seconds) ? $hours * 3600 + $minutes * 60 + $seconds : $hours * 60 + $minutes;
+    }
+
+
+    public function upload_file($file, $file_name)
+    {
+        if(!file_exists($this->report_dir))
+            mkdir($this->report_dir,0777,true);
+        $file->move($this->report_dir, $file);
+        return "$this->report_dir/$file_name";
     }
 
     public function get_number_of_issues()
