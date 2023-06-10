@@ -21,13 +21,13 @@ use App\CustomClasses\Logs;
 
 @section('content')
 @include('includes.success')
-    <div class="box box-default">
-        <div class="box-body">
+    <div class="card">
+        <div class="card-body">
             <p><?php echo Verta(); ?></p>
             @foreach ($issues as $issue)
                 @if($issue->catagory == $catagory)
-                    <div class="box <?php if($issue->status == 0 || $issue->trackinglater == 'yes') echo "box-danger"; else echo "box-default" ?> box-solid" id="issue_{{$issue->id}}">
-                        <div class="box-header">
+                    <div class="card <?php if($issue->status == 0 || $issue->trackinglater == 'yes') echo "card-danger"; else echo "card-default" ?> card-solid" id="issue_{{$issue->id}}">
+                        <div class="card-header">
                             {{$issue->id}} - {{$issue->catagory}} - 
                             وضعیت: {{$issue->status}} - 
                             @if( Access::checkView('Issuse_showLogs') )
@@ -39,22 +39,22 @@ use App\CustomClasses\Logs;
                                     NULL
                                 @endif
                             @endif
-                            <div class="pull-left box-tools">
+                            <div class="pull-left card-tools">
                                 <button data-toggle='collapse' data-target="#{{$issue->id}}"><i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                         <div 
                             <?php 
                             if($issue->status == 0) 
-                                echo "class='box-body'"; 
+                                echo "class='card-body'"; 
                             elseif($issue->trackinglater == 'yes') 
-                                echo "class='box-body'"; 
+                                echo "class='card-body'"; 
                             else 
-                                echo "class='box-body collapse'"; 
+                                echo "class='card-body collapse'"; 
                             ?>  
                             id="{{$issue->id}}"
                         >
-                            <div class="col-sm-9 box box-default" style="width:80%">
+                            <div class="col-sm-9 card card-default" style="width:80%">
                                 <form method="post" action="javascript:void(0)" id="form_{{$issue->id}}">
                                     @csrf
                                     <table class="table table-striped" style="font-size:13px;">
@@ -97,7 +97,7 @@ use App\CustomClasses\Logs;
                                 </form>
                             </div>
 
-                            <div class="col-sm-9 box box-default" style="width:19%; float:left">
+                            <div class="col-sm-9 card card-default" style="width:19%; float:left">
                                 <form method="post" action="javascript:void(0)" id="related_form_{{$issue->id}}">
                                     @csrf
                                     <table class="table table-striped" style="font-size:13px;">
@@ -130,8 +130,8 @@ use App\CustomClasses\Logs;
                             </div>
                             
                             
-                            <div class="box box-info col-sm-12" style="padding: 5px">
-                                <div class="box box-danger col-sm-5" style="width:49%">
+                            <div class="card card-info col-sm-12" style="padding: 5px">
+                                <div class="card card-danger col-sm-5" style="width:49%">
                                     <?php $comments = CommentsController::get('issues',$issue->id); ?>
                                     <form class="form-horizontal" action="javascript:void(0)" id="comment_form_{{$issue->id}}" style="">
                                         <table class="table table-striped" style="font-size:10px">
@@ -158,7 +158,7 @@ use App\CustomClasses\Logs;
                                         </table>
                                     </form>
                                 </div>
-                                <div class="box box-danger col-sm-5" style="width:49%; float:left">
+                                <div class="card card-danger col-sm-5" style="width:49%; float:left">
                                     <form class="form-horizontal"action="javascript:void(0)" id="sendto_form_{{$issue->id}}">
                                         <input type="hidden" name="id" value="{{ $issue->id }}">
                                         <table class="table table-striped">
@@ -190,18 +190,18 @@ use App\CustomClasses\Logs;
             
             <!--Create Issue Form -->
             <div class="">
-                <div class="box box-success box-solid">
-                    <div class="box-header">
+                <div class="card card-success card-solid">
+                    <div class="card-header">
                         <i class="fa fa-info-circle"></i>
-                        <h3 class="box-title">ایجاد تیکت و ارسال به متقاضی</h3>
-                        <!-- tools box -->
-                        <div class="pull-left box-tools">
+                        <h3 class="card-title">ایجاد تیکت و ارسال به متقاضی</h3>
+                        <!-- tools card -->
+                        <div class="pull-left card-tools">
                         <button type="button" class="btn bg-info btn-sm" data-toggle="collapse" data-target="#reg_issue"><i class="fa fa-minus"></i>
                         </button>
                         </div>
                         <!-- /. tools -->
                     </div>
-                    <div class="box-body" id="reg_issue">
+                    <div class="card-body" id="reg_issue">
                         <form method="POSt" action="{{url('/admin/issues/create-new-issue')}}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="catagory" value="{{ $catagory }}" required>
@@ -250,8 +250,8 @@ use App\CustomClasses\Logs;
         
         <!-- other catagory 
         <div class="col-sm-4">
-            <div class="box box-info">
-            <div class="box-body">
+            <div class="card card-info">
+            <div class="card-body">
                 foreach ($issues as $issue)
                     if($issue->catagory != $catagory)
                         <div class="">
