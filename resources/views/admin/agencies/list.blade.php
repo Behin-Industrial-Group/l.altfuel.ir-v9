@@ -30,11 +30,10 @@
                     <td><input type="checkbox" name="name" checked onclick="columnVisible(7)">موبایل</td>
                     <td><input type="checkbox" name="name" checked onclick="columnVisible(8)">تاریخ صدور</td>
                     <td><input type="checkbox" name="name" checked onclick="columnVisible(9)">تاریخ انقضا</td>
-                    
+                    <td><input type="checkbox" name="name"  onclick="columnVisible(10)">آدرس</td>
                 </tr>
                 @if (Access::checkView('show-fin-columns'))
                     <tr>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(10)">آدرس</td>
                         <td><input type="checkbox" name="name"  onclick="columnVisible(11)">96</td>
                         <td><input type="checkbox" name="name"  onclick="columnVisible(12)">97</td>
                         <td><input type="checkbox" name="name"  onclick="columnVisible(13)">98</td>
