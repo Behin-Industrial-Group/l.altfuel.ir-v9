@@ -16,9 +16,12 @@ function create_datatable(element_id, url ='', cols, rowCallback = null){
                 extend: 'excelHtml5',
                 exportOptions: {
                     columns: ':visible'
+                },
+                className: 'btn btn-danger',
+                attr:{
+                    style: 'direction: ltr'
                 }
-            },
-            'copy','print'
+            }
         ],
         "displayLength": 25,
         language: {

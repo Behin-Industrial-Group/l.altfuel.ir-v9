@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="box table-responsive">
+<div class="card">
+    <a href="{{ Url('admin/report/call/show') }}"><button class="btn btn-danger">مشاهده</button></a>
+</div>
+    <div class="card table-responsive">
         <p id="test"></p>
         @include('includes.success')
         <form id="form" action="{{url('admin/report/call')}}" method="POST" enctype="multipart/form-data">

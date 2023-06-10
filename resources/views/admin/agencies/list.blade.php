@@ -3,55 +3,53 @@
    use App\CustomClasses\Access;
 @endphp
 @section('content')
+    <div class="row card">
+        <button class="btn btn-info" onclick="open_admin_modal('{{ route('agency.addForm') }}')">افزودن مرکز</button>
+    </div>
+    <div class="row card">
+        <form action="javascript:void(0)" id="agency-table-form">
+            <select name="agency_name" id="agency_name">
+                @foreach (config('app.agencies') as $agency)
+                    <option value="{{ $agency['name'] }}">{{ $agency['fa_name'] }}</option>
+                @endforeach
+            </select>
+            <button class="btn btn-info" onclick="filter()">نمایش</button>
+        </form>
+    </div>
     <div class="row">
-        <div class="box">
-            <button class="btn btn-info" onclick="open_admin_modal('{{ route('agency.addForm') }}')">افزودن مرکز</button>
-        </div>
-        <div class="box">
-            <form action="javascript:void(0)" id="agency-table-form">
-                <select name="agency_name" id="agency_name">
-                    @foreach (config('app.agencies') as $agency)
-                        <option value="{{ $agency['name'] }}">{{ $agency['fa_name'] }}</option>
-                    @endforeach
-                </select>
-                <button class="btn btn-info" onclick="filter()">نمایش</button>
-            </form>
-        </div>
-        <div class="box">
-            ستونها:
-            <table class="table">
-                <tr>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(1)">نام</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(2)">کداتحادیه</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(3)">شناسه صنفی</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(4)">استان</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(5)">شهرستان</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(6)">کدملی</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(7)">موبایل</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(8)">تاریخ صدور</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(9)">تاریخ انقضا</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(10)">آدرس</td>
-                </tr>
-                @if (Access::checkView('show-fin-columns'))
+        <div class="card card-info table-responsive">
+            <div class="card-header">
+                <table>
                     <tr>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(11)">96</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(12)">97</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(13)">98</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(14)">99</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(15)">00</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(16)">01</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(17)" >02</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(18)" >irngv</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(19)" >قفل</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(20)" >بدهی</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(21)" >شرح بدهی</td>
-                        <td><input type="checkbox" name="name"  onclick="columnVisible(22)" >کدرهگیری پرداخت بدهی</td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(1)">نام | </td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(2)">کداتحادیه | </td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(3)">شناسه صنفی | </td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(4)">استان | </td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(5)">شهرستان/td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(6)">کدملی | </td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(7)">موبایل | </td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(8)">تاریخ صدور | </td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(9)">تاریخ انقضا | </td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(10)">آدرس | </td>
                     </tr>
-                @endif
-            </table>
-            
-        </div>
-        <div class="box table-responsive">
+                    @if (Access::checkView('show-fin-columns'))
+                        <tr>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(11)">96 | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(12)">97 | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(13)">98 | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(14)">99 | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(15)">00 | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(16)">01 | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(17)" >02 | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(18)" >irngv | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(19)" >قفل | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(20)" >بدهی | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(21)" >شرح بدهی | </td>
+                            <td><input type="checkbox" name="name"  onclick="columnVisible(22)" >کدرهگیری پرداخت بدهی | </td>
+                        </tr>
+                    @endif
+                </table>
+            </div>
             <table class="table table-striped" id="agency-table">
                 <thead>
                   <tr>
