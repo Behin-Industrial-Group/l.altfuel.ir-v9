@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@php
+   use App\CustomClasses\Access;
+@endphp
 @section('content')
     <div class="row">
         <div class="box">
@@ -19,26 +21,34 @@
             ستونها:
             <table class="table">
                 <tr>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(1)" data-column="1">نام</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(2)" data-column="2">کداتحادیه</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(3)" data-column="3">شناسه صنفی</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(4)" data-column="4">استان</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(5)" data-column="5">شهرستان</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(6)" data-column="6">کدملی</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(7)" data-column="6">موبایل</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(8)" data-column="7">تاریخ صدور</td>
-                    <td><input type="checkbox" name="name" checked onclick="columnVisible(9)" data-column="8">تاریخ انقضا</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(10)" data-column="9">آدرس</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(11)" data-column="10">96</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(12)" data-column="11">97</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(13)" data-column="12">98</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(14)" data-column="13">99</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(15)" data-column="14">00</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(16)" data-column="15">01</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(17)" data-column="16">02</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(18)" data-column="16">irngv</td>
-                    <td><input type="checkbox" name="name"  onclick="columnVisible(19)" data-column="16">قفل</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(1)">نام</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(2)">کداتحادیه</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(3)">شناسه صنفی</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(4)">استان</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(5)">شهرستان</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(6)">کدملی</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(7)">موبایل</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(8)">تاریخ صدور</td>
+                    <td><input type="checkbox" name="name" checked onclick="columnVisible(9)">تاریخ انقضا</td>
+                    
                 </tr>
+                @if (Access::checkView('show-fin-columns'))
+                    <tr>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(10)">آدرس</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(11)">96</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(12)">97</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(13)">98</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(14)">99</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(15)">00</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(16)">01</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(17)" >02</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(18)" >irngv</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(19)" >قفل</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(20)" >بدهی</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(21)" >شرح بدهی</td>
+                        <td><input type="checkbox" name="name"  onclick="columnVisible(22)" >کدرهگیری پرداخت بدهی</td>
+                    </tr>
+                @endif
             </table>
             
         </div>
@@ -66,6 +76,9 @@
                     <th>02</th>
                     <th>irngv</th>
                     <th>قفل</th>
+                    <th>بدهی</th>
+                    <th>شرح بدهی</th>
+                    <th>کدرهگیری پرداخت بدهی</th>
                   </tr>
                 </thead>
             </table>
@@ -116,7 +129,10 @@
             }}, 
             { data: 'fin_info', visible: false, render: function(data){
                 if(data[7] != undefined && data[7].name == "lock_fee"){ return data[7].price; }else{ return "";}
-            }} 
+            }} ,
+            { data: 'debt', visible: false},
+            { data: 'debt_description', visible: false},
+            { data: 'debt_RefID', visible: false},
             
         ], 
         function(row, data) {
