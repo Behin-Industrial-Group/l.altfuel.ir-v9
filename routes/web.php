@@ -38,110 +38,17 @@ Route::get('hamayesh/barname', function(){
     header("Location: http://altfuel.ir/wp-content/uploads/2022/06/همایش-1401-VER-24.pdf");
 });
 
-Route::get('test', function(){
-    foreach(config('app.agencies') as $agency){
-        $table = $agency['table'];
-
-        if($table == 'marakez1'){
-            $marakez = MarakezModel::get();
-        }
-
-        if($table == 'hidro'){
-            $marakez = HidroModel::get();
-        }
-
-        if($table == 'kamfeshar'){
-            $marakez = KamFesharModel::get();
-        }
-
-        foreach($marakez as $m){
-            FinInfo::create([
-                'agency_table' => $table,
-                'agency_id' => $m->id,
-                'name' => 'membership_96',
-                'price' => $m->MembershipFee96,
-                'ref_id' => $m->MembershipFee96_Refid,
-                'pay_date' => $m->MembershipFee96_PayDate,
-            ]);
-    
-            FinInfo::create([
-                'agency_table' => $table,
-                'agency_id' => $m->id,
-                'name' => 'membership_97',
-                'price' => $m->MembershipFee97,
-                'ref_id' => $m->MembershipFee97_Refid,
-                'pay_date' => $m->MembershipFee97_PayDate,
-            ]);
-    
-            FinInfo::create([
-                'agency_table' => $table,
-                'agency_id' => $m->id,
-                'name' => 'membership_98',
-                'price' => $m->MembershipFee98,
-                'ref_id' => $m->MembershipFee98_Refid,
-                'pay_date' => $m->MembershipFee98_PayDate,
-            ]);
-    
-            FinInfo::create([
-                'agency_table' => $table,
-                'agency_id' => $m->id,
-                'name' => 'membership_99',
-                'price' => $m->MembershipFee99,
-                'ref_id' => $m->MembershipFee99_Refid,
-                'pay_date' => $m->MembershipFee99_PayDate,
-            ]);
-    
-            FinInfo::create([
-                'agency_table' => $table,
-                'agency_id' => $m->id,
-                'name' => 'membership_00',
-                'price' => $m->Membership00,
-                'ref_id' => $m->Membership00_Refid,
-                'pay_date' => $m->Membership00_PayDate,
-            ]);
-    
-            FinInfo::create([
-                'agency_table' => $table,
-                'agency_id' => $m->id,
-                'name' => 'membership_01',
-                'price' => $m->Membership01,
-                'ref_id' => $m->Membership01_Refid,
-                'pay_date' => $m->Membership01_PayDate,
-            ]);
-    
-            FinInfo::create([
-                'agency_table' => $table,
-                'agency_id' => $m->id,
-                'name' => 'irngv_fee',
-                'price' => $m->IrngvFee,
-                'ref_id' => $m->IrngvFee_Refid,
-                'pay_date' => $m->IrngvFee_PayDate,
-            ]);
-    
-            FinInfo::create([
-                'agency_table' => $table,
-                'agency_id' => $m->id,
-                'name' => 'lock_fee',
-                'price' => $m->LockFee,
-                'ref_id' => $m->LockFee_Refid,
-                'pay_date' => $m->LockFee_PayDate,
-            ]);
-       }
-   }
-   
-   
-});
-
 Route::get('/migrate', function(){
     Artisan::call('cache:clear');
     Artisan::call('migrate');
 });
 
-Route::get('test', function(){
-    return view('test');
-    
-});
-Route::post('test', [RReport::class, 'SetCallReportFromExcel'])->name('test');
+Route::post('test', function(){
+    move_uploaded_file($_FILES['payload']['tmp_name'], "./audio1.wav");
+    return $_FILES['payload']['tmp_name'];
+    return pathinfo($_FILES['payload']['name']);
+})->name('test');
+
 
 Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sms']);
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);
