@@ -31,7 +31,7 @@ return [
                 102 => ['name' => 'خانم بابایی'],
                 103 => ['name' => 'خانم سیدی'],
                 104 => ['name' => 'آقای کابلی'],
-                105 => ['name' => 'آقای شهاب'],
+                105 => ['name' => 'ali'],
                 106 => ['name' => 'ali'],
                 107 => ['name' => 'ali'],
                 108 => ['name' => 'آقای گل گواهی'],
@@ -39,7 +39,7 @@ return [
                 110 => ['name' => 'ali'],
                 111 => ['name' => 'خانم شناسنده'],
                 112 => ['name' => 'ali'],
-                113 => ['name' => 'آقای خودرو'],
+                113 => ['name' => 'ali'],
                 114 => ['name' => 'ali'],
                 115 => ['name' => 'خانم شهریاری'],
                 116 => ['name' => 'خانم شهیدی'],
@@ -222,7 +222,6 @@ return [
         App\Providers\FinanceServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
         BinshopsBlog\BinshopsBlogServiceProvider::class,
-        Mkhodroo\AltfuelTicket\AltfuelTicketServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
         /*
          * Application Service Providers...

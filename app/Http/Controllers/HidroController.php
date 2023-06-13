@@ -289,17 +289,6 @@ class HidroController extends Controller
         return view('admin.addhidro', [ 'Provinces' => $Provinces , 'message' => $message ]);
 
     }
-    public function checkMarkaz($nid, $mobile, $guildNumber)
-    {
-        $markaz = HidroModel::where('NationalID', $nid)->first();
-        if(!$markaz)
-            return "مرکز هیدرواستاتیکی  با این کدملی وجود ندارد.";
-        if($markaz->Cellphone != $mobile)
-            return "شماره موبایل با شماره ثبت شده در سامانه مطابقت ندارد.";
-        if($markaz->CodeEtehadie != $guildNumber)
-            return " کد مرکز وارد شده صحیح نمی باشد";
-        return $markaz;
-    }
 
     public function createApi()
     {

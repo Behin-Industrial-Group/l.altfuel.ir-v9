@@ -28,7 +28,7 @@
                         </div>
                         
                         <div class="row">
-                                <a href="{{ Url('/bedehi') }}">
+                                <a href="{{ Url('/bimeh') }}">
                                     <button class="btn btn-info">بازگشت</button>
                                 </a>
                         </div>

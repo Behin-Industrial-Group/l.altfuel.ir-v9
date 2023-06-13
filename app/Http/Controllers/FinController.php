@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\CustomClasses\zarinPal;
 use App\Enums\EnumsEntity;
-use App\Models\HidroModel;
 use App\Models\KamFesharModel;
 use App\Models\MarakezModel;
 use App\Models\MessageModel;
 use App\Models\User;
-use Exception;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+
 
 class FinController extends Controller
 {
@@ -20,8 +18,6 @@ class FinController extends Controller
     private $kamfesharController;
     private $marakezModel;
     private $kamfesharModel;
-    private $hidroController;
-    private $hidroModel;
     private $msg;
     private $user;
 
@@ -30,8 +26,6 @@ class FinController extends Controller
         $this->kamfesharController = new KamFesharController();
         $this->marakezModel = new MarakezModel();
         $this->kamfesharModel = new KamFesharModel();
-        $this->hidroController  = new HidroController();
-        $this->hidroModel  = new HidroModel();
         $this->msg = new MessageController();
         $this->user = new User();
     }
@@ -46,9 +40,6 @@ class FinController extends Controller
         }
         if($request->type === EnumsEntity::$AgencyType['kamfeshar']['value']){
             $markaz = $this->kamfesharController->checkMarkaz($request->nid, $request->mobile, $request->code);
-        }
-        if($request->type === EnumsEntity::$AgencyType['hidro']['value']){
-            $markaz = $this->hidroController->checkMarkaz($request->nid, $request->mobile, $request->code);
         }
 
         if(!isset($markaz->id))
@@ -89,12 +80,6 @@ class FinController extends Controller
                 ->first();
         if($type === EnumsEntity::$AgencyType['agency']['value']){
             $markaz = MarakezModel::where('NationalID', $nid)
-                ->where('Cellphone', $mobile)
-                ->where('CodeEtehadie', $code)
-                ->first();
-        }
-        if($type === EnumsEntity::$AgencyType['hidro']['value']){
-            $markaz = HidroModel::where('NationalID', $nid)
                 ->where('Cellphone', $mobile)
                 ->where('CodeEtehadie', $code)
                 ->first();
@@ -156,31 +141,14 @@ class FinController extends Controller
         else
         {
             //کد رهگیری رو در جدول مراکز ثبت کن 
-            if($type === EnumsEntity::$AgencyType['agency']['value']){
+            if($type === EnumsEntity::$AgencyType['agency']['value'])
                 $this->marakezModel->where('CodeEtehadie', $code)->update(['debt_RefID' => $result]);
-                $type_fa = EnumsEntity::$AgencyType['agency']['fa_name'];
-            }
 
-            if($type === EnumsEntity::$AgencyType['kamfeshar']['value']){
+            if($type === EnumsEntity::$AgencyType['kamfeshar']['value'])
                 $this->kamfesharModel->where('GuildNumber', $code)->update(['debt_RefID' => $result]);
-                $type_fa = EnumsEntity::$AgencyType['kamfeshar']['fa_name'];
-            }
 
-            if($type === EnumsEntity::$AgencyType['hidro']['value']){
-                $this->hidroModel->where('CodeEtehadie', $code)->update(['debt_RefID' => $result]);
-                $type_fa = EnumsEntity::$AgencyType['hidro']['fa_name'];
-            }
-
-            //ارسال پیام به مالی '
-            try{
-                $message = "مرکز $type_fa با کدمرکز/شناسه صنفی: $code ";
-                $message .= "تسویه مالی را با کد رهگیری: $result  انجام داد.";
-                $this->msg->send($this->user->where('level', 3)->first()->id, $message, $code);
-            }catch(Exception $e){
-                Log::info("خطا در ارسال پیام به مالی پس از انجام تراکنش");
-                Log::error($e->getMessage());
-            }
-            
+            //ارسال پیام به مالی 
+            $this->msg->send($this->user->where('level', 3)->first()->id,'مرکز '.$code. 'تسویه مالی را با کدرهگیری '.$result. 'انجام داد.', $code);
 
 
             $date = Verta();

@@ -13,8 +13,7 @@
                     </td>
                     <td class="col-sm-9">
                         <input type="radio" name="type" value="agency" id="">مرکز خدمات فنی <br>
-                        <input type="radio" name="type" value="kamfeshar" id="" >مرکز کم فشار<br>
-                        <input type="radio" name="type" value="hidro" id="" >ازمایشگاه هیدرو استاتیک
+                        <input type="radio" name="type" value="kamfeshar" id="" >مرکز کم فشار
                     </td>
                 </tr>
                 <tr>
@@ -64,9 +63,6 @@
                 if(value == 'kamfeshar'){
                     code_label.html('شماره صنفی پروانه کسب ')
                 }
-                if(value == 'hidro'){
-                    code_label.html('کد 5 رقمی آزمایشگاه هیدرواستاتیک')
-                }
             })
         </script>
         <script>
@@ -83,12 +79,10 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(data){
-                        console.log(data);
                         show_success(data.msg);
                         location.href = data.url
                     },
                     error: function (data) {
-                        console.log(data);
                         show_error(data.responseText)
                     }
                 })

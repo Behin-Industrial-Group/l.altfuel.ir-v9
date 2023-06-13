@@ -39,9 +39,6 @@ use App\Enums\EnumsEntity;
                         if($type === EnumsEntity::$AgencyType['kamfeshar']['value']){
                             $code = $markaz->GuildNumber;
                         }
-                        if($type === EnumsEntity::$AgencyType['hidro']['value']){
-                            $code = $markaz->CodeEtehadie;
-                        }
                         ?>
                         <input type="text" class="form-control col-sm-9" name="code" 
                         value="{{ $code }}" readonly/>
