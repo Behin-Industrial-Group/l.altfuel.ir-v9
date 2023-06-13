@@ -116,7 +116,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'M' => 
         array (
             'Monolog\\' => 8,
-            'Mkhodroo\\ShahabTicketSystem\\' => 28,
+            'Mkhodroo\\AltfuelTicket\\' => 23,
         ),
         'L' => 
         array (
@@ -394,9 +394,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'Mkhodroo\\ShahabTicketSystem\\' => 
+        'Mkhodroo\\AltfuelTicket\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/packages/ticket/src',
+            0 => __DIR__ . '/../..' . '/packages/altfuel-ticket/src',
         ),
         'Livewire\\' => 
         array (
