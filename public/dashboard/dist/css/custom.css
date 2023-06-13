@@ -24,7 +24,7 @@ img {
 }
 
 li a {
-    color: white;
+    color: black !important;
 }
 
 .image {
