@@ -1,0 +1,16 @@
+{
+    "name": "mkhodroo/altfuel-ticket",
+    "description": "altfuel-tickets",
+    "autoload": {
+        "psr-4": {
+            "Mkhodroo\\AltfuelTicket\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mkhodroo",
+            "email": "mkhodroo@yahoo.com"
+        }
+    ],
+    "require": {}
+}
