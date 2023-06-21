@@ -36,7 +36,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('ticket_id')->unsigned();
             $table->integer('user_id');
-            $table->text('text');
+            $table->text('text')->nullable();
             $table->string('voice')->nullable();
             $table->timestamps();
             $table->foreign('ticket_id')->references('id')->on('altfuel_tickets');
