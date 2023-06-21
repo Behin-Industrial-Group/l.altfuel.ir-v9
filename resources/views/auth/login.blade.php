@@ -56,7 +56,7 @@
                 function(response) {
                     console.log(response);
                     show_message("به صفحه داشبورد منتقل میشوید")
-                    window.location = "{{ url('') }}" + response
+                    window.location = "{{ url('admin') }}"
                 },
                 function(response) {
                     console.log(response);
