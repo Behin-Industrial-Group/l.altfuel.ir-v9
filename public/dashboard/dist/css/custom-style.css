@@ -271,3 +271,26 @@ ul {
 .datepicker-plot-area {
     font-family: 'Vazir', sans-serif;
 }
+.right .direct-chat-text{
+    background-color: #0b5d00 !important;
+}
+
+.direct-chat-text{
+    color: #ffffff !important;
+}
+
+audio{
+    width: 100% !important;
+    height: 25px !important;
+  }
+  
+  .direct-chat-timestamp{
+    font-size: 15px !important;
+    direction: ltr !important;
+    color: white !important;
+  }
+  
+  .direct-chat-name{
+    display: block !important;
+    color: white !important;
+  }

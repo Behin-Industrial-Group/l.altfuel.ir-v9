@@ -53,7 +53,7 @@ class FinController extends Controller
 
         if(!isset($markaz->id))
             return $markaz;
-        if($markaz->debt == 0)
+        if($markaz->debt == 0 || $markaz->debt_RefID)
             return "بدهی ندارید";
         return $markaz;
     }

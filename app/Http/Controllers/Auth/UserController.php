@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Models\AccessModel;
 use App\Models\MethodsModel;
-use Auth;
+// use Auth;
 use App\CustomClasses\Access;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\RandomStringController;
@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Mkhodroo\UserRoles\Controllers\GetRoleController;
+use Mkhodroo\UserRoles\Models\Method;
 
 class UserController extends Controller
 {
@@ -53,10 +56,11 @@ class UserController extends Controller
             $users = User::get();
             return view('admin.user.all')->with(['users' => $users]);
         else:
-            $user = User::where('id', $id)->first();
-            $methods = MethodsModel::orderBy('fa_name')->get();
-            $access = AccessModel::get();
-            return view('admin.user.edit')->with(['user' => $user, 'accessibilities' => $access, 'methods' => $methods]);
+            
+            return view('admin.user.edit')->with([
+                'user' => User::find($id),
+                'roles' => GetRoleController::getAll()
+            ]);
         endif;
     }
     

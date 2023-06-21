@@ -15,15 +15,19 @@ class CreateTicketController extends Controller
     }
 
     public function store(Request $r){
-        CommentVoiceController::upload($r->file('payload'));
-        return $r->file('payload');
-        $ticket = Ticket::create([
-            'user_id' => Auth::id(),
-            'cat_id' => $r->catagory,
-            'title' => $r->title
-        ]);
-        CommentVoiceController::upload($r->file(''));
-        AddTicketCommentController::add($ticket->id, $r->text );
-        return $r->catagory;
+        if(isset($r->title)){
+            $ticket = GetTicketController::findByTitleAndUser($r->title, Auth::id());
+            if(!$ticket){
+                $ticket = Ticket::create([
+                    'user_id' => Auth::id(),
+                    'cat_id' => $r->catagory,
+                    'title' => $r->title
+                ]);
+            }
+        }
+        $file_path = CommentVoiceController::upload($r->file('payload'), $ticket->id);
+
+        AddTicketCommentController::add($ticket->id, $r->text , $file_path);
+        return response()->json($ticket, 200);
     }
 }

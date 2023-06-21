@@ -223,6 +223,8 @@ return [
         App\Providers\ConfigServiceProvider::class,
         BinshopsBlog\BinshopsBlogServiceProvider::class,
         Mkhodroo\AltfuelTicket\AltfuelTicketServiceProvider::class,
+        \Mkhodroo\UserRoles\UserRolesServiceProvider::class,
+        // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
         /*
          * Application Service Providers...

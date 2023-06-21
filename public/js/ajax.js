@@ -4,7 +4,8 @@ function send_ajax_request(url, data, callback, erCallback = null){
     if(erCallback == null){
         erCallback= function(data){ 
             hide_loading();
-            error_notification('<p dir="ltr">' + JSON.stringify(data) + '</p>');
+            show_error();
+            // error_notification('<p dir="ltr">' + JSON.stringify(data) + '</p>');
         }
     }
     return $.ajax({
@@ -21,7 +22,7 @@ function send_ajax_request(url, data, callback, erCallback = null){
         error: erCallback
     })
     .done(callback)
-    .catch(erCallback);
+    // .catch(erCallback);
 }
 
 function send_ajax_formdata_request(url, data, callback, erCallback = null){
@@ -35,6 +36,7 @@ function send_ajax_formdata_request(url, data, callback, erCallback = null){
     return $.ajax({
         url: url,
         data: data,
+        async: false,
         processData: false,
         contentType: false,
         headers: {
@@ -170,7 +172,7 @@ function open_admin_modal(url, title = ''){
     )
 }
 
-function open_admin_modal_with_data(data, title = ''){
+function open_admin_modal_with_data(data, title = '', customFun){
     var modal = $('<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
                     '<div class="modal-dialog modal-lg">' +
                     '<div class="modal-content">' +
@@ -195,6 +197,7 @@ function open_admin_modal_with_data(data, title = ''){
 
     $('#admin-modal #modal-body').html(data);
     $('#admin-modal').modal('show')
+    setTimeout(customFun(), 1000);
 }
 
 

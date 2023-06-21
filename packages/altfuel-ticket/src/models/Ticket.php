@@ -13,4 +13,8 @@ class Ticket extends Model
     protected $fillable = [
         'user_id', 'cat_id', 'title', 'status', 'junk'
     ];
+
+    public function comments() {
+        return TicketComment::where('ticket_id', $this->id)->get();
+    }
 }

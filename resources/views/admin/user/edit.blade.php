@@ -74,38 +74,34 @@ use App\Models\User;
                 
                 <div class="box-body">
                     <button class="" id="check_all">انتخاب همه</button>
-                    <form class="form-horizontal" method="post" action="" id="access_tbl">
+                    <form class="form-horizontal" method="post" action="" id="role-table">
                         @csrf
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>نام</th>
-                                    <th>دسترسی</th>
-                                    
-                                </tr>
-                            </thead>
-                            @foreach($methods as $method)
-                                    <tr>
-                                        <td>{{ $method->fa_name != '' ? $method->fa_name : $method->name }}</td>
-                                        <td>
-                                            <?php
-                                            $access = AccessModel::where('user_id',$user->id)->where('method_id',$method->id)->first();
-                                            ?>
-                                            <input type="checkbox" name="{{$method->name}}" <?php if( isset($access->access) && $access->access == 'yes') echo "checked" ?>>
-                                        </td>
-                                    </tr>
-                            @endforeach
-                        </table>
-                        <hr>
-                        <input type="submit" class="btn btn-danger">
+                       <input type="text" name="user_id" id="" value="{{ $user->id }}">
+                            <select name="role_id" id="">
+                                @foreach ($roles as $role)
+                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
+                            </select>
                     </form>
+
+                    <button onclick="change_role()">change role</button>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('script')
+    
     <script>
+        function change_role(){
+            send_ajax_request(
+                "{{ route('role.changeUserRole') }}",
+                $('#role-table').serialize(),
+                function(response){
+                    console.log(response);
+                }
+            )
+        }
         $("#check_all").on('click',function(){
             $('#access_tbl input:checkbox').prop('checked', 'true');
         });

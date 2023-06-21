@@ -34,7 +34,8 @@ $videosCatagories = VideosCatagoriesModel::get();
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
                     @foreach (config('sidebar.menu') as $menu)
-                        <li class="nav-item has-treeview">
+                        @if ( auth()->user()->access('منو >>' .$menu['fa_name']) )
+                          <li class="nav-item has-treeview">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fa fa-dashboard"></i>
                                 <p>
@@ -44,15 +45,19 @@ $videosCatagories = VideosCatagoriesModel::get();
                             </a>
                             <ul class="nav nav-treeview">
                                 @foreach ($menu['submenu'] as $submenu)
+                                  @if ( auth()->user()->access('منو >>' .$menu['fa_name'] . '>>' . $submenu['fa_name'] ) )
                                     <li class="nav-item">
                                         <a href="@if(Route::has($submenu['route-name'])) {{ route($submenu['route-name']) }} @else  {{ url($submenu['route-url']) }} @endif" class="nav-link active">
                                             <i class="fa fa-circle-o nav-icon"></i>
                                             <p>{{ $submenu['fa_name'] }}</p>
                                         </a>
                                     </li>
+                                  @endif
                                 @endforeach
                             </ul>
-                        </li>
+                          </li>
+                        @endif
+                        
                     @endforeach
                         @if(Access::checkView('Issues_issue_show'))
                             <li class="nav-item has-treeview">

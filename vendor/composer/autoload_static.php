@@ -116,6 +116,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Mkhodroo\\UserRoles\\' => 19,
             'Mkhodroo\\AltfuelTicket\\' => 23,
         ),
         'L' => 
@@ -393,6 +394,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Mkhodroo\\UserRoles\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src',
         ),
         'Mkhodroo\\AltfuelTicket\\' => 
         array (
@@ -3587,6 +3592,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Livewire\\Wireable' => __DIR__ . '/..' . '/livewire/livewire/src/Wireable.php',
         'Livewire\\WithFileUploads' => __DIR__ . '/..' . '/livewire/livewire/src/WithFileUploads.php',
         'Livewire\\WithPagination' => __DIR__ . '/..' . '/livewire/livewire/src/WithPagination.php',
+        'Mkhodroo\\AltfuelTicket\\AltfuelTicketServiceProvider' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/AltfuelTicketServiceProvider.php',
+        'Mkhodroo\\UserRoles\\UserRolesServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/UserRolesServiceProvider.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',

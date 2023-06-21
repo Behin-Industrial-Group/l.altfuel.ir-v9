@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\CustomClasses\Access;
-
+use Mkhodroo\UserRoles\Controllers\GetRoleController;
+use Mkhodroo\UserRoles\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -21,7 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        $access = Access::check('register-user');
+        // $access = Access::check('register-user');
 
         return view('auth.register');
     }
@@ -36,25 +37,30 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $access = Access::check('register-user');
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-        ]);
+        // $access = Access::check('register-user');
+        // return $request->mobile;
+        if(User::where('email', $request->mobile)->first()){
+            return response("شماره موبایل تکراری", 402);
+        }
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'mobile' => 'required|string|max:11',
+        //     'password' => 'required|string|min:8',
+        // ]);
 
         $user = User::create([
             'name' => $request->name,
-            'display_name' => $request->display_name,
-            'email' => $request->email,
+            'display_name' => $request->name,
+            'email' => $request->mobile,
             'password' => Hash::make($request->password),
-            'level' => 6,
-            'showInReport' => 1
+            'role_id' => GetRoleController::getByName('متقاضی')->id,
+            'showInReport' => 0
         ]);
+
+        Auth::loginUsingId($user->id);
 
         event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+        return response(RouteServiceProvider::HOME);
     }
 }

@@ -84,7 +84,7 @@
 <script>
     $('#gen_code').on('click', function(){
         var province = $('#Province').val();
-        $.get( "{{url('GenCode/markaz')}}/"+ province, function( data ) {
+        $.get( "{{url('GenCode')}}/{{ $agency_table }}/"+ province, function( data ) {
             alert('کد جدید:  ' + data)
         });
     })

@@ -3025,6 +3025,8 @@ return array(
     'Livewire\\Wireable' => $vendorDir . '/livewire/livewire/src/Wireable.php',
     'Livewire\\WithFileUploads' => $vendorDir . '/livewire/livewire/src/WithFileUploads.php',
     'Livewire\\WithPagination' => $vendorDir . '/livewire/livewire/src/WithPagination.php',
+    'Mkhodroo\\AltfuelTicket\\AltfuelTicketServiceProvider' => $baseDir . '/packages/altfuel-ticket/src/AltfuelTicketServiceProvider.php',
+    'Mkhodroo\\UserRoles\\UserRolesServiceProvider' => $baseDir . '/packages/mkhodroo-user-roles/src/UserRolesServiceProvider.php',
     'Mockery' => $vendorDir . '/mockery/mockery/library/Mockery.php',
     'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
     'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',

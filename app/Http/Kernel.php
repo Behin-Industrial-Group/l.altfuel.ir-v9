@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'api_access' => \App\Http\Middleware\ApiAccess::class,
         'api_auth' => \App\Http\Middleware\ApiAuth::class,
+        'access' => \Mkhodroo\UserRoles\Middlewares\Access::class,
     ];
 }

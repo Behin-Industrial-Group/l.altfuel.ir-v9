@@ -56,7 +56,7 @@ Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::clas
 
 Route::get('/GenCode/{type}/{province}', function($type,$province){
     $a = new RGenCode($province);
-    if($type === 'markaz')
+    if($type === 'markaz1')
         return $a->Markaz();
     if($type === 'hidro')
         return $a->Hidro();
@@ -74,6 +74,7 @@ Route::get('generate-code/', function () {
 });
 
 Route::get('/', function () {
+    return view('auth.login');
     return "
     <center dir='rtl'><h3>جهت خرید برچسب به پنل کاربری خود در سایت 
     <a href='https://irngv.mimt.gov.ir'>irngv.mimt.gov.ir</a> مراجعه کنید.</h3></center>
@@ -144,7 +145,7 @@ Route::prefix('/bedehi')->group(function(){
     Route::get('/{type}/{nid}/{mobile}/{code}', [FinController::class, 'confirmForm'])->name('confirm-form');
 });
 
-Route::prefix('admin')->middleware(['auth', 'verified'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(function(){
     Route::get('/', [HomeController::class, 'index']);
 
     Route::post('/setComments', [CommentsController::class, 'set']);

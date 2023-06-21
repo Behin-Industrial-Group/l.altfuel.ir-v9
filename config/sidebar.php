@@ -25,6 +25,7 @@ return [
             'fa_name' => 'کاربران',
             'submenu' => [
                 'dashboard' => [ 'fa_name' => 'همه', 'route-name' => '', 'route-url' => 'admin/user/all' ],
+                'role' => [ 'fa_name' => 'نقش ها', 'route-name' => 'role.listForm', 'route-url' => '' ],
             ]
         ],
         'reports' => [
@@ -54,6 +55,13 @@ return [
             'submenu' => [
                 'irngv' => [ 'fa_name' => 'اطلاعات دریافتی', 'route-name' => 'admin.irngv.show.list', 'route-url' => '' ],
                 'poll' => [ 'fa_name' => 'اطلاعات نظرسنجی', 'route-name' => 'admin.irngv.show.answers', 'route-url' => '' ],
+            ]
+        ],
+        'tickets' => [
+            'fa_name' => 'تیکت پشتیبانی',
+            'submenu' => [
+                'create' => [ 'fa_name' => 'ایجاد', 'route-name' => 'ATRoutes.index', 'route-url' => '' ],
+                'show' => [ 'fa_name' => 'مشاهده', 'route-name' => 'ATRoutes.show.listForm', 'route-url' => '' ],
             ]
         ],
 

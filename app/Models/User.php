@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Mkhodroo\UserRoles\Controllers\AccessController;
 
 class User extends Authenticatable
 {
@@ -22,7 +23,8 @@ class User extends Authenticatable
         'password',
         'level',
         'display_name',
-        'showInReport'
+        'showInReport', 
+        'role_id'
     ];
 
     /**
@@ -64,4 +66,9 @@ class User extends Authenticatable
 
         return false;
     }
+
+    function access($method_name) {
+        return (new AccessController($method_name))->check();
+    }
+
 }

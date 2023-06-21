@@ -25,7 +25,7 @@
                         <td><input type="checkbox" name="name" checked onclick="columnVisible(2)">کداتحادیه | </td>
                         <td><input type="checkbox" name="name" checked onclick="columnVisible(3)">شناسه صنفی | </td>
                         <td><input type="checkbox" name="name" checked onclick="columnVisible(4)">استان | </td>
-                        <td><input type="checkbox" name="name" checked onclick="columnVisible(5)">شهرستان/td>
+                        <td><input type="checkbox" name="name" checked onclick="columnVisible(5)">شهرستان |</td>
                         <td><input type="checkbox" name="name" checked onclick="columnVisible(6)">کدملی | </td>
                         <td><input type="checkbox" name="name" checked onclick="columnVisible(7)">موبایل | </td>
                         <td><input type="checkbox" name="name" checked onclick="columnVisible(8)">تاریخ صدور | </td>

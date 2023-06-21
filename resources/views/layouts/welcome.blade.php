@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>
-		{{ $title ?? '' }}
-	</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{{ url('public/login/images/icons/favicon.ico') }}"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/vendor/bootstrap/css/bootstrap.min.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/fonts/iconic/css/material-design-iconic-font.min.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/vendor/animate/animate.css') }}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/vendor/css-hamburgers/hamburgers.min.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/vendor/animsition/css/animsition.min.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/vendor/select2/select2.min.css') }}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/vendor/daterangepicker/daterangepicker.css') }}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/css/util.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url('public/login/css/main.css') }}">
-<!--===============================================================================================-->
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
+	
+		<title>@yield('title')</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/font-awesome/css/font-awesome.min.css') }}">
+		<!-- Ionicons -->
+		<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/adminlte.min.css') }}">
+		<!-- Date Picker -->
+		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/datepicker/datepicker3.css') }}">
+		<!-- Daterange picker -->
+		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/daterangepicker/daterangepicker-bs3.css') }}">
+		<!-- bootstrap wysihtml5 - text editor -->
+		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+		<!-- Google Font: Source Sans Pro -->
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+		<!-- bootstrap rtl -->
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/bootstrap-rtl.min.css') }}">
+		<!-- template rtl version -->
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom-style.css') }}">
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css') }}">
+	
+		{{-- <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css') }}"> --}}
+		<link rel="stylesheet" type="text/css" href="{{ url('public/dashboard/plugins/datatables/dataTables.bootstrap4.css') }}" />
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/dropzone.min.css') }}">
+		<link rel="stylesheet" href="{{ url('public/leaflet/leaflet.css') }}"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+		<link rel="stylesheet" href="{{ Url('public/dist/css/persian-datepicker-0.4.5.min.css') }}" />
+		<link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css') }}" />
+		<link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.min.css') }}" />
+		@yield('style')
+	
+		<script src="{{ url('public/dashboard/plugins/jquery/jquery.min.js') }}"></script>
+		<script src="{{ url('public/dashboard/plugins/datatables/jquery.dataTables.js') }}"></script>
+		<script src="{{ url('public/dashboard/plugins/datatables/dataTables.bootstrap4.js') }}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	
+		<script src="{{ url('public/js/ajax.js') }}"></script>
+		<script src="{{ url('public/js/dataTable.js') }}"></script>
+		<script src="{{ url('public/js/dropzone.js') }}"></script>
+		
+	</head>
 <body>
 	
 	<div class="limiter">
@@ -47,26 +62,10 @@
 
 	<div id="dropDownSelect1"></div>
 	
-<!--===============================================================================================-->
-	<script src="{{ url('public/login/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url('public/login/vendor/animsition/js/animsition.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url('public/login/vendor/bootstrap/js/popper.js') }}"></script>
-	<script src="{{ url('public/login/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url('public/login/vendor/select2/select2.min.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url('public/login/vendor/daterangepicker/moment.min.js') }}"></script>
-	<script src="{{ url('public/login/vendor/daterangepicker/daterangepicker.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url('public/login/vendor/countdowntime/countdowntime.js') }}"></script>
-<!--===============================================================================================-->
-	<script src="{{ url('public/login/js/main.js') }}"></script>
-	<script src="{{ url('public/js/ajax.js') }}"></script>
+	<!--===============================================================================================-->
 	<script src="{{ url('public/js/loader.js') }}"></script>
+	<script src="{{ url('public/js/clearcach.js') }}"></script>
 	<script src="{{ url('public/js/scripts.js') }}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 	@yield('script')
 </body>

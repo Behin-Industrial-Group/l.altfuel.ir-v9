@@ -35,10 +35,12 @@ return new class extends Migration
         Schema::create('altfuel_ticket_comments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('ticket_id')->unsigned();
-            $table->text('text');
+            $table->integer('user_id');
+            $table->text('text')->nullable();
             $table->string('voice')->nullable();
             $table->timestamps();
             $table->foreign('ticket_id')->references('id')->on('altfuel_tickets');
+            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('altfuel_comment_attachments', function (Blueprint $table) {

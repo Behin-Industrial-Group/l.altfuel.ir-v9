@@ -7,3 +7,7 @@ function show_error(er){
     }
     hide_loading();
 }
+
+function show_message(msg = "انجام شد" ){
+    toastr.success(msg);
+}

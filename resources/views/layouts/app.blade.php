@@ -37,6 +37,9 @@
     <link rel="stylesheet" href="{{ url('public/leaflet/leaflet.css') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ Url('public/dist/css/persian-datepicker-0.4.5.min.css') }}" />
+    <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css') }}" />
+    <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.min.css') }}" />
+    @yield('style')
 
     <script src="{{ url('public/dashboard/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ url('public/dashboard/plugins/datatables/jquery.dataTables.js') }}"></script>
@@ -116,7 +119,8 @@
         <script src="{{ Url('public/dist/js/persian-date-0.1.8.min.js') }}"></script>
         <script src="{{ Url('public/dist/js/persian-datepicker-0.4.5.min.js') }}"></script>
 
-        
+        <script src="{{ Url('public/green-player/js/green-audio-player.js') }}"></script>
+        <script src="{{ Url('public/green-player/js/green-audio-player.min.js') }}"></script>
 
         
         

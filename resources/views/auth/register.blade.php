@@ -1,65 +1,75 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.welcome')
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+@section('content')
+    <div class="register-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center col-sm-12">
+                <img src="https://altfuel.ir/fa/public/logo.png" class="col-sm-12" alt="">
+            </div>
+            <div class="card-body">
+                <form action="javascript:void(0)" method="post" id="register-form">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="name" placeholder="نام و نام خانوادگی">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="mobile" placeholder="موبایل">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="رمز عبور">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary col-sm-12" onclick="submit()">ثبت نام</button>
+                </div>
 
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name-En')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <div style="text-align: center">
+                    <a href="{{ route('login') }}" class="text-center">صفحه ورود</a>
+                </div>
             </div>
 
-            <div>
-                <x-label for="name" :value="__('Name-Fa')" />
+        </div>
+    </div>
+@endsection
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="display_name" :value="old('display_name')" required />
-            </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+@section('script')
+    <script>
+        function submit() {
+            send_ajax_request(
+                "{{ route('register') }}",
+                $('#register-form').serialize(),
+                function(response) {
+                    show_message("به صفحه داشبورد منتقل میشوید")
+                    window.location = "{{ url('') }}" + response
+                },
+                function(response) {
+                    console.log(response);
+                    show_error(response.responseText)
+                    hide_loading()
+                }
+            )
+        }
+    </script>
+@endsection

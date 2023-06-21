@@ -29,7 +29,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Mkhodroo\\AltfuelTicket\\": "packages/altfuel-ticket/src/"
+            "Mkhodroo\\AltfuelTicket\\": "packages/altfuel-ticket/src/",
+            "Mkhodroo\\UserRoles\\": "packages/mkhodroo-user-roles/src/"
         }
     },
     "autoload-dev": {
