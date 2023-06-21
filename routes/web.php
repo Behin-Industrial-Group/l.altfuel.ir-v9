@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Translation\MessageCatalogue;
 use Illuminate\Support\Facades\Schema;
-
+use Mkhodroo\UserRoles\Models\Access;
+use Mkhodroo\UserRoles\Models\Method;
+use Mkhodroo\UserRoles\Models\Role;
 
 use function PHPSTORM_META\type;
 
@@ -43,10 +45,16 @@ Route::get('/migrate', function(){
     Artisan::call('migrate');
 });
 
-Route::post('test', function(){
-    move_uploaded_file($_FILES['payload']['tmp_name'], "./audio1.wav");
-    return $_FILES['payload']['tmp_name'];
-    return pathinfo($_FILES['payload']['name']);
+Route::get('test', function(){
+    $admin = Role::find(1);
+    $methods = Method::get();
+    foreach($methods as $method){
+        Access::create([
+            'role_id' => $admin->id,
+            'method_id' => $method->id,
+            'access' => 1
+        ]);
+    }
 })->name('test');
 
 
@@ -75,11 +83,6 @@ Route::get('generate-code/', function () {
 
 Route::get('/', function () {
     return view('auth.login');
-    return "
-    <center dir='rtl'><h3>جهت خرید برچسب به پنل کاربری خود در سایت 
-    <a href='https://irngv.mimt.gov.ir'>irngv.mimt.gov.ir</a> مراجعه کنید.</h3></center>
-    ";
-    return redirect('http://lable.altfuel.ir');
 });
 
 Route::get('hidro', [HidroController::class, 'createApi']);
