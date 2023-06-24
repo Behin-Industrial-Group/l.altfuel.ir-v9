@@ -18,6 +18,7 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
     });
     Route::name('get.')->prefix('get')->group(function(){
         Route::get('all', [GetTicketController::class, 'getAll'])->name('getAll');
+        Route::get('get-mine', [GetTicketController::class, 'getMyTickets'])->name('getMyTickets');
         Route::post('get-by-catagory', [GetTicketController::class, 'getByCatagory'])->name('getByCatagory');
         Route::get('{id}', [GetTicketController::class, 'get'])->name('get');
     });

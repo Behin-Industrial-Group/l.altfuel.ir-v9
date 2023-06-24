@@ -21,6 +21,7 @@
                 <tr>
                     <th>شناسه</th>
                     <th>عنوان</th>
+                    <th>دسته بندی</th>
                     <th>وضعیت</th>
                     <th>آخرین تغییرات</th>
                 </tr>
@@ -48,10 +49,18 @@
             [
                 {data: 'id'},
                 {data: 'title'},
+                {data: 'catagory.name'},
                 {data: 'status'},
                 {data: 'updated_at'}
             ]
         );
+
+        send_ajax_get_request(
+            "{{ route('ATRoutes.get.getMyTickets') }}",
+            function(data){
+                update_datatable(data);
+            }
+        )
 
         table.on('click', 'tr', function(){
             var data = table.row( this ).data();

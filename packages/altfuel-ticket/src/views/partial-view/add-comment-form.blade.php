@@ -100,17 +100,26 @@
             //     document.body.innerHTML += "Too big; could not upload";
             //     return;
             // }
-            a = audio.audioBlob;
-            console.log('send');
             const f = new FormData($('#{{ $form_id ?? "comment-form" }}')[0]);
+
+            if(audio){
+                a = audio.audioBlob;
+                f.append("payload", a);
+            }
+            console.log('send');
             // f.append("nonce", window.nonce);
-            f.append("payload", a);
             send_ajax_formdata_request(
                 "{{ route('ATRoutes.store') }}",
                 f,
-                function(ticket){
-                    console.log(ticket);
-                    show_comment_modal(ticket.id, ticket.title, ticket.user_id)
+                function(response){
+                    ticket = response.ticket;
+                    show_message(response.message)
+                    console.log(response);
+                    if(typeof(show_comment_modal) === "function"){
+                        show_comment_modal(ticket.id, ticket.title, ticket.user_id)
+                    }else{
+                        window.location = "{{ route('ATRoutes.show.listForm') }}"
+                    }
                 },
                 function(data){
                     show_error(data);

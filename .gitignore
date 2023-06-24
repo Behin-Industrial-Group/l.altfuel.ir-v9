@@ -2,6 +2,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/ticket-uploads
 /storage/*.key
 .env.backup
 .env.production

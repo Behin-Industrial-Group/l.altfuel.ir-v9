@@ -25,9 +25,12 @@ class CreateTicketController extends Controller
                 ]);
             }
         }
-        $file_path = CommentVoiceController::upload($r->file('payload'), $ticket->id);
+        $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->id): '';
 
         AddTicketCommentController::add($ticket->id, $r->text , $file_path);
-        return response()->json($ticket, 200);
+        return response([
+            'ticket' => $ticket,
+            'message' => "ثبت شد"
+        ], 200);
     }
 }

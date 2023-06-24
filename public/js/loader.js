@@ -39,7 +39,7 @@ var $spinner = $('<div>', {
 // create the text element
 var $text = $('<div>', {
   'class': 'loader-text',
-  text: 'وَ اللهُ یُحِبُّ الصَّابِرِینَ',
+  text: 'منتظر بمانید',
   css: {
     'text-align': 'center',
     'font-size': '14px',

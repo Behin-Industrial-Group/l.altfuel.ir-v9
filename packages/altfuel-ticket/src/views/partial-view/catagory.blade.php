@@ -1,14 +1,16 @@
-<select name="" id="parent_cat" class="select2"></select>
-<select name="catagory" id="child_cat" class="select2"></select>
+<div class="row">
+    <select name="" id="parent_cat" class="form-control col-sm-4"></select>
+    <select name="catagory" id="child_cat" class="form-control col-sm-4 "></select>
+</div>
 <script>
     var parent_cat = $('#parent_cat')
     send_ajax_get_request(
         "{{ route('ATRoutes.catagory.getAllParent') }}",
         function(data){
-            
             data.forEach(element => {
                 parent_cat.append(new Option(`${element.name}`, element.id));
             });
+            getChildrenByParentId($('#parent_cat').val())
         }
     );
     parent_cat.on('change', function(){
@@ -30,4 +32,5 @@
             }
         )
     }
+    
 </script>

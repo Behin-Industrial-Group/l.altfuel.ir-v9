@@ -17,4 +17,8 @@ class Ticket extends Model
     public function comments() {
         return TicketComment::where('ticket_id', $this->id)->get();
     }
+
+    function catagory() {
+        return TicketCatagory::find($this->cat_id)->only(['id', 'name']);
+    }
 }

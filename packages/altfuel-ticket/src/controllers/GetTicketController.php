@@ -13,11 +13,21 @@ class GetTicketController extends Controller
 {
 
     function getAll() {
-        return Ticket::get();
+        return Ticket::get()->each(function($row){
+            $row->catagory = $row->catagory();
+        });
+    }
+
+    function getMyTickets() {
+        return Ticket::where('user_id', Auth::id())->get()->each(function($row){
+            $row->catagory = $row->catagory();
+        });
     }
 
     function getByCatagory(Request $r) {
-        return Ticket::where('cat_id', $r->catagory)->get();
+        return Ticket::where('cat_id', $r->catagory)->get()->each(function($row){
+            $row->catagory = $row->catagory();
+        });
     }
 
     public static function get($id) {
