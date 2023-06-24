@@ -34,7 +34,6 @@
     {{-- <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css')  . '?' . config('app.version') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ url('public/dashboard/plugins/datatables/dataTables.bootstrap4.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/dropzone.min.css')  . '?' . config('app.version') }}">
-    <link rel="stylesheet" href="{{ url('public/leaflet/leaflet.css')  . '?' . config('app.version') }}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ Url('public/dist/css/persian-datepicker-0.4.5.min.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css')  . '?' . config('app.version') }}" />
