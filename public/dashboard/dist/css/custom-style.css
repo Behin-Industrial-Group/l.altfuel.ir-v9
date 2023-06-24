@@ -272,11 +272,11 @@ ul {
     font-family: 'Vazir', sans-serif;
 }
 .right .direct-chat-text{
-    background-color: #0b5d00 !important;
+    background-color: #b1d0ac !important;
 }
 
 .direct-chat-text{
-    color: #ffffff !important;
+    color: #000000 !important;
 }
 
 audio{
@@ -287,10 +287,10 @@ audio{
   .direct-chat-timestamp{
     font-size: 15px !important;
     direction: ltr !important;
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
   }
   
   .direct-chat-name{
     display: block !important;
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
   }

@@ -1,11 +1,13 @@
-
+<div class="row">
+    {{ $ticket->user()->display_name }}
+</div>
 <div class="direct-chat-messages" style="height: 500px">
     @foreach ($ticket->comments() as $comment)
             <div class="direct-chat-msg {{ ($comment->user()->id === auth()->user()->id) ? 'right' : '' }}">
                 <div class="direct-chat-infos clearfix">
                 
                 </div>
-                
+                <img class="direct-chat-img" src="{{ url('public/dashboard/dist/img/avatar5.png') }}" alt="message user image">
                 <div class="direct-chat-text">
                     <span class="direct-chat-name {{ ($comment->user()->id === auth()->user()->id) ? 'float-right' : '' }}"">{{ $comment->user()->display_name ?? '' }}</span>
                     <br>

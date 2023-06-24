@@ -78,7 +78,7 @@
                 "{{ route('ATRoutes.show.ticket') }}",
                 fd,
                 function(body){
-                    open_admin_modal_with_data(body, title + '<br>' + user, function(){
+                    open_admin_modal_with_data(body, title, function(){
                         $(".direct-chat-messages").animate({ scrollTop: $('.direct-chat-messages').prop("scrollHeight")}, 1);
                     });
                 },
