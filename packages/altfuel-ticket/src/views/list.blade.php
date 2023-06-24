@@ -16,17 +16,20 @@
                 </div>
             </form>
         </div>
-        <table class="table table-stripped" id="tickets-table">
-            <thead>
-                <tr>
-                    <th>شناسه</th>
-                    <th>عنوان</th>
-                    <th>دسته بندی</th>
-                    <th>وضعیت</th>
-                    <th>آخرین تغییرات</th>
-                </tr>
-            </thead>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-stripped" id="tickets-table">
+                <thead>
+                    <tr>
+                        <th>شناسه</th>
+                        <th>عنوان</th>
+                        <th>دسته بندی</th>
+                        <th>وضعیت</th>
+                        <th>آخرین تغییرات</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        
     </div>
 @endsection
 
