@@ -48,7 +48,9 @@
             "{{ route('ATRoutes.get.getAll') }}",
             [
                 {data: 'id'},
-                {data: 'title'},
+                {data: 'title', render: function(title){
+                    return `<a href="#">${title}</a>`;
+                }},
                 {data: 'catagory.name'},
                 {data: 'status'},
                 {data: 'updated_at'}
