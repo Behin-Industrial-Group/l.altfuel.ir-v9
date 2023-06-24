@@ -27,7 +27,7 @@
     @endforeach
 </div>
 <div class="card-body">
-    @include('ATView::partial-view.add-comment-form', ['form_id' => 'comment-form', 'ticket_title' => $ticket->title])
+    @include('ATView::partial-view.add-comment-form', ['form_id' => 'comment-form', 'ticket_id' => $ticket->ticket_id])
 </div>
 
 

@@ -3,6 +3,7 @@
 namespace Mkhodroo\AltfuelTicket\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\RandomStringController;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +16,12 @@ class CreateTicketController extends Controller
     }
 
     public function store(Request $r){
-        if(isset($r->title)){
-            $ticket = GetTicketController::findByTitleAndUser($r->title, Auth::id());
+        if(isset($r->ticket_id)){
+            $ticket = GetTicketController::findByTicketId($r->ticket_id);
             if(!$ticket){
                 $ticket = Ticket::create([
                     'user_id' => Auth::id(),
+                    'ticket_id' => RandomStringController::Generate(20),
                     'cat_id' => $r->catagory,
                     'title' => $r->title
                 ]);

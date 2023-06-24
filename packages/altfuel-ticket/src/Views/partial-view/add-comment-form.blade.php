@@ -4,8 +4,8 @@
 @endphp
 <form action="javascript:void(0)" id="{{ $form_id ?? 'comment-form' }}">
     @csrf
-    @isset($ticket_title)
-        <input type="hidden" name="title" id="" value="{{ $ticket_title }}">
+    @isset($ticket_id)
+        <input type="hidden" name="ticket_id" id="" value="{{ $ticket_id }}">
     @endisset
     <div class="card">
         <div class="row">

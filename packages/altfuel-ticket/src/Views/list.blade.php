@@ -42,6 +42,7 @@
                 "{{ route('ATRoutes.get.getByCatagory') }}",
                 data,
                 function(data){
+                    console.log(data);
                     update_datatable(data);
                 }
             )

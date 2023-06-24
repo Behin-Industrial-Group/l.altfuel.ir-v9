@@ -3599,6 +3599,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Controllers\\GetTicketController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/GetTicketController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\ShowTicketController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/ShowTicketController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\TicketCatagoryController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketCatagoryController.php',
+        'Mkhodroo\\AltfuelTicket\\Models\\CatagoryActor' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/CatagoryActor.php',
         'Mkhodroo\\AltfuelTicket\\Models\\Ticket' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/Ticket.php',
         'Mkhodroo\\AltfuelTicket\\Models\\TicketCatagory' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketCatagory.php',
         'Mkhodroo\\AltfuelTicket\\Models\\TicketComment' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketComment.php',

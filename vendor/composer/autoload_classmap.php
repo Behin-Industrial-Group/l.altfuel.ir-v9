@@ -3032,6 +3032,7 @@ return array(
     'Mkhodroo\\AltfuelTicket\\Controllers\\GetTicketController' => $baseDir . '/packages/altfuel-ticket/src/Controllers/GetTicketController.php',
     'Mkhodroo\\AltfuelTicket\\Controllers\\ShowTicketController' => $baseDir . '/packages/altfuel-ticket/src/Controllers/ShowTicketController.php',
     'Mkhodroo\\AltfuelTicket\\Controllers\\TicketCatagoryController' => $baseDir . '/packages/altfuel-ticket/src/Controllers/TicketCatagoryController.php',
+    'Mkhodroo\\AltfuelTicket\\Models\\CatagoryActor' => $baseDir . '/packages/altfuel-ticket/src/Models/CatagoryActor.php',
     'Mkhodroo\\AltfuelTicket\\Models\\Ticket' => $baseDir . '/packages/altfuel-ticket/src/Models/Ticket.php',
     'Mkhodroo\\AltfuelTicket\\Models\\TicketCatagory' => $baseDir . '/packages/altfuel-ticket/src/Models/TicketCatagory.php',
     'Mkhodroo\\AltfuelTicket\\Models\\TicketComment' => $baseDir . '/packages/altfuel-ticket/src/Models/TicketComment.php',

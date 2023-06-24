@@ -12,7 +12,7 @@ class Ticket extends Model
 
     public $table = "altfuel_tickets";
     protected $fillable = [
-        'user_id', 'cat_id', 'title', 'status', 'junk'
+        'ticket_id', 'user_id', 'cat_id', 'title', 'status', 'junk'
     ];
 
     public function comments() {

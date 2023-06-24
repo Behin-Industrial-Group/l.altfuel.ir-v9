@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketComment;
 
@@ -24,17 +26,33 @@ class GetTicketController extends Controller
         });
     }
 
-    function getByCatagory(Request $r) {
-        return Ticket::where('cat_id', $r->catagory)->get()->each(function($row){
+    function getMyTicketsByCatagory($catagory_id) {
+        if(is_array($catagory_id)){
+            return Ticket::where('user_id', Auth::id())->WhereIn('cat_id', $catagory_id)->get()->each(function($row){
+                $row->catagory = $row->catagory();
+            });
+        }
+        return Ticket::where('user_id', Auth::id())->where('cat_id', $catagory_id)->get()->each(function($row){
             $row->catagory = $row->catagory();
         });
+    }
+
+    function getByCatagory(Request $r) {
+        if(auth()->user()->access("asd")){
+            $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
+            return Ticket::where('cat_id', $r->catagory)->WhereIn('cat_id', $actors)->get()->each(function($row){
+                $row->catagory = $row->catagory();
+            });
+        }
+        return $this->getMyTicketsByCatagory($r->catagory);
+        
     }
 
     public static function get($id) {
         return Ticket::find($id);
     }
 
-    public static function findByTitleAndUser($title, $user_id) {
-        return Ticket::where('title' , $title)->where('user_id', $user_id)->first();
+    public static function findByTicketId($ticket_id) {
+        return Ticket::where('ticket_id' , $ticket_id)->first();
     }
 }
