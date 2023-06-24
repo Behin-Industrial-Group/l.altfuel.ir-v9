@@ -1,4 +1,3 @@
-
 function send_ajax_request(url, data, callback, erCallback = null){
     show_loading()
     if(erCallback == null){

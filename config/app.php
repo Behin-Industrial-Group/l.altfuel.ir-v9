@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'version' => '9.1.15',
 
     'agencies' => [
         'high-pressure' => [
