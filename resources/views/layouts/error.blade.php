@@ -11,15 +11,15 @@
     <script>
         const er = $('.error-div');
         const su = $('.success-div');
-        // function show_error(msg) {
-        //     su.fadeOut();
-        //     er.html(msg);
-        //     er.fadeIn("slow");
-        // }
-        // function show_success(msg) {
-        //     er.fadeOut();
-        //     su.html(msg);
-        //     su.fadeIn("slow");
-        // }
+        function show_error(msg) {
+            su.fadeOut();
+            er.html(msg);
+            er.fadeIn("slow");
+        }
+        function show_success(msg) {
+            er.fadeOut();
+            su.html(msg);
+            su.fadeIn("slow");
+        }
     </script>
 </div>
