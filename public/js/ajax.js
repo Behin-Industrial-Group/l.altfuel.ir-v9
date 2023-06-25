@@ -3,7 +3,7 @@ function send_ajax_request(url, data, callback, erCallback = null){
     if(erCallback == null){
         erCallback= function(data){ 
             hide_loading();
-            show_error();
+            show_error(data);
             // error_notification('<p dir="ltr">' + JSON.stringify(data) + '</p>');
         }
     }
@@ -29,7 +29,7 @@ function send_ajax_formdata_request(url, data, callback, erCallback = null){
     if(erCallback == null){
         erCallback= function(data){ 
             hide_loading();
-            error_notification('<p dir="ltr">' + JSON.stringify(data) + '</p>');
+            show_error(data)
         }
     }
     return $.ajax({
@@ -82,7 +82,7 @@ function send_ajax_get_request(url, callback, erCallback = null){
     if(erCallback == null){
         erCallback= function(data){ 
             hide_loading();
-            error_notification('<p dir="ltr">' + JSON.stringify(data) + '</p>');
+            show_error(data)
         }
     }
     return $.ajax({
@@ -106,7 +106,7 @@ function send_ajax_get_request_with_confirm(url, callback, message = "Are you su
         if(erCallback == null){
             erCallback= function(data){ 
                 hide_loading();
-                error_notification('<p dir="ltr">' + JSON.stringify(data) + '</p>');
+                show_error(data)
             }
         }
         return $.ajax({

@@ -85,7 +85,6 @@
                 },
                 function(data){
                     show_error(data);
-                    console.log(data);
                 }
             )
         }

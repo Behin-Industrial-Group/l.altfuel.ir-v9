@@ -29,9 +29,13 @@ class CreateTicketController extends Controller
         }
         $ticket->status = $this->changeStatus($ticket->cat_id);
         $ticket->save();
-        $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->id): '';
+        $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->ticket_id): '';
 
-        AddTicketCommentController::add($ticket->id, $r->text , $file_path);
+        $comment = AddTicketCommentController::add($ticket->id, $r->text , $file_path);
+        if($r->file('file')){
+            $attach = CommentAttachmentController::upload($r->file('file'), $ticket->ticket_id);
+            AddTicketCommentAttachmentController::add($comment->id, $attach);
+        }
         return response([
             'ticket' => $ticket,
             'message' => "ثبت شد"

@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{ Url('public/dist/css/persian-datepicker-0.4.5.min.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.min.css')  . '?' . config('app.version') }}" />
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     @yield('style')
 
     <script src="{{ url('public/dashboard/plugins/jquery/jquery.min.js') . '?' . config('app.version') }}"></script>
@@ -120,7 +121,14 @@
 
         <script src="{{ Url('public/green-player/js/green-audio-player.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ Url('public/green-player/js/green-audio-player.min.js')  . '?' . config('app.version') }}"></script>
+        <!-- include FilePond library -->
+        <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 
+        <!-- include FilePond plugins -->
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+
+        <!-- include FilePond jQuery adapter -->
+        <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
         
         
         <script>

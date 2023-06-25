@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
             'display_name' => $request->name,
             'email' => $request->mobile,
             'password' => Hash::make($request->password),
-            'role_id' => GetRoleController::getByName('متقاضی')->id,
+            'role_id' => GetRoleController::getByName('متقاضی')?->id,
             'showInReport' => 0
         ]);
 

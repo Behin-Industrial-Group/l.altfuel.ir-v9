@@ -22,4 +22,8 @@ class TicketComment extends Model
     function user() {
         return User::find($this->user_id);
     }
+
+    function attachments() {
+        return CommentAttachments::where('comment_id', $this->id)->get();
+    }
 }

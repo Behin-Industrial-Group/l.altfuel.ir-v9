@@ -9,8 +9,12 @@
                 </div>
                 <img class="direct-chat-img" src="{{ url('public/dashboard/dist/img/avatar5.png') }}" alt="message user image">
                 <div class="direct-chat-text">
-                    <span class="direct-chat-name {{ ($comment->user()->id === auth()->user()->id) ? 'float-right' : '' }}"">{{ $comment->user()->display_name ?? '' }}</span>
-                    <br>
+                    <div>
+                        <span class="direct-chat-name">{{ $comment->user()->display_name ?? '' }}</span>
+                        <span class="direct-chat-timestamp float-left">{{ $comment->created_at }}</span>
+                    </div>
+                    
+                    <hr>
                     {{ $comment->text ?? '' }} <br>
                     @empty(!$comment->voice)
                         <div class="green-player">
@@ -20,7 +24,10 @@
                             </audio>
                         </div>
                     @endempty
-                    <span class="direct-chat-timestamp">{{ $comment->created_at }}</span>
+                    @foreach($comment->attachments() as $attach)
+                        <a href="{{ url("$attach->file") }}" target="_blank">پیوست</a>
+                    @endforeach
+                    
                 </div>
             </div>
             <div id="end"></div>

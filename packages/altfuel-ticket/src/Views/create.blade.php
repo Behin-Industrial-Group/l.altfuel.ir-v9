@@ -25,3 +25,10 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    <script>
+        $('.filepond').filepond();
+    $('.filepond').filepond('storeAsFile', true);
+    </script>
+@endsection

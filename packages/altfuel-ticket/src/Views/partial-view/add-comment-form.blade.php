@@ -2,26 +2,42 @@
     session_start();
     $_SESSION['nonce'] = substr(str_shuffle(MD5(microtime())), 0, 10);
 @endphp
-<form action="javascript:void(0)" id="{{ $form_id ?? 'comment-form' }}">
+<form action="javascript:void(0)" id="{{ $form_id ?? 'comment-form' }}" enctype="multipart/form-data">
     @csrf
     @isset($ticket_id)
-        <input type="hidden" name="ticket_id" id="" value="{{ $ticket_id }}">
+        {{-- <input type="text" name="ticket_id" id="" value="{{ $ticket_id }}"> --}}
     @endisset
     <div class="card">
         <div class="row">
-            <div class="col-sm-3" id="voice">
-                <input type="button" class="btn" id="voice-input" value="برای ضبط نگه دارید" />
+            {{-- <div class="col-sm-3" id="voice">
+                <button class="btn btn-danger col-sm-12" id="voice-input" style="">
+                    <i class="fa fa-microphone"></i><br>
+                    برای ضبط صدا نگه دارید
+                </button>
+            </div> --}}
+            <div class="col-sm-12">
+                <div class="input-group mb-3">
                 <button class="btn btn-success" id="play-btn" style="display: none">پخش</button>
+                <textarea name="text" id="" class="form-control" rows="4" placeholder="متن پیام"></textarea>
+                    <div class="input-group-append">
+                        <div class="input-group-text" id="voice-input" style="cursor: pointer; background:rgb(207, 1, 1); color:white">
+                            <span class="fa fa-microphone" ></span>
+                        </div>
+                    </div>
+                </div>
+                <input type="file" class="filepond" name="file">
             </div>
-            <div class="col-sm-7">
-                <textarea name="text" id="" class="form-control" rows="4"></textarea>
-            </div>
-            <div class="col-sm-2 float-left">
-                <button class="btn btn-success float-left" id="submit-btn">ثبت</button>
-            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-success col-sm-12 float-left" id="submit-btn">ثبت</button>
         </div>
     </div>
 </form>
+
+<script>
+    $('.filepond').filepond();
+    $('.filepond').filepond('storeAsFile', true);
+</script>
 
 <script type="text/javascript">
     // window.nonce = "<?php echo $_SESSION['nonce']; ?>"
@@ -72,12 +88,12 @@
         const recStart = e => {
             console.log('start');
             recorder.start();
-            btn.initialValue = btn.value;
-            btn.value = "درحال ضبط...";
+            btn.initialValue = btn.innerHTML;
+            btn.innerHTML = "درحال ضبط...";
         }
         const recEnd = async e => {
             console.log('end');
-            btn.value = btn.initialValue;
+            btn.innerHTML = btn.initialValue;
             audio = await recorder.stop();
             showPlayAudioBtn();
             // audio.play();
@@ -118,8 +134,7 @@
                     if(typeof(show_comment_modal) === "function"){
                         show_comment_modal(ticket.id, ticket.title, ticket.user_id)
                     }else{
-                        
-                        // window.location = "{{ route('ATRoutes.show.listForm') }}"
+                        window.location = "{{ route('ATRoutes.show.listForm') }}"
                     }
                 },
                 function(data){
