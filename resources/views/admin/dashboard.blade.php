@@ -1,7 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row ">
+        <div class="col-md-3" style="text-align: justify;">
+            <div class="card card-danger shadow-lg" style="transition: all 0.15s ease 0s; height: inherit; width: inherit;">
+                <div class="card-header">
+                    <h3 class="card-title">قابلیت جدید تیکت پشتیبانی</h3>
+                    <div class="card-tools"></div>
+
+                </div>
+
+                <div class="card-body">
+                    *قابلیت ارسال پیام صوتی در تیکت های پشتیبانی <br>
+                    برای استفاده از این قابلیت مجوز دسترسی به میکروفن را در مرورگر خود فعال کنید
+                </div>
+
+            </div>
+
+        </div>
+    {{-- <div class="row ">
         <div class="col-sm-4">
             <div class="box box-info box-solid">
                 <div class="box-header"><h4>کد تخفیف ها</h4></div>
@@ -118,22 +134,21 @@
                     <div class="box-header"><h4>بازی</h4></div>
                     <div class="box-body">
                         {{-- <iframe src="https://www.vaajoor.ir/" frameborder="0" width="100%" height="400px"></iframe> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
+    </div>
+    </div>
+    </div>
+    </div>
 
-        
+
+
+
     </div>
     <script>
-        $.get('{{ url('admin/send-sms-3month-to-expired')}}', function(data){
+        $.get('{{ url('admin/send-sms-3month-to-expired') }}', function(data) {
             console.log(data);
-            if(data > 0){
+            if (data > 0) {
                 alert('به ' + data + 'مرکز پیامک یاداوری تمدید پروانه کسب ارسال شد.')
             }
         })
-        
-    </script>
+    </script> --}}
 @endsection
