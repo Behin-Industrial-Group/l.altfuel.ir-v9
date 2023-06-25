@@ -1,9 +1,12 @@
 function show_error(er){
     if(er.status == 403){
         toastr.error("دسترسی ندارید")
+    }
+    if(er.responseJSON){
+        toastr.error(er.responseJSON.message)
     }else{
         toastr.error("خطا");
-        toastr.error(JSON.stringify(er))
+        console.log(er);
     }
     hide_loading();
 }

@@ -54,13 +54,12 @@
                 "{{ route('login') }}",
                 $('#login-form').serialize(),
                 function(response) {
-                    console.log(response);
                     show_message("به صفحه داشبورد منتقل میشوید")
                     window.location = "{{ url('admin') }}"
                 },
                 function(response) {
-                    console.log(response);
-                    show_error(response.responseText)
+                    // console.log(response);
+                    show_error(response)
                     hide_loading();
                 }
             )

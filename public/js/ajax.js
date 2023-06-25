@@ -47,7 +47,6 @@ function send_ajax_formdata_request(url, data, callback, erCallback = null){
         error: erCallback
     })
     .done(callback)
-    .catch(erCallback);
 }
 
 function send_ajax_request_with_confirm(url, data, callback, erCallback = null, message = "Are you sure?"){
