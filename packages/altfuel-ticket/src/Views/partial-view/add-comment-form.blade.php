@@ -118,7 +118,8 @@
                     if(typeof(show_comment_modal) === "function"){
                         show_comment_modal(ticket.id, ticket.title, ticket.user_id)
                     }else{
-                        window.location = "{{ route('ATRoutes.show.listForm') }}"
+                        
+                        // window.location = "{{ route('ATRoutes.show.listForm') }}"
                     }
                 },
                 function(data){

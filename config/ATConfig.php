@@ -5,6 +5,9 @@ return [
     'route-prefix' => 'admin/',
     'ticket-uploads-folder' => '/ticket-uploads',
     'status' => [
-        'new', 'opened', 'answered', 'closed' 
+        'new' => 'جدید', 
+        'opened' => 'بازشده', 
+        'answered' => 'پاسخ داده شده', 
+        'closed' => 'بسته شده'
     ]
 ];

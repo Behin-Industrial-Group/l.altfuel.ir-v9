@@ -7,6 +7,7 @@ use App\Http\Controllers\RandomStringController;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 
 class CreateTicketController extends Controller
@@ -18,15 +19,16 @@ class CreateTicketController extends Controller
     public function store(Request $r){
         if(isset($r->ticket_id)){
             $ticket = GetTicketController::findByTicketId($r->ticket_id);
-            if(!$ticket){
-                $ticket = Ticket::create([
-                    'user_id' => Auth::id(),
-                    'ticket_id' => RandomStringController::Generate(20),
-                    'cat_id' => $r->catagory,
-                    'title' => $r->title
-                ]);
-            }
+        }else{//Create new Ticket
+            $ticket = Ticket::create([
+                'user_id' => Auth::id(),
+                'ticket_id' => RandomStringController::Generate(20),
+                'cat_id' => $r->catagory,
+                'title' => $r->title,
+            ]);
         }
+        $ticket->status = $this->changeStatus($ticket->cat_id);
+        $ticket->save();
         $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->id): '';
 
         AddTicketCommentController::add($ticket->id, $r->text , $file_path);
@@ -34,5 +36,13 @@ class CreateTicketController extends Controller
             'ticket' => $ticket,
             'message' => "ثبت شد"
         ], 200);
+    }
+
+    function changeStatus($cat_id) {
+        if(CatagoryActor::where('cat_id', $cat_id)->where('user_id', Auth::id())->first()){
+            return config('ATConfig.status.answered');
+        }else{
+            return config('ATConfig.status.new');
+        }
     }
 }
