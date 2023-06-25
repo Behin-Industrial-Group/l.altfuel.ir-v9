@@ -10,43 +10,29 @@
 		<!-- Tell the browser to be responsive to screen width -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Font Awesome -->
-		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/font-awesome/css/font-awesome.min.css') }}">
+		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/font-awesome/css/font-awesome.min.css')  . '?' . config('app.version') }}">
 		<!-- Ionicons -->
 		<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 		<!-- Theme style -->
-		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/adminlte.min.css') }}">
-		<!-- Date Picker -->
-		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/datepicker/datepicker3.css') }}">
-		<!-- Daterange picker -->
-		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/daterangepicker/daterangepicker-bs3.css') }}">
-		<!-- bootstrap wysihtml5 - text editor -->
-		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/adminlte.min.css')  . '?' . config('app.version') }}">
+		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')  . '?' . config('app.version') }}">
 		<!-- Google Font: Source Sans Pro -->
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 		<!-- bootstrap rtl -->
-		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/bootstrap-rtl.min.css') }}">
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/bootstrap-rtl.min.css')  . '?' . config('app.version') }}">
 		<!-- template rtl version -->
-		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom-style.css') }}">
-		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css') }}">
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom-style.css')  . '?' . config('app.version') }}">
+		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css')  . '?' . config('app.version') }}">
 	
-		{{-- <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css') }}"> --}}
-		<link rel="stylesheet" type="text/css" href="{{ url('public/dashboard/plugins/datatables/dataTables.bootstrap4.css') }}" />
-		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/dropzone.min.css') }}">
-		<link rel="stylesheet" href="{{ url('public/leaflet/leaflet.css') }}"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-		<link rel="stylesheet" href="{{ Url('public/dist/css/persian-datepicker-0.4.5.min.css') }}" />
-		<link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css') }}" />
-		<link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.min.css') }}" />
 		@yield('style')
 	
-		<script src="{{ url('public/dashboard/plugins/jquery/jquery.min.js') }}"></script>
-		<script src="{{ url('public/dashboard/plugins/datatables/jquery.dataTables.js') }}"></script>
-		<script src="{{ url('public/dashboard/plugins/datatables/dataTables.bootstrap4.js') }}"></script>
+		<script src="{{ url('public/dashboard/plugins/jquery/jquery.min.js')  . '?' . config('app.version') }}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	
-		<script src="{{ url('public/js/ajax.js') }}"></script>
-		<script src="{{ url('public/js/dataTable.js') }}"></script>
-		<script src="{{ url('public/js/dropzone.js') }}"></script>
+		<script src="{{ url('public/js/ajax.js')  . '?' . config('app.version') }}"></script>
+		<script src="{{ url('public/js/dataTable.js')  . '?' . config('app.version') }}"></script>
+		<script src="{{ url('public/js/dropzone.js')  . '?' . config('app.version') }}"></script>
 		
 	</head>
 <body>
@@ -63,9 +49,9 @@
 	<div id="dropDownSelect1"></div>
 	
 	<!--===============================================================================================-->
-	<script src="{{ url('public/js/loader.js') }}"></script>
-	<script src="{{ url('public/js/clearcach.js') }}"></script>
-	<script src="{{ url('public/js/scripts.js') }}"></script>
+	<script src="{{ url('public/js/loader.js')  . '?' . config('app.version') }}"></script>
+	<script src="{{ url('public/js/clearcach.js')  . '?' . config('app.version') }}"></script>
+	<script src="{{ url('public/js/scripts.js')  . '?' . config('app.version') }}"></script>
 
 	@yield('script')
 </body>
