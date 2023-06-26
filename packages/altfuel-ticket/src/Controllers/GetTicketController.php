@@ -38,7 +38,7 @@ class GetTicketController extends Controller
     }
 
     function getByCatagory(Request $r) {
-        if(auth()->user()->access("asd")){
+        if(auth()->user()->access("Ticket-Actors")){
             $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
             return Ticket::where('cat_id', $r->catagory)->WhereIn('cat_id', $actors)->get()->each(function($row){
                 $row->catagory = $row->catagory();
