@@ -38,11 +38,8 @@
 </form>
 
 <script>
-    $('.filepond').filepond({
-        acceptedFileTypes: ['image/png']
-    });
+    $('.filepond').filepond();
     $('.filepond').filepond('storeAsFile', true);
-    $('.filepond').filepond('acceptedFileTypes', ['image/png']);
 </script>
 
 <script type="text/javascript">
