@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
+use Mkhodroo\AltfuelTicket\Requests\TicketRequest;
 
 class CreateTicketController extends Controller
 {
@@ -16,7 +17,7 @@ class CreateTicketController extends Controller
         return view('ATView::create');
     }
 
-    public function store(Request $r){
+    public function store(TicketRequest $r){
         if(isset($r->ticket_id)){
             $ticket = GetTicketController::findByTicketId($r->ticket_id);
         }else{//Create new Ticket

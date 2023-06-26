@@ -5,7 +5,7 @@
 <form action="javascript:void(0)" id="{{ $form_id ?? 'comment-form' }}" enctype="multipart/form-data">
     @csrf
     @isset($ticket_id)
-        {{-- <input type="text" name="ticket_id" id="" value="{{ $ticket_id }}"> --}}
+        <input type="hidden" name="ticket_id" id="" value="{{ $ticket_id }}">
     @endisset
     <div class="card">
         <div class="row">
