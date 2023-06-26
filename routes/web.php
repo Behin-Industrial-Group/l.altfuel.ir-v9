@@ -110,9 +110,9 @@ Route::any('/irobot', [IssuesRobotController::class, 'getRequest']);
 Route::get( '/issues', function(){
     return view('ticket');
 });
-Route::get( '/issues/{id}', [IssuesController::class, 'issuesCatagoryForm']);
-Route::get( '/issues/survay/{id}', [IssuesController::class, 'SetSurvay']);
-Route::post( '/issues', [IssuesController::class, 'Register']);
+// Route::get( '/issues/{id}', [IssuesController::class, 'issuesCatagoryForm']);
+// Route::get( '/issues/survay/{id}', [IssuesController::class, 'SetSurvay']);
+// Route::post( '/issues', [IssuesController::class, 'Register']);
 
 Route::get('/answer', [IssuesController::class, 'answerform']);
 Route::post('/answer', [IssuesController::class, 'showanswer']);
