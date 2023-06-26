@@ -20,8 +20,11 @@
                 <button class="btn btn-success" id="play-btn" style="display: none">پخش</button>
                 <textarea name="text" id="" class="form-control" rows="4" placeholder="متن پیام"></textarea>
                     <div class="input-group-append">
-                        <div class="input-group-text" id="voice-input" style="cursor: pointer; background:rgb(207, 1, 1); color:white">
-                            <span class="fa fa-microphone" ></span>
+                        <div class="input-group-text" id="voice-input" style="cursor: pointer; background:rgb(207, 1, 1); color:white; text-align: center">
+                            <span class="fa fa-microphone" ></span><br>
+                            <span style="writing-mode: vertical-lr;">
+                                نگه دارید
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -35,8 +38,11 @@
 </form>
 
 <script>
-    $('.filepond').filepond();
+    $('.filepond').filepond({
+        acceptedFileTypes: ['image/png']
+    });
     $('.filepond').filepond('storeAsFile', true);
+    $('.filepond').filepond('acceptedFileTypes', ['image/png']);
 </script>
 
 <script type="text/javascript">

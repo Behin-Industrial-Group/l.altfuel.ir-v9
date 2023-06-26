@@ -107,7 +107,9 @@ Route::get( '/shopinglable/verify', [ShopingController::class, 'verify']);
 
 Route::any('/irobot', [IssuesRobotController::class, 'getRequest']);
 
-Route::get( '/issues', [IssuesController::class, 'selectIssuesCatagoryForm']);
+Route::get( '/issues', function(){
+    return view('ticket');
+});
 Route::get( '/issues/{id}', [IssuesController::class, 'issuesCatagoryForm']);
 Route::get( '/issues/survay/{id}', [IssuesController::class, 'SetSurvay']);
 Route::post( '/issues', [IssuesController::class, 'Register']);

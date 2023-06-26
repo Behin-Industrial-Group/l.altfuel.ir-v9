@@ -134,15 +134,15 @@
                     <div class="box-header"><h4>بازی</h4></div>
                     <div class="box-body">
                         {{-- <iframe src="https://www.vaajoor.ir/" frameborder="0" width="100%" height="400px"></iframe> --}}
+    {{-- </div>
     </div>
     </div>
-    </div>
-    </div>
+    </div> --}}
 
 
 
 
-    </div>
+    {{-- </div>
     <script>
         $.get('{{ url('admin/send-sms-3month-to-expired') }}', function(data) {
             console.log(data);

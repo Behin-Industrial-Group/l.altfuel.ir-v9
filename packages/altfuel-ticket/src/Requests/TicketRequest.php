@@ -29,9 +29,17 @@ class TicketRequest extends FormRequest
      */
     public function rules()
     {
-        if(!$this->input('text') and !$this->file('payload') and !$this->file('file')){
+        // throw ValidationException::withMessages([
+        //     'title' => $this->file('file')->getClientMimeType(),
+        // ]);
+        if(!$this->input('text') and !$this->file('payload')){
             throw ValidationException::withMessages([
-                'title' => "متن یا صدا یا پیوست را تکمیل کنید",
+                'title' => "متن یا صدا را تکمیل کنید",
+            ]);
+        }
+        if(!in_array($this->file('file')->getClientMimeType(), ['image/png'] )){
+            throw ValidationException::withMessages([
+                'title' => "فایل پشتیبانی نمیشود",
             ]);
         }
         if(!$this->input('ticket_id')){
