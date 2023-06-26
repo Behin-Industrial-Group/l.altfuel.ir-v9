@@ -1,7 +1,4 @@
-@php
-    session_start();
-    $_SESSION['nonce'] = substr(str_shuffle(MD5(microtime())), 0, 10);
-@endphp
+
 <form action="javascript:void(0)" id="{{ $form_id ?? 'comment-form' }}" enctype="multipart/form-data">
     @csrf
     @isset($ticket_id)
@@ -43,7 +40,6 @@
 </script>
 
 <script type="text/javascript">
-    // window.nonce = "<?php echo $_SESSION['nonce']; ?>"
     // courtesy https://medium.com/@bryanjenningz/how-to-record-and-play-audio-in-javascript-faa1b2b3e49b
     var recordAudio = () => {
         audio = '';
