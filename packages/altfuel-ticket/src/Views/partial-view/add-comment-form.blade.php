@@ -6,6 +6,10 @@
     @endisset
     <div class="card">
         <div class="row">
+            <div class="alert alert-danger">
+                با عرض پوزش بدلیل مشکل فنی امکان آپلود فایل پیوست وجود ندارد. <br>
+                درحال رفع مشکل هستیم. از صبر و شکیبایی شما سپاس گذاریم.
+            </div>
             {{-- <div class="col-sm-3" id="voice">
                 <button class="btn btn-danger col-sm-12" id="voice-input" style="">
                     <i class="fa fa-microphone"></i><br>
