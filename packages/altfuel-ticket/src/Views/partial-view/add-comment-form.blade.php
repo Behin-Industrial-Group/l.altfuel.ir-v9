@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                پیوست: فایل های مجاز {{ implode(",", config('ATConfig.attachment-file-types-translate')) }}
+                پیوست: فایل های مجاز {{ json_encode(config('ATConfig.attachment-file-types-translate')) }}
                 <input type="file" class="filepond" name="file">
             </div>
         </div>
