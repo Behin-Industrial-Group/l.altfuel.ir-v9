@@ -24,6 +24,7 @@ class CommentAttachmentController extends Controller
 
 
     public static function upload($file, $ticket_id) {
+        Log::info("upload method " . $file);
         $name = RandomStringController::Generate() . '.' . $file->getClientOriginalExtension();
         $full_path = public_path(config('ATConfig.ticket-uploads-folder'))  . "/$ticket_id";
         if ( ! is_dir($full_path)) {
