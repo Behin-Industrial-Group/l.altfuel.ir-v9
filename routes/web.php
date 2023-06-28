@@ -15,6 +15,7 @@ use App\Models\Workshop;
 use App\Repository\RGenCode;
 use App\Repository\RReport;
 use App\Repository\RSendExpSms;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Translation\MessageCatalogue;
@@ -46,15 +47,11 @@ Route::get('/migrate', function(){
 });
 
 Route::get('test', function(){
-    $admin = Role::find(1);
-    $methods = Method::get();
-    foreach($methods as $method){
-        Access::create([
-            'role_id' => $admin->id,
-            'method_id' => $method->id,
-            'access' => 1
-        ]);
-    }
+    return view('test');
+})->name('test');
+
+Route::post('test', function(Request $r){
+    return $r->file('file');
 })->name('test');
 
 
