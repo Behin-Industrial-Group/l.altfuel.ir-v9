@@ -48,6 +48,11 @@ class RegisterRequest extends FormRequest
                 'mobile' => "شماره موبایل باید 11 رقم باشد"
             ]);
         }
+        if(strlen($this->input('password')) < 8){
+            throw ValidationException::withMessages([
+                'password' => "رمز عبور باید بیشتر از 8 کارکتر باشد"
+            ]);
+        }
         for($i=0; $i < strlen($this->input('mobile')); $i++){
             if(!is_int( $this->input('mobile')[$i])){
                 throw ValidationException::withMessages([
