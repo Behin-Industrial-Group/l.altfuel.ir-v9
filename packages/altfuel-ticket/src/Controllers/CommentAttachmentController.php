@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketComment;
 
@@ -29,9 +30,8 @@ class CommentAttachmentController extends Controller
             mkdir($full_path);
         }
         $full_name = $full_path . '/' . $name;
-        $a = move_uploaded_file($file, $full_name);
-        Log::info($a);
-        Log::info($full_name);
+        
+        Log::info(Storage::put($name, 'content'));
         $return_path = "/public". config('ATConfig.ticket-uploads-folder') . "/$ticket_id/$name";
         return $return_path;
     }
