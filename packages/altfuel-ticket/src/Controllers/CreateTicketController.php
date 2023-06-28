@@ -7,6 +7,7 @@ use App\Http\Controllers\RandomStringController;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Requests\TicketRequest;
@@ -33,6 +34,8 @@ class CreateTicketController extends Controller
         $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->ticket_id): '';
 
         $comment = AddTicketCommentController::add($ticket->id, $r->text , $file_path);
+        Log::info("upload method " . $r->file('file'));
+
         if($r->file('file')){
             $attach = CommentAttachmentController::upload($r->file('file'), $ticket->ticket_id);
             AddTicketCommentAttachmentController::add($comment->id, $attach);
