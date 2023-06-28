@@ -31,6 +31,7 @@ class CommentAttachmentController extends Controller
         $full_name = $full_path . '/' . $name;
         $a = move_uploaded_file($file, $full_name);
         Log::info($a);
+        Log::info($full_name);
         $return_path = "/public". config('ATConfig.ticket-uploads-folder') . "/$ticket_id/$name";
         return $return_path;
     }
