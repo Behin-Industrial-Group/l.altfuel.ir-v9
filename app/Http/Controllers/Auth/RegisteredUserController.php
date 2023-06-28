@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\CustomClasses\Access;
 use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Validation\ValidationException;
 use Mkhodroo\UserRoles\Controllers\GetRoleController;
 use Mkhodroo\UserRoles\Models\Role;
 
@@ -38,16 +39,7 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request)
     {
-        // $access = Access::check('register-user');
-        // return $request->mobile;
-        if(User::where('email', $request->mobile)->first()){
-            return response("شماره موبایل تکراری", 402);
-        }
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'mobile' => 'required|string|max:11',
-        //     'password' => 'required|string|min:8',
-        // ]);
+        
 
         $user = User::create([
             'name' => $request->name,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -54,17 +55,18 @@ class RegisterRequest extends FormRequest
             ]);
         }
         for($i=0; $i < strlen($this->input('mobile')); $i++){
-            if(!is_int( $this->input('mobile')[$i])){
+            if(!is_numeric( $this->input('mobile')[$i])){
                 throw ValidationException::withMessages([
                     'mobile' => "لطفا موبایل را با اعداد انگلیسی وارد کنید"
                 ]);
             }
         }
+        if(User::where('email', $this->input('mobile'))->first()){
+            return throw ValidationException::withMessages([
+                'mobile' => "شماره موبایل تکراری است"
+            ]);
+        }
         return [];
-        
-    }
-
-    public function messages(){
         
     }
 }
