@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\CustomClasses\Access;
+use App\Http\Requests\Auth\RegisterRequest;
 use Mkhodroo\UserRoles\Controllers\GetRoleController;
 use Mkhodroo\UserRoles\Models\Role;
 
@@ -35,7 +36,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
         // $access = Access::check('register-user');
         // return $request->mobile;

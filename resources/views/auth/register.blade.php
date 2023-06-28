@@ -66,7 +66,7 @@
                 },
                 function(response) {
                     console.log(response);
-                    show_error(response.responseText)
+                    show_error(response)
                     hide_loading()
                 }
             )
