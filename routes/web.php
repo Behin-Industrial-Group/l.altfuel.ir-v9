@@ -47,7 +47,14 @@ Route::get('/migrate', function(){
 });
 
 Route::get('test', function(){
-    return view('test');
+    $inipath = php_ini_loaded_file();
+
+if ($inipath) {
+    return 'Loaded php.ini: ' . $inipath;
+} else {
+   return 'A php.ini file is not loaded';
+}
+    // return view('test');
 })->name('test');
 
 Route::post('test', function(Request $r){
