@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 پیوست: فایل های مجاز {{ json_encode(config('ATConfig.attachment-file-types-translate')) }}
-                <input type="file" class="filepond" name="file">
+                <input type="file"  name="file">
             </div>
         </div>
         <div class="row" onclick="submit()">
@@ -170,11 +170,12 @@
             function(response){
                 ticket = response.ticket;
                 show_message(response.message)
+                show_message("لطفا منتظر بمانید")
                 console.log(response);
                 if(typeof(show_comment_modal) === "function"){
                     show_comment_modal(ticket.id, ticket.title, ticket.user_id)
                 }else{
-                    // window.location = "{{ route('ATRoutes.show.listForm') }}"
+                    window.location = "{{ route('ATRoutes.show.listForm') }}"
                 }
             },
             function(data){
