@@ -51,6 +51,10 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+        'ticket' => [
+            'driver' => 'local',
+            'root' => public_path('ticket-uploads'),
+        ],
 
     ],
 

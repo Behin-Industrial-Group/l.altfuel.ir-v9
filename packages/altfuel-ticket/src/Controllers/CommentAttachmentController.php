@@ -31,8 +31,8 @@ class CommentAttachmentController extends Controller
         }
         $full_name = $full_path . '/' . $name;
         
-        Log::info(Storage::put($name, 'content'));
-        $return_path = "/public". config('ATConfig.ticket-uploads-folder') . "/$ticket_id/$name";
+        $a = Storage::disk('ticket')->put($ticket_id,$file);
+        $return_path = "/public". config('ATConfig.ticket-uploads-folder') . "/$a";
         return $return_path;
     }
 }
