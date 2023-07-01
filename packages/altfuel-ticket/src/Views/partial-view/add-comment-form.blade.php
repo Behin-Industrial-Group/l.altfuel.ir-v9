@@ -18,7 +18,7 @@
                         </div> --}}
                     </div>
                 </div>
-                <div class="col-sm-4 float-left">
+                <div class="col-sm-4 float-left" style="font-size: 15px">
                     پیوست: فایل های مجاز {{ json_encode(config('ATConfig.attachment-file-types-translate')) }}
                     <input type="file" name="file" class="filepond">
                 </div>

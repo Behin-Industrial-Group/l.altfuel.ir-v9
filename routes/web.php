@@ -46,21 +46,6 @@ Route::get('/migrate', function(){
     Artisan::call('migrate');
 });
 
-Route::get('test', function(){
-    $inipath = php_ini_loaded_file();
-
-if ($inipath) {
-    return 'Loaded php.ini: ' . $inipath;
-} else {
-   return 'A php.ini file is not loaded';
-}
-    // return view('test');
-})->name('test');
-
-Route::post('test', function(Request $r){
-    return $r->file('file');
-})->name('test');
-
 
 Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sms']);
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);
