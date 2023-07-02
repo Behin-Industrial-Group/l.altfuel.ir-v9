@@ -58,7 +58,9 @@
                 {data: 'catagory.name'},
                 {data: 'status'},
                 {data: 'updated_at'}
-            ]
+            ],
+            null,
+            [4 ,'desc']
         );
 
         send_ajax_get_request(
@@ -70,7 +72,9 @@
 
         table.on('click', 'tr', function(){
             var data = table.row( this ).data();
-            show_comment_modal(data.id, data.title, data.user_id);
+            if(data != undefined){
+                show_comment_modal(data.id, data.title, data.user_id);
+            }
         })
         function show_comment_modal(ticket_id, title ,user){
             var fd = new FormData();

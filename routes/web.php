@@ -50,7 +50,6 @@ Route::get('/migrate', function(){
 Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sms']);
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);
 
-
 Route::get('/GenCode/{type}/{province}', function($type,$province){
     $a = new RGenCode($province);
     if($type === 'markaz1')

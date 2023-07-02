@@ -3,7 +3,7 @@
 return [
 
     'messages'=>[
-        'reset-password' => "کد تایید شما جهت بازیابی رمز عبور: ",
+        'reset-password' => "Code: :code \n کد تایید شما جهت بازیابی رمز عبور: :code",
     ],
 
     /*

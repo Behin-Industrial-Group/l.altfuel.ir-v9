@@ -44,9 +44,13 @@
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary col-sm-12" onclick="submit()">ثبت نام</button>
                 </div>
-
+                <hr>
                 <div style="text-align: center">
                     <a href="{{ route('login') }}" class="text-center">صفحه ورود</a>
+                </div>
+                <hr>
+                <div class="center-align" style="text-align: center">
+                    <a href="{{ route('password.request') }}" class="text-center">فراموشی رمز</a>
                 </div>
             </div>
 

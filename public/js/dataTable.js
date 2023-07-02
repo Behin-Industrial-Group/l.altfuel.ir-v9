@@ -1,4 +1,4 @@
-function create_datatable(element_id, url ='', cols, rowCallback = null){
+function create_datatable(element_id, url ='', cols, rowCallback = null, order= [0, 'desc']){
     if (rowCallback == null){
         rowCallback = function(){
 
@@ -6,7 +6,7 @@ function create_datatable(element_id, url ='', cols, rowCallback = null){
     }
     return table = $(`#${element_id}`).DataTable({
         dom: 'Bfrtip',
-        order: [[0, 'desc']],
+        order: [order],
         ajax: {
             url: url,
         },

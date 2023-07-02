@@ -43,7 +43,7 @@ class PasswordResetLinkController extends Controller
         ]);
         if($user = User::where('email', $r->mobile)->first()){
             $code = rand(10000, 99999);
-            $sendSmsResult = $sms->send($r->mobile, config('auth.messages.reset-password'). $code);
+            $sendSmsResult = $sms->send($r->mobile, str_replace(':code', $code, config('auth.messages.reset-password')));
             $user->reset_code = $code;
             $user->save();
             return true;
