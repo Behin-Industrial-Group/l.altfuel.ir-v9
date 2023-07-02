@@ -60,7 +60,7 @@
                 {data: 'updated_at'}
             ],
             null,
-            [4 ,'desc']
+            [3 ,'asc']
         );
 
         send_ajax_get_request(
