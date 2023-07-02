@@ -40,6 +40,10 @@
             <div class="center-align" style="text-align: center">
                 <a href="{{ route('register') }}" class="text-center">صفحه ثبت نام</a>
             </div>
+            <hr>
+            <div class="center-align" style="text-align: center">
+                <a href="{{ route('password.request') }}" class="text-center">فراموشی رمز</a>
+            </div>
         </div>
 
     </div>

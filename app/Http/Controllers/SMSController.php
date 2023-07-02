@@ -55,7 +55,7 @@ class SMSController extends Controller
         $result = json_decode($result);
         if(isset($result->data[0]->serverId))
             return 'ok';
-        return $result;
+        return 'not ok';
     }
 
     public function send_multiple(array $messages)

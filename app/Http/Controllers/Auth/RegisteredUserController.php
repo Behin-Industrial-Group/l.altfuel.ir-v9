@@ -40,7 +40,6 @@ class RegisteredUserController extends Controller
     public function store(RegisterRequest $request)
     {
         
-
         $user = User::create([
             'name' => $request->name,
             'display_name' => $request->name,

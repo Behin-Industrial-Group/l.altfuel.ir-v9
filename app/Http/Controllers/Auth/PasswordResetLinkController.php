@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\SMSController;
+use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 
 class PasswordResetLinkController extends Controller
@@ -18,6 +22,11 @@ class PasswordResetLinkController extends Controller
         return view('auth.forgot-password');
     }
 
+    public function sendCode(Request $r, SMSController $sms)
+    {
+        
+    }
+
     /**
      * Handle an incoming password reset link request.
      *
@@ -26,22 +35,16 @@ class PasswordResetLinkController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $r, SMSController $sms)
     {
-        $request->validate([
-            'email' => 'required|email',
+        $r->validate([
+            'mobile' => 'required',
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-
-        return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+        $code = rand(10000, 99999);
+        $sendSmsResult = $sms->send($r->mobile, config('auth.messages.reset-password'). $code);
+        $user = User::where('email', $r->mobile)->first();
+        $user->reset_code = $code;
+        $user->save();
     }
 }

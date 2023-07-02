@@ -24,7 +24,8 @@ class User extends Authenticatable
         'level',
         'display_name',
         'showInReport', 
-        'role_id'
+        'role_id', 
+        'reset_code'
     ];
 
     /**
