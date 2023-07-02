@@ -46,7 +46,7 @@ class PasswordResetLinkController extends Controller
             $sendSmsResult = $sms->send($r->mobile, config('auth.messages.reset-password'). $code);
             $user->reset_code = $code;
             $user->save();
-            Log::info($user);
+            return true;
         }
         return throw ValidationException::withMessages([
             'mobile' => 'کاربر یافت نشد. ابتدا ثبت نام کنید'
