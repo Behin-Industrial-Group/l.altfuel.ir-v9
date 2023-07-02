@@ -21,7 +21,7 @@
                     <button type="submit" class="btn btn-primary col-sm-12" onclick="send_code()">ارسال کد</button>
                 </div>
                 <div class="input-group mb-3" style="display: none" id="code-input">
-                    <input type="password" class="form-control" name="reset_code" placeholder="کدپیامک شده">
+                    <input type="text" class="form-control" name="reset_code" placeholder="کدپیامک شده">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fa fa-check"></span>
