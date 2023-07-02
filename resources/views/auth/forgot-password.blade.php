@@ -24,7 +24,7 @@
                     <input type="password" class="form-control" name="reset_code" placeholder="کدپیامک شده">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fa fa-lock"></span>
+                            <span class="fa fa-check"></span>
                         </div>
                     </div>
                 </div>
