@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
 
 class PasswordResetLinkController extends Controller
 {
@@ -42,10 +43,13 @@ class PasswordResetLinkController extends Controller
         ]);
         if($user = User::where('email', $r->mobile)->first()){
             $code = rand(10000, 99999);
-            $sendSmsResult = $sms->send($r->mobile, config('auth.messages.reset-password'). $code);
+            // $sendSmsResult = $sms->send($r->mobile, config('auth.messages.reset-password'). $code);
             $user->reset_code = $code;
             $user->save();
+            Log::info($user);
         }
-        
+        return throw ValidationException::withMessages([
+            'mobile' => 'کاربر یافت نشد. ابتدا ثبت نام کنید'
+        ]);
     }
 }
