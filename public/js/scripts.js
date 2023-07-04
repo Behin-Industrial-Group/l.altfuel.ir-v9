@@ -14,3 +14,17 @@ function show_error(er){
 function show_message(msg = "انجام شد" ){
     toastr.success(msg);
 }
+
+function camaSeprator(className){
+    $('.'+ className).on('keyup', function(){
+        $(this).val(parseInt($(this).val().replace(/,/g, '')).toLocaleString())
+    })
+}
+
+function runCamaSeprator(className){
+    $('.'+ className).each(function(){
+        if($(this).val()){
+            $(this).val(parseInt($(this).val().replace(/,/g, '')).toLocaleString())
+        }
+    })
+}

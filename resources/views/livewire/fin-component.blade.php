@@ -29,7 +29,7 @@
                         <td>
                             <input 
                                 type="text" 
-                                class="form-control" 
+                                class="form-control price" 
                                 name="{{$item['name']}}[price]" 
                                 value="{{ $results->where('name', $item['name'])->first()->price ?? '' }}"
                                 id="">
@@ -163,6 +163,7 @@
             "{{ route('fin-info.edit') }}",
             $('#fin-form').serialize(),
             function(data){
+                console.log(data);
                 toastr.success("اطلاعات مالی مرکز ویرایش شد")
             },
             function(data){
@@ -171,4 +172,7 @@
             }
         )
     }
+
+    camaSeprator('price');
+    runCamaSeprator('price');
 </script>

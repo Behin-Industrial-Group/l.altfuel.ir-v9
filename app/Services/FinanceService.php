@@ -45,7 +45,7 @@ class FinanceService implements FinanceServiceInterface
                     'name' => $name
                 ],
                 [
-                    'price' => $request->$name['price'],
+                    'price' => str_replace(",", "", $request->$name['price']) ,
                     'pay_date' => $request->$name['pay_date'],
                     'ref_id' => $request->$name['ref_id'],
                 ]
@@ -62,7 +62,7 @@ class FinanceService implements FinanceServiceInterface
                     'name' => $name
                 ],
                 [
-                    'price' => $request->$name['price'],
+                    'price' => str_replace(",", "", $request->$name['price']) ,
                     'pay_date' => $request->$name['pay_date'],
                     'ref_id' => $request->$name['ref_id'],
                 ]
@@ -75,6 +75,7 @@ class FinanceService implements FinanceServiceInterface
         $agency_table = config("app.agencies.$agency.table");
         $data = $r->only(['debt', 'debt_description', 'FinGreen', 'FinDetails']);
         $data['FinGreen'] = ($r->FinGreen) ? 'ok' : 'not ok';
+        $data['debt'] = str_replace(",", "", $r->debt); 
         return DB::table($agency_table)->where('id',$agency_id)->update($data);
     }
 
