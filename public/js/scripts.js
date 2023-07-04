@@ -17,7 +17,9 @@ function show_message(msg = "انجام شد" ){
 
 function camaSeprator(className){
     $('.'+ className).on('keyup', function(){
-        $(this).val(parseInt($(this).val().replace(/,/g, '')).toLocaleString())
+        if($(this).val()){
+            $(this).val(parseInt($(this).val().replace(/,/g, '')).toLocaleString())
+        }
     })
 }
 
