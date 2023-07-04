@@ -58,7 +58,7 @@
                             {{__($item['fa_name'])}}
                             <input 
                                 type="hidden"
-                                class="form-control" 
+                                class="form-control price" 
                                 name="{{$item['name']}}[name]" 
                                 value="{{ $results->where('name', $item['name'])->first()->name ?? $item['name'] }}"
                                 id=""
