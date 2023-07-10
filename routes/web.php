@@ -52,7 +52,7 @@ Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::clas
 
 Route::get('/GenCode/{type}/{province}', function($type,$province){
     $a = new RGenCode($province);
-    if($type === 'markaz1')
+    if($type === 'marakez1')
         return $a->Markaz();
     if($type === 'hidro')
         return $a->Hidro();

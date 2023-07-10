@@ -129,10 +129,12 @@ function send_ajax_get_request_with_confirm(url, callback, message = "Are you su
 }
 
 function show_loading(){
+    $('body').css('cursor', 'wait');
     $('#preloader').show();
 }
 
 function hide_loading(){
+    $('body').css('cursor', 'auto');
     $('#preloader').hide();
 }
 
