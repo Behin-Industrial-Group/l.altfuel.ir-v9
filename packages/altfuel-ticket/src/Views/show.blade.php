@@ -1,5 +1,6 @@
 <div class="row">
-    {{ $ticket->user()->display_name }}
+    {{ $ticket->user()->display_name }} <br>
+    شماره همراه:  {{ $ticket->user()->email ?? '' }}
 </div>
 <div class="direct-chat-messages" style="height: 500px">
     @foreach ($ticket->comments() as $comment)
