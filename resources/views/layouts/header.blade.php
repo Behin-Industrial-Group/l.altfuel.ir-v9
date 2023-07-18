@@ -47,6 +47,11 @@ use App\CustomClasses\Access;
           <a href="{{url('admin/messages/list')}}" class="dropdown-item dropdown-footer">نمایش تماام پیام ها</a>
         </div>
       </li>
+      <li class="">
+        <a class="" href="{{ route('logout')}}">
+          <button class="btn btn-danger">خروج</button>
+        </a>
+      </li>
     </ul>
   </nav>
 
