@@ -3,25 +3,16 @@
 @section('content')
     @include('includes.success')
     <div class="box table-responsive">
-        <form action="javascript:void(0)">
+        <form action="javascript:void(0)" id="sms-form">
             <table class="table table-striped" id="">
                 <tr>
                     <td>شماره موبایل:</td>
                     <td><input type="text" name="to" id="" class="form-control"></td>
                 </tr>
                 <tr>
-                    <td>رمز عبور جدید: </td>
-                    <td><input type="text" name="newpass" id="" class="form-control"></td>
-                </tr>
-                <tr>
                     <td>متن پیامک: </td>
                     <td>
-                        <textarea name="msg" id="" class="form-control" cols="30" rows="10" readonly>رمز عبور شما جهت ورود به سامانه صدور پرانه کسب تغییر کرد
-نام کابری: کدملی
-رمز عبور جدید: 
-لینک ورود به سامانه:
-https://bpms.altfuel.ir
-اتحادیه کشوری سوخت های جایگزین
+                        <textarea name="msg" id="" class="form-control" cols="30" rows="10" >
                         </textarea>
                     </td>
                 </tr>
@@ -40,10 +31,7 @@ https://bpms.altfuel.ir
 
         $('#send_newpass_sms').click(function(){
             $('#loading').show();
-            var fd = {
-                "to": $('input[name="to"]').val(),
-                "newpass": $('input[name="newpass"]').val(),
-            };
+            var fd = $('#sms-form').serialize();
             var send_url = "{{url('admin/send-sms')}}";
             $.ajax({
                 url: send_url,

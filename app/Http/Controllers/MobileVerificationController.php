@@ -51,13 +51,9 @@ class MobileVerificationController extends Controller
         $to = $this->check_mobile($request->to);
         if(!$to)
             return 'شماره موبایل نامعتبر';
-        $code = $this->save_code($to);
-        $msg = "رمز عبور شما جهت ورود به سامانه صدور پرانه کسب تغییر کرد
-نام کاربری: کدملی
-رمز عبور جدید: $request->newpass
-لینک ورود به سامانه:
-https://bpms.altfuel.ir
-اتحادیه کشوری سوخت های جایگزین";
+        // $code = $this->save_code($to);
+        $msg = "$request->msg
+        اتحادیه کشوری سوخت های جایگزین";
 
         $send_sms = $this->sms->send($to, $msg);
         if($send_sms !== 'ok')
