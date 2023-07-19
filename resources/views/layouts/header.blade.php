@@ -14,7 +14,7 @@ use App\CustomClasses\Access;
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">تماس</a>
       </li> --}}
-      @if(Access::checkView('send_sms'))
+      @if ( auth()->user()->access('send-sms') )
           <li class="nav-item d-none d-sm-inline-block">
               <a href="{{ url('admin/send-sms') }}" class="nav-link">
                   ارسال پیامک
