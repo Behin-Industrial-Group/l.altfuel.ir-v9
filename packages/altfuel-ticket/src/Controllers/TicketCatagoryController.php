@@ -17,7 +17,9 @@ class TicketCatagoryController extends Controller
     }
 
     function getChildrenByParentId($parent_id = null) {
-        return TicketCatagory::where('parent_id', $parent_id)->get();
+        return TicketCatagory::where('parent_id', $parent_id)->get()->each(function($row){
+            $row->count = $row->countNews();
+        });
     }
 
     function getAllParent() {

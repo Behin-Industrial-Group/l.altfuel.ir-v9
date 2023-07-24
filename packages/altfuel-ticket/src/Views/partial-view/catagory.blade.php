@@ -29,8 +29,9 @@
                 url,
                 function(data){
                     child_cat.html('');
+                    console.log(data);
                     data.forEach(element => {
-                        child_cat.append(new Option(element.name, element.id))
+                        child_cat.append(new Option(element.name + `@if(auth()->user()->access("new-tickets-counter")) - ${element.count}  @endif`, element.id))
                     });
                 }
             )
