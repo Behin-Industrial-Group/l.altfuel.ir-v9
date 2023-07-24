@@ -12,8 +12,7 @@
                 <tr>
                     <td>متن پیامک: </td>
                     <td>
-                        <textarea name="msg" id="" class="form-control" cols="30" rows="10" >
-                        </textarea>
+                        <textarea name="msg" id="" class="form-control" cols="30" rows="10" ></textarea>
                     </td>
                 </tr>
                 <tr>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\SmsLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class SMSController extends Controller
@@ -53,8 +55,10 @@ class SMSController extends Controller
         $result = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($result);
-        if(isset($result->data[0]->serverId))
+        if(isset($result->data[0]->serverId)){
+            SmsLog::set(Auth::user(), $to, $msg);
             return 'ok';
+        }
         return 'not ok';
     }
 
