@@ -21,6 +21,7 @@
             getChildrenByParentId($(this).val())
             $('.parent-cat').val($(this).val())
         })
+        var count;
         function getChildrenByParentId(parentId){
             var url = "{{ route('ATRoutes.catagory.getChildrenByParentId', ['parent_id' => 'parent_id']) }}";
             url = url.replace('parent_id', parentId)
@@ -29,9 +30,31 @@
                 url,
                 function(data){
                     child_cat.html('');
-                    console.log(data);
                     data.forEach(element => {
-                        child_cat.append(new Option(element.name + `@if(auth()->user()->access("new-tickets-counter")) - ${element.count}  @endif`, element.id))
+                        `@if(auth()->user()->access("new-tickets-counter"))
+                        ${
+                        send_ajax_get_request(
+                            `{{ route("ATRoutes.catagory.count") }}/${element.id}`,
+                            function(count){
+                                child_cat.append(
+                                    new Option(
+                                        element.name + ' - ' +  count, 
+                                        element.id
+                                    )
+                                )
+                            }
+                        )}
+                        @else
+                        ${
+                            child_cat.append(
+                                new Option(
+                                    element.name, 
+                                    element.id
+                                )
+                            )
+                        }
+                        @endif`
+                        
                     });
                 }
             )

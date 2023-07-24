@@ -4,6 +4,7 @@ namespace Mkhodroo\AltfuelTicket\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketCatagory;
 
 class TicketCatagoryController extends Controller
@@ -17,9 +18,7 @@ class TicketCatagoryController extends Controller
     }
 
     function getChildrenByParentId($parent_id = null) {
-        return TicketCatagory::where('parent_id', $parent_id)->get()->each(function($row){
-            $row->count = $row->countNews();
-        });
+        return TicketCatagory::where('parent_id', $parent_id)->get();
     }
 
     function getAllParent() {
@@ -40,5 +39,12 @@ class TicketCatagoryController extends Controller
         ]);
         AddTicketCommentController::add($ticket->id, $text);
         return $r->ticket_id;
+    }
+
+    function count(Request $r, $id) {
+        if($id){
+            return Ticket::where('cat_id', $id)->where('status', config('ATConfig.status.new'))->count();
+        }
+        return Ticket::where('cat_id', $r->id)->where('status', config('ATConfig.status.new'))->count();
     }
 }
