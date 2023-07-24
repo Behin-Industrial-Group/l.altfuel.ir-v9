@@ -17,5 +17,7 @@ return [
     'attachment-file-types-translate' => [
         'png', 'jpg', 'jpeg', 'pdf', 'zip', 'rar'
     ], 
-    'max-attach-file-size' => 2048 //KB
+    'max-attach-file-size' => 2048, //KB
+
+    
 ];

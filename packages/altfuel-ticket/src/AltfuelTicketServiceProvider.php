@@ -13,8 +13,8 @@ class AltfuelTicketServiceProvider extends ServiceProvider{
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/Migrations' => database_path('migrations'),
             __DIR__ . '/config.php' => config_path('ATConfig.php'),
+            __DIR__ . '/Lang' => lang_path(''),
         ]);
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
         $this->loadRoutesFrom(__DIR__. '/routes.php');

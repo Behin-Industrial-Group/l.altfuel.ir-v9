@@ -11,6 +11,7 @@ use Mkhodroo\AltfuelTicket\Controllers\TicketCatagoryController;
 Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->middleware(['web','auth', 'access'])->group(function(){
     Route::get('', [CreateTicketController::class, 'index'])->name('index');
     Route::post('store', [CreateTicketController::class, 'store'])->name('store');
+    Route::post('change-catagory', [TicketCatagoryController::class, 'changeCatagory'])->name('changeCatagory');
 
     Route::name('show.')->prefix('show')->group(function(){
         Route::get('all', [ShowTicketController::class, 'list'])->name('listForm');

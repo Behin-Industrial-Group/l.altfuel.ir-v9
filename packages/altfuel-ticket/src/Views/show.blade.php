@@ -38,4 +38,10 @@
     @include('ATView::partial-view.add-comment-form', ['form_id' => 'comment-form', 'ticket_id' => $ticket->ticket_id])
 </div>
 
+@if(auth()->user()->access('change-catagory'))
+<div class="card-body">
+    @include('ATView::partial-view.change-catagory-form', ['form_id' => 'chage-cat-form', 'ticket_id' => $ticket->ticket_id])
+</div>
+@endif
+
 
