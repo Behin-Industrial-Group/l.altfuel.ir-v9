@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <div class="col-md-3" style="text-align: justify;">
             <div class="card card-danger shadow-lg" style="transition: all 0.15s ease 0s; height: inherit; width: inherit;">
                 <div class="card-header">
@@ -16,6 +18,67 @@
 
             </div>
 
+        </div>
+        <div class="row">
+            @if (auth()->user()->access('report.tickets.numberOfEachCatagory'))
+            <div>
+                <canvas id="myChart"></canvas>
+            </div>
+            <script>
+            send_ajax_get_request(
+                '{{ url("admin/report/tickets/number-of-each-catagory") }}',
+                function(response){
+                    var canvas = document.getElementById("myChart");
+                    var ctx = canvas.getContext("2d");
+                    var midX = canvas.width/2;
+                    var midY = canvas.height/2
+
+                    var myPieChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                        labels: response.labels,
+                        datasets: [{
+                            label: '# تعداد',
+                            data: response.data,
+                            borderWidth: 1
+                        }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                beginAtZero: true
+                                }
+                            },
+                            onAnimationProgress: drawSegmentValues
+                        }
+                    });
+
+
+                    function drawSegmentValues()
+                    {
+                        for(var i=0; i<myPieChart.segments.length; i++)
+                        {
+                            ctx.fillStyle="white";
+                            var textSize = canvas.width/10;
+                            ctx.font= textSize+"px Verdana";
+                            // Get needed variables
+                            var value = myPieChart.segments[i].value;
+                            var startAngle = myPieChart.segments[i].startAngle;
+                            var endAngle = myPieChart.segments[i].endAngle;
+                            var middleAngle = startAngle + ((endAngle - startAngle)/2);
+                            var posX = (radius/2) * Math.cos(middleAngle) + midX;
+                            var posY = (radius/2) * Math.sin(middleAngle) + midY;
+                            var w_offset = ctx.measureText(value).width/2;
+                            var h_offset = textSize/4;
+                            ctx.fillText(value, posX - w_offset, posY + h_offset);
+                        }
+                    }
+                }
+            )
+            
+            </script>
+            @endif
+            
         </div>
     {{-- <div class="row ">
         <div class="col-sm-4">
