@@ -37,6 +37,10 @@ use function PHPSTORM_META\type;
 |
 */
 
+Route::get('test', function(){
+    return view('test');
+});
+
 Route::get('hamayesh/barname', function(){
     header("Location: http://altfuel.ir/wp-content/uploads/2022/06/همایش-1401-VER-24.pdf");
 });
@@ -422,6 +426,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
         Route::get('list', [HamayeshController::class, 'list'])->name('hamayesh-list');
     });
 
+    require __DIR__.'/report.php';
 
 
 });
