@@ -50,6 +50,7 @@ class Access
             if(!$a->check()){
                 return abort(403, "Forbidden For : " . $method_name);
             }
+            return true;
             // $method = MethodsModel::firstOrCreate(['name' => $method_name]);
             // $user = Auth::user();
             // $access = AccessModel::where('method_id', $method->id)->where('user_id', $user->id)->first();
@@ -78,6 +79,7 @@ class Access
             if(!$a->check()){
                 return false;
             }
+            return true;
             // $method = MethodsModel::firstOrCreate(['name' => $method_name]);
             // $user = Auth::user();
             // $access = AccessModel::where('method_id', $method->id)->where('user_id', $user->id)->first();
