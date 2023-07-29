@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Mkhodroo\UserRoles\Controllers\GetRoleController;
 
-Route::name('role.')->prefix('role')->middleware(['web', 'auth'])->group(function(){
+Route::name('role.')->prefix('role')->middleware(['web', 'auth','access'])->group(function(){
     Route::get('list-form', [GetRoleController::class, 'listForm'])->name('listForm');
     Route::get('list', [GetRoleController::class, 'list'])->name('list');
     Route::post('get', [GetRoleController::class, 'get'])->name('get');
