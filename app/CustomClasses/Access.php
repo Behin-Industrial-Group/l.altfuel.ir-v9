@@ -46,10 +46,10 @@ class Access
     public static function check($method_name)
     {
         try{
-            $a = new AccessController($method_name);
-            if(!$a->check()){
-                return abort(403, "Forbidden For : " . $method_name);
-            }
+            // $a = new AccessController($method_name);
+            // if(!$a->check()){
+            //     return abort(403, "Forbidden For : " . $method_name);
+            // }
             return true;
             // $method = MethodsModel::firstOrCreate(['name' => $method_name]);
             // $user = Auth::user();
