@@ -9,6 +9,7 @@ use Exception;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Mkhodroo\UserRoles\Controllers\AccessController;
 
 class Access
 {
@@ -45,20 +46,24 @@ class Access
     public static function check($method_name)
     {
         try{
-            $method = MethodsModel::firstOrCreate(['name' => $method_name]);
-            $user = Auth::user();
-            $access = AccessModel::where('method_id', $method->id)->where('user_id', $user->id)->first();
+            $a = new AccessController($method_name);
+            if(!$a->check()){
+                return abort(403, "Forbidden For : " . $method_name);
+            }
+            // $method = MethodsModel::firstOrCreate(['name' => $method_name]);
+            // $user = Auth::user();
+            // $access = AccessModel::where('method_id', $method->id)->where('user_id', $user->id)->first();
 
-            if(!empty($access)):
-                if($access->access == 'yes'):
-                    return true;
-                else:
-                    //return false;
-                    abort(403);
-                endif;
-            else:
-                abort(403);
-            endif;
+            // if(!empty($access)):
+            //     if($access->access == 'yes'):
+            //         return true;
+            //     else:
+            //         //return false;
+            //         abort(403);
+            //     endif;
+            // else:
+            //     abort(403);
+            // endif;
         }
         catch(Exception $e){
             abort(403,$e->getMessage());
@@ -69,20 +74,24 @@ class Access
     public static function checkView($method_name)
     {
         try{
-            $method = MethodsModel::firstOrCreate(['name' => $method_name]);
-            $user = Auth::user();
-            $access = AccessModel::where('method_id', $method->id)->where('user_id', $user->id)->first();
-
-            if(!empty($access)):
-                if($access->access == 'yes'):
-                    return true;
-                else:
-                    //return false;
-                    return false;
-                endif;
-            else:
+            $a = new AccessController($method_name);
+            if(!$a->check()){
                 return false;
-            endif;
+            }
+            // $method = MethodsModel::firstOrCreate(['name' => $method_name]);
+            // $user = Auth::user();
+            // $access = AccessModel::where('method_id', $method->id)->where('user_id', $user->id)->first();
+
+            // if(!empty($access)):
+            //     if($access->access == 'yes'):
+            //         return true;
+            //     else:
+            //         //return false;
+            //         return false;
+            //     endif;
+            // else:
+            //     return false;
+            // endif;
         }
         catch(Exception $e){
             return false;
