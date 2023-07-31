@@ -83,7 +83,7 @@
             </script>
             @endif
             @if (auth()->user()->access('report.tickets.statusInEachCatagory'))
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <div class="card" id="statusInEachCatagory" style="height: 300px">در حال بارگیری...</div>
             </div>
             <script>
