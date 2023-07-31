@@ -129,7 +129,7 @@
 
                         var options = {
                             title: 'تعداد تیکت ها به تفکیک وضعیت',
-                            chartArea: {width: '85%'},
+                            chartArea: {width: '75%'},
                             hAxis: {
                             title: 'دسته بندی',
                             minValue: 0
