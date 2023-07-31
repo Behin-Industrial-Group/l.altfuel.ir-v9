@@ -120,7 +120,6 @@
                         }
                         i++;
                     })
-                    console.log(labels);
                     google.charts.load('current', {packages: ['corechart', 'bar']});
                     google.charts.setOnLoadCallback(drawBasic);
 
@@ -130,14 +129,16 @@
 
                         var options = {
                             title: 'تعداد تیکت ها به تفکیک وضعیت',
-                            chartArea: {width: '50%'},
+                            chartArea: {width: '75%'},
                             hAxis: {
                             title: 'دسته بندی',
                             minValue: 0
                             },
                             vAxis: {
                             title: 'تعداد'
-                            }
+                            },
+                            isStacked: true,
+                            pieSliceText: 'label',
                         };
 
                         var chart = new google.visualization.ColumnChart(document.getElementById('statusInEachCatagory'));
