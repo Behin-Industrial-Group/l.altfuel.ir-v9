@@ -103,7 +103,7 @@
                             }
                         })
                         if(answered.length >0){
-                            labels[i][1] = answered[0].total;
+                            labels[i][1] = parseInt(answered[0].total) ;
                         }else{
                             labels[i][1] = 0;
                         }
@@ -114,7 +114,7 @@
                             }
                         })
                         if(newStatus.length >0){
-                            labels[i][2] = newStatus[0].total;
+                            labels[i][2] = parseInt(newStatus[0].total);
                         }else{
                             labels[i][2] = 0;
                         }
