@@ -84,7 +84,7 @@
             @endif
             @if (auth()->user()->access('report.tickets.statusInEachCatagory'))
             <div class="col-sm-4">
-                <div class="card" id="statusInEachCatagory"></div>
+                <div class="card" id="statusInEachCatagory" style="height: 300px">در حال بارگیری...</div>
             </div>
             <script>
             send_ajax_get_request(
