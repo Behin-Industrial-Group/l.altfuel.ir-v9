@@ -128,7 +128,7 @@
                         var data = google.visualization.arrayToDataTable(labels);
 
                         var options = {
-                            title: 'تعداد تیکت ها به تفکیک وضعیت',
+                            title: 'تعداد تیکت ها به تفکیک وضعیت در هفت روز گذشته',
                             chartArea: {width: '75%'},
                             hAxis: {
                             title: 'دسته بندی',
