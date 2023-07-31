@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
+@section('style')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+@endsection
+
 @section('content')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        
 
-        <div class="col-md-3" style="text-align: justify;">
+        {{-- <div class="col-md-3" style="text-align: justify;">
             <div class="card card-danger shadow-lg" style="transition: all 0.15s ease 0s; height: inherit; width: inherit;">
                 <div class="card-header">
                     <h3 class="card-title">قابلیت جدید تیکت پشتیبانی</h3>
@@ -18,11 +23,11 @@
 
             </div>
 
-        </div>
-        <div class="row">
+        </div> --}}
+        <div class="card">
             @if (auth()->user()->access('report.tickets.numberOfEachCatagory'))
-            <div>
-                <canvas id="myChart"></canvas>
+            <div class="col-sm-4">
+                <canvas class="card" id="myChart"></canvas>
             </div>
             <script>
             send_ajax_get_request(
@@ -75,10 +80,75 @@
                     }
                 }
             )
-            
             </script>
             @endif
-            
+            @if (auth()->user()->access('report.tickets.statusInEachCatagory'))
+            <div class="col-sm-4">
+                <div class="card" id="statusInEachCatagory"></div>
+            </div>
+            <script>
+            send_ajax_get_request(
+                '{{ url("admin/report/tickets/status-in-each-catagory") }}',
+                function(response){
+                    console.log(response.labels);
+                    var labels = [
+                        ['دسته بندی', 'پاسخ داده شده' , 'جدید']
+                    ];
+                    var i =1 ;
+                    response.labels.forEach(function(label){
+                        labels[i] = [label.catagory];
+                        var answered = label.count.filter(function(status){
+                            if( status.status == "پاسخ داده شده" ){
+                                return status.status;
+                            }
+                        })
+                        if(answered.length >0){
+                            labels[i][1] = answered[0].total;
+                        }else{
+                            labels[i][1] = 0;
+                        }
+
+                        var newStatus = label.count.filter(function(status){
+                            if( status.status == "جدید" ){
+                                return status.status;
+                            }
+                        })
+                        if(newStatus.length >0){
+                            labels[i][2] = newStatus[0].total;
+                        }else{
+                            labels[i][2] = 0;
+                        }
+                        i++;
+                    })
+                    console.log(labels);
+                    google.charts.load('current', {packages: ['corechart', 'bar']});
+                    google.charts.setOnLoadCallback(drawBasic);
+
+                    function drawBasic() {
+
+                        var data = google.visualization.arrayToDataTable(labels);
+
+                        var options = {
+                            title: 'تعداد تیکت ها به تفکیک وضعیت',
+                            chartArea: {width: '50%'},
+                            hAxis: {
+                            title: 'تعداد',
+                            minValue: 0
+                            },
+                            vAxis: {
+                            title: 'دسته بندی'
+                            }
+                        };
+
+                        var chart = new google.visualization.BarChart(document.getElementById('statusInEachCatagory'));
+
+                        chart.draw(data, options);
+                    }
+                }
+            )
+            </script>
+            @endif
+
         </div>
     {{-- <div class="row ">
         <div class="col-sm-4">

@@ -19,5 +19,6 @@ use Mkhodroo\AltfuelTicket\Controllers\ReportController;
 Route::name('report.')->prefix('report')->group(function(){
     Route::name('tickets.')->prefix('tickets')->group(function(){
         Route::get('number-of-each-catagory', [ReportController::class, 'numberOfEachCatagory']);
+        Route::get('status-in-each-catagory', [ReportController::class, 'statusInEachCatagory']);
     });
 });
