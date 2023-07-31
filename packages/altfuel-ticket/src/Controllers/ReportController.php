@@ -24,11 +24,11 @@ class ReportController extends Controller
     function statusInEachCatagory() {
         Log::info(Carbon::now()->subDays(7)->toDateString());
         $end = Carbon::createFromFormat('Y-m-d', Carbon::now()->toDateString());
-        $start = Carbon::createFromFormat('Y-m-d', Carbon::now()->subDays(8)->toDateString());
+        $start = Carbon::createFromFormat('Y-m-d', Carbon::now()->subDays(60)->toDateString());
         return response()->json([
-            'labels' => Ticket::whereBetween('created_at', [$start, $end])->select('cat_id')->groupBy('cat_id')->get()->each(function($row){
+            'labels' => Ticket::whereBetween('created_at', [$start, $end])->select('cat_id')->groupBy('cat_id')->get()->each(function($row) use( $start, $end){
                 $row->catagory = $row->catagory()['name'];
-                $row->count = $row->whereCat_id($row->catagory()['id'])->select(DB::raw('count(*) as total'), 'status')->groupBy('status')->get();
+                $row->count = $row->whereBetween('created_at', [$start, $end])->whereCat_id($row->catagory()['id'])->select(DB::raw('count(*) as total'), 'status')->groupBy('status')->get();
             })
         ],200);
     }
