@@ -132,15 +132,15 @@
                             title: 'تعداد تیکت ها به تفکیک وضعیت',
                             chartArea: {width: '50%'},
                             hAxis: {
-                            title: 'تعداد',
+                            title: 'دسته بندی',
                             minValue: 0
                             },
                             vAxis: {
-                            title: 'دسته بندی'
+                            title: 'تعداد'
                             }
                         };
 
-                        var chart = new google.visualization.BarChart(document.getElementById('statusInEachCatagory'));
+                        var chart = new google.visualization.ColumnChart(document.getElementById('statusInEachCatagory'));
 
                         chart.draw(data, options);
                     }
