@@ -24,7 +24,7 @@
             </div>
 
         </div> --}}
-        <div class="card">
+        <div class="row">
             @if (auth()->user()->access('report.tickets.numberOfEachCatagory'))
             <div class="col-sm-4">
                 <canvas class="card" id="myChart"></canvas>
@@ -83,8 +83,8 @@
             </script>
             @endif
             @if (auth()->user()->access('report.tickets.statusInEachCatagory'))
-            <div class="col-sm-12">
-                <div class="card" id="statusInEachCatagory" style="height: 300px">در حال بارگیری...</div>
+            <div class="col-sm-8">
+                <div class="card" id="statusInEachCatagory" style="height: 400px">در حال بارگیری...</div>
             </div>
             <script>
             send_ajax_get_request(
@@ -129,7 +129,7 @@
 
                         var options = {
                             title: 'تعداد تیکت ها به تفکیک وضعیت',
-                            chartArea: {width: '75%'},
+                            chartArea: {width: '85%'},
                             hAxis: {
                             title: 'دسته بندی',
                             minValue: 0
