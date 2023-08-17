@@ -27,7 +27,7 @@ class CaseController extends Controller
     function newCase() {
         $this->userId = PMController::getUserId($this->accessToken);
         PMController::changePass($this->accessToken, $this->userId, $this->newPass);
-        $newCaseUrl = env('PM_SERVER') ."/sysworkflow/fa/neoclassic/login/login?u=%2Fsysworkflow%2Fen%2Fneoclassic%2Fcases%2FcasesStartPage%3Faction%3DstartCase";
+        $newCaseUrl = "/sysworkflow/fa/neoclassic/login/login?u=%2Fsysworkflow%2Fen%2Fneoclassic%2Fcases%2FcasesStartPage%3Faction%3DstartCase";
         return view('test')->with([
             'src' => env('PM_SERVER') . $newCaseUrl . "&user=". Auth::user()->pm_username ."&pass=$this->newPass",
             'user' => Auth::user()->pm_username,
