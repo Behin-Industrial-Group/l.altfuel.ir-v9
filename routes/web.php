@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Schema;
 use Mkhodroo\UserRoles\Models\Access;
 use Mkhodroo\UserRoles\Models\Method;
 use Mkhodroo\UserRoles\Models\Role;
+use SoapClient;
 
 use function PHPSTORM_META\type;
 
@@ -38,6 +39,34 @@ use function PHPSTORM_META\type;
 */
 
 Route::get('test', function(){
+    $client = new SoapClient('http://localhost:81/sysworkflow/en/neoclassic/services/wsdl2');
+    $params = array(array('userid'=>'admin', 'password'=>'Mk09376922176'));
+    $result = $client->__SoapCall('login', $params);
+    $sessionId = $result->message;
+    $params = array(array('sessionId'=>$sessionId));
+    $result1 = $client->__SoapCall('userList', $params);
+    return $result1;
+    $tasksArray = $result1->tasks;
+    
+    $params = array(array('sessionId'=>$sessionId, 'caseId'=>$tasksArray->guid,
+   'delIndex'=>'0'));
+    $result = $client->__SoapCall('getCaseInfo', $params);
+    return $result;
+    // return response()->json($result1, 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+        // JSON_UNESCAPED_UNICODE);
+    
+//     class variableStruct {
+//         public $name;
+//      }
+     
+//     $p = new variableStruct();
+//     $p->name = 'clientName';     //a case variable
+//     $s = new variableStruct();
+//     $s->name = 'SYS_LANG';       //a system variable
+//     $variables = array($p, $s);
+//     $params = array(array('sessionId'=>$sessionId, 'caseId'=>$tasksArray->guid, 'variables'=>$variables));
+//     $result = $client->__SoapCall('getVariables', $params);
+//     return $result;
     return view('test');
 });
 

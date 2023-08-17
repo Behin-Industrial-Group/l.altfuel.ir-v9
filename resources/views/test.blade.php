@@ -1,23 +1,14 @@
-@isset($data)
-    <pre>
-        @php
-            print_r($data)
-        @endphp
-    </pre>
-@endisset
-@isset($result)
-    <pre>
-        @php
-            print_r($result)
-        @endphp
-    </pre>
-@endisset
-{{phpinfo()}}
-<form action="{{ route('test') }}" enctype="multipart/form-data" method="POST">
-    @csrf
-    <input type="file" name="file" id="">
-    <input type="submit" name="" id="">
-</form>
+@extends('layouts.app')
+
+@section('content')
+{{ $_SERVER['REMOTE_ADDR'] }} <br>
+{{$user}} <br>
+{{$pass}}
+    <iframe src="{{ $src }}" frameborder="0"
+        style="width: 100%; height: 85vh"
+        id="iframeId"
+    ></iframe>
+@endsection
 
 
 

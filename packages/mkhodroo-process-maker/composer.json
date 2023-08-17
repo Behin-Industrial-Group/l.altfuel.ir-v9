@@ -1,0 +1,16 @@
+{
+    "name": "mkhodroo/mkhodroo-process-maker",
+    "description": "connect to process maker",
+    "autoload": {
+        "psr-4": {
+            "Mkhodroo\\MkhodrooProcessMaker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mkhodroo",
+            "email": "mkhodroo@yahoo.com"
+        }
+    ],
+    "require": {}
+}

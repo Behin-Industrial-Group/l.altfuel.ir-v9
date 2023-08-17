@@ -1,5 +1,6 @@
 <?php
 
+
 return [
     'version' => '9.1.22',
 
@@ -225,6 +226,7 @@ return [
         BinshopsBlog\BinshopsBlogServiceProvider::class,
         Mkhodroo\AltfuelTicket\AltfuelTicketServiceProvider::class,
         \Mkhodroo\UserRoles\UserRolesServiceProvider::class,
+        \Mkhodroo\MkhodrooProcessMaker\MKProcessMakerProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
         /*

@@ -117,6 +117,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             'Monolog\\' => 8,
             'Mkhodroo\\UserRoles\\' => 19,
+            'Mkhodroo\\MkhodrooProcessMaker\\' => 30,
             'Mkhodroo\\AltfuelTicket\\' => 23,
         ),
         'L' => 
@@ -398,6 +399,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\UserRoles\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src',
+        ),
+        'Mkhodroo\\MkhodrooProcessMaker\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src',
         ),
         'Mkhodroo\\AltfuelTicket\\' => 
         array (
@@ -694,6 +699,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'App\\Models\\ProvinceModel' => __DIR__ . '/../..' . '/app/Models/ProvinceModel.php',
         'App\\Models\\RasteModel' => __DIR__ . '/../..' . '/app/Models/RasteModel.php',
         'App\\Models\\RelatedIssueModel' => __DIR__ . '/../..' . '/app/Models/RelatedIssueModel.php',
+        'App\\Models\\SmsLog' => __DIR__ . '/../..' . '/app/Models/SmsLog.php',
         'App\\Models\\StatusModel' => __DIR__ . '/../..' . '/app/Models/StatusModel.php',
         'App\\Models\\TakmiliModel' => __DIR__ . '/../..' . '/app/Models/TakmiliModel.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -3600,6 +3606,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Controllers\\CommentVoiceController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/CommentVoiceController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\CreateTicketController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/CreateTicketController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\GetTicketController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/GetTicketController.php',
+        'Mkhodroo\\AltfuelTicket\\Controllers\\ReportController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/ReportController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\ShowTicketController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/ShowTicketController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\TicketCatagoryController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketCatagoryController.php',
         'Mkhodroo\\AltfuelTicket\\Models\\CatagoryActor' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/CatagoryActor.php',
@@ -3608,6 +3615,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Models\\TicketCatagory' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketCatagory.php',
         'Mkhodroo\\AltfuelTicket\\Models\\TicketComment' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketComment.php',
         'Mkhodroo\\AltfuelTicket\\Requests\\TicketRequest' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Requests/TicketRequest.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\InboxController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/InboxController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\PMController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/PMController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\MKProcessMakerProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/MKProcessMakerProvider.php',
         'Mkhodroo\\UserRoles\\Controllers\\AccessController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/AccessController.php',
         'Mkhodroo\\UserRoles\\Controllers\\GetMethodsController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/GetMethodsController.php',
         'Mkhodroo\\UserRoles\\Controllers\\GetRoleController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/GetRoleController.php',

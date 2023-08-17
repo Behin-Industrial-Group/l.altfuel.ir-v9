@@ -47,7 +47,13 @@ $videosCatagories = VideosCatagoriesModel::get();
                                 @foreach ($menu['submenu'] as $submenu)
                                   @if ( auth()->user()->access('منو >>' .$menu['fa_name'] . '>>' . $submenu['fa_name'] ) )
                                     <li class="nav-item">
-                                        <a href="@if(Route::has($submenu['route-name'])) {{ route($submenu['route-name']) }} @else  {{ url($submenu['route-url']) }} @endif" class="nav-link active">
+                                        <a href="@if(Route::has($submenu['route-name'])) 
+                                                    {{ route($submenu['route-name']) }} 
+                                                @elseif(isset($submenu['static-url']))
+                                                    {{ $submenu['static-url'] }}
+                                                @else
+                                                    {{ url($submenu['route-url']) }} 
+                                                @endif" class="nav-link active">
                                             <i class="fa fa-circle-o nav-icon"></i>
                                             <p>{{ $submenu['fa_name'] }}</p>
                                         </a>
