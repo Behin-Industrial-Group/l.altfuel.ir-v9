@@ -17,8 +17,9 @@ class CaseController extends Controller
     function get() {
         $this->userId = PMController::getUserId($this->accessToken);
         PMController::changePass($this->accessToken, $this->userId, $this->newPass);
+        $pm_username = Auth::user()->pm_username;
         return view('test')->with([
-            'src' => env('PM_SERVER') ."/sysworkflow/fa/neoclassic/login/login?u=%2Fsysworkflow%2Ffa%2Fneoclassic%2Fcases%2Fviena_init#/casesListExtJs?action=todo&user=". Auth::user()->pm_username ."&pass=$this->newPass",
+            'src' => env('PM_SERVER') ."/sysworkflow/fa/neoclassic/login/login?user=$pm_username&pass=$this->newPass&u=%2Fsysworkflow%2Ffa%2Fneoclassic%2Fcases%2Fviena_init#/casesListExtJs?action=todo",
             'user' => Auth::user()->pm_username,
             'pass' => $this->newPass
         ]);
