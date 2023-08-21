@@ -30,7 +30,7 @@ class PMController extends Controller
             'username'      => env('PM_ADMIN_USER'),
             'password'      => env('PM_ADMIN_PASS')
         );
-        $ch = curl_init(self::$pmServer.'/'. self::$pmWorkspace . "/oauth2/token");
+        $ch = curl_init('http://pmaker.altfuel.ir/'. self::$pmWorkspace . "/oauth2/token");
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postParams);
