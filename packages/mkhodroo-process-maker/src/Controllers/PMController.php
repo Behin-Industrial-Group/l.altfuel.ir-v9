@@ -38,7 +38,6 @@ class PMController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         
         $oToken = json_decode(curl_exec($ch));
-        Log::info(curl_error($ch));
         $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         
