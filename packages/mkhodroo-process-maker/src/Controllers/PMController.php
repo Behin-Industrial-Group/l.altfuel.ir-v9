@@ -13,7 +13,7 @@ class PMController extends Controller
     private static $pmWorkspace;
 
     public static function login() {
-        $client = new SoapClient(env('PM_URL').'sysworkflow/en/neoclassic/services/wsdl2');
+        $client = new SoapClient(env('PM_SERVER').'sysworkflow/en/neoclassic/services/wsdl2');
         $params = array(array('userid'=>'f.shahidi', 'password'=>'Fsh123456'));
         $result = $client->__SoapCall('login', $params);
         return $result;
@@ -37,6 +37,8 @@ class PMController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         
         $oToken = json_decode(curl_exec($ch));
+        Log::info($oToken);
+        Log::info(curl_error($ch));
         $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         
@@ -49,6 +51,7 @@ class PMController extends Controller
                 "Description: {$oToken->error_description}\n");
         }
         else {
+            Log::info($oToken);
             return $oToken->access_token;
         }
         
