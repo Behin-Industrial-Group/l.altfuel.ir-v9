@@ -20,7 +20,7 @@ class PMController extends Controller
     }
 
     public static function getAccessToken(){
-        self::$pmServer = env('PM_SERVER');
+        self::$pmServer = str_replace('https', 'http', env('PM_SERVER')) ;
         self::$pmWorkspace = "workflow";
         $postParams = array(
             'grant_type'    => 'password',
@@ -30,7 +30,7 @@ class PMController extends Controller
             'username'      => env('PM_ADMIN_USER'),
             'password'      => env('PM_ADMIN_PASS')
         );
-        $ch = curl_init('http://pmaker.altfuel.ir/'. self::$pmWorkspace . "/oauth2/token");
+        $ch = curl_init(self::$pmServer . '/'. self::$pmWorkspace . "/oauth2/token");
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postParams);
@@ -38,7 +38,6 @@ class PMController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         
         $oToken = json_decode(curl_exec($ch));
-        Log::info(var_dump($oToken));
         Log::info(curl_error($ch));
         $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
@@ -52,7 +51,6 @@ class PMController extends Controller
                 "Description: {$oToken->error_description}\n");
         }
         else {
-            Log::info(var_dump($oToken));
             return $oToken->access_token;
         }
         
