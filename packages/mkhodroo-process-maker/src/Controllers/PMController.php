@@ -51,6 +51,7 @@ class PMController extends Controller
                 "Description: {$oToken->error_description}\n");
         }
         else {
+            Log::info($oToken->access_token);
             return $oToken->access_token;
         }
         
