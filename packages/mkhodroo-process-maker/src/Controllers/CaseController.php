@@ -4,6 +4,7 @@ namespace Mkhodroo\MkhodrooProcessMaker\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use SoapClient;
 
 class CaseController extends Controller
@@ -15,7 +16,11 @@ class CaseController extends Controller
         
     }
     function get() {
+        Log::info("access token:");
+        Log::info($this->accessToken);
         $this->userId = PMController::getUserId($this->accessToken);
+        Log::info("user id: ");
+        Log::info($this->userId);
         PMController::changePass($this->accessToken, $this->userId, $this->newPass);
         $pm_username = Auth::user()->pm_username;
         return view('test')->with([
