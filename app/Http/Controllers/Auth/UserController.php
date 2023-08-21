@@ -88,6 +88,11 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    function changePMUsername(Request $r, $id) {
+        User::where('id', $id)->update(['pm_username' => $r->pm_username]);
+        return redirect()->back();
+    }
+
     public function ChangeIp(Request $r, $user_id)
     {
         User::where('id',$user_id)->update([ 'valid_ip' => $r->valid_ip ]);

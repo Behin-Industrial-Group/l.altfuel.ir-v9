@@ -46,6 +46,13 @@ use App\Models\User;
                             </form>
                         </tr>
                         <tr>
+                            <form method="post" action="{{ route('change-pm-username', ['id'=> $user->id]) }}">
+                                @csrf
+                                <td>نام کاربری Process Maker<input type="text" name="pm_username" id="" value="{{ $user->pm_username }}"></td>
+                                <td><input type="submit" value="تغییر نام کاربری PM" name="" id=""></td>
+                            </form>
+                        </tr>
+                        <tr>
                             <form method="post" action="{{$user->id}}/changepass">
                                 @csrf
                                 <input type="password" name="pass">

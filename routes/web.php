@@ -353,6 +353,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
         Route::post('/{id}',[Auth\UserController::class, 'AccessReg']);
 
         Route::post('/{id}/changepass',[Auth\UserController::class, 'ChangePass']);
+        Route::post('/{id}/change-pm-username',[Auth\UserController::class, 'changePMUsername'])->name('change-pm-username');
         Route::post('/{id}/change-ip',[Auth\UserController::class, 'ChangeIp'])->name('change-user-ip');
 
         Route::post('/{id}/changeShowInReport', [Auth\UserController::class, 'changeShowInReport']);
