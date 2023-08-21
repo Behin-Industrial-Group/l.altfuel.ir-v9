@@ -69,6 +69,8 @@ class PMController extends Controller
           curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
           curl_setopt($ch, CURLOPT_POST, 1);
           curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postParams));
+          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
           $oResult = json_decode(curl_exec($ch));
           $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
           curl_close($ch);
@@ -92,6 +94,8 @@ class PMController extends Controller
         $ch = curl_init(self::$pmServer . "/api/1.0/workflow/users?filter=$username");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $accessToken));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
         $aUsers = json_decode(curl_exec($ch));
         $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
