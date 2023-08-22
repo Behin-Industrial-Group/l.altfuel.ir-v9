@@ -91,6 +91,9 @@ class PMController extends Controller
 
     public static function getUserId($accessToken){
         $username = Auth::user()->pm_username;
+        if(!$username){
+            return false;
+        }
         $ch = curl_init(self::$pmServer . "/api/1.0/workflow/users?filter=$username");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $accessToken));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -103,18 +106,62 @@ class PMController extends Controller
         $aActiveUsers = array();
 
         if ($statusCode != 200) {
-        if (isset ($aUsers) and isset($aUsers->error))
-            Log::info("Error code: {$aUsers->error->code}\nMessage: {$aUsers->error->message}\n");
-        else
-            Log::info("Error: HTTP status code: $statusCode\n");
+            if (isset ($aUsers) and isset($aUsers->error))
+                Log::info("Error code: {$aUsers->error->code}\nMessage: {$aUsers->error->message}\n");
+            else
+                Log::info("Error: HTTP status code: $statusCode\n");
+            return false;
         }
         else {
-            return $aUsers[0]->usr_uid;
+            return count($aUsers) ? $aUsers[0]->usr_uid : false;;
             foreach ($aUsers as $oUser) {
                 if ($oUser->usr_status == "ACTIVE") {
                     $aActiveUsers[] = array("uid" => $oUser->usr_uid, "username" => $oUser->usr_username);
                 }
             }
         }
+    }
+
+    public static function createUser($accessToken, $user){
+        if(!$user->pm_username){
+            return false;
+        }
+        $pass = rand(10000000, 99999999);
+        $postParams = array(
+            'usr_username'   => $user->pm_username,
+            'usr_firstname'  => $user->name,
+            'usr_lastname'   => " ",
+            'usr_email'      => "$user->email@altfuel.ir",
+            'usr_due_date'   => "2030-12-31",
+            'usr_status'     => "ACTIVE",
+            'usr_role'       => "PROCESSMAKER_OPERATOR",
+            'usr_new_pass'   => "$pass",
+            'usr_cnf_pass'   => "$pass",
+         );
+         
+         $ch = curl_init(self::$pmServer . "/api/1.0/workflow/user");
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $accessToken"));
+         curl_setopt($ch, CURLOPT_HEADER, false);
+         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+         curl_setopt($ch, CURLOPT_POST, 1);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $postParams);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+         curl_close($ch);
+
+         $oUser = json_decode(curl_exec($ch));
+         
+         if (!isset($oUser)) {
+            print "Error accessing ".self::$pmServer .": \n" . curl_error($ch);
+            return false;
+         }
+         elseif (isset($oUser->error)) {
+            print "Error in ".self::$pmServer.": \nCode: {$oUser->error->code}\nMessage: {$oUser->error->message}\n";
+            return false;
+         }
+         else {
+            return $oUser->usr_id;
+            print "User '{$oUser->usr_username}' created with UID: {$oUser->usr_uid}\n";
+         }
     }
 }

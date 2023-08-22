@@ -17,12 +17,28 @@ class CaseController extends Controller
         
     }
     function get() {
-        Log::info("access token:");
-        Log::info($this->accessToken);
+        if(!$this->accessToken){
+            return view('test')->with([
+                'error' => 'خطا در دریافت access token'
+            ]);
+        }
         $this->userId = PMController::getUserId($this->accessToken);
-        Log::info("user id: ");
-        Log::info($this->userId);
-        PMController::changePass($this->accessToken, $this->userId, $this->newPass);
+        if(!$this->userId){
+            $createUser = PMController::createUser($this->accessToken, Auth::user());
+            if(!$createUser){
+                return view('test')->with([
+                    'error' => 'کاربر process maker وجود ندارد. خطا در ایجاد کاربر'
+                ]);
+            }
+            return view('test')->with([
+                'error' => 'خطا در دریافت نام کاربر'
+            ]);
+        }
+        if(!PMController::changePass($this->accessToken, $this->userId, $this->newPass)){
+            return view('test')->with([
+                'error' => 'خطا در تغییر رمز عبور کاربر'
+            ]);
+        }
         $pm_username = Auth::user()->pm_username;
         return view('test')->with([
             'src' => env('PM_SERVER') ."/sysworkflow/fa/neoclassic/login/login?user=$pm_username&pass=$this->newPass&u=%2Fsysworkflow%2Ffa%2Fneoclassic%2Fcases%2Fviena_init#/casesListExtJs?action=todo",
