@@ -24,10 +24,10 @@ class CaseController extends Controller
         }
         $this->userId = PMController::getUserId($this->accessToken);
         if(!$this->userId){
-            $createUser = PMController::createUser($this->accessToken, Auth::user());
+            $createUser = PMController::createUser($this->accessToken, $user = Auth::user());
             if(!$createUser){
                 return view('test')->with([
-                    'error' => 'کاربر process maker وجود ندارد. خطا در ایجاد کاربر'
+                    'error' => 'کاربر process maker وجود ندارد. خطا در ایجاد کاربر' . "$user->email@altfuel.ir"
                 ]);
             }
             return view('test')->with([
