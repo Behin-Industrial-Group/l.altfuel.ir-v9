@@ -152,6 +152,7 @@ class PMController extends Controller
          curl_close($ch);
 
          $oUser = json_decode(curl_exec($ch));
+         Log::info($oUser);
          
          if (!isset($oUser)) {
             print "Error accessing ".self::$pmServer .": \n" . curl_error($ch);
