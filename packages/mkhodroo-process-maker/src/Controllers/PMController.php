@@ -43,11 +43,13 @@ class PMController extends Controller
         
         if ($httpStatus != 200) {
             Log::info("Error in HTTP status code: $httpStatus\n");
+            return false;
         }
         elseif (isset($oToken->error)) {
             Log::info("Error logging into " . self::$pmServer .":\n" .
                 "Error:       {$oToken->error}\n" .
                 "Description: {$oToken->error_description}\n");
+                return false;
         }
         else {
             // Log::info($oToken->access_token);
