@@ -29,10 +29,9 @@ class CaseController extends Controller
                 return view('test')->with([
                     'error' => 'کاربر process maker وجود ندارد. خطا در ایجاد کاربر' 
                 ]);
+            }else{
+                $this->get();
             }
-            return view('test')->with([
-                'error' => 'خطا در دریافت نام کاربر'
-            ]);
         }
         if(!PMController::changePass($this->accessToken, $this->userId, $this->newPass)){
             return view('test')->with([

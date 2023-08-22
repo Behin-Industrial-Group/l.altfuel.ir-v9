@@ -152,7 +152,7 @@ class PMController extends Controller
          curl_close($ch);
 
          $oUser = json_decode(curl_exec($ch));
-         Log::info($oUser);
+        //  Log::info($oUser);
          
          if (!isset($oUser)) {
             print "Error accessing ".self::$pmServer .": \n" . curl_error($ch);
@@ -163,7 +163,7 @@ class PMController extends Controller
             return false;
          }
          else {
-            return $oUser->usr_id;
+            return $oUser;
             print "User '{$oUser->usr_username}' created with UID: {$oUser->usr_uid}\n";
          }
     }
