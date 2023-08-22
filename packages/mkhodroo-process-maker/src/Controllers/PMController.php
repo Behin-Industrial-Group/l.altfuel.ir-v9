@@ -132,7 +132,7 @@ class PMController extends Controller
         $postParams = array(
             'usr_username'   => $user->pm_username,
             'usr_firstname'  => $user->name,
-            'usr_lastname'   => " ",
+            'usr_lastname'   => ".",
             'usr_email'      => "$user->email@altfuel.ir",
             'usr_due_date'   => "2030-12-31",
             'usr_status'     => "ACTIVE",
