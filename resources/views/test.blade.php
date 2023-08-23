@@ -16,7 +16,7 @@
 @section('script')
 <script type="text/javascript">
     //change to the address and workspace of your ProcessMaker server:
-    var restServer = "http://pmaker.altfuel.ir/workflow/";
+    var restServer = "https://pmaker.altfuel.ir/workflow/";
   
     var jqxhr = $.ajax({
        type: "POST",
