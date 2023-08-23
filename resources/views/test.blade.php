@@ -11,8 +11,11 @@
         id="iframeId"
     ></iframe>
 @endsection
-<script>
-    $('iframe').attr('src', '{{$src}}');
-</script>
+@section('script')
+    <script>
+        $('iframe').attr('src', '{{$src}}');
+    </script>
+@endsection
+
 
 
