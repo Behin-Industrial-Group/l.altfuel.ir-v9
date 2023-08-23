@@ -11,6 +11,7 @@
         style="width: 100%; height: 85vh"
         id="iframeId"
     ></iframe>
+    
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -51,6 +52,9 @@
        }
     })
     .fail(function(data, statusText, xhr) {
+        console.log(data);
+        console.log(statusText);
+        console.log(xhr);
        alert("Failed to connect.\nHTTP status code: " + xhr.status + ' ' + statusText);
     });
   </script>
