@@ -3,6 +3,7 @@
 @section('content')
 {{-- {{ $_SERVER['REMOTE_ADDR'] }} --}}
 {{-- {{ env('PM_SERVER') }} --}}
+{{ $pass }}
     @isset($error)
         <div class="alert alert-danger">{{$error}}</div>
     @endisset
