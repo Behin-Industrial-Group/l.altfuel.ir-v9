@@ -20,7 +20,7 @@ class PMController extends Controller
     }
 
     public static function getAccessToken(){
-        self::$pmServer = "http://pmaker.altfuel.ir"; //str_replace('https', 'http', env('PM_SERVER')) ;
+        self::$pmServer = str_replace('https', 'http', env('PM_SERVER')) ;
         self::$pmWorkspace = "workflow";
         $postParams = array(
             'grant_type'    => 'password',
