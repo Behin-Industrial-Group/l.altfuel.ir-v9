@@ -7,6 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('asnaf-lpg')->group(function(){
-    Route::get('register-form', [AsnafLPGController::class, 'registerForm']);
+    Route::get('', [AsnafLPGController::class, 'registerForm']);
     Route::post('register', [AsnafLPGController::class, 'register'])->name('asnafLPGRegistration');
 });
