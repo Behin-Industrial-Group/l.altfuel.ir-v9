@@ -89,9 +89,9 @@ return [
         'array' => 'The :attribute must not have more than :max items.',
         'file' => 'The :attribute must not be greater than :max kilobytes.',
         'numeric' => 'The :attribute must not be greater than :max.',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'string' => ':attribute نباید بیشتر از  :max کارکتر باشد.',
     ],
-    'max_digits' => 'The :attribute must not have more than :max digits.',
+    'max_digits' => ':attribute نباید بیشتر از :max رقم باشد.',
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
@@ -104,7 +104,7 @@ return [
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
-    'numeric' => 'The :attribute must be a number.',
+    'numeric' => ':attribute باید عدد باشد.',
     'password' => [
         'letters' => 'The :attribute must contain at least one letter.',
         'mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
@@ -178,6 +178,8 @@ return [
         'password' => 'رمز عبور',
         'title' => 'عنوان',
         'catagory' => 'دسته بندی',
+        'nid' => 'کدملی',
+        'monthly_use' => 'مصرف ماهانه'
     ],
 
 ];

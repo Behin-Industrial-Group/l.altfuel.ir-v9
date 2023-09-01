@@ -23,6 +23,7 @@
 		<!-- template rtl version -->
 		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom-style.css')  . '?' . config('app.version') }}">
 		<link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css')  . '?' . config('app.version') }}">
+		<link rel="stylesheet" href="{{ url('public/dashboard/plugins/select2/select2.min.css')  . '?' . config('app.version') }}">
 	
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 		@yield('style')
@@ -52,7 +53,10 @@
 	<script src="{{ url('public/js/loader.js')  . '?' . config('app.version') }}"></script>
 	<script src="{{ url('public/js/clearcach.js')  . '?' . config('app.version') }}"></script>
 	<script src="{{ url('public/js/scripts.js')  . '?' . config('app.version') }}"></script>
-
+	<script src="{{ url('public/dashboard/plugins/select2/select2.full.min.js')  . '?' . config('app.version') }}"></script>
+	<script>
+		$('.select2').select2();
+	</script>
 	@yield('script')
 </body>
 </html>

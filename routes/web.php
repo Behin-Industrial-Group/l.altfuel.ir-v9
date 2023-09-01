@@ -18,6 +18,7 @@ use App\Repository\RSendExpSms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Translation\MessageCatalogue;
 use Illuminate\Support\Facades\Schema;
 use Mkhodroo\UserRoles\Models\Access;
@@ -116,6 +117,7 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/irngv.php';
+require __DIR__.'/asnaf_lpg.php';
 
 
 Route::get('/rsgs', function(){
