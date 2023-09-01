@@ -39,7 +39,7 @@ return [
     'declined' => 'The :attribute must be declined.',
     'declined_if' => 'The :attribute must be declined when :other is :value.',
     'different' => 'The :attribute and :other must be different.',
-    'digits' => 'The :attribute must be :digits digits.',
+    'digits' => ':attribute باید :digits رقم باشد.',
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
@@ -179,7 +179,10 @@ return [
         'title' => 'عنوان',
         'catagory' => 'دسته بندی',
         'nid' => 'کدملی',
-        'monthly_use' => 'مصرف ماهانه'
+        'monthly_use' => 'مصرف ماهانه',
+        'fname' => 'نام',
+        'lname' => 'نام خانوادگی',
+        'asnaf_catagory' => 'رسته صنفی'
     ],
 
 ];

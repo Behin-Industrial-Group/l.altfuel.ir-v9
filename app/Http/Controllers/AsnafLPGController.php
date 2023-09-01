@@ -17,9 +17,13 @@ class AsnafLPGController extends Controller
 
     function register(Request $r) {
         $r->validate([
-            'mobile' => 'string| max_digits:11',
-            'nid' => 'string| max_digits:10',
-            'monthly_use' => 'numeric'
+            'fname' => 'required',
+            'lname' => 'required',
+            'mobile' => 'required|digits:11',
+            'nid' => 'required|string| max_digits:10',
+            'monthly_use' => 'required|numeric',
+            'asnaf_catagory' => 'required',
+
         ]);
         AsnafLPG::updateOrCreate(
             [
