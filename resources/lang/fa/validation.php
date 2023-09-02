@@ -182,7 +182,11 @@ return [
         'monthly_use' => 'مصرف ماهانه',
         'fname' => 'نام',
         'lname' => 'نام خانوادگی',
-        'asnaf_catagory' => 'رسته صنفی'
+        'asnaf_catagory' => 'رسته صنفی',
+        'father_name' => 'نام پدر',
+        'birth_date' => 'تاریخ تولد',
+        'postal_code' => 'کدپستی',
+        'address' => 'آدرس',
     ],
 
 ];

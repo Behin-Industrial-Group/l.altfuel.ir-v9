@@ -23,6 +23,10 @@ class AsnafLPGController extends Controller
             'nid' => 'required|string| max_digits:10',
             'monthly_use' => 'required|numeric',
             'asnaf_catagory' => 'required',
+            'father_name' => 'required | string',
+            'birth_date' => 'required',
+            'postal_code' => 'required | digits:10',
+            'address' => 'required',
 
         ]);
         AsnafLPG::updateOrCreate(

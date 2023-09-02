@@ -104,6 +104,7 @@ return array(
     'App\\Models\\AsignInsModel' => $baseDir . '/app/Models/AsignInsModel.php',
     'App\\Models\\AsnafLPG' => $baseDir . '/app/Models/AsnafLPG.php',
     'App\\Models\\CallReportModel' => $baseDir . '/app/Models/CallReportModel.php',
+    'App\\Models\\Cities' => $baseDir . '/app/Models/Cities.php',
     'App\\Models\\CommentsModel' => $baseDir . '/app/Models/CommentsModel.php',
     'App\\Models\\ContractorsModel' => $baseDir . '/app/Models/ContractorsModel.php',
     'App\\Models\\DisableModel' => $baseDir . '/app/Models/DisableModel.php',

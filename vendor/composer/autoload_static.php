@@ -676,6 +676,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'App\\Models\\AsignInsModel' => __DIR__ . '/../..' . '/app/Models/AsignInsModel.php',
         'App\\Models\\AsnafLPG' => __DIR__ . '/../..' . '/app/Models/AsnafLPG.php',
         'App\\Models\\CallReportModel' => __DIR__ . '/../..' . '/app/Models/CallReportModel.php',
+        'App\\Models\\Cities' => __DIR__ . '/../..' . '/app/Models/Cities.php',
         'App\\Models\\CommentsModel' => __DIR__ . '/../..' . '/app/Models/CommentsModel.php',
         'App\\Models\\ContractorsModel' => __DIR__ . '/../..' . '/app/Models/ContractorsModel.php',
         'App\\Models\\DisableModel' => __DIR__ . '/../..' . '/app/Models/DisableModel.php',
