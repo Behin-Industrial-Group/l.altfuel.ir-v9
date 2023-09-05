@@ -13,7 +13,7 @@ return [
             'fa_name' => 'کارپوشه',
             'submenu' => [
                 // 'new-case' => [ 'fa_name' => 'فرایند جدید', 'route-name' => 'MkhodrooProcessMaker.newCase', 'route-url' => '' ],
-                'inbox' => [ 'fa_name' => 'انجام نشده', 'route-name' => 'MkhodrooProcessMaker.inbox', 'route-url' => '' , 'static-url' => '']
+                'inbox' => [ 'fa_name' => 'انجام نشده', 'route-name' => 'MkhodrooProcessMaker.inbox', 'route-url' => '' , 'static-url' => '', 'target' => '_blank']
             ]
         ],
         'content' => [
