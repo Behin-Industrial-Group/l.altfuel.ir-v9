@@ -30,7 +30,7 @@
                             </tr>
                         </table>
                     </h3>
-                    <p>تعداد مرخصی ها</p>
+                    <p> مرخصی ها</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
