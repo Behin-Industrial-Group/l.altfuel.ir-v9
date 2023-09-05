@@ -45,7 +45,7 @@ use function PHPSTORM_META\type;
 */
 
 Route::get('test', function(SMSController $sms){
-    return $_SERVER['HTTP_CLIENT_IP'];
+    // return $_SERVER['HTTP_CLIENT_IP'];
     return DB::connection('pm_mysql')->table('pmt_vacation_requests')->get();
 });
 
