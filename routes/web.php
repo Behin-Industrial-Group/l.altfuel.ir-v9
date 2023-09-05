@@ -1,5 +1,8 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\CustomClasses\ExcelReader;
+use App\CustomClasses\SimpleXLSX;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LableController;
@@ -17,6 +20,7 @@ use App\Repository\RReport;
 use App\Repository\RSendExpSms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Translation\MessageCatalogue;
@@ -25,6 +29,7 @@ use Mkhodroo\UserRoles\Models\Access;
 use Mkhodroo\UserRoles\Models\Method;
 use Mkhodroo\UserRoles\Models\Role;
 use SoapClient;
+use Tests\Feature\ExampleTest;
 
 use function PHPSTORM_META\type;
 
@@ -39,36 +44,8 @@ use function PHPSTORM_META\type;
 |
 */
 
-Route::get('test', function(){
-    $client = new SoapClient('http://localhost:81/sysworkflow/en/neoclassic/services/wsdl2');
-    $params = array(array('userid'=>'admin', 'password'=>'Mk09376922176'));
-    $result = $client->__SoapCall('login', $params);
-    $sessionId = $result->message;
-    $params = array(array('sessionId'=>$sessionId));
-    $result1 = $client->__SoapCall('userList', $params);
-    return $result1;
-    $tasksArray = $result1->tasks;
-    
-    $params = array(array('sessionId'=>$sessionId, 'caseId'=>$tasksArray->guid,
-   'delIndex'=>'0'));
-    $result = $client->__SoapCall('getCaseInfo', $params);
-    return $result;
-    // return response()->json($result1, 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
-        // JSON_UNESCAPED_UNICODE);
-    
-//     class variableStruct {
-//         public $name;
-//      }
-     
-//     $p = new variableStruct();
-//     $p->name = 'clientName';     //a case variable
-//     $s = new variableStruct();
-//     $s->name = 'SYS_LANG';       //a system variable
-//     $variables = array($p, $s);
-//     $params = array(array('sessionId'=>$sessionId, 'caseId'=>$tasksArray->guid, 'variables'=>$variables));
-//     $result = $client->__SoapCall('getVariables', $params);
-//     return $result;
-    return view('test');
+Route::get('test', function(SMSController $sms){
+    // return DB::connection('pm_mysql')->table('pmt_vacation_requests')->get();
 });
 
 Route::get('hamayesh/barname', function(){

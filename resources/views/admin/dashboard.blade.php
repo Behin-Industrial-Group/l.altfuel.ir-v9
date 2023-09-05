@@ -1,156 +1,184 @@
 @extends('layouts.app')
 
 @section('style')
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 @endsection
 
 @section('content')
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        {{-- <div class="col-md-3" style="text-align: justify;">
-            <div class="card card-danger shadow-lg" style="transition: all 0.15s ease 0s; height: inherit; width: inherit;">
-                <div class="card-header">
-                    <h3 class="card-title">قابلیت جدید تیکت پشتیبانی</h3>
-                    <div class="card-tools"></div>
 
+    {{-- تعداد مرخصی ها --}}
+    @if (auth()->user()->access('MkhodrooProcessMaker.report.numberOfMyVacation'))
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>
+                        <table>
+                            <tr>
+                                <td id="numberOfMyVacationDays">...</td>
+                                <td>
+                                    <p>روز</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="numberOfMyVacationHours">...</td>
+                                <td>
+                                    <p>ساعت</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </h3>
+                    <p>تعداد مرخصی ها</p>
                 </div>
-
-                <div class="card-body">
-                    *قابلیت ارسال پیام صوتی در تیکت های پشتیبانی <br>
-                    برای استفاده از این قابلیت مجوز دسترسی به میکروفن را در مرورگر خود فعال کنید
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
                 </div>
-
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
+            <script>
+                $.get('{{ route('MkhodrooProcessMaker.report.numberOfMyVacation') }}', function(response) {
+                    console.log(response);
+                    $('#numberOfMyVacationDays').html(response.daily);
+                    $('#numberOfMyVacationHours').html(response.hourly);
+                })
+            </script>
+        </div>
+    </div>
+    @endif
 
-        </div> --}}
-        <div class="row">
-            @if (auth()->user()->access('report.tickets.numberOfEachCatagory'))
+    <div class="row">
+        @if (auth()->user()->access('report.tickets.numberOfEachCatagory'))
             <div class="col-sm-4">
                 <canvas class="card" id="myChart"></canvas>
             </div>
             <script>
-            send_ajax_get_request(
-                '{{ url("admin/report/tickets/number-of-each-catagory") }}',
-                function(response){
-                    var canvas = document.getElementById("myChart");
-                    var ctx = canvas.getContext("2d");
-                    var midX = canvas.width/2;
-                    var midY = canvas.height/2
+                send_ajax_get_request(
+                    '{{ url('admin/report/tickets/number-of-each-catagory') }}',
+                    function(response) {
+                        var canvas = document.getElementById("myChart");
+                        var ctx = canvas.getContext("2d");
+                        var midX = canvas.width / 2;
+                        var midY = canvas.height / 2
 
-                    var myPieChart = new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                        labels: response.labels,
-                        datasets: [{
-                            label: '# تعداد',
-                            data: response.data,
-                            borderWidth: 1
-                        }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                beginAtZero: true
-                                }
+                        var myPieChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: response.labels,
+                                datasets: [{
+                                    label: '# تعداد',
+                                    data: response.data,
+                                    borderWidth: 1
+                                }]
                             },
-                            onAnimationProgress: drawSegmentValues
-                        }
-                    });
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                },
+                                onAnimationProgress: drawSegmentValues
+                            }
+                        });
 
 
-                    function drawSegmentValues()
-                    {
-                        for(var i=0; i<myPieChart.segments.length; i++)
-                        {
-                            ctx.fillStyle="white";
-                            var textSize = canvas.width/10;
-                            ctx.font= textSize+"px Verdana";
-                            // Get needed variables
-                            var value = myPieChart.segments[i].value;
-                            var startAngle = myPieChart.segments[i].startAngle;
-                            var endAngle = myPieChart.segments[i].endAngle;
-                            var middleAngle = startAngle + ((endAngle - startAngle)/2);
-                            var posX = (radius/2) * Math.cos(middleAngle) + midX;
-                            var posY = (radius/2) * Math.sin(middleAngle) + midY;
-                            var w_offset = ctx.measureText(value).width/2;
-                            var h_offset = textSize/4;
-                            ctx.fillText(value, posX - w_offset, posY + h_offset);
+                        function drawSegmentValues() {
+                            for (var i = 0; i < myPieChart.segments.length; i++) {
+                                ctx.fillStyle = "white";
+                                var textSize = canvas.width / 10;
+                                ctx.font = textSize + "px Verdana";
+                                // Get needed variables
+                                var value = myPieChart.segments[i].value;
+                                var startAngle = myPieChart.segments[i].startAngle;
+                                var endAngle = myPieChart.segments[i].endAngle;
+                                var middleAngle = startAngle + ((endAngle - startAngle) / 2);
+                                var posX = (radius / 2) * Math.cos(middleAngle) + midX;
+                                var posY = (radius / 2) * Math.sin(middleAngle) + midY;
+                                var w_offset = ctx.measureText(value).width / 2;
+                                var h_offset = textSize / 4;
+                                ctx.fillText(value, posX - w_offset, posY + h_offset);
+                            }
                         }
                     }
-                }
-            )
+                )
             </script>
-            @endif
-            @if (auth()->user()->access('report.tickets.statusInEachCatagory'))
+        @endif
+        @if (auth()->user()->access('report.tickets.statusInEachCatagory'))
             <div class="col-sm-8">
                 <div class="card" id="statusInEachCatagory" style="height: 400px">در حال بارگیری...</div>
             </div>
             <script>
-            send_ajax_get_request(
-                '{{ url("admin/report/tickets/status-in-each-catagory") }}',
-                function(response){
-                    console.log(response.labels);
-                    var labels = [
-                        ['دسته بندی', 'پاسخ داده شده' , 'جدید']
-                    ];
-                    var i =1 ;
-                    response.labels.forEach(function(label){
-                        labels[i] = [label.catagory];
-                        var answered = label.count.filter(function(status){
-                            if( status.status == "پاسخ داده شده" ){
-                                return status.status;
+                send_ajax_get_request(
+                    '{{ url('admin/report/tickets/status-in-each-catagory') }}',
+                    function(response) {
+                        console.log(response.labels);
+                        var labels = [
+                            ['دسته بندی', 'پاسخ داده شده', 'جدید']
+                        ];
+                        var i = 1;
+                        response.labels.forEach(function(label) {
+                            labels[i] = [label.catagory];
+                            var answered = label.count.filter(function(status) {
+                                if (status.status == "پاسخ داده شده") {
+                                    return status.status;
+                                }
+                            })
+                            if (answered.length > 0) {
+                                labels[i][1] = parseInt(answered[0].total);
+                            } else {
+                                labels[i][1] = 0;
                             }
-                        })
-                        if(answered.length >0){
-                            labels[i][1] = parseInt(answered[0].total) ;
-                        }else{
-                            labels[i][1] = 0;
-                        }
 
-                        var newStatus = label.count.filter(function(status){
-                            if( status.status == "جدید" ){
-                                return status.status;
+                            var newStatus = label.count.filter(function(status) {
+                                if (status.status == "جدید") {
+                                    return status.status;
+                                }
+                            })
+                            if (newStatus.length > 0) {
+                                labels[i][2] = parseInt(newStatus[0].total);
+                            } else {
+                                labels[i][2] = 0;
                             }
+                            i++;
                         })
-                        if(newStatus.length >0){
-                            labels[i][2] = parseInt(newStatus[0].total);
-                        }else{
-                            labels[i][2] = 0;
+                        google.charts.load('current', {
+                            packages: ['corechart', 'bar']
+                        });
+                        google.charts.setOnLoadCallback(drawBasic);
+
+                        function drawBasic() {
+
+                            var data = google.visualization.arrayToDataTable(labels);
+
+                            var options = {
+                                title: 'تعداد تیکت ها به تفکیک وضعیت در هفت روز گذشته',
+                                chartArea: {
+                                    width: '75%'
+                                },
+                                hAxis: {
+                                    title: 'دسته بندی',
+                                    minValue: 0
+                                },
+                                vAxis: {
+                                    title: 'تعداد'
+                                },
+                                isStacked: true,
+                                pieSliceText: 'label',
+                            };
+
+                            var chart = new google.visualization.ColumnChart(document.getElementById('statusInEachCatagory'));
+
+                            chart.draw(data, options);
                         }
-                        i++;
-                    })
-                    google.charts.load('current', {packages: ['corechart', 'bar']});
-                    google.charts.setOnLoadCallback(drawBasic);
-
-                    function drawBasic() {
-
-                        var data = google.visualization.arrayToDataTable(labels);
-
-                        var options = {
-                            title: 'تعداد تیکت ها به تفکیک وضعیت در هفت روز گذشته',
-                            chartArea: {width: '75%'},
-                            hAxis: {
-                            title: 'دسته بندی',
-                            minValue: 0
-                            },
-                            vAxis: {
-                            title: 'تعداد'
-                            },
-                            isStacked: true,
-                            pieSliceText: 'label',
-                        };
-
-                        var chart = new google.visualization.ColumnChart(document.getElementById('statusInEachCatagory'));
-
-                        chart.draw(data, options);
                     }
-                }
-            )
+                )
             </script>
-            @endif
+        @endif
 
-        </div>
+    </div>
+
+
     {{-- <div class="row ">
         <div class="col-sm-4">
             <div class="box box-info box-solid">
