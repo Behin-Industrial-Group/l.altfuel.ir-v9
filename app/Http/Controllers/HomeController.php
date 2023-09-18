@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard')->with([
+            'voip_poll_info' => VoipController::get_voip_poll_info()
+        ]);
     }
 }

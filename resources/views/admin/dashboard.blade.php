@@ -9,44 +9,83 @@
 
 
     {{-- تعداد مرخصی ها --}}
-    @if (auth()->user()->access('MkhodrooProcessMaker.report.numberOfMyVacation'))
+
     <div class="row">
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>
-                        <table>
-                            <tr>
-                                <td id="numberOfMyVacationDays">...</td>
-                                <td>
-                                    <p>روز</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td id="numberOfMyVacationHours">...</td>
-                                <td>
-                                    <p>ساعت</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </h3>
-                    <p> مرخصی ها</p>
+        @if (auth()->user()->access('MkhodrooProcessMaker.report.numberOfMyVacation'))
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>
+                            <table>
+                                <tr>
+                                    <td id="numberOfMyVacationDays">...</td>
+                                    <td>
+                                        <p>روز</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td id="numberOfMyVacationHours">...</td>
+                                    <td>
+                                        <p>ساعت</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </h3>
+                        <p> مرخصی ها</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <script>
+                    $.get('{{ route('MkhodrooProcessMaker.report.numberOfMyVacation') }}', function(response) {
+                        console.log(response);
+                        $('#numberOfMyVacationDays').html(response.daily);
+                        $('#numberOfMyVacationHours').html(response.hourly);
+                    })
+                </script>
             </div>
-            <script>
-                $.get('{{ route('MkhodrooProcessMaker.report.numberOfMyVacation') }}', function(response) {
-                    console.log(response);
-                    $('#numberOfMyVacationDays').html(response.daily);
-                    $('#numberOfMyVacationHours').html(response.hourly);
-                })
-            </script>
-        </div>
+        @endif
+
+        {{-- اطلاعات نظرسنجی تلفن ها --}}
+        @foreach ($voip_poll_info as $key => $value)
+            @if (auth()->user()->access('اطلاعات نظرسنجی تلفنها - '. $value['name']))
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>
+                                <table>
+                                    <tr>
+                                        <td id="numberOfTotal">{{$value['count']}}</td>
+                                        <td>
+                                            <p>تعداد</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="score">{{$value['score_avg']}}</td>
+                                        <td>
+                                            <p>میانگین امتیاز</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h3>
+                            <p> {{$value['name']}}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                    <script></script>
+                </div>
+            @endif
+        @endforeach
+
+
     </div>
-    @endif
+
+
 
     <div class="row">
         @if (auth()->user()->access('report.tickets.numberOfEachCatagory'))
