@@ -63,7 +63,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td id="score">{{$value['score_avg']}}</td>
+                                        <td id="score">{{ number_format($value['score_avg'],2)}}</td>
                                         <td>
                                             <p>میانگین امتیاز</p>
                                         </td>
