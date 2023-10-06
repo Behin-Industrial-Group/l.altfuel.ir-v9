@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-sm-12" style="height: 10px;"></div>
-    <div class="card row" style="padding: 5px">
+    <div class="card row table-responsive" style="padding: 5px">
         <table class="table table-striped " id="draft-list">
             <thead>
                 <tr>
