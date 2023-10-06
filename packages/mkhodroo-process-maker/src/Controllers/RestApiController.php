@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use SoapClient;
 
-class PMController extends Controller
+class RestApiController extends Controller
 {
     private static $pmServer;
     private static $pmWorkspace;
@@ -59,7 +59,10 @@ class PMController extends Controller
         return $oToken;
     }
 
-    public static function changePass($accessToken, $userId, $newPass){
+    public static function changePass($accessToken = null, $userId = null, $newPass = null){
+        $accessToken = self::getAccessToken();
+        $userId = self::getUserId($accessToken);
+        $newPass = str_random(10);
         $postParams = array(
             'usr_new_pass'      => $newPass,
             'usr_cnf_pass' => $newPass
@@ -87,7 +90,7 @@ class PMController extends Controller
             return null;
           }
           else {
-             return true;
+             return $newPass;
           }
     }
 

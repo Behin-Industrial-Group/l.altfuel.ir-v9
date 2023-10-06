@@ -31,7 +31,9 @@
             "Database\\Seeders\\": "database/seeders/",
             "Mkhodroo\\AltfuelTicket\\": "packages/altfuel-ticket/src/",
             "Mkhodroo\\UserRoles\\": "packages/mkhodroo-user-roles/src/",
-            "Mkhodroo\\MkhodrooProcessMaker\\": "packages/mkhodroo-process-maker/src" 
+            "Mkhodroo\\MkhodrooProcessMaker\\": "packages/mkhodroo-process-maker/src",
+            "Mkhodroo\\Voip\\": "packages/mkhodroo-voip/src",
+            "Mkhodroo\\BPMN\\": "packages/mkhodroo-bpmn/src"
         }
     },
     "autoload-dev": {

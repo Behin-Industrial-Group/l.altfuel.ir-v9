@@ -171,7 +171,7 @@ function open_admin_modal(url, title = ''){
     )
 }
 
-function open_admin_modal_with_data(data, title = '', customFun){
+function open_admin_modal_with_data(data, title = '', customFun = null){
     var modal = $('<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
                     '<div class="modal-dialog modal-lg">' +
                     '<div class="modal-content">' +

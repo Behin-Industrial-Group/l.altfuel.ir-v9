@@ -1,10 +1,10 @@
 <?php
 
-namespace Mkhodroo\MkhodrooProcessMaker;
+namespace Mkhodroo\Voip;
 
 use Illuminate\Support\ServiceProvider;
 
-class MKProcessMakerProvider extends ServiceProvider
+class VoipServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -23,9 +23,6 @@ class MKProcessMakerProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes(
-            [ __DIR__.'/config.php' => config_path('pm_config.php') ]
-        );
         $this->loadMigrationsFrom(__DIR__. '/Migrations');
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadViewsFrom(__DIR__. '/Views', 'PMViews');

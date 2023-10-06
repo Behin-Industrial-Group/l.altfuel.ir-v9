@@ -116,8 +116,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Mkhodroo\\Voip\\' => 14,
             'Mkhodroo\\UserRoles\\' => 19,
             'Mkhodroo\\MkhodrooProcessMaker\\' => 30,
+            'Mkhodroo\\BPMN\\' => 14,
             'Mkhodroo\\AltfuelTicket\\' => 23,
         ),
         'L' => 
@@ -396,6 +398,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Mkhodroo\\Voip\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src',
+        ),
         'Mkhodroo\\UserRoles\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src',
@@ -403,6 +409,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\MkhodrooProcessMaker\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src',
+        ),
+        'Mkhodroo\\BPMN\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src',
         ),
         'Mkhodroo\\AltfuelTicket\\' => 
         array (
@@ -3618,10 +3628,51 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Models\\TicketCatagory' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketCatagory.php',
         'Mkhodroo\\AltfuelTicket\\Models\\TicketComment' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketComment.php',
         'Mkhodroo\\AltfuelTicket\\Requests\\TicketRequest' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Requests/TicketRequest.php',
+        'Mkhodroo\\BPMN\\BPMNServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/BPMNServiceProvider.php',
+        'Mkhodroo\\BPMN\\Controllers\\Actors\\GetActivityActorController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Actors/GetActivityActorController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Cases\\FirstCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Cases/FirstCaseController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Cases\\NewCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Cases/NewCaseController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Cases\\NumberController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Cases/NumberController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Cases\\StartNewCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Cases/StartNewCaseController.php',
+        'Mkhodroo\\BPMN\\Controllers\\DynamicForms\\GetDynaFormController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/DynamicForms/GetDynaFormController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Elements\\GetElementController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Elements/GetElementController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Elements\\GetStartEventController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Elements/GetStartEventController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Flows\\FlowController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Flows/FlowController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Flows\\IncomingController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Flows/IncomingController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Flows\\OutgoingController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Flows/OutgoingController.php',
+        'Mkhodroo\\BPMN\\Controllers\\Processes\\GetProcessController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/Processes/GetProcessController.php',
+        'Mkhodroo\\BPMN\\Controllers\\ReadXmlController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/ReadXmlController.php',
+        'Mkhodroo\\BPMN\\Controllers\\SaveBPMNElementController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/SaveBPMNElementController.php',
+        'Mkhodroo\\BPMN\\Controllers\\SaveBPMNIncomingController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/SaveBPMNIncomingController.php',
+        'Mkhodroo\\BPMN\\Controllers\\SaveBPMNOutgoingController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/SaveBPMNOutgoingController.php',
+        'Mkhodroo\\BPMN\\Controllers\\SaveBPMNProcessController' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Controllers/SaveBPMNProcessController.php',
+        'Mkhodroo\\BPMN\\Models\\BPMNActivityActor' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Models/BPMNActivityActor.php',
+        'Mkhodroo\\BPMN\\Models\\BPMNCaseNumber' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Models/BPMNCaseNumber.php',
+        'Mkhodroo\\BPMN\\Models\\BPMNDynaForm' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Models/BPMNDynaForm.php',
+        'Mkhodroo\\BPMN\\Models\\BPMNElement' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Models/BPMNElement.php',
+        'Mkhodroo\\BPMN\\Models\\BPMNIncoming' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Models/BPMNIncoming.php',
+        'Mkhodroo\\BPMN\\Models\\BPMNOutgoing' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Models/BPMNOutgoing.php',
+        'Mkhodroo\\BPMN\\Models\\BPMNProcess' => __DIR__ . '/../..' . '/packages/mkhodroo-bpmn/src/Models/BPMNProcess.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\AuthController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/AuthController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CaseController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CurlRequestController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CurlRequestController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\DraftCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/DraftCaseController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\DynaFormController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/DynaFormController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\GetCaseVarsController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/GetCaseVarsController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\InboxController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/InboxController.php',
-        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\PMController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/PMController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\NewCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/NewCaseController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\PMUserController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/PMUserController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\PMVacationController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/PMVacationController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\ProcessController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/ProcessController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\RestApiController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/RestApiController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\RouteCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/RouteCaseController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\SetCaseVarsController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/SetCaseVarsController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\StartCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/StartCaseController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\ToDoCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/ToDoCaseController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\TriggerController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/TriggerController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\MKProcessMakerProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/MKProcessMakerProvider.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMUsers' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMUsers.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMVacation' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMVacation.php',
         'Mkhodroo\\UserRoles\\Controllers\\AccessController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/AccessController.php',
         'Mkhodroo\\UserRoles\\Controllers\\GetMethodsController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/GetMethodsController.php',
         'Mkhodroo\\UserRoles\\Controllers\\GetRoleController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/GetRoleController.php',
@@ -3630,6 +3681,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\UserRoles\\Models\\Method' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/Method.php',
         'Mkhodroo\\UserRoles\\Models\\Role' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/Role.php',
         'Mkhodroo\\UserRoles\\UserRolesServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/UserRolesServiceProvider.php',
+        'Mkhodroo\\Voip\\Controllers\\FirstOnlineTimeController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/FirstOnlineTimeController.php',
+        'Mkhodroo\\Voip\\Controllers\\VoipController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/VoipController.php',
+        'Mkhodroo\\Voip\\Models\\VoipInfo' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Models/VoipInfo.php',
+        'Mkhodroo\\Voip\\VoipServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/VoipServiceProvider.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',

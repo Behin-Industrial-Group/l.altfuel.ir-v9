@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mkhodroo\Voip\Controllers\VoipController;
 
 class HomeController extends Controller
 {

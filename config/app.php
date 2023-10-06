@@ -227,6 +227,8 @@ return [
         Mkhodroo\AltfuelTicket\AltfuelTicketServiceProvider::class,
         \Mkhodroo\UserRoles\UserRolesServiceProvider::class,
         \Mkhodroo\MkhodrooProcessMaker\MKProcessMakerProvider::class,
+        \Mkhodroo\Voip\VoipServiceProvider::class,
+        \Mkhodroo\BPMN\BPMNServiceProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
         /*

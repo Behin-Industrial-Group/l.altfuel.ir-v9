@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Mkhodroo\Voip\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class VoipController extends Controller
 {
@@ -19,7 +20,6 @@ class VoipController extends Controller
         curl_close($ch);
 
         $data = collect(unserialize($result));
-
         return [
             '1000' => ['name' => 'اپراتور', 'score_avg' => $data->where('queue_num', '1000')->avg('score'), 'count' => $data->where('queue_num', '1000')->count()],
             '1001' => ['name' => 'متقاضیان irngv', 'score_avg' => $data->where('queue_num', '1001')->avg('score'), 'count' => $data->where('queue_num', '1001')->count()],
@@ -40,5 +40,27 @@ class VoipController extends Controller
             '9000' => ['name' => 'تستی', 'score_avg' => $data->where('queue_num', '9000')->avg('score'), 'count' => $data->where('queue_num', '9000')->count()],
 
         ];
+    }
+
+    public static function sip_show_peers_status(){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://voip.altfuel.ir/mkhodroo_pbxapi/sip-show-peers.php');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
+        $er = curl_error($ch);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        $data = collect(unserialize($result));
+        // print_r($data);
+        // $onlineUsers = $data->where('71', 'OK');
+        foreach($data as $onlineUser){
+            if(in_array("OK", $onlineUser)){
+                print_r($onlineUser);
+                FirstOnlineTimeController::set($onlineUser[0]);
+            }
+        }
+        // return $data->where('71', 'OK');
+        // return $data;
     }
 }

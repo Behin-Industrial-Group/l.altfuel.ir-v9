@@ -83,6 +83,15 @@
         @endforeach
 
 
+        {{-- آنلاین بودن تلفن روی سرور --}}
+        <script>
+            $.get('{{route("voip.sipShowPeers")}}',function(response){
+                console.log(response);
+            })
+        </script>
+        
+
+
     </div>
 
 

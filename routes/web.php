@@ -46,15 +46,25 @@ use function PHPSTORM_META\type;
 |
 */
 
+Route::get('tst', function () {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://voip.altfuel.ir/test.php');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
+    $er = curl_error($ch);
+    $result = curl_exec($ch);
+    return $result;
+});
+
 Route::get('test', function (SMSController $sms) {
     $excel = SimpleXLSX::parse(public_path('sms.xlsx'));
     $rows = $excel->rows();
-    for ($i = 2; $i < count($rows); $i++) {
-        $body = "مدیر محترم مرکز خدمات کد @code،  با سلام، طبق بررسی های اولیه انجام شده مشخصات خودرو با شاسی @shasi ثبت شده در آن مرکز، نیاز به كنترل و در صورت لزوم اصلاح در سامانه irngv دارد، لطفا حداکثر ظرف ۷۲ ساعت، تصویر مدارک خودرو را از طریق تیکت یا شماره ایتا زیر،  به اتحادیه ارسال نمایید تا درصورت لزوم مشخصات اصلاح شود. 
-شماره ایتا: 09356318865
-اتحادیه کشوری سوختهای جایگزین";
-        $body = str_replace(['@code', '@shasi'], [$rows[$i][28], $rows[$i][6]], $body);
-        $mobile = $rows[$i][30];
+    for ($i = 1; $i < count($rows); $i++) {
+        $body = "مدیر محترم مرکز خدمات کد @code،  با سلام، پیرو پیامک ارسالی قبلی جهت ارسال مدارک خودرو با شاسی @shasi، هنوز مدارک خودرو دریافت نشده است. لطفا تا ۴۸ ساعت آینده نسبت به ارسال مدارک از طریق تیکت، اقدام نمایید‌. باتوجه به اهمیت بررسی این مدارک، در صورت عدم ارسال مدارک، اقدام مقتضی توسط اتحادیه صورت خواهد گرفت. 
+        اتحادیه کشوری سوختهای جایگزین";
+        $body = str_replace(['@code', '@shasi'], [$rows[$i][14], $rows[$i][6]], $body);
+        $mobile = $rows[$i][16];
         // echo $mobile . '<br>';
         // $sms->send($mobile, $body);
     }
@@ -449,5 +459,4 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
 
     require __DIR__ . '/report.php';
     require __DIR__ . '/voip.php';
-
 });
