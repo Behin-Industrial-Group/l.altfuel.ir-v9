@@ -94,13 +94,10 @@
         </div>
 
         <div class="row form-group">
-            <div class="col-sm-3"><button class="btn btn-success"
+            <button class="btn btn-primary m-1"
                     onclick="save_and_next()">{{ __('save and next') }}</button>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-sm-3"><button class="btn btn-success" onclick="save()">{{ __('save') }}</button>
-            </div>
+            
+            <button class="btn btn-default m-1" onclick="save()">{{ __('save') }}</button>
         </div>
 
     </form>
