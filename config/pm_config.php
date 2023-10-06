@@ -17,6 +17,36 @@ return [
                         [ 'name' => 'set name of requester', 'id' => '98954906564e3553a082989062656447' ]
                     ]
                 ],
+                [ 
+                    'id' => "88779770864e34907afc1d3022729094",
+                    'name' => 'تایید درخواست',  
+                    'dynamic_view_form' => 'register',
+                    'trigger' => 
+                    [
+                        [ 'name' => 'set user id', 'id' => '68379534364e3501fd57709063851566' ],
+                        [ 'name' => 'set name of requester', 'id' => '98954906564e3553a082989062656447' ]
+                    ]
+                ],
+                [ 
+                    'id' => "54062165665097091432573067587160",
+                    'name' => 'تایید درخواست توسط رئیس',  
+                    'dynamic_view_form' => 'register',
+                    'trigger' => 
+                    [
+                        [ 'name' => 'set user id', 'id' => '68379534364e3501fd57709063851566' ],
+                        [ 'name' => 'set name of requester', 'id' => '98954906564e3553a082989062656447' ]
+                    ]
+                ],
+                [ 
+                    'id' => "65732509464e35f99da1e28012350633",
+                    'name' => 'انتقال تلفن',  
+                    'dynamic_view_form' => 'register',
+                    'trigger' => 
+                    [
+                        [ 'name' => 'set user id', 'id' => '68379534364e3501fd57709063851566' ],
+                        [ 'name' => 'set name of requester', 'id' => '98954906564e3553a082989062656447' ]
+                    ]
+                ],
             ],
         ]
     ],
