@@ -142,11 +142,8 @@ function open_admin_modal(url, title = ''){
     var modal = $('<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
                     '<div class="modal-dialog modal-lg">' +
                     '<div class="modal-content">' +
-                    '<div class="modal-header">' +
-                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                    '<h4 class="modal-title" id="myModalLabel">'+ title +'</h4>' +
-                    '</div>' +
                     '<div class="modal-body" id="modal-body">' +
+                    '<h4 class="modal-title" id="myModalLabel">'+ title +'</h4>' +
                     '<p>Modal content goes here.</p>' +
                     '</div>' +
                     '<div class="modal-footer">' +
@@ -175,11 +172,8 @@ function open_admin_modal_with_data(data, title = '', customFun = null){
     var modal = $('<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
                     '<div class="modal-dialog modal-lg">' +
                     '<div class="modal-content">' +
-                    '<div class="modal-header">' +
-                    '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                    '<h4 class="modal-title" id="myModalLabel" style="font-weight: bold">'+ title +'</h4>' +
-                    '</div>' +
                     '<div class="modal-body" id="modal-body">' +
+                    '<h4 class="modal-title" id="myModalLabel" style="font-weight: bold">'+ title +'</h4>' +
                     '<p>Modal content goes here.</p>' +
                     '</div>' +
                     '<div class="modal-footer">' +
