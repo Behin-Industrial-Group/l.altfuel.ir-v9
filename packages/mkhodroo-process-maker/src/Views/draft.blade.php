@@ -63,11 +63,12 @@
             url = "{{ route('MkhodrooProcessMaker.api.deleteCase', [ 'caseId' => 'caseId' ]) }}";
             url = url.replace('caseId', caseId)
             console.log(url);
-            send_ajax_get_request(
+            send_ajax_get_request_with_confirm(
                 url,
                 function(response){
                     console.log(response);
-                }
+                },
+                '{{__("Are You Sure For Delete This Item?")}}'
             )
         }
     </script>
