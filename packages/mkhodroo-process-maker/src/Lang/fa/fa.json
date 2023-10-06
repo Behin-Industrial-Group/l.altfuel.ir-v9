@@ -9,7 +9,7 @@
     "Send Date": "تاریخ ارسال",
     "Action": "اقدام",
     "Delete": "حذف",
-    "Draft": "پیش نویس",
+    "DRAFT": "پیش نویس",
     "daily": "روزانه",
     "hourly": "ساعتی",
     "approved": "تایید",
@@ -26,6 +26,6 @@
     "departmentManagerResult": "نظر مدیر واحد",
     "bossResult": "نظر ریاست",
     "save": "ذخیره",
-    "save and next": "ذخیره و ارسال"
-
+    "save and next": "ذخیره و ارسال",
+    "Are You Sure For Delete This Item?": "آیا از حذف این آیتم مطمئنید؟"
 }
