@@ -41,6 +41,7 @@ Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', '
         Route::post('save-and-next', [SetCaseVarsController::class, 'saveAndNext'])->name('saveAndNext');
         Route::post('save', [SetCaseVarsController::class, 'save'])->name('save');
         Route::get('get-case-vars/{caseId}', [GetCaseVarsController::class, 'getByCaseId'])->name('getCaseVars');
+        Route::get('get-case-info/{caseId}/{delIndex}', [CaseController::class, 'getCaseInfo'])->name('getCaseInfo');
         Route::get('delete-case/{caseId}', [DeleteCaseController::class, 'byCaseId'])->name('deleteCase');
 
         Route::name('process.')->prefix('process')->group(function(){
