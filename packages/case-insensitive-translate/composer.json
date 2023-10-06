@@ -1,0 +1,16 @@
+{
+    "name": "mkhodroo/case-insensitive-translate",
+    "description": "possible to make laravel case insensitive against trans statements",
+    "autoload": {
+        "psr-4": {
+            "Mkhodroo\\CaseInsensitivveTranslate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mkhodroo",
+            "email": "mkhodroo@yahoo.com"
+        }
+    ],
+    "require": {}
+}

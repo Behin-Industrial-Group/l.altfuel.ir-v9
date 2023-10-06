@@ -12,7 +12,14 @@
         <div class="row form-group">
             <div class="col-sm-3">{{ __('type') }}</div>
             <div class="col-sm-9">
-                <input type="text" name="type" value="{{ $vars->type ?? '' }}" class="form-control" id="">
+                <select name="type" class="form-control" id="">
+                    <option value="daily"
+                        {{ isset($vars->type) && $vars->type == 'daily' ? 'selected' : '' }}>
+                        {{ __('daily') }}</option>
+                    <option value="hourly"
+                        {{ isset($vars->type) && $vars->type == 'hourly' ? 'selected' : '' }}>
+                        {{ __('hourly') }}</option>
+                </select>
             </div>
         </div>
 
@@ -88,8 +95,14 @@
         <div class="row form-group">
             <div class="col-sm-3">{{ __('bossResult') }}</div>
             <div class="col-sm-9">
-                <input type="text" name="bossResult" value="{{ $vars->bossResult ?? '' }}" class="form-control"
-                    id="">
+                <select name="bossResult" class="form-control" id="">
+                    <option value="1"
+                        {{ isset($vars->bossResult) && $vars->bossResult == '1' ? 'selected' : '' }}>
+                        {{ __('approved') }}</option>
+                    <option value="0"
+                        {{ isset($vars->bossResult) && $vars->bossResult == '0' ? 'selected' : '' }}>
+                        {{ __('declined') }}</option>
+                </select>
             </div>
         </div>
 

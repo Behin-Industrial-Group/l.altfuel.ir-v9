@@ -1,0 +1,31 @@
+
+
+{
+    "Number" : "شماره",
+    "Id": "شناسه",
+    "Title": "عنوان",
+    "Process Name": "نام فرایند",
+    "Status": "وضعیت",
+    "Send Date": "تاریخ ارسال",
+    "Action": "اقدام",
+    "Delete": "حذف",
+    "Draft": "پیش نویس",
+    "daily": "روزانه",
+    "hourly": "ساعتی",
+    "approved": "تایید",
+    "declined": "عدم تایید",
+    "name": "نام",
+    "type": "نوع",
+    "duration": "مدت",
+    "startDate": "تاریخ شروع",
+    "endDate": "تاریخ پایان",
+    "substitute": "جایگزین",
+    "emergencyPhone": "تلفن اضطراری",
+    "description": "توضیحات",
+    "departmentManagerName": "نام مدیر واحد",
+    "departmentManagerResult": "نظر مدیر واحد",
+    "bossResult": "نظر ریاست",
+    "save": "ذخیره",
+    "save and next": "ذخیره و ارسال"
+
+}

@@ -60,6 +60,7 @@ return array(
     'Mkhodroo\\Voip\\' => array($baseDir . '/packages/mkhodroo-voip/src'),
     'Mkhodroo\\UserRoles\\' => array($baseDir . '/packages/mkhodroo-user-roles/src'),
     'Mkhodroo\\MkhodrooProcessMaker\\' => array($baseDir . '/packages/mkhodroo-process-maker/src'),
+    'Mkhodroo\\CaseInsensitiveTranslate\\' => array($baseDir . '/packages/case-insensitive-translate/src'),
     'Mkhodroo\\AltfuelTicket\\' => array($baseDir . '/packages/altfuel-ticket/src'),
     'Livewire\\' => array($vendorDir . '/livewire/livewire/src'),
     'League\\MimeTypeDetection\\' => array($vendorDir . '/league/mime-type-detection/src'),

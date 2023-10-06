@@ -119,6 +119,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Mkhodroo\\Voip\\' => 14,
             'Mkhodroo\\UserRoles\\' => 19,
             'Mkhodroo\\MkhodrooProcessMaker\\' => 30,
+            'Mkhodroo\\CaseInsensitiveTranslate\\' => 34,
             'Mkhodroo\\AltfuelTicket\\' => 23,
         ),
         'L' => 
@@ -408,6 +409,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\MkhodrooProcessMaker\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src',
+        ),
+        'Mkhodroo\\CaseInsensitiveTranslate\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/case-insensitive-translate/src',
         ),
         'Mkhodroo\\AltfuelTicket\\' => 
         array (
@@ -3623,6 +3628,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Models\\TicketCatagory' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketCatagory.php',
         'Mkhodroo\\AltfuelTicket\\Models\\TicketComment' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketComment.php',
         'Mkhodroo\\AltfuelTicket\\Requests\\TicketRequest' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Requests/TicketRequest.php',
+        'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => __DIR__ . '/../..' . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\AuthController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/AuthController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CaseController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CurlRequestController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CurlRequestController.php',

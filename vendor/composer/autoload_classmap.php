@@ -3046,6 +3046,7 @@ return array(
     'Mkhodroo\\AltfuelTicket\\Models\\TicketCatagory' => $baseDir . '/packages/altfuel-ticket/src/Models/TicketCatagory.php',
     'Mkhodroo\\AltfuelTicket\\Models\\TicketComment' => $baseDir . '/packages/altfuel-ticket/src/Models/TicketComment.php',
     'Mkhodroo\\AltfuelTicket\\Requests\\TicketRequest' => $baseDir . '/packages/altfuel-ticket/src/Requests/TicketRequest.php',
+    'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => $baseDir . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
     'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\AuthController' => $baseDir . '/packages/mkhodroo-process-maker/src/Controllers/AuthController.php',
     'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseController' => $baseDir . '/packages/mkhodroo-process-maker/src/Controllers/CaseController.php',
     'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CurlRequestController' => $baseDir . '/packages/mkhodroo-process-maker/src/Controllers/CurlRequestController.php',

@@ -32,7 +32,8 @@
             "Mkhodroo\\AltfuelTicket\\": "packages/altfuel-ticket/src/",
             "Mkhodroo\\UserRoles\\": "packages/mkhodroo-user-roles/src/",
             "Mkhodroo\\MkhodrooProcessMaker\\": "packages/mkhodroo-process-maker/src",
-            "Mkhodroo\\Voip\\": "packages/mkhodroo-voip/src"
+            "Mkhodroo\\Voip\\": "packages/mkhodroo-voip/src",
+            "Mkhodroo\\CaseInsensitiveTranslate\\": "packages/case-insensitive-translate/src"
         }
     },
     "autoload-dev": {
