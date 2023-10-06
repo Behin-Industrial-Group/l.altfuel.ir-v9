@@ -25,6 +25,7 @@
             fd,
             function(response) {
                 console.log(response);
+                refresh_table()
             }
         )
     }

@@ -10,7 +10,8 @@
                     <th>{{__('Number')}}</th>
                     <th>{{__('Title')}}</th>
                     <th>{{__('Process Name')}}</th>
-                    <th style="text-align: center; direction: rtl">{{__('Status')}}</th>
+                    <th>{{__('Status')}}</th>
+                    <th>{{__('Send By')}}</th>
                     <th style="text-align: center; direction: ltr">{{__('Send Date')}}</th>
                     <th style="text-align: center; direction: ltr">{{__('Delay')}}</th>
                     <th>{{__('Action')}}</th>
@@ -34,6 +35,18 @@
                 {data : 'DEL_TITLE'},
                 {data : 'PRO_TITLE'},
                 {data : 'TAS_STATUS'},
+                {data : 'SEND_BY_INFO', render: function(SEND_BY_INFO){
+                    if(SEND_BY_INFO.user_tooltip.length){
+                        var name = '';
+                        users = SEND_BY_INFO.user_tooltip;
+                        users.forEach(function(item){
+                            name += item.usr_firstname + ' ' + item.usr_lastname + '<br>'
+                        })
+                        return name;
+                    }else{
+                        return 'Nobody';
+                    }
+                }},
                 {data : 'DEL_DELEGATE_DATE', render: function(DEL_DELEGATE_DATE){ return `<span style="float: left; direction: ltr">${DEL_DELEGATE_DATE}</span>`; }},
                 {data : 'DELAY' , render: function(DELAY){ return `<span style="float: left; direction: ltr">${DELAY}</span>`; }},
                 {data : 'APP_UID', render: function(APP_UID){return  `<i class='fa fa-trash bg-red' onclick="delete_case('${APP_UID}')"></i>`; }},
