@@ -12,7 +12,7 @@
                     <th>{{__('Process Name')}}</th>
                     <th>{{__('Status')}}</th>
                     <th>{{__('Send Date')}}</th>
-                    <th>{{__('Delete')}}</th>
+                    <th>{{__('Action')}}</th>
                 </tr>
             </thead>
         </table>
@@ -32,7 +32,7 @@
                 {data : 'info', render: function(info){return info.caseNumber}},
                 {data : 'name'},
                 {data : 'info', render: function(info){return info.processName;}},
-                {data : 'status'},
+                {data : 'status', render: function(status){return `{{__('${status}')}}`}},
                 {data : 'info', render: function(info){return info.updateDate}},
                 {data : 'guid', render: function(guid){return  `<i class='fa fa-trash bg-red' onclick="delete_case('${guid}')"></i>`; }},
             ]
