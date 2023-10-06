@@ -1,11 +1,9 @@
-@if (config('pm_config.debug'))
-    <div class="col-sm-12" dir="ltr">
-        <pre>
-            {{ print_r($vars) }}
-        </pre>
-    </div>
-@endif
 
+<div class="row" style="border-bottom: solid 1px black">
+    <h4>{{ $caseTitle ?? '' }} - {{ $processTitle ?? '' }}</h4>
+    <button type="button" style="flex: auto; text-align: left" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+</div>
+<div class="row" style="height: 10px"></div>
 @yield('content')
 
 <div class="row form-group">
@@ -47,3 +45,11 @@
         )
     }
 </script>
+
+@if (config('pm_config.debug'))
+    <div class="col-sm-12" dir="ltr">
+        <pre>
+            {{ print_r($vars) }}
+        </pre>
+    </div>
+@endif
