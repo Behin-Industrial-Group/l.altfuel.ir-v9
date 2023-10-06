@@ -6,7 +6,7 @@
         <table class="table table-striped " id="draft-list">
             <thead>
                 <tr>
-                    <th>{{__('Id')}}</th>
+                    {{-- <th>{{__('Id')}}</th> --}}
                     <th>{{__('Number')}}</th>
                     <th>{{__('Title')}}</th>
                     <th>{{__('Process Name')}}</th>
@@ -30,25 +30,32 @@
             'draft-list',
             '{{ route("MkhodrooProcessMaker.api.draft") }}',
             [
-                {data : 'APP_UID', render: function(APP_UID){return APP_UID.substr(APP_UID.length - 8)}},
+                // {data : 'APP_UID', render: function(APP_UID){return APP_UID.substr(APP_UID.length - 8)}},
                 {data : 'APP_NUMBER'},
                 {data : 'DEL_TITLE'},
                 {data : 'PRO_TITLE'},
                 {data : 'TAS_STATUS'},
                 {data : 'SEND_BY_INFO', render: function(SEND_BY_INFO){
-                    if(SEND_BY_INFO.user_tooltip.length){
-                        var name = '';
-                        users = SEND_BY_INFO.user_tooltip;
-                        users.forEach(function(item){
-                            name += item.usr_firstname + ' ' + item.usr_lastname + '<br>'
-                        })
-                        return name;
+                    if(SEND_BY_INFO.user_tooltip.usr_firstname){
+                        user = SEND_BY_INFO.user_tooltip;
+                        name = user.usr_firstname + ' ' + user.usr_lastname 
+                        return name.substring(0,15);
                     }else{
-                        return 'Nobody';
+                        return '-';
                     }
                 }},
-                {data : 'DEL_DELEGATE_DATE', render: function(DEL_DELEGATE_DATE){ return `<span style="float: left; direction: ltr">${DEL_DELEGATE_DATE}</span>`; }},
-                {data : 'DELAY' , render: function(DELAY){ return `<span style="float: left; direction: ltr">${DELAY}</span>`; }},
+                {data : 'DEL_DELEGATE_DATE', render: function(DEL_DELEGATE_DATE){ 
+                    date = DEL_DELEGATE_DATE.split(" ")[0]
+                    time = DEL_DELEGATE_DATE.split(" ")[1]
+                    return `<span style="float: left; direction: ltr">${date} ${time}</span>`; 
+                }},
+                {data : 'DELAY' , render: function(DELAY){ 
+                    delay_day = DELAY.split(" ")[1]
+                    delay_h = DELAY.split(" ")[3]
+                    delay_m = DELAY.split(" ")[5]
+                    delay_s = DELAY.split(" ")[7]
+                    return `<span style="float: left; direction: ltr">${delay_day}d  ${delay_h}h ${delay_m}m ${delay_s}s</span>`; 
+                }},
                 {data : 'APP_UID', render: function(APP_UID){return  `<i class='fa fa-trash bg-red' onclick="delete_case('${APP_UID}')"></i>`; }},
             ]
         );
