@@ -89,6 +89,7 @@
                 url,
                 function(response){
                     console.log(response);
+                    refresh_table()
                 },
                 '{{__("Are You Sure For Delete This Item?")}}'
             )
