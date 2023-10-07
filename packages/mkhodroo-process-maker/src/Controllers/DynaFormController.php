@@ -21,7 +21,8 @@ class DynaFormController extends Controller
             TriggerController::excute($trigger->guid, $r->caseId, $r->delIndex);
         }
         $viewName = $task->dynaform;
-        $variables = (new GetCaseVarsController())->getByCaseId($r->caseId);
+        // $variables = (new GetCaseVarsController())->getByCaseId($r->caseId);
+        $variables = VariableController::getByProcessId($r->processId);
         return view("PMViews::dynamic-forms." . $viewName)->with([
             'vars' => $variables,
             'processId' => $r->processId,

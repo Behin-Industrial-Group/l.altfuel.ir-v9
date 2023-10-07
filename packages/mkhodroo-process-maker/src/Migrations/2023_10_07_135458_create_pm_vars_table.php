@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('var_title');
             $table->string('type');
             $table->string('accepted_value');
-            $table->string('default_value');
+            $table->string('default_value')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

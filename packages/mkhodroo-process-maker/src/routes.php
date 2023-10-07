@@ -18,6 +18,7 @@ use Mkhodroo\MkhodrooProcessMaker\Controllers\StartCaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\TaskController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\ToDoCaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\TriggerController;
+use Mkhodroo\MkhodrooProcessMaker\Controllers\VariableController;
 
 Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', 'access'])->group(function(){
     Route::get('test', function(){
@@ -36,11 +37,14 @@ Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', '
         $excel = SimpleXLSX::parse(public_path('process_variables.xlsx'));
         $rows = $excel->rows();
         for ($i = 1; $i < count($rows); $i++) {
-            $pro_uid = $rows[$i][0];
-            $task_uid = $rows[$i][1];
-            $task_title = $rows[$i][2];
-            echo "$pro_uid | $task_uid | $task_title <br>";
-            // TaskController::saveToDb($pro_uid, $task_uid, $task_title);
+            $pro_uid = $rows[$i][2];
+            $var_uid = $rows[$i][1];
+            $var_title = $rows[$i][4];
+            $type = $rows[$i][5];
+            $default = $rows[$i][12];
+            $accepted_value = $rows[$i][13];
+            echo "$pro_uid | $var_uid | $var_title | $type | $default | $accepted_value <br>";
+            VariableController::saveToDb($pro_uid, $var_uid, $var_title, $type, $accepted_value, $default);
             // echo $mobile . '<br>';
             // $sms->send($mobile, $body);
         }
