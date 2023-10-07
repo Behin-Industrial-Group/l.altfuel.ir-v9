@@ -43,6 +43,7 @@ Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', '
         Route::get('get-case-vars/{caseId}', [GetCaseVarsController::class, 'getByCaseId'])->name('getCaseVars');
         Route::get('get-case-info/{caseId}/{delIndex}', [CaseController::class, 'getCaseInfo'])->name('getCaseInfo');
         Route::get('delete-case/{caseId}', [DeleteCaseController::class, 'byCaseId'])->name('deleteCase');
+        Route::get('get-trigger-list', [TriggerController::class, 'list'])->name('getTriggerList');
 
         Route::name('process.')->prefix('process')->group(function(){
             Route::get('get-by-id/{process_id}', [ProcessController::class, 'getNameById']);

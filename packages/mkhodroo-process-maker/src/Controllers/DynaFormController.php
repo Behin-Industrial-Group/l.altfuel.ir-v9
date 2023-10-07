@@ -18,9 +18,9 @@ class DynaFormController extends Controller
         $process = collect(config('pm_config.process'))->where('id', $r->processId)->first();
         $cases = collect($process['case']);
         $case = $cases->where('id', $r->taskId)->first();
-        $triggers =  $case['trigger'];
+        $triggers =  TriggerController::list();
         foreach($triggers as $trigger){
-            TriggerController::excute($trigger['id'], $r->caseId, $r->delIndex);
+            TriggerController::excute($trigger->guid, $r->caseId, $r->delIndex);
         }
         $viewName = $case['dynamic_view_form'];
         $variables = (new GetCaseVarsController())->getByCaseId($r->caseId);
