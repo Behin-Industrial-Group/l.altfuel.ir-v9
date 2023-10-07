@@ -15,14 +15,12 @@ class DynaFormController extends Controller
     }
     function get(Request $r) {
 
-        $process = collect(config('pm_config.process'))->where('id', $r->processId)->first();
-        $cases = collect($process['case']);
-        $case = $cases->where('id', $r->taskId)->first();
+        $task = TaskController::getByTaskId($r->taskId);
         $triggers =  TriggerController::list();
         foreach($triggers as $trigger){
             TriggerController::excute($trigger->guid, $r->caseId, $r->delIndex);
         }
-        $viewName = $case['dynamic_view_form'];
+        $viewName = $task->dynaform;
         $variables = (new GetCaseVarsController())->getByCaseId($r->caseId);
         return view("PMViews::dynamic-forms." . $viewName)->with([
             'vars' => $variables,
