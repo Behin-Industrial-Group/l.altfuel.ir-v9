@@ -1,15 +1,18 @@
-
 <div class="row" style="border-bottom: solid 1px black">
     <h4>{{ $caseTitle ?? '' }} - {{ $processTitle ?? '' }}</h4>
-    <button type="button" style="flex: auto; text-align: left" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <button type="button" style="flex: auto; text-align: left" class="close" data-dismiss="modal"
+        aria-hidden="true">&times;</button>
 </div>
 <div class="row" style="height: 10px"></div>
-@yield('content')
+
+
+<form action="javascript:void(0)" id="main-form">
+    @yield('content')
+</form>
 
 <div class="row form-group">
-    <button class="btn btn-primary m-1"
-            onclick="save_and_next()">{{ __('save and next') }}</button>
-    
+    <button class="btn btn-primary m-1" onclick="save_and_next()">{{ __('save and next') }}</button>
+
     <button class="btn btn-default m-1" onclick="save()">{{ __('save') }}</button>
 </div>
 <script>
