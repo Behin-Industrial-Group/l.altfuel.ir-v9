@@ -51,7 +51,7 @@
 </script>
 
 @if (config('pm_config.debug'))
-    <div class="col-sm-12" dir="ltr">
+    <div class="col-sm-12" dir="ltr" style="text-align: left">
         <pre>
             {{ print_r($vars) }}
         </pre>

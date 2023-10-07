@@ -23,7 +23,7 @@ class VariableController extends Controller
             ],
             [
                 'var_title' => $var_title, 
-                'var_type' => $var_type,
+                'type' => $var_type,
                 'accepted_value' => $accepted_value,
                 'default_value' => $default_value
             ]
