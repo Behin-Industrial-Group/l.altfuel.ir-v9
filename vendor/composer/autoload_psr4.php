@@ -59,7 +59,6 @@ return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Mkhodroo\\Voip\\' => array($baseDir . '/packages/mkhodroo-voip/src'),
     'Mkhodroo\\UserRoles\\' => array($baseDir . '/packages/mkhodroo-user-roles/src'),
-    'Mkhodroo\\SmsTemplate\\' => array($baseDir . '/packages/mkhodroo-sms-template/src'),
     'Mkhodroo\\MkhodrooProcessMaker\\' => array($baseDir . '/packages/mkhodroo-process-maker/src'),
     'Mkhodroo\\CaseInsensitiveTranslate\\' => array($baseDir . '/packages/case-insensitive-translate/src'),
     'Mkhodroo\\AltfuelTicket\\' => array($baseDir . '/packages/altfuel-ticket/src'),

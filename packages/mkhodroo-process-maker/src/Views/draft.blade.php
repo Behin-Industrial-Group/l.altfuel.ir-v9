@@ -63,7 +63,6 @@
             var data = table.row( this ).data();
             console.log(data);
             var fd = new FormData();
-            fd.append('appUid', data.APP_UID);
             fd.append('processTitle', data.PRO_TITLE);
             fd.append('taskId', data.TAS_UID);
             fd.append('caseId', data.APP_UID);

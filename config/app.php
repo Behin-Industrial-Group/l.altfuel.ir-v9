@@ -228,7 +228,6 @@ return [
         \Mkhodroo\UserRoles\UserRolesServiceProvider::class,
         \Mkhodroo\MkhodrooProcessMaker\MKProcessMakerProvider::class,
         \Mkhodroo\Voip\VoipServiceProvider::class,
-        \Mkhodroo\SmsTemplate\SmsTemplateProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,

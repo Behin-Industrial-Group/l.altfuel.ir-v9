@@ -29,19 +29,5 @@
     "bossResult": "نظر ریاست",
     "save": "ذخیره",
     "save and next": "ذخیره و ارسال",
-    "Are You Sure For Delete This Item?": "آیا از حذف این آیتم مطمئنید؟",
-    "agency_manager_name": "نام مدیر مرکز",
-    "inactivity_commitment": "تعهد عدم فعالیت",
-    "referral_and_notice_sms": "پیامک مراجعه",
-    "referral": "مراجعه",
-    "agency_manager_national_id": "کدملی مدیر مرکز",
-    "warning_deadline": "مهلت اخطاریه",
-    "warning_receiver": "دریافت کننده اخطاریه",
-    "warning_register_date": "تاریخ ثبت اخطاریه",
-    "agency_mobile": "موبایل مدیر مرکز",
-    "agency_address": "آدرس مرکز",
-    "warning_registrar": "ثبت کننده اخطاریه",
-    "warning_number": "شماره اخطاریه",
-    "agency_name": "نام مرکز",
-    "created_by": "ایجاد کننده"
+    "Are You Sure For Delete This Item?": "آیا از حذف این آیتم مطمئنید؟"
 }

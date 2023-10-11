@@ -35,7 +35,6 @@ function send_ajax_formdata_request(url, data, callback, erCallback = null){
     return $.ajax({
         url: url,
         data: data,
-        type: 'POST',
         processData: false,
         contentType: false,
         headers: {
