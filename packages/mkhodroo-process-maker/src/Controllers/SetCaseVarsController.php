@@ -58,16 +58,23 @@ class SetCaseVarsController extends Controller
 
     function save(Request $r)
     {
+        // return $r;
+        // return InputDocController::upload($r->taskId, $r->caseId, '97290740465214979a6b891095846179', $r->file('97290740465214979a6b891095846179'));
+        // return $r->file('97290740465214979a6b891095846179')->getClientOriginalName();
         $sessionId = AuthController::wsdl_login()->message;
         $client = new SoapClient(str_replace('https', 'http', env('PM_SERVER')) . '/sysworkflow/en/green/services/wsdl2');
 
         $vars = $r->except('caseId');
         $variables = array();
         foreach ($vars as $key => $val) {
-            $obj = new variableListStruct();
-            $obj->name = $key;
-            $obj->value = $val;
-            $variables[] = $obj;
+            if(gettype($val) == 'object'){
+                InputDocController::upload($r->taskId, $r->caseId, $key, $r->file($key));
+            }else{
+                $obj = new variableListStruct();
+                $obj->name = $key;
+                $obj->value = $val;
+                $variables[] = $obj;
+            }
         }
         $params = array(array('sessionId' => $sessionId, 'caseId' => $r->caseId, 'variables' => $variables));
         $result = $client->__SoapCall('sendVariables', $params);

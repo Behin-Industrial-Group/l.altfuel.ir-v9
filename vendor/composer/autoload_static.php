@@ -118,6 +118,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Monolog\\' => 8,
             'Mkhodroo\\Voip\\' => 14,
             'Mkhodroo\\UserRoles\\' => 19,
+            'Mkhodroo\\SmsTemplate\\' => 21,
             'Mkhodroo\\MkhodrooProcessMaker\\' => 30,
             'Mkhodroo\\CaseInsensitiveTranslate\\' => 34,
             'Mkhodroo\\AltfuelTicket\\' => 23,
@@ -405,6 +406,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\UserRoles\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src',
+        ),
+        'Mkhodroo\\SmsTemplate\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-sms-template/src',
         ),
         'Mkhodroo\\MkhodrooProcessMaker\\' => 
         array (
@@ -3637,6 +3642,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\DynaFormController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/DynaFormController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\GetCaseVarsController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/GetCaseVarsController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\InboxController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/InboxController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\InputDocController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/InputDocController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\NewCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/NewCaseController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\PMUserController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/PMUserController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\PMVacationController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/PMVacationController.php',
@@ -3654,6 +3660,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMTask' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMTask.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMUsers' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMUsers.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMVacation' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMVacation.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMVariable' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMVariable.php',
+        'Mkhodroo\\SmsTemplate\\Controllers\\SmsTemplateController' => __DIR__ . '/../..' . '/packages/mkhodroo-sms-template/src/Controllers/SmsTemplateController.php',
+        'Mkhodroo\\SmsTemplate\\SmsTemplateProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-sms-template/src/SmsTemplateProvider.php',
         'Mkhodroo\\UserRoles\\Controllers\\AccessController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/AccessController.php',
         'Mkhodroo\\UserRoles\\Controllers\\GetMethodsController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/GetMethodsController.php',
         'Mkhodroo\\UserRoles\\Controllers\\GetRoleController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/GetRoleController.php',

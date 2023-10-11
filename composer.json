@@ -33,7 +33,8 @@
             "Mkhodroo\\UserRoles\\": "packages/mkhodroo-user-roles/src/",
             "Mkhodroo\\MkhodrooProcessMaker\\": "packages/mkhodroo-process-maker/src",
             "Mkhodroo\\Voip\\": "packages/mkhodroo-voip/src",
-            "Mkhodroo\\CaseInsensitiveTranslate\\": "packages/case-insensitive-translate/src"
+            "Mkhodroo\\CaseInsensitiveTranslate\\": "packages/case-insensitive-translate/src",
+            "Mkhodroo\\SmsTemplate\\": "packages/mkhodroo-sms-template/src"
         }
     },
     "autoload-dev": {
