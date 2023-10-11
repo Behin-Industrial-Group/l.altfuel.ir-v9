@@ -4,12 +4,15 @@ namespace Mkhodroo\MkhodrooProcessMaker;
 
 use App\CustomClasses\SimpleXLSX;
 use Illuminate\Support\Facades\Route;
+use Mkhodroo\MkhodrooProcessMaker\Controllers\AuthController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\CaseController;
+use Mkhodroo\MkhodrooProcessMaker\Controllers\CurlRequestController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\DeleteCaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\DraftCaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\DynaFormController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\GetCaseVarsController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\InboxController;
+use Mkhodroo\MkhodrooProcessMaker\Controllers\InputDocController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\NewCaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\PMVacationController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\ProcessController;
@@ -22,6 +25,57 @@ use Mkhodroo\MkhodrooProcessMaker\Controllers\VariableController;
 
 Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', 'access'])->group(function(){
     Route::get('test', function(){
+        $docs = InputDocController::list("55328747465212ff51cf735075979441");
+        $doc = collect($docs)->where('app_doc_uid', "2642967896523d5d0875784005814484");
+        foreach($doc as $doc){
+            echo "<a href='https://pmaker.altfuel.ir/sysworkflow/en/neoclassic/$doc->app_doc_link' target='_blank'>$doc->app_doc_filename</a>";
+        }
+        // exit();
+        // echo DynaFormController::getHtml("", "");
+        $json =  DynaFormController::getJson("61815949564e4999e9835d8060262100", "64799933164f74dfc477a29049824083");
+        $content = json_decode($json->dyn_content);
+        // $fields = $content->items[0]->items;
+        // $html = '';
+        // foreach($fields as $rows){
+        //     foreach($rows as $field){
+        //         if($field->type == "text"){
+        //             $html .= "<div class='col-sm-$field->colSpan'>";
+        //             $html .= "$field->label: <input type='text' name='$field->name'>";
+        //             $html .= "</div>";
+        //         }
+        //         if($field->type == "textarea"){
+        //             $html .= "<div class='col-sm-$field->colSpan'>";
+        //             $html .= "$field->label: <textarea name='$field->name'></textarea>";
+        //             $html .= "</div>";
+
+        //         }
+        //         if($field->type == 'radio'){
+        //             $html .= "<div class='col-sm-$field->colSpan'>";
+        //             $html .= "$field->label: ";
+        //             foreach($field->options as $opt){
+        //                 $html .= "<input type='radio' name='$field->name'>$opt->label <br>";
+        //             }
+        //             $html .= "</div>";
+        //         }
+        //     }
+        // }
+        // return $html;
+        echo "<pre>";
+        foreach($content->items[0]->items as $rows){
+            foreach ($rows as $field) {
+                if(isset($field->type)){
+                    echo $field->name . ' - ';
+                    echo $field->type . '<br>';
+                }else{
+                    print_r($field);
+                }
+            }
+        }
+        echo "</pre>";
+        echo "<pre>";
+        print_r($content->items[0]->items);
+        echo "</pre>";
+        return ;
         $excel = SimpleXLSX::parse(public_path('task.xlsx'));
         $rows = $excel->rows();
         for ($i = 1; $i < count($rows); $i++) {
