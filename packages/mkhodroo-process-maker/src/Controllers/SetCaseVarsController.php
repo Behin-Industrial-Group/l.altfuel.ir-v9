@@ -64,7 +64,9 @@ class SetCaseVarsController extends Controller
         $sessionId = AuthController::wsdl_login()->message;
         $client = new SoapClient(str_replace('https', 'http', env('PM_SERVER')) . '/sysworkflow/en/green/services/wsdl2');
 
-        $vars = $r->except('caseId');
+        $vars = $r->except(
+            'caseId', 'SYS_LANG', 'SYS_SKIN', 'SYS_SYS', 'APPLICATION',
+        'PROCESS', 'TASK', 'INDEX', 'USER_LOGGED', 'USR_USERNAME', 'APP_NUMBER', 'PIN');
         $variables = array();
         foreach ($vars as $key => $val) {
             if(gettype($val) == 'object'){
