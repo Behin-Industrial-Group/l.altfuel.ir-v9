@@ -151,8 +151,9 @@ class DynaFormController extends Controller
                             
 
                         } else {
-                            // echo "<label for='$field->inp_doc_uid' class='btn'>Select Image</label>";
-                            echo "<input id='$field->inp_doc_uid' type='file' name='$field->inp_doc_uid' class='form-control'>";
+                            if($field->mode != 'view'){
+                                echo "<input id='$field->inp_doc_uid' type='file' name='$field->inp_doc_uid' class='form-control'>";
+                            }
                         }
                         echo "</div>";
                         echo "</div>";
