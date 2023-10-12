@@ -4,6 +4,7 @@ namespace Mkhodroo\MkhodrooProcessMaker\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use SoapClient;
 
 class TriggerController extends Controller
@@ -22,20 +23,22 @@ class TriggerController extends Controller
         return $result->triggers;
     }
     
-    public static function excute($triggerId, $caseId, $delIndex) {
-        $sessionId = AuthController::wsdl_login()->message;
-        $client = new SoapClient(str_replace('https', 'http', env('PM_SERVER')). '/sysworkflow/en/green/services/wsdl2');
-        
-        $params = array(array('sessionId'=>$sessionId));
-        $params = array(
-            array(
-                'sessionId'=>$sessionId, 
-                'caseId'=> $caseId,
-                'triggerIndex'=> $triggerId,
-                'delIndex'=> $delIndex
-            )
+    public static function excute($triggerId, $caseId) {
+        $accessToken = AuthController::getAccessToken();
+        $result =  CurlRequestController::put(
+            $accessToken, 
+            "/api/1.0/workflow/cases/$caseId/execute-trigger/$triggerId"
         );
-        $result = $client->__SoapCall('executeTrigger', $params);
+
+        // Log::info("trigger excute result: $result");
         return $result;
+    }
+
+    public static function getAvalableTrrigersBeforeTask($processId, $taskId, $caseId){
+        $accessToken = AuthController::getAccessToken();
+        return CurlRequestController::send(
+            $accessToken, 
+            "/api/1.0/workflow/project/$processId/activity/$taskId/step/$caseId/available-triggers/before"
+        );
     }
 }

@@ -18,14 +18,18 @@ class DynaFormController extends Controller
     function get(Request $r)
     {
 
-        $task = TaskController::getByTaskId($r->taskId);
-        $triggers =  TriggerController::list();
-        // Log::info(var_dump($triggers));
-        foreach ($triggers as $trigger) {
-            $ex = TriggerController::excute($trigger->guid, $r->caseId, $r->delIndex);
-            // Log::info(var_dump($ex));
+        $steps = StepController::list($r->processId, $r->taskId);
+        foreach($steps as $step){
+            if($step->step_type_obj === "DYNAFORM"){
+                $dynaform = $step->step_uid_obj;
+            }
+            $triggers = $step->triggers;
+            foreach($triggers as $trigger){
+                if($trigger->st_type === "BEFORE"){
+                    TriggerController::excute($trigger->tri_uid, $r->caseId);
+                }
+            }
         }
-        $dynaform = $task->dynaform;
         if (!$dynaform) {
             return response("شناسه فرم پیدا نشد", 400);
         }
