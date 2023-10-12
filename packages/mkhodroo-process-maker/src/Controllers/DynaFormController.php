@@ -71,7 +71,7 @@ class DynaFormController extends Controller
                     aria-hidden='true'>&times;</button>
             </div>";
         foreach ($fields as $rows) {
-            echo "<div class='row' style='margin-bottom: 10px'>";
+            echo "<div class='row' style='margin-bottom: 20px'>";
             foreach ($rows as $field) {
                 $field_name = isset($field->name) ? $field->name : '';
                 $field_value = isset($variable_values->$field_name) ? $variable_values->$field_name : '';
