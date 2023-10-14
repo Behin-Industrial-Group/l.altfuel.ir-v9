@@ -27,7 +27,8 @@
             fd,
             function(response) {
                 console.log(response);
-                refresh_table()
+                refresh_table();
+                close_admin_modal();
             }
         )
     }

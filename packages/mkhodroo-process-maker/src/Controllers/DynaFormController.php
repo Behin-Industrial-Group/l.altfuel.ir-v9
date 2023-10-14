@@ -128,8 +128,8 @@ class DynaFormController extends Controller
                     if ($field->type == 'dropdown') {
                         echo  "<div class='col-sm-$field->colSpan'>";
                         echo  "$field->label: ";
-                        echo "<div>";
-                        echo "<select name='$field->name' class='form-control' $field_required $field_mode>";
+                        echo "<div class='form-group'>";
+                        echo "<select name='$field->name' class='form-control select2' $field_required $field_mode>";
                         foreach ($field->options as $opt) {
                             $selected = $field_value == $opt->value ? 'selected' : '';
                             echo  "<option value='$opt->value' name='$field->name' $selected>$opt->label</option>";

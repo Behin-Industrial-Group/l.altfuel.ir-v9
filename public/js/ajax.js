@@ -194,4 +194,8 @@ function open_admin_modal_with_data(data, title = '', customFun = null){
     setTimeout(customFun(), 1000);
 }
 
+function close_admin_modal(){
+    $('#admin-modal').modal('hide');
+}
+
 

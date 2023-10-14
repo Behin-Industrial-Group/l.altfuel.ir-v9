@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.min.css')  . '?' . config('app.version') }}" />
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('public/dashboard/plugins/select2/select2.min.css') }}">
     @yield('style')
 
     <script src="{{ url('public/dashboard/plugins/jquery/jquery.min.js') . '?' . config('app.version') }}"></script>
@@ -121,6 +122,7 @@
 
         <script src="{{ Url('public/green-player/js/green-audio-player.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ Url('public/green-player/js/green-audio-player.min.js')  . '?' . config('app.version') }}"></script>
+        <script src="{{ url('public/dashboard/plugins/select2/select2.full.min.js')}}"></script>
         <!-- include FilePond library -->
         <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 
@@ -129,6 +131,7 @@
 
         <!-- include FilePond jQuery adapter -->
         <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+        
         
         
         <script>
@@ -151,6 +154,7 @@
 
             function initial_view(){
                 $('.select2').select2();
+                $('.select2').css('width', '100%')
                 $(".persian-date").persianDatepicker({
                     viewMode: 'year',
                     format: 'YYYY-MM-DD',
