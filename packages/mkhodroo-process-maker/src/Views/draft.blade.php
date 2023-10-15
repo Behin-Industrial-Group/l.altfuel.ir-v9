@@ -13,7 +13,7 @@
                     <th>{{__('Status')}}</th>
                     <th>{{__('Send By')}}</th>
                     <th style="text-align: center; direction: ltr">{{__('Send Date')}}</th>
-                    <th style="text-align: center; direction: ltr">{{__('Delay')}}</th>
+                    <th style="text-align: center; direction: ltr">{{__('Delay/Deadline')}}</th>
                     <th>{{__('Action')}}</th>
                 </tr>
             </thead>
@@ -49,12 +49,12 @@
                     time = DEL_DELEGATE_DATE.split(" ")[1]
                     return `<span style="float: left; direction: ltr">${date} ${time}</span>`; 
                 }},
-                {data : 'DELAY' , render: function(DELAY){ 
+                {data : 'DELAY' , render: function(DELAY, type, row){ 
                     delay_day = DELAY.split(" ")[1]
                     delay_h = DELAY.split(" ")[3]
                     delay_m = DELAY.split(" ")[5]
                     delay_s = DELAY.split(" ")[7]
-                    return `<span style="float: left; direction: ltr">${delay_day}d  ${delay_h}h ${delay_m}m ${delay_s}s</span>`; 
+                    return `<span style="float: left; direction: ltr; color: ${row.TAS_COLOR_LABEL}">${delay_day}d  ${delay_h}h ${delay_m}m ${delay_s}s</span>`; 
                 }},
                 {data : 'APP_UID', render: function(APP_UID){return  `<i class='fa fa-trash bg-red' onclick="delete_case('${APP_UID}')"></i>`; }},
             ]
