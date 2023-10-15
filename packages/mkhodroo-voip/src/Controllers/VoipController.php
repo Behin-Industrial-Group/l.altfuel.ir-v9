@@ -38,7 +38,7 @@ class VoipController extends Controller
             '7000' => ['name' => '2001', 'score_avg' => $data->where('queue_num', '7000')->avg('score'), 'count' => $data->where('queue_num', '7000')->count()],
             '8000' => ['name' => 'ال پی جی ', 'score_avg' => $data->where('queue_num', '8000')->avg('score'), 'count' => $data->where('queue_num', '8000')->count()],
             '9000' => ['name' => 'تستی', 'score_avg' => $data->where('queue_num', '9000')->avg('score'), 'count' => $data->where('queue_num', '9000')->count()],
-
+            'total' => ['name' => 'میانگین کل', 'score_avg' => $data->where('queue_num', '!=', '8000')->avg('score'), 'count' => $data->where('queue_num', '!=', '8000')->count() ],
         ];
     }
 
