@@ -104,8 +104,10 @@ class DynaFormController extends Controller
                         echo  "</div>";
                     }
                     if ($field->type == "datetime") {
+                        $date = new SDate();
+                        $field_value = $date->toGrDate($field_value);
                         echo  "<div class='col-sm-$field->colSpan'>";
-                        echo  "$field->label: <input type='text' name='$field->name' class='form-control' value='$field_value' $field_required $field_mode>";
+                        echo  "$field->label: <input type='text' name='$field->name' class='form-control persian-date' value='$field_value' $field_required $field_mode>";
                         echo  "</div>";
                     }
                     if ($field->type == "textarea") {

@@ -6,6 +6,7 @@ use App\CustomClasses\SimpleXLSX;
 use Illuminate\Support\Facades\Route;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\AuthController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\CaseController;
+use Mkhodroo\MkhodrooProcessMaker\Controllers\CaseTrackerController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\CurlRequestController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\DeleteCaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\DraftCaseController;
@@ -26,10 +27,7 @@ use Mkhodroo\MkhodrooProcessMaker\Controllers\VariableController;
 
 Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', 'access'])->group(function(){
     Route::get('test', function(){
-        $a = StepController::list(
-            "61815949564e4999e9835d8060262100",
-            "30551969564e499a0404e46055826256",
-        );
+        $a = CaseTrackerController::get("932126309652824ec04c005092545041");
         echo "<pre>";
         print_r($a);
         echo "</pre>";

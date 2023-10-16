@@ -32,7 +32,7 @@
             [
                 // {data : 'APP_UID', render: function(APP_UID){return APP_UID.substr(APP_UID.length - 8)}},
                 {data : 'APP_NUMBER'},
-                {data : 'DEL_TITLE'},
+                {data : 'TAS_TITLE'},
                 {data : 'PRO_TITLE'},
                 {data : 'TAS_STATUS'},
                 {data : 'SEND_BY_INFO', render: function(SEND_BY_INFO){

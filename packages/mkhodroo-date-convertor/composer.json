@@ -1,0 +1,16 @@
+{
+    "name": "mkhodroo/date-convertor",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Mkhodroo\\DateConvertor\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mkhodroo",
+            "email": "mkhodroo@yahoo.com"
+        }
+    ],
+    "require": {}
+}
