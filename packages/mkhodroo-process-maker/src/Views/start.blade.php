@@ -57,7 +57,7 @@
                         fd,
                         function(response){
                             // console.log(response);
-                            open_admin_modal_with_data(response)
+                            open_admin_modal_with_data(response, initial_view())
                         }
                     )
                 }
