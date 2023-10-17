@@ -154,14 +154,14 @@ class DynaFormController extends Controller
                             $doc = InputDocController::get($caseId, $values[0]);
                             if($field->mode != 'view'){
                                 // echo "<label for='$field->inp_doc_uid' class='btn'>Select Image</label>";
-                                echo "<input id='$field->inp_doc_uid' type='file' name='$field->inp_doc_uid' class='form-control' >";
+                                echo "<input id='$field->inp_doc_uid' type='file' name='$field->name-$field->inp_doc_uid' class='form-control' >";
                             }
                             echo "<a href='https://pmaker.altfuel.ir/sysworkflow/en/neoclassic/$doc->app_doc_link' >$doc->app_doc_filename</a>";
                             
 
                         } else {
                             if($field->mode != 'view'){
-                                echo "<input id='$field->inp_doc_uid' type='file' name='$field->inp_doc_uid' class='form-control'>";
+                                echo "<input id='$field->inp_doc_uid' type='file' name='$field->name-$field->inp_doc_uid' class='form-control'>";
                             }
                         }
                         echo "</div>";

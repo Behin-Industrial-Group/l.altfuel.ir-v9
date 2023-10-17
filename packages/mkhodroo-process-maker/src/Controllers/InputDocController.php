@@ -30,17 +30,17 @@ class InputDocController extends Controller
         );
     }
 
-    public static function upload($taskId, $caseId, $inputDocId, $file)
+    public static function upload($file, $taskId, $caseId, $inputDocId, $userId, $docFieldName)
     {
         $path = $file;
         $params = array(
             'ATTACH_FILE'  => (phpversion() >= "5.5") ? new CurlFile($path, $file->getClientMimeType(), $file->getClientOriginalName()) : '@' . $path,
             'APPLICATION'  => $caseId,
             'INDEX'        => 1,
-            'USR_UID'      => '82346228665099a18bddd30042547603',
-            'DOC_UID'      => '97290740465214979a6b891095846179',
+            'USR_UID'      => $userId,
+            'DOC_UID'      => $inputDocId,
             'APP_DOC_TYPE' => 'INPUT',
-            'APP_DOC_FIELDNAME' => 'inactivity_commitment_image',
+            'APP_DOC_FIELDNAME' => $docFieldName,
             'APP_DOC_FILENAME' => $file. '.' . $file->getClientOriginalExtension(),
             'TITLE'        => "Identification for John Doe",
             'COMMENT'      => "Scanned ID document"

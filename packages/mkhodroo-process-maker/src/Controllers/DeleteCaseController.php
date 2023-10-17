@@ -9,14 +9,11 @@ use SoapClient;
 
 class DeleteCaseController extends Controller
 {
-    private $accessToken;
 
-    public function __construct() {
-    }
-    function byCaseId($caseId) {
-        $this->accessToken = AuthController::getAccessToken();
+    public static function byCaseId($caseId) {
+        $accessToken = AuthController::getAccessToken();
         return CurlRequestController::delete(
-            $this->accessToken, 
+            $accessToken, 
             "/api/1.0/workflow/cases/$caseId"
         );
     }

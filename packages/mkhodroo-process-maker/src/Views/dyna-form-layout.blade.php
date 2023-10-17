@@ -27,6 +27,7 @@
             fd,
             function(response) {
                 console.log(response);
+                show_message("ذخیره و ارسال شد");
                 refresh_table();
                 close_admin_modal();
             }
@@ -46,6 +47,11 @@
             fd,
             function(response) {
                 console.log(response);
+                show_message("ذخیره شد");
+            },
+            function(er){
+                console.log(er);
+                show_error(er);
             }
         )
     }

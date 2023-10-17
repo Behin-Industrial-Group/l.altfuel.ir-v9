@@ -26,7 +26,11 @@ class SetCaseVarsController extends Controller
             $triggers = $step->triggers;
             foreach ($triggers as $trigger) {
                 if ($trigger->st_type === "AFTER") {
-                    TriggerController::excute($trigger->tri_uid, $system_vars->APPLICATION);
+                    $result = TriggerController::excute($trigger->tri_uid, $system_vars->APPLICATION);
+                    if($result?->original){
+                        $result = iconv("UTF-8", "ISO-8859-1", $result->original);
+                        return response(str_replace("Bad Request: ", "", $result), 400);
+                    }
                 }
             }
         }
@@ -37,6 +41,7 @@ class SetCaseVarsController extends Controller
 
     function save(Request $r)
     {
+        $system_vars = (new GetCaseVarsController())->getByCaseId($r->caseId);
         $sessionId = AuthController::wsdl_login()->message;
         $client = new SoapClient(str_replace('https', 'http', env('PM_SERVER')) . '/sysworkflow/en/green/services/wsdl2');
         $vars = $r->except(
@@ -56,7 +61,9 @@ class SetCaseVarsController extends Controller
         $variables = array();
         foreach ($vars as $key => $val) {
             if (gettype($val) == 'object') {
-                InputDocController::upload($r->taskId, $r->caseId, $key, $r->file($key));
+                $field_name = explode("-", $key)[0];
+                $fileId = explode("-", $key)[1];
+                InputDocController::upload($r->file($key), $r->taskId, $r->caseId, $fileId, $system_vars->USER_LOGGED, $field_name );
             } else {
                 $obj = new variableListStruct();
                 $obj->name = $key;
@@ -64,6 +71,7 @@ class SetCaseVarsController extends Controller
                 $variables[] = $obj;
             }
         }
+
         $params = array(array('sessionId' => $sessionId, 'caseId' => $r->caseId, 'variables' => $variables));
         $result = $client->__SoapCall('sendVariables', $params);
         if ($result->status_code != 0)

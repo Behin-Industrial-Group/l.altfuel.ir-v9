@@ -4,10 +4,13 @@ function show_error(er){
     }
     if(er.responseJSON){
         toastr.error(er.responseJSON.message)
-    }else{
-        toastr.error("خطا");
-        console.log(er);
+    }else if(er.responseText){
+        toastr.error(er.responseText)
     }
+    else{
+        toastr.error("خطا");
+    }
+    console.log(er);
     hide_loading();
 }
 
