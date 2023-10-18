@@ -68,6 +68,7 @@ class DynaFormController extends Controller
         );
         $content = json_decode($json->dyn_content);
         $fields = $content->items[0]->items;
+        $docs = collect(InputDocController::list($caseId));
         echo "<form action='javascript:void(0)' id='main-form' enctype='multipart/form-data'>";
         echo "<div class='row' style='border-bottom: solid 1px black'>
                 <h4>$caseTitle - $processTitle</h4>
@@ -144,6 +145,9 @@ class DynaFormController extends Controller
                         echo  "</div>";
                     }
                     if ($field->type == 'file') {
+                        // echo "<pre>";
+                        // print_r($field);
+                        // echo "<pre>";
                         echo  "<div class='col-sm-$field->colSpan'>";
                         echo  "$field->label: ";
                         echo "<div style='text-align: center'>";
@@ -151,12 +155,12 @@ class DynaFormController extends Controller
                             // print_r($field_value);
                             $values = json_decode($field_value);
                             // print_r($values);
-                            $doc = InputDocController::get($caseId, $values[0]);
+                            $doc = $docs->where('app_doc_uid', $values[0])->first();
                             if($field->mode != 'view'){
                                 // echo "<label for='$field->inp_doc_uid' class='btn'>Select Image</label>";
                                 echo "<input id='$field->inp_doc_uid' type='file' name='$field->name-$field->inp_doc_uid' class='form-control' >";
                             }
-                            echo "<a href='https://pmaker.altfuel.ir/sysworkflow/en/neoclassic/$doc->app_doc_link' >$doc->app_doc_filename</a>";
+                            echo "<a href='https://pmaker.altfuel.ir/sysworkflow/en/neoclassic/$doc?->app_doc_link' >$doc?->app_doc_filename</a>";
                             
 
                         } else {
