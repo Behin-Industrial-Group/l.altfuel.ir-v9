@@ -28,7 +28,9 @@ use Mkhodroo\MkhodrooProcessMaker\Controllers\VariableController;
 
 Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', 'access'])->group(function(){
     Route::get('test', function(){
-        return DeleteCaseController::byCaseId("526986200652e6be4884519093797788");
+        $doc = (new GetCaseVarsController())->getByCaseId("526986200652e6be4884519093797788");  
+        echo "<pre>";
+        print_r($doc);
     });
     Route::get('inbox', [CaseController::class, 'get'])->name('inbox');
     Route::get('new-case', [CaseController::class, 'newCase'])->name('newCase');
@@ -51,6 +53,7 @@ Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', '
         Route::post('save', [SetCaseVarsController::class, 'save'])->name('save');
         Route::get('get-case-vars/{caseId}', [GetCaseVarsController::class, 'getByCaseId'])->name('getCaseVars');
         Route::get('get-case-info/{caseId}/{delIndex}', [CaseController::class, 'getCaseInfo'])->name('getCaseInfo');
+        Route::get('get-case-main-info/{caseId}', [GetCaseVarsController::class, 'getMainInfoByCaseId'])->name('getMainInfoByCaseId');
         Route::get('delete-case/{caseId}', [DeleteCaseController::class, 'byCaseId'])->name('deleteCase');
         Route::get('get-trigger-list', [TriggerController::class, 'list'])->name('getTriggerList');
         Route::get('get-task/{taskId}', [TaskController::class, 'getByTaskId'])->name('getTask');

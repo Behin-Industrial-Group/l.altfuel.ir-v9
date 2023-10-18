@@ -26,6 +26,9 @@ class DraftCaseController extends Controller
             "/api/1.0/workflow/home/todo"
         );
         $draft->data = array_merge($draft->data, $inbox->data);
+        foreach($draft->data as $data){
+            $data->MAIN_INFO = (new GetCaseVarsController())->getMainInfoByCaseId($data->APP_UID);
+        }
         return $draft;
 
         
