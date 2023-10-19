@@ -1,6 +1,4 @@
-<pre>
-    {{print_r($data)}}
-</pre>
+
 <table class="table table-striped ">
     <thead>
         <tr>
