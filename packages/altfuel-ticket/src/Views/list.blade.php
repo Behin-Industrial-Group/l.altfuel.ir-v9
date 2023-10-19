@@ -22,6 +22,7 @@
                     <tr>
                         <th>شناسه</th>
                         <th>عنوان</th>
+                        <th>ثبت کننده</th>
                         <th>دسته بندی</th>
                         <th>وضعیت</th>
                         <th>آخرین تغییرات</th>
@@ -55,6 +56,7 @@
                 {data: 'title', render: function(title){
                     return `<a href="#">${title}</a>`;
                 }},
+                {data: 'user'},
                 {data: 'catagory.name'},
                 {data: 'status'},
                 {data: 'updated_at'}
@@ -62,6 +64,13 @@
             null,
             [3 ,'asc']
         );
+
+        send_ajax_get_request(
+            "{{ route('ATRoutes.get.getAll') }}",
+            function(data){
+                console.log(data);
+            }
+        )
 
         send_ajax_get_request(
             "{{ route('ATRoutes.get.getMyTickets') }}",
