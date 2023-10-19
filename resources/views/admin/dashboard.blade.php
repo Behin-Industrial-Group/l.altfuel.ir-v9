@@ -75,7 +75,7 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <p onclick="getPeerPollInfo('{{$value['queue_num']}}')">More info <i class="fa fa-arrow-circle-right"></i></p>
+                        <p style="text-align: center" onclick="getPeerPollInfo('{{$value['queue_num']}}')">More info <i class="fa fa-arrow-circle-right"></i></p>
                     </div>
                 </div>
             @endif
