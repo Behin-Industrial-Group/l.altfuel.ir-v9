@@ -89,25 +89,18 @@
         <script src="{{ url('public/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')  . '?' . config('app.version') }}"></script>
         <!-- Morris.js charts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="{{ url('public/dashboard/plugins/morris/morris.min.js')  . '?' . config('app.version') }}"></script>
         <!-- Sparkline -->
-        <script src="{{ url('public/dashboard/plugins/sparkline/jquery.sparkline.min.js')  . '?' . config('app.version') }}"></script>
         <!-- jvectormap -->
-        <script src="{{ url('public/dashboard/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')  . '?' . config('app.version') }}"></script>
-        <script src="{{ url('public/dashboard/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')  . '?' . config('app.version') }}"></script>
         <!-- jQuery Knob Chart -->
         <script src="{{ url('public/dashboard/plugins/knob/jquery.knob.js')  . '?' . config('app.version') }}"></script>
         <!-- daterangepicker -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
         <script src="{{ url('public/dashboard/plugins/daterangepicker/daterangepicker.js')  . '?' . config('app.version') }}"></script>
         <!-- datepicker -->
         <script src="{{ url('public/dashboard/plugins/datepicker/bootstrap-datepicker.js')  . '?' . config('app.version') }}"></script>
         <!-- Bootstrap WYSIHTML5 -->
         <script src="{{ url('public/dashboard/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')  . '?' . config('app.version') }}"></script>
         <!-- Slimscroll -->
-        <script src="{{ url('public/dashboard/plugins/slimScroll/jquery.slimscroll.min.js')  . '?' . config('app.version') }}"></script>
         <!-- FastClick -->
-        <script src="{{ url('public/dashboard/plugins/fastclick/fastclick.js')  . '?' . config('app.version') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ url('public/dashboard/dist/js/adminlte.js')  . '?' . config('app.version') }}"></script>
 
@@ -120,8 +113,6 @@
         <script src="{{ Url('public/dist/js/persian-date-0.1.8.min.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ Url('public/dist/js/persian-datepicker-0.4.5.min.js')  . '?' . config('app.version') }}"></script>
 
-        <script src="{{ Url('public/green-player/js/green-audio-player.js')  . '?' . config('app.version') }}"></script>
-        <script src="{{ Url('public/green-player/js/green-audio-player.min.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ url('public/dashboard/plugins/select2/select2.full.min.js')}}"></script>
         <!-- include FilePond library -->
         <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>

@@ -6,6 +6,8 @@ function show_error(er){
         toastr.error(er.responseJSON.message)
     }else if(er.responseText){
         toastr.error(er.responseText)
+    }else if(typeof(er) == "string"){
+        toastr.error(er);
     }
     else{
         toastr.error("خطا");

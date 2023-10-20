@@ -80,4 +80,15 @@ class VoipController extends Controller
         // return $data->where('71', 'OK');
         // return $data;
     }
+
+    function dlVoice(Request $r) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $r->link);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
+        $er = curl_error($ch);
+        $result = curl_exec($ch);
+        return $result != "404" ? $r->link : $result;
+    }
 }
