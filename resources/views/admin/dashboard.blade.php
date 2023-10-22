@@ -50,39 +50,40 @@
 
         {{-- اطلاعات نظرسنجی تلفن ها --}}
         @foreach ($voip_poll_info as $key => $value)
-            @if (auth()->user()->access('اطلاعات نظرسنجی تلفنها - '. $value['name']))
+            @if (auth()->user()->access('اطلاعات نظرسنجی تلفنها - ' . $value['name']))
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-primary">
                         <div class="inner">
                             <h3>
                                 <table>
                                     <tr>
-                                        <td id="numberOfTotal">{{$value['count']}}</td>
+                                        <td id="numberOfTotal">{{ $value['count'] }}</td>
                                         <td>
                                             <p>تعداد</p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td id="score">{{ number_format($value['score_avg'],2)}}</td>
+                                        <td id="score">{{ number_format($value['score_avg'], 2) }}</td>
                                         <td>
                                             <p>میانگین امتیاز</p>
                                         </td>
                                     </tr>
                                 </table>
                             </h3>
-                            <p> {{$value['name']}}</p>
+                            <p> {{ $value['name'] }}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <p style="text-align: center" onclick="getPeerPollInfo('{{$value['queue_num']}}')">More info <i class="fa fa-arrow-circle-right"></i></p>
+                        <p style="text-align: center" onclick="getPeerPollInfo('{{ $value['queue_num'] }}')">More info <i
+                                class="fa fa-arrow-circle-right"></i></p>
                     </div>
                 </div>
             @endif
         @endforeach
         <script>
-            function getPeerPollInfo(queue_num){
-                url = '{{ route("voip.getPeerPollInfo", ["queue_num" => "queue_num"]) }}';
+            function getPeerPollInfo(queue_num) {
+                url = '{{ route('voip.getPeerPollInfo', ['queue_num' => 'queue_num']) }}';
                 url = url.replace('queue_num', queue_num);
                 open_admin_modal(url)
             }
@@ -92,11 +93,20 @@
 
         {{-- آنلاین بودن تلفن روی سرور --}}
         <script>
-            $.get('{{route("voip.sipShowPeers")}}',function(response){
-                console.log(response);
-            })
+
+            var intervalId = window.setInterval(function() {
+                const d = new Date();
+                let hour = d.getHours();
+
+                if (hour == "8" || hour == "9") {
+                    console.log(hour);
+                    $.get('{{ route('voip.sipShowPeers') }}', function(response) {
+                        console.log(response);
+                    })
+                }
+            }, 5000);
         </script>
-        
+
 
 
     </div>
@@ -232,6 +242,4 @@
         @endif
 
     </div>
-
-
 @endsection
