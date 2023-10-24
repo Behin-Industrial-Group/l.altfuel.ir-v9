@@ -4,6 +4,7 @@
             <th>شماره</th>
             <th>امتیاز</th>
             <th>تاریخ</th>
+            <th>مدت مکالمه</th>
             <th>دانلود</th>
         </tr>
     </thead>
@@ -12,6 +13,7 @@
             <td>{{ $item['src'] }}</td>
             <td>{{ $item['score'] }}</td>
             <td dir="ltr">{{ $item['calldate'] }}</td>
+            <td dir="ltr">{{ $item['duration'] }}</td>
             <td dir="ltr">
                 <p
                     style="cursor: pointer"
