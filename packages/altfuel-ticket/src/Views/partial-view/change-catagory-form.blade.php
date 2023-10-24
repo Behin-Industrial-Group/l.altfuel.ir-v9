@@ -37,7 +37,7 @@
             $('#{{ $form_id ?? 'change-cat-form' }}').serialize(),
             function(response) {
                 show_message("{{ trans('ATTrans.success') }}")
-                filter()
+                // filter()
             },
             function(data) {
                 show_error(data);
