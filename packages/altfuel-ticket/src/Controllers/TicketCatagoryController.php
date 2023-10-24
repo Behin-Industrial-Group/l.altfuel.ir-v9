@@ -17,7 +17,12 @@ class TicketCatagoryController extends Controller
         return TicketCatagory::get();
     }
 
-    function getChildrenByParentId($parent_id = null) {
+    function getChildrenByParentId($parent_id = null, $count = false) {
+        if($count){
+            return TicketCatagory::where('parent_id', $parent_id)->get()->each(function($row){
+                $row->count = Ticket::where('cat_id', $row->id)->where('status', config('ATConfig.status.new'))->count();
+            });
+        }
         return TicketCatagory::where('parent_id', $parent_id)->get();
     }
 

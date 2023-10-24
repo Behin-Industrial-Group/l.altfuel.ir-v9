@@ -26,7 +26,7 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
 
     Route::name('catagory.')->prefix('catagory')->group(function(){
         Route::get('all-parent', [TicketCatagoryController::class, 'getAllParent'])->name('getAllParent');
-        Route::get('get-children/{parent_id?}', [TicketCatagoryController::class, 'getChildrenByParentId'])->name('getChildrenByParentId');
+        Route::get('get-children/{parent_id?}/{count?}', [TicketCatagoryController::class, 'getChildrenByParentId'])->name('getChildrenByParentId');
         Route::get('count/{id?}', [TicketCatagoryController::class, 'count'])->name('count');
     });
 });
