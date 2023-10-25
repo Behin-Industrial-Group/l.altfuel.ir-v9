@@ -82,6 +82,7 @@ Route::get('/migrate', function () {
 });
 
 Route::get('/run-schedule', function () {
+    echo date("Y-m-d H:i");
     echo "<pre>";
     Artisan::call('schedule:run');
 });
