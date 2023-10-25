@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $data = VoipController::sip_show_peers_status();
             print($data);
-        })->timezone('Asia/Tehran')->everyMinute()->between('08:25', '09:15');
+        })->timezone('Asia/Tehran')->everyMinute();
     }
 
     /**
