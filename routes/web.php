@@ -81,6 +81,11 @@ Route::get('/migrate', function () {
     Artisan::call('migrate');
 });
 
+Route::get('/run-schedule', function () {
+    echo "<pre>";
+    Artisan::call('schedule:run');
+});
+
 
 Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sms']);
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);
