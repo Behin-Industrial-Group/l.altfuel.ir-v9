@@ -28,9 +28,18 @@ use Mkhodroo\MkhodrooProcessMaker\Controllers\VariableController;
 
 Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', 'access'])->group(function(){
     Route::get('test', function(){
-        $doc = (new GetCaseVarsController())->getByCaseId("526986200652e6be4884519093797788");  
-        echo "<pre>";
-        print_r($doc);
+        $url = "http://80.71.149.190:4339/api/v1/table";
+        $data = [
+            'api_token' => 'asd',
+            'table_name' => 'rbac_users'
+        ];
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        return curl_exec($ch);
     });
     Route::get('inbox', [CaseController::class, 'get'])->name('inbox');
     Route::get('new-case', [CaseController::class, 'newCase'])->name('newCase');

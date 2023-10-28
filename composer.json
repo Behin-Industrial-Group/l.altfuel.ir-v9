@@ -35,7 +35,8 @@
             "Mkhodroo\\Voip\\": "packages/mkhodroo-voip/src",
             "Mkhodroo\\CaseInsensitiveTranslate\\": "packages/case-insensitive-translate/src",
             "Mkhodroo\\SmsTemplate\\": "packages/mkhodroo-sms-template/src",
-            "Mkhodroo\\DateConvertor\\": "packages/mkhodroo-date-convertor/src"
+            "Mkhodroo\\DateConvertor\\": "packages/mkhodroo-date-convertor/src",
+            "Mkhodroo\\PMReport\\": "packages/mkhodroo-pm-report/src"
         }
     },
     "autoload-dev": {

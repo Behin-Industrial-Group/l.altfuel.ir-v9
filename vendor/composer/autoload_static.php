@@ -119,6 +119,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Mkhodroo\\Voip\\' => 14,
             'Mkhodroo\\UserRoles\\' => 19,
             'Mkhodroo\\SmsTemplate\\' => 21,
+            'Mkhodroo\\PMReport\\' => 18,
             'Mkhodroo\\MkhodrooProcessMaker\\' => 30,
             'Mkhodroo\\DateConvertor\\' => 23,
             'Mkhodroo\\CaseInsensitiveTranslate\\' => 34,
@@ -411,6 +412,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\SmsTemplate\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-sms-template/src',
+        ),
+        'Mkhodroo\\PMReport\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-pm-report/src',
         ),
         'Mkhodroo\\MkhodrooProcessMaker\\' => 
         array (
@@ -3640,6 +3645,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Requests\\TicketRequest' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Requests/TicketRequest.php',
         'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => __DIR__ . '/../..' . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
         'Mkhodroo\\DateConvertor\\Controllers\\SDate' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/Controllers/SDate.php',
+        'Mkhodroo\\DateConvertor\\DateConvertorProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/DateConvertorProvider.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\AuthController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/AuthController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CaseController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseTrackerController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CaseTrackerController.php',

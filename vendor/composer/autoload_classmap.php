@@ -3048,6 +3048,7 @@ return array(
     'Mkhodroo\\AltfuelTicket\\Requests\\TicketRequest' => $baseDir . '/packages/altfuel-ticket/src/Requests/TicketRequest.php',
     'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => $baseDir . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
     'Mkhodroo\\DateConvertor\\Controllers\\SDate' => $baseDir . '/packages/mkhodroo-date-convertor/src/Controllers/SDate.php',
+    'Mkhodroo\\DateConvertor\\DateConvertorProvider' => $baseDir . '/packages/mkhodroo-date-convertor/src/DateConvertorProvider.php',
     'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\AuthController' => $baseDir . '/packages/mkhodroo-process-maker/src/Controllers/AuthController.php',
     'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseController' => $baseDir . '/packages/mkhodroo-process-maker/src/Controllers/CaseController.php',
     'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseTrackerController' => $baseDir . '/packages/mkhodroo-process-maker/src/Controllers/CaseTrackerController.php',

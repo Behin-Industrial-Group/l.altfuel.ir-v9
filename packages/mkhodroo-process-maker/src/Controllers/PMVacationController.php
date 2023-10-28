@@ -8,6 +8,7 @@ use Mkhodroo\MkhodrooProcessMaker\Models\PMVacation;
 
 class PMVacationController extends Controller
 {
+    
     function numberOfMyVacation() {
         $user_id = PMUserController::getByName(auth()->user()->pm_username)->USR_UID;
         return [

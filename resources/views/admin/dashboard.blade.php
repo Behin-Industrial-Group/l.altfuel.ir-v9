@@ -39,7 +39,7 @@
                     <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
                 <script>
-                    $.get('{{ route('MkhodrooProcessMaker.report.numberOfMyVacation') }}', function(response) {
+                    $.get('{{ route('PMReport.getNumberOfVacation') }}', function(response) {
                         console.log(response);
                         $('#numberOfMyVacationDays').html(response.daily);
                         $('#numberOfMyVacationHours').html(response.hourly);

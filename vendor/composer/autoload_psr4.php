@@ -60,6 +60,7 @@ return array(
     'Mkhodroo\\Voip\\' => array($baseDir . '/packages/mkhodroo-voip/src'),
     'Mkhodroo\\UserRoles\\' => array($baseDir . '/packages/mkhodroo-user-roles/src'),
     'Mkhodroo\\SmsTemplate\\' => array($baseDir . '/packages/mkhodroo-sms-template/src'),
+    'Mkhodroo\\PMReport\\' => array($baseDir . '/packages/mkhodroo-pm-report/src'),
     'Mkhodroo\\MkhodrooProcessMaker\\' => array($baseDir . '/packages/mkhodroo-process-maker/src'),
     'Mkhodroo\\DateConvertor\\' => array($baseDir . '/packages/mkhodroo-date-convertor/src'),
     'Mkhodroo\\CaseInsensitiveTranslate\\' => array($baseDir . '/packages/case-insensitive-translate/src'),
