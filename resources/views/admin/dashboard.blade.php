@@ -91,21 +91,6 @@
 
 
 
-        {{-- آنلاین بودن تلفن روی سرور --}}
-        <script>
-
-            var intervalId = window.setInterval(function() {
-                const d = new Date();
-                let hour = d.getHours();
-
-                if (hour == "8" || hour == "9") {
-                    console.log(hour);
-                    $.get('{{ route('voip.sipShowPeers') }}', function(response) {
-                        console.log(response);
-                    })
-                }
-            }, 60000);
-        </script>
 
 
 
