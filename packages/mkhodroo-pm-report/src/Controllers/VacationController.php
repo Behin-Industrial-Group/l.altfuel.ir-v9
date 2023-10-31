@@ -39,4 +39,6 @@ class VacationController extends Controller
             'hourly' => $hourly,
         ];
     }
+
+    
 }

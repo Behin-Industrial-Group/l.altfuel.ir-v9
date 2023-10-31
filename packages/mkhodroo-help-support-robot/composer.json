@@ -1,0 +1,16 @@
+{
+    "name": "mkhodroo/help-support-robot",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Mkhodroo\\HelpSupportRobot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mkhodroo",
+            "email": "mkhodroo@yahoo.com"
+        }
+    ],
+    "require": {}
+}

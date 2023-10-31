@@ -36,7 +36,8 @@
             "Mkhodroo\\CaseInsensitiveTranslate\\": "packages/case-insensitive-translate/src",
             "Mkhodroo\\SmsTemplate\\": "packages/mkhodroo-sms-template/src",
             "Mkhodroo\\DateConvertor\\": "packages/mkhodroo-date-convertor/src",
-            "Mkhodroo\\PMReport\\": "packages/mkhodroo-pm-report/src"
+            "Mkhodroo\\PMReport\\": "packages/mkhodroo-pm-report/src",
+            "Mkhodroo\\HelpSupportRobot\\": "packages/mkhodroo-help-support-robot/src"
         }
     },
     "autoload-dev": {

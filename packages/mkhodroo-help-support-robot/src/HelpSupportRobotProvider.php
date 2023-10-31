@@ -1,10 +1,10 @@
 <?php
 
-namespace Mkhodroo\PMReport;
+namespace Mkhodroo\HelpSupportRobot;
 
 use Illuminate\Support\ServiceProvider;
 
-class PMReportProvider extends ServiceProvider
+class HelpSupportRobotProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -24,7 +24,8 @@ class PMReportProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
-        $this->loadViewsFrom(__DIR__. '/Views', 'PMReportView');
+        $this->loadMigrationsFrom(__DIR__ . '/Migrations');
+        $this->loadViewsFrom(__DIR__. '/Views', 'HelpSupportView');
         $this->loadJsonTranslationsFrom(__DIR__. '/Lang');
     }
 }

@@ -62,6 +62,7 @@ return array(
     'Mkhodroo\\SmsTemplate\\' => array($baseDir . '/packages/mkhodroo-sms-template/src'),
     'Mkhodroo\\PMReport\\' => array($baseDir . '/packages/mkhodroo-pm-report/src'),
     'Mkhodroo\\MkhodrooProcessMaker\\' => array($baseDir . '/packages/mkhodroo-process-maker/src'),
+    'Mkhodroo\\HelpSupportRobot\\' => array($baseDir . '/packages/mkhodroo-help-support-robot/src'),
     'Mkhodroo\\DateConvertor\\' => array($baseDir . '/packages/mkhodroo-date-convertor/src'),
     'Mkhodroo\\CaseInsensitiveTranslate\\' => array($baseDir . '/packages/case-insensitive-translate/src'),
     'Mkhodroo\\AltfuelTicket\\' => array($baseDir . '/packages/altfuel-ticket/src'),

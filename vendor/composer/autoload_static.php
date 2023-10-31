@@ -121,6 +121,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Mkhodroo\\SmsTemplate\\' => 21,
             'Mkhodroo\\PMReport\\' => 18,
             'Mkhodroo\\MkhodrooProcessMaker\\' => 30,
+            'Mkhodroo\\HelpSupportRobot\\' => 26,
             'Mkhodroo\\DateConvertor\\' => 23,
             'Mkhodroo\\CaseInsensitiveTranslate\\' => 34,
             'Mkhodroo\\AltfuelTicket\\' => 23,
@@ -420,6 +421,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\MkhodrooProcessMaker\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src',
+        ),
+        'Mkhodroo\\HelpSupportRobot\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-help-support-robot/src',
         ),
         'Mkhodroo\\DateConvertor\\' => 
         array (
@@ -3676,6 +3681,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMUsers' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMUsers.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMVacation' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMVacation.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Models\\PMVariable' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Models/PMVariable.php',
+        'Mkhodroo\\PMReport\\Controllers\\CurlRequestController' => __DIR__ . '/../..' . '/packages/mkhodroo-pm-report/src/Controllers/CurlRequestController.php',
+        'Mkhodroo\\PMReport\\Controllers\\TableController' => __DIR__ . '/../..' . '/packages/mkhodroo-pm-report/src/Controllers/TableController.php',
+        'Mkhodroo\\PMReport\\Controllers\\VacationController' => __DIR__ . '/../..' . '/packages/mkhodroo-pm-report/src/Controllers/VacationController.php',
+        'Mkhodroo\\PMReport\\PMReportProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-pm-report/src/PMReportProvider.php',
         'Mkhodroo\\SmsTemplate\\Controllers\\SendSmsController' => __DIR__ . '/../..' . '/packages/mkhodroo-sms-template/src/Controllers/SendSmsController.php',
         'Mkhodroo\\SmsTemplate\\Controllers\\SmsTemplateController' => __DIR__ . '/../..' . '/packages/mkhodroo-sms-template/src/Controllers/SmsTemplateController.php',
         'Mkhodroo\\SmsTemplate\\SmsTemplateProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-sms-template/src/SmsTemplateProvider.php',
