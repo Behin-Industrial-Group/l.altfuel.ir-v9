@@ -9,7 +9,7 @@ class zarinPal
 {
     public static function pay($request)
     {
-        $MerchantID = 'cdc4e79d-ff6e-4684-ab94-8d74049ef5c9';
+        $MerchantID = '6a6243dd-534e-4ea5-9b42-0b2cf1da4a09';
         $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
         $result = $client->PaymentRequest([
             'MerchantID'     => $MerchantID,
@@ -29,7 +29,7 @@ class zarinPal
     
     public static function verify(Request $request, $price)
     {
-        $MerchantID = 'cdc4e79d-ff6e-4684-ab94-8d74049ef5c9';
+        $MerchantID = '6a6243dd-534e-4ea5-9b42-0b2cf1da4a09';
         if ($request->Status == 'OK') {
             // URL also can be ir.zarinpal.com or de.zarinpal.com
             $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
