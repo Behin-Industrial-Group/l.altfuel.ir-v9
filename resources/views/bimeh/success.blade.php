@@ -24,10 +24,10 @@
                         <div class="row">
                             <!-- accepted payments column -->
                             <div class="col-xs-6">
-                                <alert class="alert alert-success text-muted">
+                                <div class="alert alert-success text-muted">
                                     پرداخت با موفقیت انجام شد<br>
                                     بروزرسانی اطلاعات مالی در سایت چند روزی زمانبر خواهد بود. لطفا شکیبا باشید.
-                                </alert>
+                                </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="table-responsive">
