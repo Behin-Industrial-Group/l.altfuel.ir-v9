@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Log;
 
 class VoipController extends Controller
 {
+
     public static function get_voip_poll_info()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://voip.altfuel.ir/mkhodroo.php');
+        curl_setopt($ch, CURLOPT_URL, 'https://voip.altfuel.ir/mkhodroo.php?api_token=A8k228dD4nOWXrclp2u9ubFT9Yt2xfJL');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
@@ -45,7 +46,7 @@ class VoipController extends Controller
     public static function getPeerPollInfo($queue_num ='all')
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://voip.altfuel.ir/mkhodroo.php?queue_num=$queue_num");
+        curl_setopt($ch, CURLOPT_URL, "https://voip.altfuel.ir/mkhodroo.php?queue_num=$queue_num&api_token=A8k228dD4nOWXrclp2u9ubFT9Yt2xfJL");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
