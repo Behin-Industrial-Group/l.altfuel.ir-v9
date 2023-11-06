@@ -20,6 +20,7 @@
     "name": "نام",
     "type": "نوع",
     "duration": "مدت",
+    "DURATION": "مدت",
     "startDate": "تاریخ شروع",
     "endDate": "تاریخ پایان",
     "substitute": "جایگزین",
@@ -44,5 +45,10 @@
     "warning_registrar": "ثبت کننده اخطاریه",
     "warning_number": "شماره اخطاریه",
     "agency_name": "نام مرکز",
-    "created_by": "ایجاد کننده"
+    "created_by": "ایجاد کننده",
+    "Pending": "کارتابل فعلی",
+    "Create Date": "تاریخ ایجاد",
+    "ID": "شناسه",
+    "TO_DO": "انجام شده",
+    "OVERDUE": "سررسید"
 }

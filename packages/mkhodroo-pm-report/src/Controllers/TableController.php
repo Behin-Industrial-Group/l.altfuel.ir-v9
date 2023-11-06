@@ -34,7 +34,7 @@ class TableController extends Controller
         ]);
     }
 
-    function getData(Request $r){
+    public static function getData(Request $r){
         $url = "/api/v1/table";
         $data = [
             'api_token' => env('PM_REPORT_API_TOKEN'),

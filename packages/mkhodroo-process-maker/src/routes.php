@@ -10,6 +10,7 @@ use Mkhodroo\MkhodrooProcessMaker\Controllers\CaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\CaseTrackerController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\CurlRequestController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\DeleteCaseController;
+use Mkhodroo\MkhodrooProcessMaker\Controllers\DoneCaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\DraftCaseController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\DynaFormController;
 use Mkhodroo\MkhodrooProcessMaker\Controllers\GetCaseVarsController;
@@ -28,18 +29,13 @@ use Mkhodroo\MkhodrooProcessMaker\Controllers\VariableController;
 
 Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', 'access'])->group(function(){
     Route::get('test', function(){
-        $url = "http://80.71.149.190:4339/api/v1/table";
-        $data = [
-            'api_token' => 'asd',
-            'table_name' => 'rbac_users'
-        ];
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-
-        return curl_exec($ch);
+        $accessToken = AuthController::getAccessToken();
+        echo "<pre>";
+        $a=  CurlRequestController::send(
+            $accessToken, 
+            "/api/1.0/workflow/cases/147826654653df0a7d02083073057934/tasks"
+        );
+        print_r($a);
     });
     Route::get('inbox', [CaseController::class, 'get'])->name('inbox');
     Route::get('new-case', [CaseController::class, 'newCase'])->name('newCase');
@@ -50,6 +46,7 @@ Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', '
         Route::get('start', [StartCaseController::class, 'form'])->name('start');
         Route::get('todo', [ToDoCaseController::class, 'form'])->name('todo');
         Route::get('draft', [DraftCaseController::class, 'form'])->name('draft');
+        Route::get('done', [DoneCaseController::class, 'form'])->name('done');
     });
 
     Route::name('api.')->prefix('api')->group(function(){
@@ -57,7 +54,9 @@ Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', '
         Route::post('new-case', [NewCaseController::class, 'create'])->name('newCase');
         Route::get('todo', [ToDoCaseController::class, 'getMyCase'])->name('todo');
         Route::get('draft', [DraftCaseController::class, 'getMyCase'])->name('draft');
+        Route::get('done', [DoneCaseController::class, 'getMyCase'])->name('done');
         Route::post('get-case-dynaForm', [DynaFormController::class, 'get'])->name('getCaseDynaForm');
+        Route::post('get-case-mainForm', [DoneCaseController::class, 'mainForm'])->name('getCaseMainForm');
         Route::post('save-and-next', [SetCaseVarsController::class, 'saveAndNext'])->name('saveAndNext');
         Route::post('save', [SetCaseVarsController::class, 'save'])->name('save');
         Route::get('get-case-vars/{caseId}', [GetCaseVarsController::class, 'getByCaseId'])->name('getCaseVars');

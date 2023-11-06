@@ -11,6 +11,7 @@
                         <select name="table_name" id="" class="form-control select2">
                             <option value="pmt_vacation_requests">{{ __('vacations') }}</option>
                             <option value="pmt_illegal_agencies">{{ __('illegal agencies') }}</option>
+                            <option value="application">{{ __('application') }}</option>
                         </select>
                     </td>
                     <td>
