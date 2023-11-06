@@ -67,7 +67,6 @@
                 $(row).css('cursor', 'pointer')
             }
         );
-        $('tr').css('cursor', 'pointer')
         table.on('dblclick', 'tr', function(){
             var data = table.row( this ).data();
             var fd = new FormData();

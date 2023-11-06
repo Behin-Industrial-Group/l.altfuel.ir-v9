@@ -59,7 +59,10 @@
                     return `<span style="float: left; direction: ltr; color: ${row.TAS_COLOR_LABEL}">${delay_day}d  ${delay_h}h ${delay_m}m ${delay_s}s</span>`; 
                 }},
                 {data : 'APP_UID', render: function(APP_UID){return  `<i class='fa fa-trash bg-red' onclick="delete_case('${APP_UID}')"></i>`; }},
-            ]
+            ],
+            function(row){
+                $(row).css('cursor', 'pointer')
+            }
         );
         table.on('dblclick', 'tr', function(){
             var data = table.row( this ).data();
