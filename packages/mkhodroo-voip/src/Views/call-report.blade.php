@@ -10,24 +10,9 @@
         </tr>
     </thead>
     @if (is_array($data))
-    @foreach ($data as $item)
-    <tr>
-        <td>{{ $item['src'] }}</td>
-        <td>{{ $item['dst'] }}</td>
-        <td>{{ __($item['disposition']) }}</td>
-        <td dir="ltr">{{ $item['calldate'] }}</td>
-        <td dir="ltr">{{ $item['duration'] }}</td>
-        <td dir="ltr">
-            <p
-                style="cursor: pointer"
-                onclick="dl(`https://voip.altfuel.ir/voice.php?date={{ explode(' ', $item['calldate'])[0] }}&id={{ $item['uniqueid'] }}`)">
-                دانلود
-            </p>
-        </td>
-    </tr>
-@endforeach
+        
     @endif
-    
+
 </table>
 <script>
     function dl(link) {
