@@ -89,6 +89,38 @@
             }
         </script>
 
+        {{-- گزارش تماس ها --}}
+        @if (auth()->user()->access('گزارش تماس'))
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p>جزئیات تماس</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </h3>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <p style="text-align: center" onclick="getCallReport()">More info <i
+                            class="fa fa-arrow-circle-right"></i></p>
+                </div>
+            </div>
+        @endif
+        <script>
+            function getCallReport() {
+                var ext_num = "{{ auth()->user()->ext_num }}";
+                url = "{{ route('voip.getCallReport', ['ext_num' => 'ext_num']) }}";
+                url = url.replace('ext_num', ext_num);
+                
+                open_admin_modal(url)
+            }
+        </script>
 
 
 

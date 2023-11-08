@@ -26,5 +26,6 @@ class VoipServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__. '/Migrations');
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadViewsFrom(__DIR__. '/Views', 'VoipViews');
+        $this->loadJsonTranslationsFrom(__DIR__.'/Lang');
     }
 }

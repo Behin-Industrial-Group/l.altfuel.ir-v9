@@ -58,6 +58,21 @@ class VoipController extends Controller
             'data' => unserialize($result)
         ]);
     }
+
+    public static function getCallReport($ext_num = null)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://voip.altfuel.ir/mkhodroo_pbxapi/cdr-report.php?ext=$ext_num&api_token=A8k228dD4nOWXrclp2u9ubFT9Yt2xfJL");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
+        $er = curl_error($ch);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return view('VoipViews::call-report')->with([
+            'data' => unserialize($result)
+        ]);
+    }
     
 
     public static function sip_show_peers_status(){
