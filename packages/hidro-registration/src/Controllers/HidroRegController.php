@@ -50,7 +50,7 @@ class HidroRegController extends Controller
     public static function find($simfaCode, $legalNationalId)
     {
         return HidroModel::where('simfaCode', $simfaCode)->where('legalNationalId', $legalNationalId)
-            ->select('simfaCode', 'Name', 'Address', 'PostalCode', 'legalNationalId', 'Tel', 'debt')->first()->toArray();
+            ->select('simfaCode', 'Name', 'Address', 'PostalCode', 'legalNationalId', 'Tel', 'debt')->first()?->toArray();
     }
 
     public static function compeleteInfoForm(Request $r)
