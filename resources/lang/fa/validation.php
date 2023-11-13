@@ -187,6 +187,7 @@ return [
         'birth_date' => 'تاریخ تولد',
         'postal_code' => 'کدپستی',
         'address' => 'آدرس',
+        'Name' => 'نام',
         'NationalID' => 'کدملی',
         'Cellphone' => 'موبایل',
         'Province' => 'استان',
