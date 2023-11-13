@@ -23,26 +23,26 @@ class HidroRegController extends Controller
         echo "<pre>";
         foreach ($rows as $row) {
             if ($row[1] != 'نام مرکز در سیمفا') {
-                print_r([
-                    'simfaCode' => $row[0],
-                    'Name' => $row[1],
-                    'Address' => $row[2],
-                    'PostalCode' => $row[3],
-                    'legalNationalId' => $row[4],
-                    'Tel' => $row[5],
-                    'debt' => '50000000',
-                    'Details' => "اضافه شده از اکسل سیمفا"
-                ]);
-                HidroModel::create([
-                    'simfaCode' => $row[0],
-                    'Name' => $row[1],
-                    'Address' => $row[2],
-                    'PostalCode' => (string) $row[3],
-                    'legalNationalId' => $row[4],
-                    'Tel' => $row[5],
-                    'debt' => '50000000',
-                    'Details' => "اضافه شده از اکسل سیمفا"
-                ]);
+                // print_r([
+                //     'simfaCode' => $row[0],
+                //     'Name' => $row[1],
+                //     'Address' => $row[2],
+                //     'PostalCode' => $row[3],
+                //     'legalNationalId' => $row[4],
+                //     'Tel' => $row[5],
+                //     'debt' => '50000000',
+                //     'Details' => "اضافه شده از اکسل سیمفا"
+                // ]);
+                // HidroModel::create([
+                //     'simfaCode' => $row[0],
+                //     'Name' => $row[1],
+                //     'Address' => $row[2],
+                //     'PostalCode' => (string) $row[3],
+                //     'legalNationalId' => $row[4],
+                //     'Tel' => $row[5],
+                //     'debt' => '50000000',
+                //     'Details' => "اضافه شده از اکسل سیمفا"
+                // ]);
             }
         }
     }
