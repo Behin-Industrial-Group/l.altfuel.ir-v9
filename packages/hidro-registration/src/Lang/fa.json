@@ -7,5 +7,6 @@
     "Name":"نام",
     "simfaCode":"کدسیمفا",
     "Waiting...": "منتظر بمانید...",
-    "Authority Does Not Received.": "Authority دریافت نشد با پشتیبانی تماس بگیرید."
+    "Authority Does Not Received.": "Authority دریافت نشد با پشتیبانی تماس بگیرید.",
+    "Agency Does Not Found": "مرکز یافت نشد"
 }
