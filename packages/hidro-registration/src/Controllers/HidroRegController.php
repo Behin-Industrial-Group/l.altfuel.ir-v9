@@ -50,7 +50,7 @@ class HidroRegController extends Controller
     public static function find($simfaCode, $legalNationalId)
     {
         return HidroModel::where('simfaCode', $simfaCode)->where('legalNationalId', $legalNationalId)
-            ->select('simfaCode', 'Name', 'Address', 'PostalCode', 'legalNationalId', 'Tel', 'debt')->first()?->toArray();
+            ->select('simfaCode', 'Name', 'Address', 'PostalCode', 'legalNationalId', 'Tel', 'debt')->first();
     }
 
     public static function compeleteInfoForm(Request $r)
@@ -60,7 +60,7 @@ class HidroRegController extends Controller
             return response(trans("Agency Does Not Found"), 300);
         }
         return view('HidroRegViews::compelete-info')->with([
-            'agency' => $agency
+            'agency' => $agency->toArray()
         ]);
     }
 
