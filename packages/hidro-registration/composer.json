@@ -1,0 +1,16 @@
+{
+    "name": "hidro-registration",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Hidro\\Registration\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mkhodroo",
+            "email": "mkhodroo@yahoo.com"
+        }
+    ],
+    "require": {}
+}

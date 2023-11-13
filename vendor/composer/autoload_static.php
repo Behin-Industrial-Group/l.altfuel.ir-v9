@@ -147,6 +147,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'H' => 
         array (
+            'Hidro\\Registration\\' => 19,
             'Hekmatinasser\\Verta\\' => 20,
             'Hekmatinasser\\Notowo\\' => 21,
             'Hekmatinasser\\Jalali\\' => 21,
@@ -491,6 +492,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
+        ),
+        'Hidro\\Registration\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/hidro-registration/src',
         ),
         'Hekmatinasser\\Verta\\' => 
         array (
@@ -3651,11 +3656,16 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => __DIR__ . '/../..' . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
         'Mkhodroo\\DateConvertor\\Controllers\\SDate' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/Controllers/SDate.php',
         'Mkhodroo\\DateConvertor\\DateConvertorProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/DateConvertorProvider.php',
+        'Mkhodroo\\HelpSupportRobot\\Controllers\\AddController' => __DIR__ . '/../..' . '/packages/mkhodroo-help-support-robot/src/Controllers/AddController.php',
+        'Mkhodroo\\HelpSupportRobot\\Controllers\\GetController' => __DIR__ . '/../..' . '/packages/mkhodroo-help-support-robot/src/Controllers/GetController.php',
+        'Mkhodroo\\HelpSupportRobot\\HelpSupportRobotProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-help-support-robot/src/HelpSupportRobotProvider.php',
+        'Mkhodroo\\HelpSupportRobot\\Models\\HelpSupport' => __DIR__ . '/../..' . '/packages/mkhodroo-help-support-robot/src/Models/HelpSupport.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\AuthController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/AuthController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CaseController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CaseTrackerController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CaseTrackerController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\CurlRequestController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/CurlRequestController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\DeleteCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/DeleteCaseController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\DoneCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/DoneCaseController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\DraftCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/DraftCaseController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\DynaFormController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/DynaFormController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\GetCaseVarsController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/GetCaseVarsController.php',

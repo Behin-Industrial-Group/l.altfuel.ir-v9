@@ -37,7 +37,8 @@
             "Mkhodroo\\SmsTemplate\\": "packages/mkhodroo-sms-template/src",
             "Mkhodroo\\DateConvertor\\": "packages/mkhodroo-date-convertor/src",
             "Mkhodroo\\PMReport\\": "packages/mkhodroo-pm-report/src",
-            "Mkhodroo\\HelpSupportRobot\\": "packages/mkhodroo-help-support-robot/src"
+            "Mkhodroo\\HelpSupportRobot\\": "packages/mkhodroo-help-support-robot/src",
+            "Hidro\\Registration\\": "packages/hidro-registration/src"
         }
     },
     "autoload-dev": {

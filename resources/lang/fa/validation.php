@@ -100,7 +100,7 @@ return [
         'numeric' => 'The :attribute must be at least :min.',
         'string' => 'The :attribute must be at least :min characters.',
     ],
-    'min_digits' => 'The :attribute must have at least :min digits.',
+    'min_digits' => ':attribute باید :min رقم باشد',
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
@@ -187,6 +187,12 @@ return [
         'birth_date' => 'تاریخ تولد',
         'postal_code' => 'کدپستی',
         'address' => 'آدرس',
+        'NationalID' => 'کدملی',
+        'Cellphone' => 'موبایل',
+        'Province' => 'استان',
+        'City' => 'شهر',
+        'standardCertificateNumber' => 'شماره گواهی تاييد صلاحيت آزمایشگاه',
+        'standardCertificateExpDate' => 'تاریخ اعتبار گواهی:',
     ],
 
 ];

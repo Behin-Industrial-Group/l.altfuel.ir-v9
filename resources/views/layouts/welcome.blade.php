@@ -59,7 +59,17 @@
 	<script src="{{ url('public/plugins/persian-datepicker/persian-datepicker.js')  . '?' . config('app.version') }}"></script>
 	<script>
 		$('.select2').select2();
+		function initial_view(){
+                $('.select2').select2();
+                $('.select2').css('width', '100%')
+                $(".persian-date").persianDatepicker({
+                    viewMode: 'year',
+                    format: 'YYYY-MM-DD',
+                    initialValueType: 'persian'
+                });
+            }
 	</script>
+	
 	@yield('script')
 </body>
 </html>

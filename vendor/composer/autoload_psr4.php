@@ -79,6 +79,7 @@ return array(
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),
     'Illuminate\\Support\\' => array($vendorDir . '/laravel/framework/src/Illuminate/Macroable', $vendorDir . '/laravel/framework/src/Illuminate/Collections', $vendorDir . '/laravel/framework/src/Illuminate/Conditionable'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
+    'Hidro\\Registration\\' => array($baseDir . '/packages/hidro-registration/src'),
     'Hekmatinasser\\Verta\\' => array($vendorDir . '/hekmatinasser/verta/src'),
     'Hekmatinasser\\Notowo\\' => array($vendorDir . '/hekmatinasser/notowo/src'),
     'Hekmatinasser\\Jalali\\' => array($vendorDir . '/hekmatinasser/jalali/src'),

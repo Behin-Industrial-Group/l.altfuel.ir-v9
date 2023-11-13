@@ -7,9 +7,23 @@ use SoapClient;
 
 class zarinPal
 {
+    public static function getAuthority($amount, $description, $mobile, $callbackUrl){
+        $MerchantID = config('zarinpal.merchantId');
+        $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+        $result = $client->PaymentRequest([
+            'MerchantID'     => $MerchantID,
+            'Amount'         => $amount,
+            'Description'    => $description,
+            'Mobile'         => $mobile,
+            'CallbackURL'    => $callbackUrl,
+        ]);
+        
+        if ($result->Status == 100) 
+            return $result->Authority;
+    }
     public static function pay($request)
     {
-        $MerchantID = '6a6243dd-534e-4ea5-9b42-0b2cf1da4a09';
+        $MerchantID = config('zarinpal.merchantId');
         $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
         $result = $client->PaymentRequest([
             'MerchantID'     => $MerchantID,
@@ -29,7 +43,7 @@ class zarinPal
     
     public static function verify(Request $request, $price)
     {
-        $MerchantID = '6a6243dd-534e-4ea5-9b42-0b2cf1da4a09';
+        $MerchantID = config('zarinpal.merchantId');
         if ($request->Status == 'OK') {
             // URL also can be ir.zarinpal.com or de.zarinpal.com
             $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);

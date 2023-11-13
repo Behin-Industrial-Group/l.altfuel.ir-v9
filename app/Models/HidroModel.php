@@ -11,6 +11,7 @@ class HidroModel extends Model
     protected $fillable = [
         'NationalID', 'Name', 'Province', 'City', 'CodeEtehadie', 'GuildNumber', 'IssueDate', 'ExpDate',
         'PostalCode', 'Cellphone', 'Tel', 'Address', 'MembershipFee96', 'MembershipFee97', 'MembershipFee98',
-        'IrngvFee', 'LockFee', 'FinGreen', 'Location', 'Details', 'FinDetails', 'InsUserDelivered', 'DeliveryReceipts'
+        'IrngvFee', 'LockFee', 'FinGreen', 'Location', 'Details', 'FinDetails', 'InsUserDelivered', 'DeliveryReceipts',
+        'debt', 'debt_RefID', 'simfaCode', 'legalNationalId', 'Authority'
     ];
 }

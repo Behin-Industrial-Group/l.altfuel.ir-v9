@@ -232,6 +232,7 @@ return [
         Mkhodroo\DateConvertor\DateConvertorProvider::class,
         Mkhodroo\PMReport\PMReportProvider::class,
         Mkhodroo\HelpSupportRobot\HelpSupportRobotProvider::class,
+        \Hidro\Registration\HidroRegProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,

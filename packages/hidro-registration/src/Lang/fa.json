@@ -1,0 +1,11 @@
+{
+    "debt":"مبلغ قابل پرداخت",
+    "Tel": "تلفن",
+    "legalNationalId":"شناسه ملی شرکت",
+    "PostalCode":"کدپستی",
+    "Address":"آدرس",
+    "Name":"نام",
+    "simfaCode":"کدسیمفا",
+    "Waiting...": "منتظر بمانید...",
+    "Authority Does Not Received.": "Authority دریافت نشد با پشتیبانی تماس بگیرید."
+}
