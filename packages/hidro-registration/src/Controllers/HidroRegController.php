@@ -99,10 +99,13 @@ class HidroRegController extends Controller
     }
 
     public static function callback(Request $r){
+        $agency = self::getByAuthority($r->Authority);
+        $agency->Authority = '';
+        $agency->save();
+
         if ($r->Status == 'OK') {
             // URL also can be ir.zarinpal.com or de.zarinpal.com
             $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
-            $agency = self::getByAuthority($r->Authority);
             $result = $client->PaymentVerification([
                 'MerchantID'     => config('zarinpal.merchantId'),
                 'Authority'      => $r->Authority,
@@ -110,7 +113,6 @@ class HidroRegController extends Controller
             ]);
             echo "<pre>";
             print_r($result);
-            $agency->Authority = '';
             $agency->debt_RefID = $result->RefID;
             $agency->save();
             return view('HidroRegViews::callback')->with([
