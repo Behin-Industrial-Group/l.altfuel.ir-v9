@@ -37,7 +37,7 @@ class HidroRegController extends Controller
                     'simfaCode' => $row[0],
                     'Name' => $row[1],
                     'Address' => $row[2],
-                    'PostalCode' => $row[3],
+                    'PostalCode' => (string) $row[3],
                     'legalNationalId' => $row[4],
                     'Tel' => $row[5],
                     'debt' => '50000000',
