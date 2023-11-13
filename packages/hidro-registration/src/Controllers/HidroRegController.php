@@ -33,16 +33,16 @@ class HidroRegController extends Controller
                 //     'debt' => '50000000',
                 //     'Details' => "اضافه شده از اکسل سیمفا"
                 // ]);
-                // HidroModel::create([
-                //     'simfaCode' => $row[0],
-                //     'Name' => $row[1],
-                //     'Address' => $row[2],
-                //     'PostalCode' => (string) $row[3],
-                //     'legalNationalId' => $row[4],
-                //     'Tel' => $row[5],
-                //     'debt' => '50000000',
-                //     'Details' => "اضافه شده از اکسل سیمفا"
-                // ]);
+                HidroModel::create([
+                    'simfaCode' => $row[0],
+                    'Name' => $row[1],
+                    'Address' => $row[2],
+                    'PostalCode' => (string) $row[3],
+                    'legalNationalId' => (string) $row[4],
+                    'Tel' => (string)$row[5],
+                    'debt' => '50000000',
+                    'Details' => "اضافه شده از اکسل سیمفا"
+                ]);
             }
         }
     }
