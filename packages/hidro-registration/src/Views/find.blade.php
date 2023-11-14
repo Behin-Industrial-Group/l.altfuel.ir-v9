@@ -7,9 +7,9 @@
                 <img src="https://altfuel.ir/fa/public/logo.png" class="col-sm-12" alt="">
             </div>
             <div class="card-body">
-                <h5 style="text-align: center">
-                    تکمیل ثبت نام مرکز هیدرو استاتیک
-                </h5><hr>
+                <h6 style="text-align: center">
+                    آزمایشگاه های تست هیدرو استاتیک دارای تاییدیه سازمان ملی استاندارد که هنوز در سامانه IRNGV ثبت نام نشده اند، در صورت تمایل به مشارکت در تست مخازن خودروهای تبدیل کارگاهی و کارخانه ای، می توانند از این طریق فرم زیر نسبت به تکمیل اطلاعات اقدام‌ نمایند.
+                </h6><hr>
                 <form action="javascript:void(0)" method="post" id="register-form">
                     @csrf
                     <div class="input-group mb-3">
