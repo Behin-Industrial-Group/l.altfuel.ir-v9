@@ -65,10 +65,14 @@ class HidroRegController extends Controller
 
     public static function compeleteInfoForm(Request $r)
     {
-        $agency = self::find($r->simfaCode, $r->legalNationalId);
+        $agency = self::get($r->simfaCode, $r->legalNationalId);
         if (!$agency) {
             return response(trans("Agency Does Not Found"), 300);
         }
+        if($agency->debt_RefID){
+            return response(trans("You Compelete Your Info Before. Please Be Patient. We Call You Soon."),300);
+        }
+        $agency = self::find($r->simfaCode, $r->legalNationalId);
         return view('HidroRegViews::compelete-info')->with([
             'agency' => $agency->toArray()
         ]);
