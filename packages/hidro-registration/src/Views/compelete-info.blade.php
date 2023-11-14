@@ -9,14 +9,18 @@
             <div class="card-body">
                 <h5 style="text-align: center">
                     تکمیل ثبت نام مرکز هیدرو استاتیک
-                </h5><hr>
+                </h5>
+                <hr>
                 <form action="javascript:void(0)" method="post" id="register-form">
                     @csrf
                     @foreach (array_keys($agency) as $key)
-                        {{ __($key) }}
-                        <input type="text" name="{{$key}}" id="" value="{{$agency[$key]}}" class="form-control" readonly>
+                        @if ($key != 'debt')
+                            {{ __($key) }}
+                            <input type="text" name="{{ $key }}" id="" value="{{ $agency[$key] }}"
+                                class="form-control" readonly>
+                        @endif
                     @endforeach
-                    کدملی مدیرعامل: 
+                    کدملی مدیرعامل:
                     <input type="text" name="NationalID" id="" class="form-control">
 
                     نام و نام خانوادگی مدیرعامل:
@@ -35,8 +39,11 @@
                     <input type="text" name="standardCertificateNumber" id="" class="form-control">
 
                     تاریخ اعتبار گواهی:
-                    <input type="text" name="standardCertificateExpDate" id="" class="form-control persian-date">
+                    <input type="text" name="standardCertificateExpDate" id=""
+                        class="form-control persian-date">
 
+                    مبلغ قابل پرداخت(ریال):
+                    <input type="text" name="debt" id="" class="form-control" value="{{$agency['debt']}}" readonly>
                 </form>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary col-sm-12" onclick="submit()">ثبت و پرداخت</button>
@@ -49,18 +56,17 @@
 
 @section('script')
     <script>
-        function submit(){
+        function submit() {
             var fd = new FormData($('#register-form')[0]);
             send_ajax_formdata_request(
                 "{{ route('hidroReg.pay') }}",
                 fd,
-                function(res){
-                    show_message("{{__('Waiting...')}}");
+                function(res) {
+                    show_message("{{ __('Waiting...') }}");
                     window.location = res;
                 }
             )
         }
         initial_view()
     </script>
-   
 @endsection
