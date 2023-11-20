@@ -38,7 +38,9 @@
             "Mkhodroo\\DateConvertor\\": "packages/mkhodroo-date-convertor/src",
             "Mkhodroo\\PMReport\\": "packages/mkhodroo-pm-report/src",
             "Mkhodroo\\HelpSupportRobot\\": "packages/mkhodroo-help-support-robot/src",
-            "Hidro\\Registration\\": "packages/hidro-registration/src"
+            "Hidro\\Registration\\": "packages/hidro-registration/src",
+            "Mkhodroo\\AgencyInfo\\": "packages/mkhodroo-agency-info/src",
+            "Mkhodroo\\Cities\\": "packages/mkhodroo-cities/src"
         }
     },
     "autoload-dev": {

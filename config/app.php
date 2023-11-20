@@ -233,6 +233,8 @@ return [
         Mkhodroo\PMReport\PMReportProvider::class,
         Mkhodroo\HelpSupportRobot\HelpSupportRobotProvider::class,
         \Hidro\Registration\HidroRegProvider::class,
+        Mkhodroo\AgencyInfo\AgencyInfoProvider::class,
+        Mkhodroo\Cities\CityProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,

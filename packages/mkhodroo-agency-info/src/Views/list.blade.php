@@ -1,0 +1,199 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="box">
+        <div class="card p-4">
+            <button onclick="new_agency()" class="btn btn-primary col-sm-1">{{ __('New') }}</button>
+            <button class="fa fa-filter btn btn-default col-sm-1" onclick="show_columns()">{{ __('Columns') }}</button>
+        </div>
+        <div class="card p-4" style="display: none" id="columns_div">
+            <div class="row">
+                <div class="col-sm-8" style="float: right">
+                    <select name="columns" id="columns" class="select2" multiple>
+                        @for ($i = 0; $i < count($cols); $i++)
+                            <option value="{{ $i }}">{{ __($cols[$i]) }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="col-sm-2" style="display: inline">
+                    <button onclick="show_columns()" class="btn btn-success">{{ __('Apply') }}</button>
+                </div>
+            </div>
+        </div>
+        <div class="card p-4 ">
+            <table class="table table-striped table-responsive ">
+                <form action="javascript:void(0)" id="filter-form1" class="col-sm-12 table-responsive">
+                    <td>{{ __(config('agency_info.main_field_name')) }}</td>
+                    <td>
+                        <select name="{{ config('agency_info.main_field_name') }}" id="" class="form-control">
+                            <option value="">{{ __('All') }}</option>
+                            @foreach (config('agency_info.customer_type') as $catagory => $catagory_detail)
+                                <option value="{{ $catagory }}">{{ $catagory_detail['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="field_value" id="" class="form-control"
+                            placeholder="{{ __('Everything') }}">
+                    </td>
+                    <td>
+                        <button onclick="filter()" class="btn btn-primary">{{ __('Filter') }}</button>
+                    </td>
+            </table>
+            </form>
+        </div>
+
+        <div class="card p-4">
+
+            <table class="table table-stripped" id="infos">
+                <thead>
+                    <tr>
+                        @for ($i = 0; $i < count($cols); $i++)
+                            <th>{{ __($cols[$i]) }}</th>
+                        @endfor
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        initial_view()
+        send_ajax_get_request(
+            "{{ route('agencyInfo.list') }}",
+            function(res) {
+                console.log(res);
+            }
+        )
+        $(document).ready(function() {
+            var table = create_datatable(
+                "infos",
+                "{{ route('agencyInfo.list') }}",
+                [
+                    @for ($i = 0; $i < count($cols); $i++)
+                        {
+                            data: '{{ $cols[$i] }}',
+                            render: function(data) {
+                                return data ? data : '';
+                            },
+                            visible: <?php echo in_array($cols[$i], config('agency_info.default_fields')) ? true : 'false'; ?>
+                        }
+                        @if ($i != count($cols) - 1)
+                            ,
+                        @endif
+                    @endfor
+                ],
+                function(row, data) {
+                    // تغییر رنگ پس‌زمینه ردیف بر اساس مقدار فیلد enable
+                    if (data.fin_green == 'ok') {
+                        $(row).css('background-color', 'green');
+                    }
+                }
+            )
+
+            table.on('dblclick', 'tr', function() {
+                var data = table.row(this).data();
+                console.log(data);
+                open_edit_form(data.parent_id, 'info')
+                // show_edit_modal(data.id);
+            })
+        })
+
+
+        function columnVisible(num) {
+            var column = table.column(num);
+            column.visible(1);
+        }
+
+        function columnHide(num) {
+            var column = table.column(num);
+            column.visible(0);
+        }
+
+        $('#columns').val([
+            @for ($i = 0; $i < count($cols); $i++)
+                @if (in_array($cols[$i], config('agency_info.default_fields')))
+                    "{{ $i }}",
+                @endif
+            @endfor
+        ]).trigger("change");
+
+        function apply() {
+            @for ($i = 0; $i < count($cols); $i++)
+                columnHide({{ $i }})
+            @endfor
+            var columns = $('#columns').val();
+            columns.forEach(function(column) {
+                columnVisible(column)
+            })
+        }
+
+        function show_columns() {
+            var c = $('#columns_div')
+            if (c.css('display') == 'none') {
+                c.css('display', 'block')
+            } else {
+                c.css('display', 'none')
+            }
+        }
+
+        function open_edit_form(parent_id, active_tab) {
+            url = "{{ route('agencyInfo.editForm', ['parent_id' => 'parent_id']) }}";
+            url = url.replace('parent_id', parent_id);
+            open_admin_modal(
+                url,
+                '',
+                function() {
+                    var tab = $(`#${active_tab}-tab`).attr('class');
+                    var tabBody = $(`#${active_tab}`).attr('class');
+                    $(`#${active_tab}-tab`).click()
+                }
+            )
+
+        }
+
+        function new_agency() {
+            open_admin_modal(
+                "{{ route('agencyInfo.createForm') }}"
+            )
+        }
+
+        function filter() {
+            var fd = new FormData($('#filter-form1')[0]);
+
+            send_ajax_formdata_request(
+                "{{ route('agencyInfo.filterList') }}",
+                fd,
+                function(res) {
+                    console.log(res);
+                    update_datatable(res.data);
+                }
+            )
+        }
+    </script>
+@endsection
+
+<table>
+    <tbody>
+        <tr>
+            <td rowspan="6"><img src="blob:https://lh380.irandns.com/3ce4423b-fc8d-46a9-bb45-59bdcf32f1b8" width="200" height="111" /></td>
+        </tr>
+        <tr>
+            <td>Mohammad Shahab Khodroo</td>
+        </tr>
+        <tr>
+            <td>IT Manager</td>
+        </tr>
+        <tr>
+            <td>Cell: +98 937 692 2176</td>
+        </tr>
+        <tr>
+            <td>Tel: +98 21 9101 7175</td>    
+        </tr>
+        <tr>
+            <td>Website: www.behin.energy</td>    
+        </tr>
+    </tbody>
+</table>

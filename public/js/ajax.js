@@ -78,6 +78,36 @@ function send_ajax_request_with_confirm(url, data, callback, erCallback = null, 
     }
 }
 
+function send_ajax_formdata_request_with_confirm(url, data, callback, erCallback = null, message = "Are you sure?"){
+    if (confirm(message) == true) {
+        show_loading()
+        if(erCallback == null){
+            erCallback= function(data){ 
+                hide_loading();
+                show_error(data)
+            }
+        }
+        return $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            method: 'post',
+            success: function(){
+                hide_loading();
+            },
+            error: erCallback
+            })
+            .done(callback);
+    } else {
+        return false;
+    }
+}
+
 function send_ajax_get_request(url, callback, erCallback = null){
     show_loading()
     if(erCallback == null){

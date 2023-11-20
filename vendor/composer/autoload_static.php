@@ -123,8 +123,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Mkhodroo\\MkhodrooProcessMaker\\' => 30,
             'Mkhodroo\\HelpSupportRobot\\' => 26,
             'Mkhodroo\\DateConvertor\\' => 23,
+            'Mkhodroo\\Cities\\' => 16,
             'Mkhodroo\\CaseInsensitiveTranslate\\' => 34,
             'Mkhodroo\\AltfuelTicket\\' => 23,
+            'Mkhodroo\\AgencyInfo\\' => 20,
         ),
         'L' => 
         array (
@@ -431,6 +433,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src',
         ),
+        'Mkhodroo\\Cities\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src',
+        ),
         'Mkhodroo\\CaseInsensitiveTranslate\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/case-insensitive-translate/src',
@@ -438,6 +444,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/altfuel-ticket/src',
+        ),
+        'Mkhodroo\\AgencyInfo\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src',
         ),
         'Livewire\\' => 
         array (
@@ -1856,6 +1866,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Hekmatinasser\\Verta\\Laravel\\JalaliValidator' => __DIR__ . '/..' . '/hekmatinasser/verta/src/Laravel/JalaliValidator.php',
         'Hekmatinasser\\Verta\\Laravel\\VertaServiceProvider' => __DIR__ . '/..' . '/hekmatinasser/verta/src/Laravel/VertaServiceProvider.php',
         'Hekmatinasser\\Verta\\Verta' => __DIR__ . '/..' . '/hekmatinasser/verta/src/Verta.php',
+        'Hidro\\Registration\\Controllers\\HidroRegController' => __DIR__ . '/../..' . '/packages/hidro-registration/src/Controllers/HidroRegController.php',
+        'Hidro\\Registration\\HidroRegProvider' => __DIR__ . '/../..' . '/packages/hidro-registration/src/HidroRegProvider.php',
         'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
         'Illuminate\\Auth\\Access\\Events\\GateEvaluated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Events/GateEvaluated.php',
         'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',
@@ -3637,6 +3649,15 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Livewire\\Wireable' => __DIR__ . '/..' . '/livewire/livewire/src/Wireable.php',
         'Livewire\\WithFileUploads' => __DIR__ . '/..' . '/livewire/livewire/src/WithFileUploads.php',
         'Livewire\\WithPagination' => __DIR__ . '/..' . '/livewire/livewire/src/WithPagination.php',
+        'Mkhodroo\\AgencyInfo\\AgencyInfoProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/AgencyInfoProvider.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\AgencyController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/AgencyController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\AgencyDocsController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/AgencyDocsController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\AgencyListController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/AgencyListController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\CreateAgencyController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/CreateAgencyController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\FileController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/FileController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\GetAgencyController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/GetAgencyController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\SaveInfoController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/SaveInfoController.php',
+        'Mkhodroo\\AgencyInfo\\Models\\AgencyInfo' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Models/AgencyInfo.php',
         'Mkhodroo\\AltfuelTicket\\AltfuelTicketServiceProvider' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/AltfuelTicketServiceProvider.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\AddTicketCommentAttachmentController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/AddTicketCommentAttachmentController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\AddTicketCommentController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/AddTicketCommentController.php',
@@ -3654,6 +3675,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Models\\TicketComment' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/TicketComment.php',
         'Mkhodroo\\AltfuelTicket\\Requests\\TicketRequest' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Requests/TicketRequest.php',
         'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => __DIR__ . '/../..' . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
+        'Mkhodroo\\Cities\\CityProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/CityProvider.php',
+        'Mkhodroo\\Cities\\Controllers\\CityController' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Controllers/CityController.php',
+        'Mkhodroo\\Cities\\Models\\City' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Models/City.php',
         'Mkhodroo\\DateConvertor\\Controllers\\SDate' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/Controllers/SDate.php',
         'Mkhodroo\\DateConvertor\\DateConvertorProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/DateConvertorProvider.php',
         'Mkhodroo\\HelpSupportRobot\\Controllers\\AddController' => __DIR__ . '/../..' . '/packages/mkhodroo-help-support-robot/src/Controllers/AddController.php',
