@@ -20,7 +20,7 @@ class AgencyListController extends Controller
     }
 
     public static function getKeys(){
-        return AgencyInfo::groupBy('key')->pluck('key');
+        return AgencyInfo::whereIn('key', config('agency_info.filter_fields'))->groupBy('key')->pluck('key');
     }
 
     public static function list()
@@ -30,7 +30,8 @@ class AgencyListController extends Controller
         ];
     }
     public static function filterList(Request $r)
-    {
+    {   
+        
         $main_field = config('agency_info.main_field_name');
         if($r->field_value === null and $r->$main_field === null){
             $agencies =  AgencyInfo::where('parent_id', DB::raw('id'))->get();
@@ -48,9 +49,11 @@ class AgencyListController extends Controller
 
         }
         // return $agencies;
-        $agencies =  $agencies->each(function ($agency) {
+        $key_indexes = explode(',', $r->cols);
+        $agencies =  $agencies->each(function ($agency) use($key_indexes) {
             $keys = self::getKeys();
-            foreach($keys as $key){
+            foreach($key_indexes as $key_index){
+                $key = $keys[$key_index];
                 if($key === 'province'){
                     $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)->province;
                 }else{

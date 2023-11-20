@@ -5,6 +5,12 @@ return [
     'valid_file_type' => ['image/jpg', 'image/jpeg', 'image/png', 'application/pdf'],
     'main_field_name' => 'customer_type',
     'default_fields' => ['customer_type','firstname', 'lastname', 'national_id', 'agency_code'],
+    'filter_fields' => [
+        'customer_type','firstname', 'lastname', 'national_id', 'agency_code',
+        'address', 'guild_number', 'mobile', 'phone', 'issued_date', 'exp_date', 'description',
+        'province', 'agency_code', 'membership_96', 'membership_97', 'membership_98',
+        'membership_99', 'membership_00', 'membership_01', 'membership_02', 'debt1'
+    ],
     'customer_type' => [
         'agency' => [
             'name' => 'High Pressure Agency',

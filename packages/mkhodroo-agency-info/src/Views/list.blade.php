@@ -8,15 +8,12 @@
         </div>
         <div class="card p-4" style="display: none" id="columns_div">
             <div class="row">
-                <div class="col-sm-8" style="float: right">
+                <div class="col-sm-12" style="float: right">
                     <select name="columns" id="columns" class="select2" multiple>
                         @for ($i = 0; $i < count($cols); $i++)
                             <option value="{{ $i }}">{{ __($cols[$i]) }}</option>
                         @endfor
                     </select>
-                </div>
-                <div class="col-sm-2" style="display: inline">
-                    <button onclick="show_columns()" class="btn btn-success">{{ __('Apply') }}</button>
                 </div>
             </div>
         </div>
@@ -161,8 +158,9 @@
         }
 
         function filter() {
+            apply()
             var fd = new FormData($('#filter-form1')[0]);
-
+            fd.append('cols', $('#columns').val());
             send_ajax_formdata_request(
                 "{{ route('agencyInfo.filterList') }}",
                 fd,
@@ -174,26 +172,3 @@
         }
     </script>
 @endsection
-
-<table>
-    <tbody>
-        <tr>
-            <td rowspan="6"><img src="blob:https://lh380.irandns.com/3ce4423b-fc8d-46a9-bb45-59bdcf32f1b8" width="200" height="111" /></td>
-        </tr>
-        <tr>
-            <td>Mohammad Shahab Khodroo</td>
-        </tr>
-        <tr>
-            <td>IT Manager</td>
-        </tr>
-        <tr>
-            <td>Cell: +98 937 692 2176</td>
-        </tr>
-        <tr>
-            <td>Tel: +98 21 9101 7175</td>    
-        </tr>
-        <tr>
-            <td>Website: www.behin.energy</td>    
-        </tr>
-    </tbody>
-</table>
