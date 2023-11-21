@@ -17,7 +17,6 @@ use Rap2hpoutre\FastExcel\FastExcel;
 
 Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->group(function () {
     Route::get('import-data', function () {
-        return FinInfo::where('agency_tabl', 'marakez1')->groupBy('name', 'agency_id')->get();
         $marakez = MarakezModel::get();
         echo "<pre>";
         foreach ($marakez as $agency) {
