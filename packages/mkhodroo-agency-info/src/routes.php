@@ -17,6 +17,7 @@ use Rap2hpoutre\FastExcel\FastExcel;
 
 Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->group(function () {
     Route::get('import-data', function () {
+        return FinInfo::where('agency_tabl', 'marakez1')->groupBy('name', 'agency_id')->get();
         $marakez = MarakezModel::get();
         echo "<pre>";
         foreach ($marakez as $agency) {
@@ -56,7 +57,7 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->
             AgencyInfo::create(['key' => 'fin_details', 'value' => $agency->FinDetails, 'parent_id' => $main->id]);
 
             
-            $fin_infos = FinInfo::where('agency_table', 'marakez1')->where('agency_id', $agency->id)->get();
+            $fin_infos = FinInfo::where('agency_table', 'marakez1')->where('agency_id', $agency->id)->groupBy('name', 'agency_id')->get();
             foreach($fin_infos as $fin_info){
                 $key = $fin_info->name;
                 $record = new AgencyInfo();
