@@ -132,7 +132,7 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->
             AgencyInfo::create(['key' => 'fin_details', 'value' => $agency->FinDetails, 'parent_id' => $main->id]);
 
             
-            $fin_infos = FinInfo::where('agency_table', 'kamfeshar')->where('agency_id', $agency->id)->get();
+            $fin_infos = FinInfo::where('agency_table', 'kamfeshar')->where('agency_id', $agency->id)->groupBy('name', 'agency_id')->get();
             foreach($fin_infos as $fin_info){
                 $key = $fin_info->name;
                 $record = new AgencyInfo();
@@ -210,7 +210,7 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->
             AgencyInfo::create(['key' => 'authority', 'value' => $agency->Authority, 'parent_id' => $main->id]);
 
             
-            $fin_infos = FinInfo::where('agency_table', 'hidro')->where('agency_id', $agency->id)->get();
+            $fin_infos = FinInfo::where('agency_table', 'hidro')->where('agency_id', $agency->id)->groupBy('name', 'agency_id')->get();
             foreach($fin_infos as $fin_info){
                 $key = $fin_info->name;
                 $record = new AgencyInfo();
