@@ -57,6 +57,8 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->
 
             
             $fin_infos = FinInfo::where('agency_table', 'marakez1')->where('agency_id', $agency->id)->groupBy('name', 'agency_id')->get();
+            echo "number of fin info for $agency->id $agency->Name: ". count($fin_infos) . "<br>";
+
             foreach($fin_infos as $fin_info){
                 $key = $fin_info->name;
                 $record = new AgencyInfo();
@@ -88,7 +90,6 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->
             }
             // print_r($fin_info);
         }
-        echo "number of fin info: ". count($fin_infos);
 
     });
     Route::get('import-kamfeshar', function () {
