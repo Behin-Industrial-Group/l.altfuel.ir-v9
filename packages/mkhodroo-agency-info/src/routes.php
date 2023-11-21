@@ -87,8 +87,9 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->
                 $record->save();
             }
             // print_r($fin_info);
-            echo "######################<br>";
         }
+        echo "number of fin info: ". count($fin_infos);
+
     });
     Route::get('import-kamfeshar', function () {
         $marakez = KamFesharModel::get();
