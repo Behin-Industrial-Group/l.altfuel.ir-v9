@@ -15,7 +15,7 @@
             <table class="table table-striped ">
                 <tr>
                     <td>وضعیت</td>
-                    <td>{{$status}}</td>
+                    <td>{{$status ?? ''}}</td>
                 </tr>
                 <tr>
                     <td>کدرهگیری</td>
@@ -24,7 +24,7 @@
                 @if ($authority)
                 <tr>
                     <td>Authority</td>
-                    <td>{{$authority}}</td>
+                    <td>{{$authority ?? ''}}</td>
                 </tr>
                 @endif
             </table>
