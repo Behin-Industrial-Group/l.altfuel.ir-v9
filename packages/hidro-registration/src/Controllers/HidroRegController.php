@@ -114,8 +114,8 @@ class HidroRegController extends Controller
 
     public static function callback(Request $r){
         $agency = self::getByAuthority($r->Authority);
-        $agency->Authority = '';
-        $agency->save();
+        // $agency->Authority = '';
+        // $agency->save();
 
         if ($r->Status == 'OK') {
             // URL also can be ir.zarinpal.com or de.zarinpal.com
