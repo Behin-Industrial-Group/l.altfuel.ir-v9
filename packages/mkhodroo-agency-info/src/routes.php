@@ -15,7 +15,7 @@ use Mkhodroo\Cities\Controllers\CityController;
 use Mkhodroo\UserRoles\Controllers\GetRoleController;
 use Rap2hpoutre\FastExcel\FastExcel;
 
-Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->group(function () {
+Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth', 'access'])->group(function () {
     Route::get('import-data', function () {
         $marakez = MarakezModel::get();
         echo "<pre>";
