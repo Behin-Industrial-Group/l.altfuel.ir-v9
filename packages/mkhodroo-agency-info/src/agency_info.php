@@ -29,7 +29,7 @@ return [
                 'description' => ['type' => 'text', 'default' => '', 'required' => false],
 
             ],
-            'fin_fileds' => [
+            'memberships' => [
                 '96' => ['membership96', 'memebership96_pay_date', 'memebership96_pay_file'],
                 '97' => ['membership97', 'memebership97_pay_date', 'memebership97_pay_file'],
                 '98' => ['membership98', 'memebership98_pay_date', 'memebership98_pay_file'],

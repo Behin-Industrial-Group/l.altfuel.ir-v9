@@ -1,3 +1,7 @@
+<?php
+use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
+
+?>
 <h4>
     {{ __('Edit customer info') }}: {{ $agency_fields->where('key', 'firstname')->first()?->value }}
     {{ $agency_fields->where('key', 'lastname')->first()?->value }}
@@ -98,10 +102,11 @@
                                 <th>{{ __('Year') }}</th>
                                 <th>{{ __('Price') }}</th>
                                 <th>{{ __('Payment date') }}</th>
+                                <th>{{ __('Payment ref id') }}</th>
                                 <th>{{ __('Payment file') }}</th>
                             </tr>
                         </thead>
-                        @foreach (config("agency_info.customer_type.$customer_type->value")['fin_fileds'] as $field_key => $field_detail)
+                        @foreach (config("agency_info.customer_type.$customer_type->value")['memberships'] as $field_key => $field_detail)
                             <tr>
                                 <td>
                                     {{ __($field_key) }}
@@ -133,6 +138,12 @@
                             </tr>
                         @endforeach
                     </table>
+                    @foreach (config("agency_info.customer_type.$customer_type->value")['fin_fields'] as $field_key => $field_detail)
+                        @php
+                            $value = $agency_fields->where('key', $field_key)->first()?->value;
+                        @endphp
+                        {{ HtmlCreatorController::createInput($field_key, $field_detail, $value) }}
+                    @endforeach
                     <button class="btn btn-primary" onclick="fin_edit()">{{ __('Edit') }}</button>
                 </form>
             </div>

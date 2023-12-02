@@ -60,6 +60,7 @@ class AgencyListController extends Controller
                     $agency->$key = __(GetAgencyController::getByKey($agency->parent_id, $key)?->value);
                 }
             }
+            $agency->fin_green = __(GetAgencyController::getByKey($agency->parent_id, 'fin_green')?->value);
             
 
         });

@@ -46,18 +46,30 @@ return [
                         ['value' => '1', 'label' => 'تحویل داده شد'],
                     ]
                 ],
+                
 
             ],
-            'fin_fileds' => [
-                '96' => ['membership_96', 'membership_96_pay_date', 'membership_96_pay_file'],
-                '97' => ['membership_97', 'membership_97_pay_date', 'membership_97_pay_file'],
-                '98' => ['membership_98', 'membership_98_pay_date', 'membership_98_pay_file'],
-                '99' => ['membership_99', 'membership_99_pay_date', 'membership_99_pay_file'],
-                '00' => ['membership_00', 'membership_00_pay_date', 'membership_00_pay_file'],
-                '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_pay_file'],
-                '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_pay_file'],
-                'irngv' => ['irngv', 'irngv_pay_date', 'irngv_pay_file'],
-                'plate_reader' => ['plate_reader', 'plate_reader_pay_date', 'plate_reader_pay_file'],
+            'memberships' => [
+                '96' => ['membership_96', 'membership_96_pay_date', 'membership_96_ref_id', 'membership_96_pay_file'],
+                '97' => ['membership_97', 'membership_97_pay_date', 'membership_97_ref_id', 'membership_97_pay_file'],
+                '98' => ['membership_98', 'membership_98_pay_date', 'membership_98_ref_id', 'membership_98_pay_file'],
+                '99' => ['membership_99', 'membership_99_pay_date', 'membership_99_ref_id', 'membership_99_pay_file'],
+                '00' => ['membership_00', 'membership_00_pay_date', 'membership_00_ref_id', 'membership_00_pay_file'],
+                '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_ref_id', 'membership_01_pay_file'],
+                '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_ref_id', 'membership_02_pay_file'],
+                'irngv' => ['irngv', 'irngv_pay_date', 'irngv_ref_id', 'irngv_pay_file'],
+                'plate_reader' => ['plate_reader', 'plate_reader_pay_date', 'plate_reader_ref_id', 'plate_reader_pay_file'],
+            ],
+            'fin_fields' => [
+                'fin_green' => [
+                    'type' => 'select',
+                    'default' => '',
+                    'options' => [
+                        ['value' => 'not ok', 'label' => 'غیرفعال'],
+                        ['value' => 'ok', 'label' => 'فعال'],
+                    ]
+                ],
+                
             ],
             'docs' => [
                 'archive_docs',
@@ -101,7 +113,7 @@ return [
                     ]
                 ],
             ],
-            'fin_fileds' => [
+            'memberships' => [
                 '96' => ['membership_96', 'membership_96_pay_date', 'membership_96_pay_file'],
                 '97' => ['membership_97', 'membership_97_pay_date', 'membership_97_pay_file'],
                 '98' => ['membership_98', 'membership_98_pay_date', 'membership_98_pay_file'],
@@ -109,6 +121,17 @@ return [
                 '00' => ['membership_00', 'membership_00_pay_date', 'membership_00_pay_file'],
                 '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_pay_file'],
                 '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_pay_file'],
+            ],
+            'fin_fields' => [
+                'fin_green' => [
+                    'type' => 'select',
+                    'default' => '',
+                    'options' => [
+                        ['value' => 'not ok', 'label' => 'غیرفعال'],
+                        ['value' => 'ok', 'label' => 'فعال'],
+                    ]
+                ],
+                
             ],
             'docs' => [
                 'archive_docs',
@@ -158,7 +181,7 @@ return [
                 'standard_certificate_exp_date' => ['type' => 'text'],
                 'standard_certificate_number' => ['type' => 'text'],
             ],
-            'fin_fileds' => [
+            'memberships' => [
                 '96' => ['membership_96', 'membership_96_pay_date', 'membership_96_pay_file'],
                 '97' => ['membership_97', 'membership_97_pay_date', 'membership_97_pay_file'],
                 '98' => ['membership_98', 'membership_98_pay_date', 'membership_98_pay_file'],
@@ -166,6 +189,18 @@ return [
                 '00' => ['membership_00', 'membership_00_pay_date', 'membership_00_pay_file'],
                 '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_pay_file'],
                 '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_pay_file'],
+                'fin_green' => ['type' => 'text', 'default' => ''],
+            ],
+            'fin_fields' => [
+                'fin_green' => [
+                    'type' => 'select',
+                    'default' => '',
+                    'options' => [
+                        ['value' => 'not ok', 'label' => 'غیرفعال'],
+                        ['value' => 'ok', 'label' => 'فعال'],
+                    ]
+                ],
+                
             ],
             'docs' => [
                 'archive_docs',
