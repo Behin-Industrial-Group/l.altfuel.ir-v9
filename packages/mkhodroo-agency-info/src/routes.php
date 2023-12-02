@@ -10,6 +10,7 @@ use Mkhodroo\AgencyInfo\Controllers\AgencyController;
 use Mkhodroo\AgencyInfo\Controllers\AgencyDocsController;
 use Mkhodroo\AgencyInfo\Controllers\AgencyListController;
 use Mkhodroo\AgencyInfo\Controllers\CreateAgencyController;
+use Mkhodroo\AgencyInfo\Controllers\DebtController;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\Cities\Controllers\CityController;
 use Mkhodroo\UserRoles\Controllers\GetRoleController;
@@ -254,4 +255,12 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->
     Route::post('fin-edit', [AgencyController::class, 'finEdit'])->name('finEdit');
     Route::post('docs-edit', [AgencyDocsController::class, 'docsEdit'])->name('docsEdit');
     Route::post('delete-info', [AgencyController::class, 'deleteByKey'])->name('deleteByKey');
+});
+
+Route::prefix('/bedehi')->group(function () {
+    Route::get('/', [DebtController::class, 'bedehiHomePage']);
+    Route::post('/confirm-debt', [DebtController::class, 'confirmForm'])->name('confirmForm');
+    Route::post('/', [DebtController::class, 'confirmBedehi'])->name('confirm-bedehi');
+    Route::post('/pay', [DebtController::class, 'pay'])->name('bedehi-pay');
+    Route::get('/success/{type}/{code}/{price}', [DebtController::class, 'success']);
 });

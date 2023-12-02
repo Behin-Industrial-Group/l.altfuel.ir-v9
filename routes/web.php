@@ -172,13 +172,13 @@ Route::prefix('/takmili')->group(function () {
     Route::post('/login', [BimehController::class, 'show']);
 });
 
-Route::prefix('/bedehi')->group(function () {
-    Route::get('/', [FinController::class, 'bedehiHomePage']);
-    Route::post('/', [FinController::class, 'confirmBedehi'])->name('confirm-bedehi');
-    Route::post('/pay', [FinController::class, 'pay'])->name('bedehi-pay');
-    Route::get('/success/{type}/{code}/{price}', [FinController::class, 'success']);
-    Route::get('/{type}/{nid}/{mobile}/{code}', [FinController::class, 'confirmForm'])->name('confirm-form');
-});
+// Route::prefix('/bedehi')->group(function () {
+//     Route::get('/', [FinController::class, 'bedehiHomePage']);
+//     Route::post('/', [FinController::class, 'confirmBedehi'])->name('confirm-bedehi');
+//     Route::post('/pay', [FinController::class, 'pay'])->name('bedehi-pay');
+//     Route::get('/success/{type}/{code}/{price}', [FinController::class, 'success']);
+//     Route::get('/{type}/{nid}/{mobile}/{code}', [FinController::class, 'confirmForm'])->name('confirm-form');
+// });
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(function () {
     Route::get('/', [HomeController::class, 'index']);
