@@ -103,5 +103,13 @@
     "address":"آدرس",
     "plate_reader":"قفل سخت افزاری",
     "archive_docs":"مدارک آرشیو",
-    "Debt Price": "مبلغ بدهی"
+    "Debt Price": "مبلغ بدهی",
+    "debt1": "بدهی اول",
+    "membership_96": "حق عضویت 96",
+    "membership_97": "حق عضویت 97",
+    "membership_98": "حق عضویت 98",
+    "membership_99": "حق عضویت 99",
+    "membership_00": "حق عضویت 00",
+    "membership_01": "حق عضویت 01",
+    "membership_02": "حق عضویت 02"
 }
