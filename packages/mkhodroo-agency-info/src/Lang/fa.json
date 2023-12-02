@@ -94,5 +94,14 @@
     "agency": "مرکز خدمات فنی",
     "low-pressure": "مرکز کم فشار",
     "hidrostatic": "آزمایشگاه هیدرواستاتیک",
-    "Edit customer info": "اصلاح اطلاعات "
+    "Edit customer info": "اصلاح اطلاعات ",
+    "receiving_code_year":"سال دریافت کد",
+    "agency_code":"کد مرکز",
+    "exp_date":"تاریخ انقضا",
+    "inspection_user":"یوزر بازرسی",
+    "location":"موقعیت مکانی",
+    "address":"آدرس",
+    "plate_reader":"قفل سخت افزاری",
+    "archive_docs":"مدارک آرشیو",
+    "Debt Price": "مبلغ بدهی"
 }
