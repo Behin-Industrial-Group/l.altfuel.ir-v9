@@ -27,7 +27,7 @@ return [
         'agencies' => [
             'fa_name' => 'مراکز',
             'submenu' => [
-                'dashboard' => [ 'fa_name' => 'همه', 'route-name' => 'agencyInfo.list-form', 'route-url' => '' ],
+                'dashboard' => [ 'fa_name' => 'همه', 'route-name' => 'agencyInfo.listForm', 'route-url' => '' ],
             ]
         ],
         'users' => [
