@@ -130,7 +130,7 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                                         @else
                                             <input type="text" name="{{ $item }}"
                                                 value="{{ $value }}"
-                                                class="form-control {{ str_contains($item, 'pay') ? '' : 'cama-seprator' }}"
+                                                class="form-control {{ (str_contains($item, 'date') or str_contains($item, 'ref_id')) ? '' : 'cama-seprator' }}"
                                                 id="">
                                         @endif
                                     </td>
@@ -200,7 +200,7 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                                             <textarea name="{{ $field_name }}" id="" class="form-control">{{ $agency_fields->where('key', $field_name)->first()?->value }}</textarea>
                                         @else
                                             <input type="text" name="{{ $field_name }}"
-                                                class="form-control {{ $field_name === 'debt1' ? 'cama-seprator' : '' }}"
+                                                class="form-control {{ (str_contains($field_name, 'date') or str_contains($field_name, 'ref_id')) ? '' : 'cama-seprator' }}"
                                                 value="{{ $agency_fields->where('key', $field_name)->first()?->value }}">
                                         @endif
                                     </td>

@@ -96,7 +96,7 @@ class DebtController extends Controller
         if(!is_array($debts))
             return $debts;
         return view('AgencyView::debt.confirm')->with(['debts' => $debts['debts'], 'sum' => $debts['sum'], 'data' => $debts ]);
-        
+
     }
     
     public function pay(Request $request)

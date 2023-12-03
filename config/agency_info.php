@@ -114,13 +114,13 @@ return [
                 ],
             ],
             'memberships' => [
-                '96' => ['membership_96', 'membership_96_pay_date', 'membership_96_pay_file'],
-                '97' => ['membership_97', 'membership_97_pay_date', 'membership_97_pay_file'],
-                '98' => ['membership_98', 'membership_98_pay_date', 'membership_98_pay_file'],
-                '99' => ['membership_99', 'membership_99_pay_date', 'membership_99_pay_file'],
-                '00' => ['membership_00', 'membership_00_pay_date', 'membership_00_pay_file'],
-                '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_pay_file'],
-                '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_pay_file'],
+                '96' => ['membership_96', 'membership_96_pay_date', 'membership_96_ref_id', 'membership_96_pay_file'],
+                '97' => ['membership_97', 'membership_97_pay_date', 'membership_97_ref_id', 'membership_97_pay_file'],
+                '98' => ['membership_98', 'membership_98_pay_date', 'membership_98_ref_id', 'membership_98_pay_file'],
+                '99' => ['membership_99', 'membership_99_pay_date', 'membership_99_ref_id', 'membership_99_pay_file'],
+                '00' => ['membership_00', 'membership_00_pay_date', 'membership_00_ref_id', 'membership_00_pay_file'],
+                '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_ref_id', 'membership_01_pay_file'],
+                '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_ref_id', 'membership_02_pay_file'],
             ],
             'fin_fields' => [
                 'fin_green' => [
@@ -182,14 +182,14 @@ return [
                 'standard_certificate_number' => ['type' => 'text'],
             ],
             'memberships' => [
-                '96' => ['membership_96', 'membership_96_pay_date', 'membership_96_pay_file'],
-                '97' => ['membership_97', 'membership_97_pay_date', 'membership_97_pay_file'],
-                '98' => ['membership_98', 'membership_98_pay_date', 'membership_98_pay_file'],
-                '99' => ['membership_99', 'membership_99_pay_date', 'membership_99_pay_file'],
-                '00' => ['membership_00', 'membership_00_pay_date', 'membership_00_pay_file'],
-                '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_pay_file'],
-                '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_pay_file'],
-                'fin_green' => ['type' => 'text', 'default' => ''],
+                '96' => ['membership_96', 'membership_96_pay_date', 'membership_96_ref_id', 'membership_96_pay_file'],
+                '97' => ['membership_97', 'membership_97_pay_date', 'membership_97_ref_id', 'membership_97_pay_file'],
+                '98' => ['membership_98', 'membership_98_pay_date', 'membership_98_ref_id', 'membership_98_pay_file'],
+                '99' => ['membership_99', 'membership_99_pay_date', 'membership_99_ref_id', 'membership_99_pay_file'],
+                '00' => ['membership_00', 'membership_00_pay_date', 'membership_00_ref_id', 'membership_00_pay_file'],
+                '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_ref_id', 'membership_01_pay_file'],
+                '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_ref_id', 'membership_02_pay_file'],
+                'irngv' => ['irngv', 'irngv_pay_date', 'irngv_ref_id', 'irngv_pay_file'],
             ],
             'fin_fields' => [
                 'fin_green' => [
@@ -207,6 +207,7 @@ return [
             ],
             'debts' => [
                 '1' => [ 'debt1', 'debt1_pay_date', 'debt1_ref_id', 'debt1_description' ],
+                '2' => [ 'debt2', 'debt2_pay_date', 'debt2_ref_id', 'debt2_description' ],
             ]
         ],
     ]
