@@ -9,7 +9,7 @@ class zarinPal
 {
     public static function getAuthority($amount, $description, $mobile, $callbackUrl){
         $MerchantID = config('zarinpal.merchantId');
-        $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+        $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
         $result = $client->PaymentRequest([
             'MerchantID'     => $MerchantID,
             'Amount'         => $amount,
@@ -24,7 +24,7 @@ class zarinPal
     public static function pay($request)
     {
         $MerchantID = config('zarinpal.merchantId');
-        $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+        $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
         $result = $client->PaymentRequest([
             'MerchantID'     => $MerchantID,
             'Amount'         => $request['amount'],
@@ -34,7 +34,7 @@ class zarinPal
         ]);
         
         if ($result->Status == 100) {
-            return redirect('https://www.zarinpal.com/pg/StartPay/'.$result->Authority);
+            return redirect(config('zarinpal.pay_url').$result->Authority);
         } else {
             return null;
         }
@@ -46,7 +46,7 @@ class zarinPal
         $MerchantID = config('zarinpal.merchantId');
         if ($request->Status == 'OK') {
             // URL also can be ir.zarinpal.com or de.zarinpal.com
-            $client = new SoapClient('https://www.zarinpal.com/pg/services/WebGate/wsdl', ['encoding' => 'UTF-8']);
+            $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
     
             $result = $client->PaymentVerification([
                 'MerchantID'     => $MerchantID,

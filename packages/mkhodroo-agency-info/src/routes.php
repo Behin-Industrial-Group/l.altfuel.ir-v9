@@ -261,6 +261,6 @@ Route::prefix('/bedehi')->group(function () {
     Route::get('/', [DebtController::class, 'bedehiHomePage']);
     Route::post('/confirm-debt', [DebtController::class, 'confirmForm'])->name('confirmForm');
     Route::post('/', [DebtController::class, 'confirmBedehi'])->name('confirm-bedehi');
-    Route::post('/pay', [DebtController::class, 'pay'])->name('bedehi-pay');
-    Route::get('/success/{type}/{code}/{price}', [DebtController::class, 'success']);
+    Route::post('/pay', [DebtController::class, 'pay'])->name('pay');
+    Route::get('/callback', [DebtController::class, 'callback'])->name('callback');
 });

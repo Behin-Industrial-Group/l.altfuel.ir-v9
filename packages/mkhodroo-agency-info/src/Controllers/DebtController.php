@@ -15,7 +15,9 @@ use Exception;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Mkhodroo\AgencyInfo\Models\AgencyDebtPayment;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
+use PhpParser\Node\Stmt\Static_;
 
 class DebtController extends Controller
 {
@@ -35,6 +37,21 @@ class DebtController extends Controller
         return view('AgencyView::debt.index');
     }
 
+    public static function getDebts($customer_type , $parent_id){
+        $debts = [];
+        foreach(config("agency_info.customer_type.$customer_type.debts") as $row){
+            //IF DEBT DOESNT HAS REF ID 
+            if(!AgencyInfo::where('parent_id', $parent_id)->where('key', $row[2])->first()?->value){
+                $debts[] = [
+                    'id' => AgencyInfo::where('parent_id', $parent_id)->where('key', $row[0])->first()?->id,
+                    'title' => AgencyInfo::where('parent_id', $parent_id)->where('key', $row[3])->first()?->value,
+                    'price' => AgencyInfo::where('parent_id', $parent_id)->where('key', $row[0])->first()?->value,
+                ];
+            }
+        }
+        return $debts;
+    }
+
     public function checkMarkaz($request)
     {
         $agency = AgencyInfo::where('value', $request->code)->first();
@@ -49,13 +66,7 @@ class DebtController extends Controller
         if(!AgencyInfo::where('parent_id', $parent_id)->where('key', 'mobile')->where('value', $request->mobile)->count()){
             return response(trans("No Agency Found With This Mobile Number"), 300);
         } 
-        $debts = [];
-        foreach(config("agency_info.customer_type.$request->type.debts") as $row){
-            $debts[] = [
-                'title' => AgencyInfo::where('parent_id', $parent_id)->where('key', $row[3])->first()->value,
-                'price' => AgencyInfo::where('parent_id', $parent_id)->where('key', $row[0])->first()->value,
-            ];
-        }
+        $debts = self::getDebts($request->type, $parent_id);
         $sum = 0;
         foreach($debts as $debt){
             $sum += (int) $debt['price'];
@@ -65,33 +76,12 @@ class DebtController extends Controller
         }
         return [
             'debts' => $debts,
+            'agency_national_id' => AgencyInfo::where('parent_id', $parent_id)->where('key', 'national_id')->first()->value,
+            'mobile' => AgencyInfo::where('parent_id', $parent_id)->where('key', 'mobile')->first()->value,
             'sum' => $sum
         ];
     }
 
-
-    public function confirmBedehi(Request $request)
-    {
-        $request->validate([
-            'type' => 'required',
-            'nid' => ['required', 'digits:10'],
-            'mobile' => ['required', 'digits:11'],
-            'code' => ['required']
-        ]);
-        
-        $checkMarkaz = $this->checkMarkaz($request);
-        if(!array($checkMarkaz))
-            return $checkMarkaz;
-        return response([
-            'msg' => 'به صفحه پرداخت منتقل میشوید...',
-            'url' => route('confirm-form', [
-                'type' => $request->type,
-                'nid' => $request->nid,
-                'mobile' => $request->mobile,
-                'code' => $request->code,
-            ])
-        ]);
-    }
 
     public function confirmForm(Request $request)
     {
@@ -103,102 +93,87 @@ class DebtController extends Controller
         ]);
         
         $debts = $this->checkMarkaz($request);
-        if(!array($debts))
+        if(!is_array($debts))
             return $debts;
-        return view('AgencyView::debt.confirm')->with(['debts' => $debts['debts'], 'sum' => $debts['sum'] ]);
+        return view('AgencyView::debt.confirm')->with(['debts' => $debts['debts'], 'sum' => $debts['sum'], 'data' => $debts ]);
         
-    }
-
-    public function bedehi_form_validation($r)
-    {
-        if(!$r->type)
-            return "نوع مرکز را انتخاب کنید";
-
     }
     
     public function pay(Request $request)
     {
-        $markaz = $this->checkMarkaz($request);
-
-
-        // if($markaz->debt === 0 || !($markaz)){
-        //     return view('bedehi.index')->with(['error' => 'خطایی رخ داده است. مجدد تلاش کنید']);
-        // }
-        // // return var_dump($request->accept);
-        if(!$request->accept){
-            return view('bedehi.confirm')->with([
-                'markaz' => $markaz, 
-                'type' => $request->type, 
-                'error' => 'لطفا گزینه صحت اطلاعات را فعال کنید'
-            ]);
+        $data = unserialize($request->data);
+        $description = trans("Debt Payment For Agency With National ID: "). $data['agency_national_id'];
+        $callbackUrl = route('callback');
+        $Authority = zarinPal::getAuthority($data['sum']/10, $description, $data['mobile'], $callbackUrl);
+        foreach($data['debts'] as $debt){
+            AgencyDebtPaymentController::create($debt['id'], $debt['price'], $Authority, 'pending');
         }
-
-        $debt = $markaz->debt / 10;
-        $payInfo = [
-            'amount' => $debt,
-            'description' => 'بدهی حق عضویت -' . $request->code,
-            'mobile' => $request->mobile,
-            'callbackUrl' => url('bedehi/success') . "/$request->type/$request->code/$debt",
-            ];
-        $result = zarinPal::pay($payInfo);
-        if(!$result)
-            return var_dump($result);
-        return $result;
+        
+        return [
+            'message' => trans("Redirecting To Payment Page"),
+            'url' => config('zarinpal.pay_url') . $Authority
+        ];
     }
 
-    public function success(Request $request, $type, $code, $price)
+    public static function callback(Request $request)
     {
-        $result = zarinPal::verify($request, $price);
+        $agency_payments = AgencyDebtPaymentController::getPendingByAuthority($request->Authority);
+        $sum = $agency_payments->sum('price');
+        $refId = zarinPal::verify($request, $sum/10);
         
-      
-        if( $result == 0 ){
-            $message = "پرداخت ناموفق";
-            return view( 'bimeh.unsuccess' )-> with( [ 'message' => $message ] );
+        if( $refId == 0 ){
+            self::setErrorForPaymentRecordByAuthority($request->Authority);
+            return view('AgencyView::debt.callback')->with([
+                'error' => trans("Error")
+            ]);
+
         }
-        elseif($result == 1){
+        elseif($refId == 1){
             $message = "تراکنش توسط کاربر لغو شد";
-            return view( 'bimeh.unsuccess' )-> with( [ 'message' => $message ] );
+            self::setErrorForPaymentRecordByAuthority($request->Authority);
+            return view('AgencyView::debt.callback')->with([
+                'error' => trans("Cancel By User")
+            ]);
+
         }
         else
         {
-            //کد رهگیری رو در جدول مراکز ثبت کن 
-            if($type === EnumsEntity::$AgencyType['agency']['value']){
-                $this->marakezModel->where('CodeEtehadie', $code)->update(['debt_RefID' => $result]);
-                $type_fa = EnumsEntity::$AgencyType['agency']['fa_name'];
-            }
+            self::setDoneForPaymentRecordByAuthority($request->Authority, $refId);
+            $agency_payments->each(function($row) use($refId){
+                $parent_id = AgencyInfo::where('id', $row->agency_info_row_id)->first()->parent_id;
+                $key = AgencyInfo::where('id', $row->agency_info_row_id)->first()->key;
+                $s = $key . "_pay_date";
+                AgencyInfo::where('parent_id', $parent_id)->where('key', $s)->update([
+                    'value' => date('Y-m-d')
+                ]);
+                $s = $key . "_ref_id";
+                AgencyInfo::where('parent_id', $parent_id)->where('key', $s)->update([
+                    'value' => $refId
+                ]);
+                $row->ref_id = $refId;
+                $row->save();
+            });
+            return view('AgencyView::debt.callback')->with([
+                'message' => trans("Transaction Successful"),
+                'refId' => $refId
+            ]);
 
-            if($type === EnumsEntity::$AgencyType['kamfeshar']['value']){
-                $this->kamfesharModel->where('GuildNumber', $code)->update(['debt_RefID' => $result]);
-                $type_fa = EnumsEntity::$AgencyType['kamfeshar']['fa_name'];
-            }
-
-            if($type === EnumsEntity::$AgencyType['hidro']['value']){
-                $this->hidroModel->where('CodeEtehadie', $code)->update(['debt_RefID' => $result]);
-                $type_fa = EnumsEntity::$AgencyType['hidro']['fa_name'];
-            }
-
-            //ارسال پیام به مالی '
-            try{
-                $message = "مرکز $type_fa با کدمرکز/شناسه صنفی: $code ";
-                $message .= "تسویه مالی را با کد رهگیری: $result  انجام داد.";
-                $this->msg->send($this->user->where('level', 3)->first()->id, $message, $code);
-            }catch(Exception $e){
-                Log::info("خطا در ارسال پیام به مالی پس از انجام تراکنش");
-                Log::error($e->getMessage());
-            }
-            
-
-
-            $date = Verta();
-            $successfulPayInfo = [
-                'codeEtehadie' => $code,
-                'RefID' => $result,
-                'price' => $price,
-                'date' => $date,
-                ];
-            
-            return view( 'bimeh.success' )->with( [ 'successfulPayInfo' => $successfulPayInfo] );
         }
+    }
+
+    private static function setErrorForPaymentRecordByAuthority($authority){
+        AgencyDebtPaymentController::getPendingByAuthority($authority)->each(function($row){
+            $row->status = 'error';
+            $row->save();
+        });
+    }
+
+    private static function setDoneForPaymentRecordByAuthority($authority, $refId){
+        AgencyDebtPaymentController::getPendingByAuthority($authority)->each(function($row) use($refId){
+            $row->status = 'done';
+            $row->ref_id = $refId;
+            $row->save();
+        });
     }
 
 
