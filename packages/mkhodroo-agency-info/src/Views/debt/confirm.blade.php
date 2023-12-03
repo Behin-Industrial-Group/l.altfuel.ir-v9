@@ -9,7 +9,7 @@
                         <td>{{$debt['title']}}</td>
                         <td>
                             {{$debt['price']}} ریال
-                            <input type="text" name="agency_info_row_id[]" value="{{$debt['id']}}">
+                            <input type="hidden" name="agency_info_row_id[]" value="{{$debt['id']}}">
                         </td>
                     </tr>
                 @endforeach
@@ -17,7 +17,7 @@
                     <td>{{__('Total')}}</td>
                     <td>
                         {{$sum}} ریال
-                        <input type="text" name="amount" id="" value="{{$sum}}">
+                        <input type="hidden" name="amount" id="" value="{{$sum}}">
                     </td>
                 </tr>
                 <tr>
