@@ -91,7 +91,7 @@ class HidroRegController extends Controller
         //     return response(trans("You Compelete Your Info Before. Please Be Patient. We Call You Soon."),300);
         // }
         $parent_id = self::find($r->simfaCode, $r->legalNationalId);
-        if(!is_integer($parent_id)){
+        if(!(is_integer($parent_id) or is_string($parent_id))){
             return $parent_id;
         }
         return view('HidroRegViews::compelete-info')->with([
