@@ -3,7 +3,7 @@
 @section('content')
     <div class="box">
         <div class="card p-4">
-            <button onclick="new_agency()" class="btn btn-primary col-sm-1">{{ __('Add New Agency') }}</button>
+            <button onclick="new_agency()" class="btn btn-primary col-sm-2">{{ __('Add New Agency') }}</button>
         </div>
         
         <div class="card p-4 ">
