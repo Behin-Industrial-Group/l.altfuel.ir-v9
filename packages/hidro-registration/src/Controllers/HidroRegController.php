@@ -101,16 +101,16 @@ class HidroRegController extends Controller
 
     public static function pay(Request $r)
     {
-        $r->validate([
-            'Name' => ['required'],
-            'NationalID' => ['required', 'digits:10'],
-            'Cellphone' => ['required', 'digits:11'],
-            'Province' => ['required', 'string'],
-            'City' => ['required', 'string'],
-            'standardCertificateNumber' => ['required', 'string'],
-            'standardCertificateExpDate' => ['required', 'string'],
+        // $r->validate([
+        //     'Name' => ['required'],
+        //     'NationalID' => ['required', 'digits:10'],
+        //     'Cellphone' => ['required', 'digits:11'],
+        //     'Province' => ['required', 'string'],
+        //     'City' => ['required', 'string'],
+        //     'standardCertificateNumber' => ['required', 'string'],
+        //     'standardCertificateExpDate' => ['required', 'string'],
 
-        ]);
+        // ]);
         CreateAgencyController::createByParentId('firstname', $r->Name, $r->parent_id);
         CreateAgencyController::createByParentId('national_id', $r->NationalID, $r->parent_id);
         CreateAgencyController::createByParentId('mobile', $r->Cellphone, $r->parent_id);
