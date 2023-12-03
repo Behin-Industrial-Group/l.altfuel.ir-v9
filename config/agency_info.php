@@ -207,7 +207,6 @@ return [
             ],
             'debts' => [
                 '1' => [ 'debt1', 'debt1_pay_date', 'debt1_ref_id', 'debt1_description' ],
-                '2' => [ 'debt2', 'debt2_pay_date', 'debt2_ref_id', 'debt2_description' ],
             ]
         ],
     ]
