@@ -4,22 +4,11 @@
     <div class="box">
         <div class="card p-4">
             <button onclick="new_agency()" class="btn btn-primary col-sm-1">{{ __('New') }}</button>
-            <button class="fa fa-filter btn btn-default col-sm-1" onclick="show_columns()">{{ __('Columns') }}</button>
         </div>
-        <div class="card p-4" style="display: none" id="columns_div">
-            <div class="row">
-                <div class="col-sm-12" style="float: right">
-                    <select name="columns" id="columns" class="select2" multiple>
-                        @for ($i = 0; $i < count($cols); $i++)
-                            <option value="{{ $i }}">{{ __($cols[$i]) }}</option>
-                        @endfor
-                    </select>
-                </div>
-            </div>
-        </div>
+        
         <div class="card p-4 ">
-            <table class="table table-striped table-responsive ">
-                <form action="javascript:void(0)" id="filter-form1" class="col-sm-12 table-responsive">
+            <form action="javascript:void(0)" id="filter-form1" class="col-sm-12 table-responsive">
+                <table class="table table-striped table-responsive ">
                     <td>{{ __(config('agency_info.main_field_name')) }}</td>
                     <td>
                         <select name="{{ config('agency_info.main_field_name') }}" id="" class="form-control">
@@ -36,8 +25,23 @@
                     <td>
                         <button onclick="filter()" class="btn btn-primary">{{ __('Filter') }}</button>
                     </td>
-            </table>
+                    <td>
+                        <button class="btn btn-default" onclick="show_columns()">{{ __('Columns') }}</button>
+                    </td>
+                </table>
             </form>
+
+        </div>
+        <div class="card p-4" style="display: none" id="columns_div">
+            <div class="row">
+                <div class="col-sm-12" style="float: right">
+                    <select name="columns" id="columns" class="select2" multiple>
+                        @for ($i = 0; $i < count($cols); $i++)
+                            <option value="{{ $i }}">{{ __($cols[$i]) }}</option>
+                        @endfor
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div class="card p-4">
