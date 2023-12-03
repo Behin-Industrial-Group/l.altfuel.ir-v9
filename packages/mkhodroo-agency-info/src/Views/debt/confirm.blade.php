@@ -3,7 +3,7 @@
         <form method="POST" action="javascript:void(0)" style="margin: 5px" id="bedehi-form">
             @csrf
             <table class="table table-striped table-bordered">
-                <input type="text" name="data" id="" value="{{serialize($data)}}">
+                <input type="hidden" name="data" id="" value="{{serialize($data)}}">
                 @foreach ($debts as $debt)
                     <tr>
                         <td>{{$debt['title']}}</td>
