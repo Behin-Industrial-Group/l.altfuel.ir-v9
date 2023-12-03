@@ -6,7 +6,7 @@
                 <td>
                     <select name="{{ config('agency_info.main_field_name') }}" id="" class="form-control">
                         @foreach (config('agency_info.customer_type') as $catagory => $catagory_detail)
-                            <option value="{{ $catagory }}">{{ $catagory_detail['name'] }}</option>
+                            <option value="{{ $catagory }}">{{ __($catagory_detail['name']) }}</option>
                         @endforeach
                     </select>
                 </td>
