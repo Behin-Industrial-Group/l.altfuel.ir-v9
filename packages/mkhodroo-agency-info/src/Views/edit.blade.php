@@ -237,7 +237,7 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                             </tr>
                         @endforeach
                     </table>
-                    <button class="btn btn-primary" onclick="edit()">{{ __('Edit') }}</button>
+                    <button class="btn btn-primary" onclick="simfa_edit()">{{ __('Edit') }}</button>
                 </form>
             </div>
             @endisset
@@ -294,6 +294,19 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
         send_ajax_request(
             "{{ route('agencyInfo.edit') }}",
             $('#debt-form').serialize(),
+            function(res) {
+                console.log(res);
+                show_message("{{ __('Edited') }}");
+                open_edit_form(res.parent_id, 'info')
+                filter()
+            }
+        )
+    }
+
+    function simfa_edit() {
+        send_ajax_request(
+            "{{ route('agencyInfo.edit') }}",
+            $('#simfa-form').serialize(),
             function(res) {
                 console.log(res);
                 show_message("{{ __('Edited') }}");
