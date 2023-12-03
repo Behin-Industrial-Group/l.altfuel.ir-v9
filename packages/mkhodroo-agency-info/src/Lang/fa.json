@@ -121,6 +121,10 @@
     "enable": "فعال",
     "Columns": "ستون ها",
     "Everything":"هر چه میخواهد دل تنگت",
-    "Filter": "فیلتر"
+    "Filter": "فیلتر",
+    "All":"همه",
+    "High Pressure Agency":"مرکز خدمات فنی",
+    "Low Pressure Agency":"مرکز کم فشار",
+    "Hidrostatic Laboratory":"آزمایشگاه هیدرواستاتیک"
 
 }
