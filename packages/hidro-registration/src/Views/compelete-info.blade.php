@@ -13,7 +13,7 @@
                 <hr>
                 <form action="javascript:void(0)" method="post" id="register-form">
                     @csrf
-                    <input type="text" name="parent_id" id="" value="{{$agency_fields->first()->parent_id}}">
+                    <input type="hidden" name="parent_id" id="" value="{{$agency_fields->first()->parent_id}}">
                     {{__("simfa code")}}:
                     <input type="text" name="" class="form-control" id="" value="{{$agency_fields->where('key', 'simfa_code')->first()->value ?? ''}}" readonly>
 
