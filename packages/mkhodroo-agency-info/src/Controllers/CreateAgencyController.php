@@ -24,4 +24,16 @@ class CreateAgencyController extends Controller
         }
         return $row;
     }
+
+    public static function createByParentId($key, $value, $parent_id){
+        AgencyInfo::updateOrCreate(
+            [
+                'key' => $key,
+                'parent_id' => $parent_id
+            ],
+            [
+                'value' => $value
+            ]
+            );
+    }
 }

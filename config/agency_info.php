@@ -36,6 +36,7 @@ return [
                 'exp_date' => ['type' => 'text', 'default' => '', 'required' => false],
                 'province' => ['type' => 'select', 'default' => '', 'options' => '', 'option-url' => 'city.all'],
                 'address' => ['type' => 'text', 'default' => ''],
+                'postal_code' => ['type' => 'text'],
                 'location' => ['type' => 'text', 'default' => ''],
                 'description' => ['type' => 'text', 'default' => '', 'required' => false],
                 'inspection_user' => [
@@ -102,6 +103,7 @@ return [
                 'exp_date' => ['type' => 'text', 'default' => '', 'required' => false],
                 'province' => ['type' => 'select', 'default' => '', 'options' => '', 'option-url' => 'city.all'],
                 'address' => ['type' => 'text', 'default' => ''],
+                'postal_code' => ['type' => 'text'],
                 'location' => ['type' => 'text', 'default' => ''],
                 'description' => ['type' => 'text', 'default' => '', 'required' => false],
                 'inspection_user' => [
@@ -164,6 +166,7 @@ return [
                 'exp_date' => ['type' => 'text', 'default' => '', 'required' => false],
                 'province' => ['type' => 'select', 'default' => '', 'options' => '', 'option-url' => 'city.all'],
                 'address' => ['type' => 'text', 'default' => ''],
+                'postal_code' => ['type' => 'text'],
                 'location' => ['type' => 'text', 'default' => ''],
                 'description' => ['type' => 'text', 'default' => '', 'required' => false],
                 'inspection_user' => [
@@ -207,6 +210,13 @@ return [
             ],
             'debts' => [
                 '1' => [ 'debt1', 'debt1_pay_date', 'debt1_ref_id', 'debt1_description' ],
+            ],
+
+            'simfa_fields' => [
+                'simfa_code'                    =>['type' => 'text'],
+                'legal_national_id'             =>['type' => 'text'],
+                'standard_certificate_exp_date' =>['type' => 'text'],
+                'standard_certificate_number'   =>['type' => 'text'],
             ]
         ],
     ]

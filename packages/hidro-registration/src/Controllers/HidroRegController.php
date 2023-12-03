@@ -7,6 +7,10 @@ use App\CustomClasses\zarinPal;
 use App\Http\Controllers\Controller;
 use App\Models\HidroModel;
 use Illuminate\Http\Request;
+use Mkhodroo\AgencyInfo\Controllers\AgencyDebtPaymentController;
+use Mkhodroo\AgencyInfo\Controllers\CreateAgencyController;
+use Mkhodroo\AgencyInfo\Controllers\GetAgencyController;
+use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use SoapClient;
 
 class HidroRegController extends Controller
@@ -59,54 +63,69 @@ class HidroRegController extends Controller
 
     public static function find($simfaCode, $legalNationalId)
     {
+        $parent_id = AgencyInfo::where('key', 'simfa_code')->where('value', $simfaCode)->first()?->parent_id;
+        if(!$parent_id){
+            return response("Agency Does Not Found", 404);
+        }
+        $parent_id = AgencyInfo::where('key', 'legal_national_id')->where('value', $legalNationalId)->where('parent_id', $parent_id)->first()?->parent_id;
+        if(!$parent_id){
+            return response("Agency Does Not Found", 404);
+        }
+        $ref_id = AgencyInfo::where('key', 'debt1_ref_id')->where('parent_id', $parent_id)->first()?->value;
+        if($ref_id){
+            return response(trans("You Compelete Your Info Before. Please Be Patient. We Call You Soon."), 300);
+        }
+
+        return $parent_id;
         return HidroModel::where('simfaCode', $simfaCode)->where('legalNationalId', $legalNationalId)
             ->select('simfaCode', 'Name', 'Address', 'PostalCode', 'legalNationalId', 'Tel', 'debt')->first();
     }
 
     public static function compeleteInfoForm(Request $r)
     {
-        $agency = self::get($r->simfaCode, $r->legalNationalId);
-        if (!$agency) {
-            return response(trans("Agency Does Not Found"), 300);
+        // $agency = self::get($r->simfaCode, $r->legalNationalId);
+        // if (!$agency) {
+        //     return response(trans("Agency Does Not Found"), 300);
+        // }
+        // if($agency->debt_RefID){
+        //     return response(trans("You Compelete Your Info Before. Please Be Patient. We Call You Soon."),300);
+        // }
+        $parent_id = self::find($r->simfaCode, $r->legalNationalId);
+        if(!is_integer($parent_id)){
+            return $parent_id;
         }
-        if($agency->debt_RefID){
-            return response(trans("You Compelete Your Info Before. Please Be Patient. We Call You Soon."),300);
-        }
-        $agency = self::find($r->simfaCode, $r->legalNationalId);
         return view('HidroRegViews::compelete-info')->with([
-            'agency' => $agency->toArray()
+            'agency_fields' => GetAgencyController::getByParentId($parent_id)
         ]);
     }
 
     public static function pay(Request $r)
     {
-        $r->validate([
-            'Name' => ['required'],
-            'NationalID' => ['required', 'digits:10'],
-            'Cellphone' => ['required', 'digits:11'],
-            'Province' => ['required', 'string'],
-            'City' => ['required', 'string'],
-            'standardCertificateNumber' => ['required', 'string'],
-            'standardCertificateExpDate' => ['required', 'string'],
+        // $r->validate([
+        //     'Name' => ['required'],
+        //     'NationalID' => ['required', 'digits:10'],
+        //     'Cellphone' => ['required', 'digits:11'],
+        //     'Province' => ['required', 'string'],
+        //     'City' => ['required', 'string'],
+        //     'standardCertificateNumber' => ['required', 'string'],
+        //     'standardCertificateExpDate' => ['required', 'string'],
 
-        ]);
-        $agency = self::get($r->simfaCode, $r->legalNationalId);
-        $agency->Name = $r->Name;
-        $agency->NationalID = $r->NationalID;
-        $agency->Cellphone = $r->Cellphone;
-        $agency->Province = $r->Province;
-        $agency->City = $r->City;
-        $agency->standardCertificateNumber = $r->standardCertificateNumber;
-        $agency->standardCertificateExpDate = $r->standardCertificateExpDate;
-        $agency->save();
-        $amount = $agency->debt / 10;
+        // ]);
+        CreateAgencyController::createByParentId('firstname', $r->Name, $r->parent_id);
+        CreateAgencyController::createByParentId('national_id', $r->NationalID, $r->parent_id);
+        CreateAgencyController::createByParentId('mobile', $r->Cellphone, $r->parent_id);
+        CreateAgencyController::createByParentId('province', $r->Province, $r->parent_id);
+        CreateAgencyController::createByParentId('standard_certificate_number', $r->standardCertificateNumber, $r->parent_id);
+        CreateAgencyController::createByParentId('standard_certificate_exp_date', $r->standardCertificateExpDate, $r->parent_id);
+        $agency = GetAgencyController::getByParentId($r->parent_id);
+        $debt_id = $agency->where('key', 'debt1')->first()->id;
+        $amount = $agency->where('key', 'debt1')->first()->value;
         $description =  'کمک مردمی اتصال به سامانه برای مرکز هیدرو به کدملی: ' . $r->NationalID;
-        $mobile = $agency->Cellphone;
+        $mobile = $agency->where('key', 'mobile')->first()->value;
         $callbackUrl = route('hidroReg.callback');
-        $Authority = zarinPal::getAuthority($amount, $description, $mobile, $callbackUrl);
+        $Authority = zarinPal::getAuthority($amount/10, $description, $mobile, $callbackUrl);
         if($Authority){
-            $agency->Authority = $Authority;
-            $agency->save();
+            AgencyDebtPaymentController::create($debt_id, $amount, $Authority, 'pending');
             return config('zarinpal.pay_url') . $Authority;
         }
         return response(trans("Authority Does Not Received."),300);

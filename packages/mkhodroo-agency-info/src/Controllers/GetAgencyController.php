@@ -13,4 +13,10 @@ class GetAgencyController extends Controller
     {
         return AgencyInfo::where('parent_id', $parent_id)->where('key', "$key")->first();
     }
+
+    public static function getByParentId($parent_id)
+    {
+        return AgencyInfo::where('parent_id', $parent_id)->get();
+    }
+    
 }

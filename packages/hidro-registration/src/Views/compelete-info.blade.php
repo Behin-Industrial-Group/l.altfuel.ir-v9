@@ -13,13 +13,25 @@
                 <hr>
                 <form action="javascript:void(0)" method="post" id="register-form">
                     @csrf
-                    @foreach (array_keys($agency) as $key)
-                        @if ($key != 'debt')
-                            {{ __($key) }}
-                            <input type="text" name="{{ $key }}" id="" value="{{ $agency[$key] }}"
-                                class="form-control" readonly>
-                        @endif
-                    @endforeach
+                    <input type="text" name="parent_id" id="" value="{{$agency_fields->first()->parent_id}}">
+                    {{__("simfa code")}}:
+                    <input type="text" name="" class="form-control" id="" value="{{$agency_fields->where('key', 'simfa_code')->first()->value ?? ''}}" readonly>
+
+                    {{__("firstname")}}:
+                    <input type="text" name="" class="form-control" id="" value="{{$agency_fields->where('key', 'firstname')->first()->value ?? ''}}" readonly>
+
+                    {{__("address")}}:
+                    <input type="text" name="" class="form-control" id="" value="{{$agency_fields->where('key', 'address')->first()->value ?? ''}}" readonly>
+
+                    {{__("postal code")}}:
+                    <input type="text" name="" class="form-control" id="" value="{{$agency_fields->where('key', 'postal_code')->first()->value ?? ''}}" readonly>
+
+                    {{__("legal national id")}}:
+                    <input type="text" name="" class="form-control" id="" value="{{$agency_fields->where('key', 'legal_national_id')->first()->value ?? ''}}" readonly>
+
+                    {{__("phone")}}:
+                    <input type="text" name="" class="form-control" id="" value="{{$agency_fields->where('key', 'phone')->first()->value ?? ''}}" readonly>
+
                     کدملی مدیرعامل:
                     <input type="text" name="NationalID" id="" class="form-control">
 
@@ -30,10 +42,19 @@
                     <input type="text" name="Cellphone" id="" class="form-control">
 
                     استان:
-                    <input type="text" name="Province" id="" class="form-control">
-
-                    شهر:
-                    <input type="text" name="City" id="" class="form-control">
+                    <select name="Province" class="form-control select2 col-sm-12" id="province"></select>
+                    <script>
+                        send_ajax_get_request(
+                            "{{ route('city.all') }}",
+                            function(res) {
+                                selec_element = $('#province')
+                                res.forEach(function(item) {
+                                    var opt = new Option(item.province + ' - ' + item.city, item.id)
+                                    selec_element.append(opt)
+                                })
+                            }
+                        )
+                    </script>
 
                     شماره گواهی تاييد صلاحيت آزمایشگاه (اخذ شده از سازمان ملی استاندارد):
                     <input type="text" name="standardCertificateNumber" id="" class="form-control">
@@ -43,7 +64,8 @@
                         class="form-control persian-date">
 
                     مبلغ قابل پرداخت(ریال):
-                    <input type="text" name="debt" id="" class="form-control" value="{{$agency['debt']}}" readonly>
+                    <input type="text" name="debt1" class="form-control" id="" value="{{$agency_fields->where('key', 'debt1')->first()->value ?? ''}}" readonly>
+
                 </form>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary col-sm-12" onclick="submit()">ثبت و پرداخت</button>
@@ -62,6 +84,7 @@
                 "{{ route('hidroReg.pay') }}",
                 fd,
                 function(res) {
+                    console.log(res);
                     show_message("{{ __('Waiting...') }}");
                     window.location = res;
                 }
