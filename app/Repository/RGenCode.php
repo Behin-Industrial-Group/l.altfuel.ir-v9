@@ -116,7 +116,7 @@ class RGenCode
 
         $date = (string)Verta();
         $year = explode("-", explode(" ", $date)[0])[0][2] . explode("-", explode(" ", $date)[0])[0][3];
-        $province_code = $this->provinceModel->GetCode($this->province);
+        $province_code = $this->GetProvinceCode();
 
         $new_code = "K" . $province_code . $year . $no;
 
