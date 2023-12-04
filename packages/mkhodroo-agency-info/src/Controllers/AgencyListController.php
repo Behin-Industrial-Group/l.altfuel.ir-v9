@@ -20,7 +20,7 @@ class AgencyListController extends Controller
     }
 
     public static function getKeys(){
-        return AgencyInfo::whereIn('key', config('agency_info.filter_fields'))->groupBy('key')->pluck('key');
+        return AgencyInfo::groupBy('key')->pluck('key');
     }
 
     public static function list()
