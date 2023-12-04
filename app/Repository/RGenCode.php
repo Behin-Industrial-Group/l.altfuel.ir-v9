@@ -50,6 +50,7 @@ class RGenCode
 
     public function Hidro()
     {
+        return $this->province;
         $last_code = $this->GetLastHidroCode();
 
         if($last_code !== null){
