@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Translation\MessageCatalogue;
 use Illuminate\Support\Facades\Schema;
+use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\UserRoles\Models\Access;
 use Mkhodroo\UserRoles\Models\Method;
 use Mkhodroo\UserRoles\Models\Role;
@@ -97,11 +98,16 @@ Route::get('/GenCode/{type}/{province}', function ($type, $province) {
     }
     $a = new RGenCode($province, $type);
     if ($type === 'agency')
-        return $a->Markaz();
+        $agency_code = $a->Markaz();
     if ($type === 'hidrostatic')
-        return $a->Hidro();
+        $agency_code = $a->Hidro();
     if ($type === 'low-pressure')
-        return $a->Kamfeshar();
+        $agency_code = $a->Kamfeshar();
+
+    if(!AgencyInfo::where('key', 'agency_code')->where('value', $agency_code)->first()){
+        return response(trans("Unfortunately Generated Code Is Not Unique. Contact Support"), 300);
+    }
+    return $agency_code;
 });
 
 Route::get('generate-code/', function () {
