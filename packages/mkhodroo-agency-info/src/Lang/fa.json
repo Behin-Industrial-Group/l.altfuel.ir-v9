@@ -135,6 +135,12 @@
     "You Have No Debt": "بدهی ندارید",
     "No Agency Found With This Mobile Number": "مرکزی با این موبایل یافت نشد",
     "No Agency Found With This National ID": "مرکزی با این کدملی یافت نشد",
-    "No Agency Found": "مرکزی یافت نشد"
+    "No Agency Found": "مرکزی یافت نشد",
+    "simfa_code": "کد سیمفا",
+    "legal_national_id": "شناسه ملی شرکت",
+    "standard_certificate_exp_date": "تاریخ انقضا گواهینامه استاندارد",
+    "standard_certificate_number": "شماره گواهینامه استاندارد",
+    "postal_code": "کدپستی",
+    "Simfa Info": "کد سیمفا"
 
 }

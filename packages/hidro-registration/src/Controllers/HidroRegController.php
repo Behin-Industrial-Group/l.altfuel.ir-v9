@@ -105,8 +105,7 @@ class HidroRegController extends Controller
             'Name' => ['required'],
             'NationalID' => ['required', 'digits:10'],
             'Cellphone' => ['required', 'digits:11'],
-            'Province' => ['required', 'string'],
-            'City' => ['required', 'string'],
+            'Province' => ['required'],
             'standardCertificateNumber' => ['required', 'string'],
             'standardCertificateExpDate' => ['required', 'string'],
 
