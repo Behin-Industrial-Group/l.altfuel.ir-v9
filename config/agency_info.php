@@ -62,6 +62,7 @@ return [
                 'plate_reader' => ['plate_reader', 'plate_reader_pay_date', 'plate_reader_ref_id', 'plate_reader_pay_file'],
             ],
             'fin_fields' => [
+                'fin_details' => ['type' => 'textarea'],
                 'fin_green' => [
                     'type' => 'select',
                     'default' => '',
@@ -125,6 +126,7 @@ return [
                 '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_ref_id', 'membership_02_pay_file'],
             ],
             'fin_fields' => [
+                'fin_details' => ['type' => 'textarea'],
                 'fin_green' => [
                     'type' => 'select',
                     'default' => '',
@@ -195,6 +197,7 @@ return [
                 'irngv' => ['irngv', 'irngv_pay_date', 'irngv_ref_id', 'irngv_pay_file'],
             ],
             'fin_fields' => [
+                'fin_details' => ['type' => 'textarea'],
                 'fin_green' => [
                     'type' => 'select',
                     'default' => '',
