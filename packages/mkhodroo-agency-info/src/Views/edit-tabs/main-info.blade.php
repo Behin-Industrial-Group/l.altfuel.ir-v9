@@ -26,7 +26,7 @@
                                     $('#gen_code').on('click', function() {
                                         var province = $('#province').val();
                                         $.get("{{ url('GenCode') }}/{{ $customer_type->value }}/" + province, function(data) {
-                                            // alert('کد جدید:  ' + data)
+                                            alert('کد جدید:  ' + data)
                                             console.log(data);
                                         });
                                     })
