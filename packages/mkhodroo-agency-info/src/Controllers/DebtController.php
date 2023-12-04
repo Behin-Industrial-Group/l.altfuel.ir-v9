@@ -77,6 +77,7 @@ class DebtController extends Controller
         return [
             'debts' => $debts,
             'agency_national_id' => AgencyInfo::where('parent_id', $parent_id)->where('key', 'national_id')->first()->value,
+            'agency_code' => AgencyInfo::where('parent_id', $parent_id)->where('key', 'agency_code')->first()?->value,
             'mobile' => AgencyInfo::where('parent_id', $parent_id)->where('key', 'mobile')->first()->value,
             'sum' => $sum
         ];
@@ -102,7 +103,8 @@ class DebtController extends Controller
     public function pay(Request $request)
     {
         $data = unserialize($request->data);
-        $description = trans("Debt Payment For Agency With National ID: "). $data['agency_national_id'];
+        $description = trans("Debt Payment For Agency With National ID: "). $data['agency_national_id'] ;
+        $description .= " ". trans("Agency Code: "). $data['agency_code'];
         $callbackUrl = route('callback');
         $Authority = zarinPal::getAuthority($data['sum']/10, $description, $data['mobile'], $callbackUrl);
         foreach($data['debts'] as $debt){

@@ -57,6 +57,8 @@
 	<script src="{{ url('public/dashboard/plugins/select2/select2.full.min.js')  . '?' . config('app.version') }}"></script>
 	<script src="{{ url('public/plugins/persian-datepicker/persian-date.js')  . '?' . config('app.version') }}"></script>
 	<script src="{{ url('public/plugins/persian-datepicker/persian-datepicker.js')  . '?' . config('app.version') }}"></script>
+	<script src="{{ url('public/dist/js/num2persian/num2persian.js') }}" type="text/javascript"></script>
+
 	<script>
 		$('.select2').select2();
 		function initial_view(){

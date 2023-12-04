@@ -18,6 +18,10 @@
                     <td>
                         {{$sum}} ریال
                         <input type="hidden" name="amount" id="" value="{{$sum}}">
+                        <p id="total_string"></p>
+                        <script>
+                            $('#total_string').html(Num2persian('{{ (int)$sum/10 }}') + ' تومان')
+                        </script>
                     </td>
                 </tr>
                 <tr>

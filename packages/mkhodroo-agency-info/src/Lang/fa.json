@@ -141,6 +141,8 @@
     "standard_certificate_exp_date": "تاریخ انقضا گواهینامه استاندارد",
     "standard_certificate_number": "شماره گواهینامه استاندارد",
     "postal_code": "کدپستی",
-    "Simfa Info": "کد سیمفا"
+    "Simfa Info": "کد سیمفا",
+    "Agency Code: ": "کد مرکز: ",
+    "Total": "مجموع"
 
 }
