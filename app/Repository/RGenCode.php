@@ -30,6 +30,7 @@ class RGenCode
         $this->parent_ids = AgencyInfo::where('key','customer_type')->where('value', $customer_type)->pluck('parent_id');
         $this->parent_ids = AgencyInfo::where('key','province')->whereIn('parent_id', $this->parent_ids)->whereIn('value', $this->province_ids)->pluck('parent_id');
         $this->agency_codes = AgencyInfo::where('key','agency_code')->whereIn('parent_id', $this->parent_ids)->pluck('value');
+        $this->agency_codes = array_filter($this->agency_codes->toArray());
         $this->marakez = new MarakezModel();
         $this->hidro = new HidroModel();
         $this->kamfeshar = new KamFesharModel();
@@ -73,7 +74,7 @@ class RGenCode
     private function GetLastHidroCode()
     {
         // $all = $this->hidro->where('province', $this->province)->whereNotNull('CodeEtehadie')->get();
-        $all = Arr::sort(array_filter($this->agency_codes->toArray()));
+        $all = Arr::sort($this->agency_codes);
         foreach($all as $a){
             $no = $a[5] . $a[6];
             $b[] =  (int) $no;
@@ -90,7 +91,7 @@ class RGenCode
     private function GetProvinceCode()
     {
         // $all = $this->hidro->where('province', $this->province)->whereNotNull('CodeEtehadie')->get();
-        $all = Arr::sort($this->agency_codes->toArray());
+        $all = Arr::sort($this->agency_codes);
         foreach($all as $a){
             $no = $a[1] . $a[2];
             $b[] =  (int) $no;
