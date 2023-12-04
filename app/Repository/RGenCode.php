@@ -50,7 +50,7 @@ class RGenCode
 
     public function Hidro()
     {
-        return $this->parent_ids;
+        return $this->agency_codes;
         $last_code = $this->GetLastHidroCode();
 
         if($last_code !== null){
