@@ -51,6 +51,7 @@ class RGenCode
     public function Hidro()
     {
         $last_code = $this->GetLastHidroCode();
+
         if($last_code !== null){
             $no = $last_code +1;
             $no = $this->Length($no);
@@ -67,30 +68,12 @@ class RGenCode
         return $new_code;
     }
 
-    public function Kamfeshar()
-    {
-        $last_code = $this->GetLastKamfesharCode();
-        if($last_code !== null){
-            $no = $last_code +1;
-            $no = $this->Length($no);
-        }else{
-            $no = "01";
-        }
-
-        $date = (string)Verta();
-        $year = explode("-", explode(" ", $date)[0])[0][2] . explode("-", explode(" ", $date)[0])[0][3];
-        $province_code = $this->provinceModel->GetCode($this->province);
-
-        $new_code = "K" . $province_code . $year . $no;
-
-        return $new_code;
-    }
+    
 
     private function GetLastHidroCode()
     {
         // $all = $this->hidro->where('province', $this->province)->whereNotNull('CodeEtehadie')->get();
         $all = Arr::sort($this->agency_codes->toArray());
-
         foreach($all as $a){
             $no = $a[5] . $a[6];
             $b[] =  (int) $no;
@@ -119,6 +102,24 @@ class RGenCode
         }else{
             return null;
         }
+    }
+    public function Kamfeshar()
+    {
+        $last_code = $this->GetLastKamfesharCode();
+        if($last_code !== null){
+            $no = $last_code +1;
+            $no = $this->Length($no);
+        }else{
+            $no = "01";
+        }
+
+        $date = (string)Verta();
+        $year = explode("-", explode(" ", $date)[0])[0][2] . explode("-", explode(" ", $date)[0])[0][3];
+        $province_code = $this->provinceModel->GetCode($this->province);
+
+        $new_code = "K" . $province_code . $year . $no;
+
+        return $new_code;
     }
 
     private function GetLastKamfesharCode()
