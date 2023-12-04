@@ -92,6 +92,9 @@ Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sm
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);
 
 Route::get('/GenCode/{type}/{province}', function ($type, $province) {
+    if(!$province){
+        return response(trans("Province is not set"),300);
+    }
     $a = new RGenCode($province, $type);
     if ($type === 'agency')
         return $a->Markaz();
