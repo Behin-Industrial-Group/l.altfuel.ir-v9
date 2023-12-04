@@ -50,7 +50,6 @@ class RGenCode
 
     public function Hidro()
     {
-        return array_filter($this->agency_codes->toArray());
         $last_code = $this->GetLastHidroCode();
 
         if($last_code !== null){
@@ -74,7 +73,7 @@ class RGenCode
     private function GetLastHidroCode()
     {
         // $all = $this->hidro->where('province', $this->province)->whereNotNull('CodeEtehadie')->get();
-        $all = Arr::sort($this->agency_codes->toArray());
+        $all = Arr::sort(array_filter($this->agency_codes->toArray()));
         foreach($all as $a){
             $no = $a[5] . $a[6];
             $b[] =  (int) $no;
