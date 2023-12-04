@@ -125,9 +125,9 @@ class RGenCode
 
     private function GetLastKamfesharCode()
     {
-        $all = $this->kamfeshar->where('province', $this->province)->whereNotNull('CodeEtehadie')->get();
+        $all = Arr::sort($this->agency_codes);
         foreach($all as $a){
-            $no = $a->CodeEtehadie[5] . $a->CodeEtehadie[6];
+            $no = $a[5] . $a[6];
             $b[] =  (int) $no;
         }
 
