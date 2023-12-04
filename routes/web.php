@@ -92,12 +92,12 @@ Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sm
 Route::any('/mv/check-code/{mobile}/{code}', [MobileVerificationController::class, 'check_code']);
 
 Route::get('/GenCode/{type}/{province}', function ($type, $province) {
-    $a = new RGenCode($province);
-    if ($type === 'marakez1')
+    $a = new RGenCode($province, $type);
+    if ($type === 'agency')
         return $a->Markaz();
-    if ($type === 'hidro')
+    if ($type === 'hidrostatic')
         return $a->Hidro();
-    if ($type === 'kamfeshar')
+    if ($type === 'low-pressure')
         return $a->Kamfeshar();
 });
 

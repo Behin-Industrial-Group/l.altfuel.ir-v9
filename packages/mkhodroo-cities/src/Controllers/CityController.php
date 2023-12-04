@@ -25,4 +25,16 @@ class CityController extends Controller
             'city' => $city
         ], []);
     }
+
+    public static function getProvinceIds($id){
+        $province = City::where('id', $id)->first()->province;
+        $province_ids = City::where('province', $province)->pluck('id');
+        return $province_ids;
+    }
+
+    public static function getProvinceAgencyCode($id){
+        $province = City::where('id', $id)->first()->province;
+        $province_ids = City::where('province', $province)->pluck('id');
+        return $province_ids;
+    }
 }

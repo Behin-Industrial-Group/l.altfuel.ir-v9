@@ -16,11 +16,25 @@
                                 $required = '';
                             @endphp
                             <input type="text" name="{{ $field_key }}" value="{{ $value }}"
-                                class="form-control" id="">
+                                class="form-control" id="{{ $field_key }}">
+                            @if ($field_key === 'agency_code')
+                                <span id="gen_code" class="col-sm-3"
+                                    style="background: #db4f4f;padding-top:5px; height:32px; text-align:center; font-weight:bold; cursor:pointer">
+                                    تولید کد
+                                </span>
+                                <script>
+                                    $('#gen_code').on('click', function() {
+                                        var province = $('#province').val();
+                                        $.get("{{ url('GenCode') }}/{{ $customer_type->value }}/" + province, function(data) {
+                                            // alert('کد جدید:  ' + data)
+                                            console.log(data);
+                                        });
+                                    })
+                                </script>
+                            @endif
                         @endif
                         @if ($field_detail['type'] == 'select')
-                            <select name="{{ $field_key }}" class="form-control select2 col-sm-12"
-                                id="">
+                            <select name="{{ $field_key }}" class="form-control select2 col-sm-12" id="{{ $field_key }}">
                                 @if (!empty($field_detail['option-url']))
                                     @php
                                         $url = $field_detail['option-url'];
