@@ -23,6 +23,7 @@ class HtmlCreatorController extends Controller
             echo "<input type='checkbox' name='$field_name' class='' $checked>". __($field_name) . '<br>';
         }
         if ($attr['type'] == 'select'){
+            echo trans($field_name);
             echo "<select name='$field_name' class='form-control select2'>";
             foreach($attr['options'] as $option){
                 $value = $option['value'];
@@ -31,6 +32,10 @@ class HtmlCreatorController extends Controller
                 echo "<option value='$value' $selected>$label</option>";
             }
             echo "</select>";
+        }
+        if($attr['type'] === 'textarea'){
+            echo trans($field_name);
+            echo "<textarea name='$field_name' class='form-control'>$default_value</textarea>";
         }
         
     }
