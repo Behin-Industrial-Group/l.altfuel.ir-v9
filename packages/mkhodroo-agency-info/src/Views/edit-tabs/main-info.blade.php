@@ -25,16 +25,20 @@
                                 <script>
                                     $('#gen_code').on('click', function() {
                                         var province = $('#province').val();
-                                        $.get("{{ url('GenCode') }}/{{ $customer_type->value }}/" + province, function(data) {
-                                            alert('کد جدید:  ' + data)
-                                            console.log(data);
-                                        });
+                                        send_ajax_get_request(
+                                            "{{ url('GenCode') }}/{{ $customer_type->value }}/" + province,
+                                            function(data) {
+                                                alert('کد جدید:  ' + data)
+                                                console.log(data);
+                                            }
+                                        )
                                     })
                                 </script>
                             @endif
                         @endif
                         @if ($field_detail['type'] == 'select')
-                            <select name="{{ $field_key }}" class="form-control select2 col-sm-12" id="{{ $field_key }}">
+                            <select name="{{ $field_key }}" class="form-control select2 col-sm-12"
+                                id="{{ $field_key }}">
                                 @if (!empty($field_detail['option-url']))
                                     @php
                                         $url = $field_detail['option-url'];
