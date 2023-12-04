@@ -104,7 +104,7 @@ class DebtController extends Controller
     {
         $data = unserialize($request->data);
         $description = trans("Debt Payment For Agency With National ID: "). $data['agency_national_id'] ;
-        // $description .= " ". trans("Agency Code: "). $data['agency_code'];
+        $description .= " ". trans("Agency Code: "). $data['agency_code'];
         $callbackUrl = route('callback');
         $Authority = zarinPal::getAuthority($data['sum']/10, $description, $data['mobile'], $callbackUrl);
         foreach($data['debts'] as $debt){
