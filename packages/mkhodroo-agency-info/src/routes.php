@@ -168,52 +168,52 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth'])->
     //     }
     // });
 
-    Route::get('import-hidro', function () {
-        $marakez = HidroModel::get();
-        $i=1;
-        foreach ($marakez as $agency) {
-            if($agency->CodeEtehadie){
-                $parent_id = AgencyInfo::where('key', 'agency_code')->where('value', $agency->CodeEtehadie)->first()->parent_id;
-                echo $i. ' - '. $parent_id .' - '.$agency->CodeEtehadie.' - '.  $agency->PostalCode. '<br>';
-                $i++;
-                AgencyInfo::create(['key' => 'postal_code', 'value' => (string)$agency->PostalCode, 'parent_id' => $parent_id]);
-                AgencyInfo::create(['key' => 'standard_certificate_exp_date', 'value' => $agency->standardCertificateExpDate, 'parent_id' => $parent_id]);
-                AgencyInfo::create(['key' => 'standard_certificate_number', 'value' => $agency->standardCertificateNumber, 'parent_id' => $parent_id]);
-            }elseif($agency->legalNationalId){
-                $parent_id = AgencyInfo::where('key', 'legal_national_id')->where('value', $agency->legalNationalId)->first()->parent_id;
-                echo $i. ' - '. $parent_id .' - '.$agency->CodeEtehadie.' - '.  $agency->PostalCode. '<br>';
-                $i++;
-                AgencyInfo::create(['key' => 'postal_code', 'value' => (string)$agency->PostalCode, 'parent_id' => $parent_id]);
-                AgencyInfo::create(['key' => 'standard_certificate_exp_date', 'value' => $agency->standardCertificateExpDate, 'parent_id' => $parent_id]);
-                AgencyInfo::create(['key' => 'standard_certificate_number', 'value' => $agency->standardCertificateNumber, 'parent_id' => $parent_id]);
-            }
+    // Route::get('import-hidro', function () {
+    //     $marakez = HidroModel::get();
+    //     $i=1;
+    //     foreach ($marakez as $agency) {
+    //         if($agency->CodeEtehadie){
+    //             $parent_id = AgencyInfo::where('key', 'agency_code')->where('value', $agency->CodeEtehadie)->first()->parent_id;
+    //             echo $i. ' - '. $parent_id .' - '.$agency->CodeEtehadie.' - '.  $agency->PostalCode. '<br>';
+    //             $i++;
+    //             AgencyInfo::create(['key' => 'postal_code', 'value' => (string)$agency->PostalCode, 'parent_id' => $parent_id]);
+    //             AgencyInfo::create(['key' => 'standard_certificate_exp_date', 'value' => $agency->standardCertificateExpDate, 'parent_id' => $parent_id]);
+    //             AgencyInfo::create(['key' => 'standard_certificate_number', 'value' => $agency->standardCertificateNumber, 'parent_id' => $parent_id]);
+    //         }elseif($agency->legalNationalId){
+    //             $parent_id = AgencyInfo::where('key', 'legal_national_id')->where('value', $agency->legalNationalId)->first()->parent_id;
+    //             echo $i. ' - '. $parent_id .' - '.$agency->CodeEtehadie.' - '.  $agency->PostalCode. '<br>';
+    //             $i++;
+    //             AgencyInfo::create(['key' => 'postal_code', 'value' => (string)$agency->PostalCode, 'parent_id' => $parent_id]);
+    //             AgencyInfo::create(['key' => 'standard_certificate_exp_date', 'value' => $agency->standardCertificateExpDate, 'parent_id' => $parent_id]);
+    //             AgencyInfo::create(['key' => 'standard_certificate_number', 'value' => $agency->standardCertificateNumber, 'parent_id' => $parent_id]);
+    //         }
             
 
             
-        }
+    //     }
 
-        $marakez = MarakezModel::get();
-        $i=1;
-        foreach ($marakez as $agency) {
-            if($agency->CodeEtehadie){
-                $parent_id = AgencyInfo::where('key', 'agency_code')->where('value', $agency->CodeEtehadie)->first()->parent_id;
-                echo $i. ' - '. $parent_id .' - '.$agency->CodeEtehadie.' - '.  $agency->PostalCode. '<br>';
-                $i++;
-                AgencyInfo::create(['key' => 'postal_code', 'value' => (string)$agency->PostalCode, 'parent_id' => $parent_id]);
-            }
-        }
+    //     $marakez = MarakezModel::get();
+    //     $i=1;
+    //     foreach ($marakez as $agency) {
+    //         if($agency->CodeEtehadie){
+    //             $parent_id = AgencyInfo::where('key', 'agency_code')->where('value', $agency->CodeEtehadie)->first()->parent_id;
+    //             echo $i. ' - '. $parent_id .' - '.$agency->CodeEtehadie.' - '.  $agency->PostalCode. '<br>';
+    //             $i++;
+    //             AgencyInfo::create(['key' => 'postal_code', 'value' => (string)$agency->PostalCode, 'parent_id' => $parent_id]);
+    //         }
+    //     }
 
-        $marakez = KamFesharModel::get();
-        $i=1;
-        foreach ($marakez as $agency) {
-            if($agency->CodeEtehadie){
-                $parent_id = AgencyInfo::where('key', 'agency_code')->where('value', $agency->CodeEtehadie)->first()->parent_id;
-                echo $i. ' - '. $parent_id .' - '.$agency->CodeEtehadie.' - '.  $agency->PostalCode. '<br>';
-                $i++;
-                AgencyInfo::create(['key' => 'postal_code', 'value' => (string)$agency->PostalCode, 'parent_id' => $parent_id]);
-            }
-        }
-    });
+    //     $marakez = KamFesharModel::get();
+    //     $i=1;
+    //     foreach ($marakez as $agency) {
+    //         if($agency->CodeEtehadie){
+    //             $parent_id = AgencyInfo::where('key', 'agency_code')->where('value', $agency->CodeEtehadie)->first()->parent_id;
+    //             echo $i. ' - '. $parent_id .' - '.$agency->CodeEtehadie.' - '.  $agency->PostalCode. '<br>';
+    //             $i++;
+    //             AgencyInfo::create(['key' => 'postal_code', 'value' => (string)$agency->PostalCode, 'parent_id' => $parent_id]);
+    //         }
+    //     }
+    // });
     Route::get('create-form', [CreateAgencyController::class, 'view'])->name('createForm');
     Route::post('create', [CreateAgencyController::class, 'create'])->name('create');
     Route::get('list-form', [AgencyListController::class, 'view'])->name('listForm');
