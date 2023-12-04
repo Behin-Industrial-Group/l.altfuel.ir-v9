@@ -1,3 +1,4 @@
+@if (auth()->user()->access('Show Agency Fin Info'))
 <div class="tab-pane fade" id="fin-info" role="tabpanel" aria-labelledby="fin-info-tab">
     <form action="javascript:void(0)" id="fin-form" enctype="multipart/form-data">
         <input type="hidden" name="id" id="" value="{{ $customer_type->id ?? '' }}">
@@ -52,3 +53,4 @@
         <button class="btn btn-primary" onclick="fin_edit()">{{ __('Edit') }}</button>
     </form>
 </div>
+@endif

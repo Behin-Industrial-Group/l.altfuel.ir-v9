@@ -1,3 +1,4 @@
+@if (auth()->user()->access('Show Agency Fin Info'))
 @isset(config("agency_info.customer_type.$customer_type->value")['simfa_fields'])
     <div class="tab-pane fade show" id="simfa" role="tabpanel" aria-labelledby="simfa-info">
         <form action="javascript:void(0)" id="simfa-form">
@@ -21,3 +22,5 @@
         </form>
     </div>
 @endisset
+
+@endif

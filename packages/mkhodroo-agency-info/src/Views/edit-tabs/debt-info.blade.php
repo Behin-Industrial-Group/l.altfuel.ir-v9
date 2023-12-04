@@ -1,3 +1,4 @@
+@if (auth()->user()->access('Show Agency Debt Info'))
 <div class="tab-pane fade show" id="debts" role="tabpanel" aria-labelledby="debts-tab">
     <form action="javascript:void(0)" id="debt-form">
         <input type="hidden" name="id" id="" value="{{ $customer_type->id ?? '' }}">
@@ -30,3 +31,4 @@
         <button class="btn btn-primary" onclick="debt_edit()">{{ __('Edit') }}</button>
     </form>
 </div>
+@endif

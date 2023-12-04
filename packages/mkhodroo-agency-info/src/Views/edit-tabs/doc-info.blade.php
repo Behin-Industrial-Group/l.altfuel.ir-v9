@@ -1,3 +1,4 @@
+@if (auth()->user()->access('Show Agency Doc Info'))
 <div class="tab-pane fade" id="docs" role="tabpanel" aria-labelledby="docs">
     <form action="javascript:void(0)" id="docs-form" enctype="multipart/form-data">
         <input type="hidden" name="id" id="" value="{{ $customer_type->id ?? '' }}">
@@ -33,3 +34,4 @@
         <button class="btn btn-primary" onclick="docs_edit()">{{ __('Edit') }}</button>
     </form>
 </div>
+@endif
