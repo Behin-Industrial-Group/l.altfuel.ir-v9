@@ -16,7 +16,7 @@ class AgencyController extends Controller
         return view('AgencyView::edit')->with(['agency_fields' => $agency_fields]);
     }
 
-    public static function edit(AgencyInfoRequest $r)
+    public static function edit(Request $r)
     {
         $agency_fields =  AgencyInfo::where('parent_id', $r->id)->get();
         $data = $r->except('id');
