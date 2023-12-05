@@ -104,9 +104,9 @@ Route::get('/GenCode/{type}/{province}', function ($type, $province) {
     if ($type === 'low-pressure')
         $agency_code = $a->Kamfeshar();
 
-    if(AgencyInfo::where('key', 'agency_code')->where('value', $agency_code)->first()){
-        return response(trans("Unfortunately Generated Code Is Not Unique. Contact Support"), 300);
-    }
+    // if(AgencyInfo::where('key', 'agency_code')->where('value', $agency_code)->first()){
+    //     return response(trans("Unfortunately Generated Code Is Not Unique. Contact Support"), 300);
+    // }
     return $agency_code;
 });
 
