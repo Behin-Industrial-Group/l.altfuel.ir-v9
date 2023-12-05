@@ -3,6 +3,8 @@
 namespace Mkhodroo\AgencyInfo\Controllers;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
@@ -65,6 +67,35 @@ class AgencyListController extends Controller
 
         });
         return ['data' => $agencies];
+    }
+
+    public static function getValidAgencies($type = 'agency'){
+        $parent_ids = AgencyInfo::where('key', 'customer_type')->where('value', $type)->pluck('id');
+        $exp_dates = AgencyInfo::whereIn('parent_id', $parent_ids)->where('key', 'exp_date')->whereNotNull('value')->where('value', '!=', '')->get();
+        $parent_ids = [];
+        $sDate = new SDate();
+        $agencies = [];
+        foreach($exp_dates as $exp_date){
+            $exp = SDate::jalaliToGregorian($exp_date->value);
+            $GregorianExpDate = SDate::gregorianToCarbon($exp);
+            $now_carbon = Carbon::now();
+            $diff = $now_carbon->diffInDays($GregorianExpDate, false);
+            if($diff >= 0){
+                $parent_ids[] = $exp_date->parent_id;
+                $agencies[] = [
+                    'agecny_code' => GetAgencyController::getByKey($exp_date->parent_id, 'agency_code')?->value,
+                    'name' => GetAgencyController::getByKey($exp_date->parent_id, 'firstname')?->value,
+                    'province' => CityController::getById(GetAgencyController::getByKey($exp_date->parent_id, 'province')?->value)->province,
+                    'city' => CityController::getById(GetAgencyController::getByKey($exp_date->parent_id, 'province')?->value)->city,
+                    'address' => GetAgencyController::getByKey($exp_date->parent_id, 'address')?->value,
+                    'phone' => GetAgencyController::getByKey($exp_date->parent_id, 'phone')?->value,
+                    'mobile' => GetAgencyController::getByKey($exp_date->parent_id, 'mobile')?->value,
+                    'exp_date' => GetAgencyController::getByKey($exp_date->parent_id, 'exp_date')?->value,
+                ];
+            }
+        }
+        return json_encode($agencies);
+
     }
 
 }

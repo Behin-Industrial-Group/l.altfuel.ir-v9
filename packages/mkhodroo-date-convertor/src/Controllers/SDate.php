@@ -3,6 +3,8 @@
 namespace Mkhodroo\DateConvertor\Controllers;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Mkhodroo\MkhodrooProcessMaker\Models\PMCase;
@@ -25,6 +27,42 @@ class SDate extends Controller {
      * @param string $date
      * @return string
      */
+    public static function toArray($date)
+    {
+        if(str_contains($date, "-")){
+            return explode("-", $date);
+        }
+        if(str_contains($date, "/")){
+            return explode("/", $date);
+        }
+    }    
+
+    public static function gregorianToCarbon($date)
+    {
+        if(is_array($date)){
+            return Carbon::createFromFormat('Y-m-d', $date[0] . "-" . $date[1] . "-" . $date[2]);
+        }
+        if(str_contains($date, "-")){
+            return Carbon::createFromFormat('Y-m-d', $date);
+        }
+        if(str_contains($date, "/")){
+            return Carbon::createFromFormat('Y/m/d', $date);
+        }
+    }
+
+    public static function jalaliToGregorian($date, $return_array = true)
+    {
+        if( !is_array($date) ){
+            $date = self::toArray($date);
+        }
+        $date = Verta::jalaliToGregorian($date[0], $date[1], $date[2]);
+        if($return_array){
+            return $date;
+        }
+        $date = $date[0] . '-' . $date[1] . '-' . $date[2];
+        return $date;
+    }
+
     public function toShaDate($date = "2015-01-26",$outputLimiter = "/"){
         $date = $this->PersianToLatinNumber($date);
         $delimiter = substr($date,4,1);

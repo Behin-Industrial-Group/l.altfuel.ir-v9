@@ -233,3 +233,8 @@ Route::prefix('/bedehi')->group(function () {
     Route::post('/pay', [DebtController::class, 'pay'])->name('pay');
     Route::get('/callback', [DebtController::class, 'callback'])->name('callback');
 });
+
+
+Route::prefix('api/agencies')->group(function(){
+    Route::get('{type?}', [AgencyListController::class, 'getValidAgencies']);
+});
