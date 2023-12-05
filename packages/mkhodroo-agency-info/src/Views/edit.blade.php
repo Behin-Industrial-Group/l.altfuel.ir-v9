@@ -64,6 +64,7 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
 
 
 <script>
+    initial_view()
     function edit() {
         send_ajax_request(
             "{{ route('agencyInfo.edit') }}",
