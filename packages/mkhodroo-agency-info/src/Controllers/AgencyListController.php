@@ -95,7 +95,6 @@ class AgencyListController extends Controller
             }
         }
         return json_encode($agencies);
-        file_get_contents()
 
     }
 
