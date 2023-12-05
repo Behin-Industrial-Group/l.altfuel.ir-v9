@@ -83,7 +83,7 @@ class AgencyListController extends Controller
             if($diff >= 0){
                 $parent_ids[] = $exp_date->parent_id;
                 $agencies[] = [
-                    'agecny_code' => GetAgencyController::getByKey($exp_date->parent_id, 'agency_code')?->value,
+                    'agency_code' => GetAgencyController::getByKey($exp_date->parent_id, 'agency_code')?->value,
                     'name' => GetAgencyController::getByKey($exp_date->parent_id, 'firstname')?->value,
                     'province' => CityController::getById(GetAgencyController::getByKey($exp_date->parent_id, 'province')?->value)->province,
                     'city' => CityController::getById(GetAgencyController::getByKey($exp_date->parent_id, 'province')?->value)->city,
@@ -95,6 +95,7 @@ class AgencyListController extends Controller
             }
         }
         return json_encode($agencies);
+        file_get_contents()
 
     }
 
