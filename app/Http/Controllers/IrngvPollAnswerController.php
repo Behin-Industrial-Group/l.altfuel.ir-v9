@@ -45,7 +45,9 @@ class IrngvPollAnswerController extends Controller
     {
         if($r->created_from and $r->created_to){
             $created_from = Date::jalaliToGregorian($r->created_from, false);
+            $created_from = Date::gregorianToCarbon($created_from);
             $created_to = Date::jalaliToGregorian($r->created_to, false);
+            $created_to = Date::gregorianToCarbon($created_to);
             return $this->repository->getByCreatedAtRange($created_from, $created_to);
         }
         return [ 'data' => [] ];
