@@ -47,7 +47,7 @@
                 </script>
             </div>
         @endif
-
+        @include('VoipViews::first-online-avg')
         {{-- اطلاعات نظرسنجی تلفن ها --}}
         @foreach ($voip_poll_info as $key => $value)
             @if (auth()->user()->access('اطلاعات نظرسنجی تلفنها - ' . $value['name']))
