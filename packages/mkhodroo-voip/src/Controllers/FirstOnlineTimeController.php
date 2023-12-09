@@ -21,4 +21,15 @@ class FirstOnlineTimeController extends Controller
             'value' => $value
         ]);
     }
+
+    public static function avg(){
+        $rows = VoipInfo::get()->each(function($row){
+            $row->time = explode(" ", $row->value)[1];
+            $row->time = explode(":", $row->time);
+            $row->time = $row->time[0] + $row->time[1] / 60;
+        });
+        $data = explode(".", $rows->avg('time'));
+        return $data[0] . ':' . str_limit($data[1] *60, 2, '') ;
+
+    }
 }
