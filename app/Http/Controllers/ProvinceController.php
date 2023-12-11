@@ -19,8 +19,11 @@ class ProvinceController extends Controller
         return $this->model->get();
     }
 
-    public function GetCode($province)
+    public static function GetCode($province)
     {
-        return $this->model->where('Name', $province)->first()->code;
+        $province = str_replace("گ", "گ", $province);
+        $province = str_replace("ك", "ک", $province);
+        $province = str_replace("ي", "ی", $province);
+        return ProvinceModel::where('Name', $province)->first()?->code;
     }
 }

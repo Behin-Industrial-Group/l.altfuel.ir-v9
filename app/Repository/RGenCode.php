@@ -23,14 +23,19 @@ class RGenCode
     private $hidro;
     private $kamfeshar;
     private $provinceModel;
+    private $province_name;
+    private $province_code;
 
     public function __construct($province, $customer_type) {
         $this->province = $province;
+        $this->province_name = CityController::getById($this->province)->province;
+        $this->province_code = ProvinceController::GetCode($this->province_name);
         $this->province_ids = CityController::getProvinceIds($this->province);
         $this->parent_ids = AgencyInfo::where('key','customer_type')->where('value', $customer_type)->pluck('parent_id');
         $this->parent_ids = AgencyInfo::where('key','province')->whereIn('parent_id', $this->parent_ids)->whereIn('value', $this->province_ids)->pluck('parent_id');
         $this->agency_codes = AgencyInfo::where('key','agency_code')->whereIn('parent_id', $this->parent_ids)->pluck('value');
         $this->agency_codes = array_filter($this->agency_codes->toArray());
+
         $this->marakez = new MarakezModel();
         $this->hidro = new HidroModel();
         $this->kamfeshar = new KamFesharModel();
@@ -45,6 +50,7 @@ class RGenCode
 
     private function GetLastMarkazCode()
     {
+        $this->agency_codes = AgencyInfo::where('key','agency_code')->where('value','like', "$this->province_code%")->pluck('value');
         return Arr::last(array_map('intval', $this->agency_codes->toArray()));
         return (int) $this->marakez->where('province', $this->province)->orderBy('CodeEtehadie', 'desc')->first()->CodeEtehadie;
     }
@@ -52,7 +58,6 @@ class RGenCode
     public function Hidro()
     {
         $last_code = $this->GetLastHidroCode();
-
         if($last_code !== null){
             $no = $last_code +1;
             $no = $this->Length($no);
@@ -62,9 +67,8 @@ class RGenCode
 
         $date = (string)Verta();
         $year = explode("-", explode(" ", $date)[0])[0][2] . explode("-", explode(" ", $date)[0])[0][3];
-        $province_code = $this->GetProvinceCode();
 
-        $new_code = "H" . $province_code . $year . $no;
+        $new_code = "H" . $this->province_code . $year . $no;
 
         return $new_code;
     }
@@ -74,9 +78,13 @@ class RGenCode
     private function GetLastHidroCode()
     {
         // $all = $this->hidro->where('province', $this->province)->whereNotNull('CodeEtehadie')->get();
+        $this->agency_codes = AgencyInfo::where('key','agency_code')->where('value','like', "H$this->province_code%")->pluck('value');
         $all = Arr::sort($this->agency_codes);
         foreach($all as $a){
-            $no = $a[5] . $a[6];
+            $no = $a[5];
+            if(isset( $a[6])){
+                $no .=  $a[6];
+            }
             $b[] =  (int) $no;
         }
 
@@ -125,9 +133,13 @@ class RGenCode
 
     private function GetLastKamfesharCode()
     {
+        $this->agency_codes = AgencyInfo::where('key','agency_code')->where('value','like', "K$this->province_code%")->pluck('value');
         $all = Arr::sort($this->agency_codes);
         foreach($all as $a){
-            $no = $a[5] . $a[6];
+            $no = $a[5] ;
+            if(isset( $a[6])){
+                $no .=  $a[6];
+            }
             $b[] =  (int) $no;
         }
 

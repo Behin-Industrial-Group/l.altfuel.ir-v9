@@ -6,11 +6,11 @@
         <select name="parent_id" id="" class="select2">
             <option value=""></option>
             @foreach ($datas as $item)
-                <option value="{{ $item->id }}">{{ $item->key }} - {{ $item->value }}</option>
+                <option value="{{ $item->id }}">{{ $item->value }}</option>
             @endforeach
         </select>
-        <input type="text" name="key" id="" class="form-control" placeholder="{{__('key')}}">
-        <input type="text" name="value" id="" class="form-control" placeholder="{{__('value')}}">
+        {{__('value')}}:
+        <textarea type="text" name="value" id="" class="form-control" placeholder="{{__('value')}}"></textarea>
     </form>
     <button onclick="submit()">submit</button>
 

@@ -17,7 +17,11 @@ class GetController extends Controller
     }
     public static function getByParentId(Request $r){
         if($r->parent_id){
-            return HelpSupport::where('parent_id', $r->parent_id)->where('parent_id', '!=', DB::raw('id'))->get();
+            $res  = HelpSupport::where('parent_id', $r->parent_id)->where('parent_id', '!=', DB::raw('id'))->get();
+            if(count($res)){
+                return $res;
+            }
+            return HelpSupport::where('id', $r->parent_id)->first();
         }
         return HelpSupport::where('parent_id', DB::raw('id'))->get();
     }

@@ -18,13 +18,11 @@ class AddController extends Controller
     public static function add(Request $r){
         if($r->parent_id){
             $row = new HelpSupport();
-            $row->key = $r->key;
             $row->value = $r->value;
             $row->parent_id = $r->parent_id;
             $row->save();
         }else{
             $row = new HelpSupport();
-            $row->key = $r->key;
             $row->value = $r->value;
             $row->save();
             $row->parent_id = $row->id;

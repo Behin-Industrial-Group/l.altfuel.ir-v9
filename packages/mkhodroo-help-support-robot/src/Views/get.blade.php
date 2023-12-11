@@ -30,7 +30,7 @@
             fd,
             function(res) {
                 res.forEach(function(item) {
-                    main.append(new Option(item.key, item.id))
+                    main.append(new Option(item.value, item.id))
                 })
             }
         )
@@ -47,20 +47,21 @@
                 fd,
                 function(res) {
                     console.log(res);
-                    create_new_select(parent_id, res)
+                    if (res.id) {
+                        var answer = $('#answer');
+                        answer.html(`<div>پاسخ: ${res.value}</div>`)
+                    }else{
+                        create_new_select(parent_id, res)
+                    }
                 }
             )
         }
 
         function create_new_select(parent_id, res) {
-            if (res[0].key == 'پاسخ') {
-                var answer = $('#answer');
-                answer.html(`<div>${res[0].key}: ${res[0].value}</div>`)
-            } else {
                 form.append(`<select id="p-${parent_id}" class="select2"><option></option>`)
                 var sel = $(`#p-${parent_id}`)
                 res.forEach(element => {
-                    sel.append(new Option(element.key, element.id))
+                    sel.append(new Option(element.value, element.id))
                 });
                 form.append('</select>')
                 initial_view()
@@ -68,7 +69,6 @@
                     console.log($(this).val());
                     get($(this).val())
                 })
-            }
 
         }
     </script>
