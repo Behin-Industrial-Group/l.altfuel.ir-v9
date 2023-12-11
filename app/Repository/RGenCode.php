@@ -30,11 +30,7 @@ class RGenCode
         $this->province = $province;
         $this->province_name = CityController::getById($this->province)->province;
         $this->province_code = ProvinceController::GetCode($this->province_name);
-        $this->province_ids = CityController::getProvinceIds($this->province);
-        $this->parent_ids = AgencyInfo::where('key','customer_type')->where('value', $customer_type)->pluck('parent_id');
-        $this->parent_ids = AgencyInfo::where('key','province')->whereIn('parent_id', $this->parent_ids)->whereIn('value', $this->province_ids)->pluck('parent_id');
-        $this->agency_codes = AgencyInfo::where('key','agency_code')->whereIn('parent_id', $this->parent_ids)->pluck('value');
-        $this->agency_codes = array_filter($this->agency_codes->toArray());
+        
 
         $this->marakez = new MarakezModel();
         $this->hidro = new HidroModel();
