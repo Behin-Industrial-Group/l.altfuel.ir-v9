@@ -65,11 +65,11 @@ class HidroRegController extends Controller
     {
         $parent_id = AgencyInfo::where('key', 'simfa_code')->where('value', $simfaCode)->first()?->parent_id;
         if(!$parent_id){
-            return response("Agency Does Not Found", 404);
+            return response(trans("Agency Does Not Found"), 404);
         }
         $parent_id = AgencyInfo::where('key', 'legal_national_id')->where('value', $legalNationalId)->where('parent_id', $parent_id)->first()?->parent_id;
         if(!$parent_id){
-            return response("Agency Does Not Found", 404);
+            return response(trans("Agency Does Not Found"), 404);
         }
         $ref_id = AgencyInfo::where('key', 'debt1_ref_id')->where('parent_id', $parent_id)->first()?->value;
         if($ref_id){
