@@ -162,11 +162,11 @@
         </script>
 
         <script>
-            $('form').keypress(function(event) {
-                if (event.keyCode == 13) {
-                    event.preventDefault();
-                }
-            });
+            // $('form').keypress(function(event) {
+            //     if (event.keyCode == 13) {
+            //         event.preventDefault();
+            //     }
+            // });
             
 
         </script>
