@@ -7,12 +7,12 @@
             <table class="table table-striped" id="">
                 <tr>
                     <td>شماره موبایل:</td>
-                    <td><input type="text" name="to" id="" class="form-control"></td>
+                    <td><input type="text" name="to" id="" class="form-control" placeholder="{{__('mobile')}}"></td>
                 </tr>
                 <tr>
                     <td>متن پیامک: </td>
                     <td>
-                        <textarea name="msg" id="" class="form-control" cols="30" rows="10" ></textarea>
+                        <textarea name="msg" id="" class="form-control" style="border: none" rows="4" placeholder="متن پیام"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -25,9 +25,6 @@
 
 @section('script')
     <script>
-        
-
-
         $('#send_newpass_sms').click(function(){
             $('#loading').show();
             var fd = $('#sms-form').serialize();
