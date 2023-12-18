@@ -19,6 +19,7 @@ use App\CustomClasses\Access;
 use SoapClient;
 use App\Enums\EnumsEntity as Enum;
 use Illuminate\Support\Facades\Auth;
+use Mkhodroo\AgencyInfo\Controllers\GetAgencyController;
 
 class InsController extends Controller
 {
@@ -112,22 +113,23 @@ class InsController extends Controller
             if(!is_null($ins)){
                 return "این کد ملی در کارگاه $ins->markaz_code تخصیص داده شده است";
             }
-
-            $g = MarakezModel::where('CodeEtehadie', $request->codeEtehadie)->first();
-            if(!$g){
+            $g = GetAgencyController::getByKeyValue('agency_code', $request->codeEtehadie);
+            $agency_code = $g->where('key', 'agency_code')->first()->value;
+            $guild_number = $g->where('key', 'guild_number')->first()->value;
+            if(!$agency_code){
                 return "این کد مرکز وجود ندارد ";
             }
 
-            if(is_null($g->GuildNumber) || empty($g->GuildNumber)){
+            if(is_null($guild_number) || empty($guild_number)){
                 return "این مرکز شناسه صنفی ندارد / شناسه صنفی این مرکز در سامانه ثبت نشده است";
             }
 
-            $markaz = MarakezModel::where('CodeEtehadie', $request->codeEtehadie)->where('FinGreen', '!=', "ok")->first();
-            if(!is_null($markaz)){
-                return "تسویه مالی این کارگاه در سامانه ثبت نشده است. ابتدا مرکز باید با بخش مالی اتحادیه هماهنگ کند";
-            }
+            // $markaz = MarakezModel::where('CodeEtehadie', $request->codeEtehadie)->where('FinGreen', '!=', "ok")->first();
+            // if(!is_null($markaz)){
+            //     return "تسویه مالی این کارگاه در سامانه ثبت نشده است. ابتدا مرکز باید با بخش مالی اتحادیه هماهنگ کند";
+            // }
 
-            $markaz = AsignInsModel::where('markaz_code', $request->markaz_code)->where('asign', '1')->first();
+            $markaz = AsignInsModel::where('markaz_code', $agency_code)->where('asign', '1')->first();
             if(!is_null($markaz)){
                 return "برای این مرکز قبلا بازرس تخصیص داده شده است";
             }
