@@ -71,6 +71,7 @@ class AgencyListController extends Controller
 
     public static function getValidAgencies($type = 'agency'){
         $parent_ids = AgencyInfo::where('key', 'customer_type')->where('value', $type)->pluck('id');
+        $parent_ids = AgencyInfo::whereIn('parent_id', $parent_ids)->where('key', 'enable')->where('value', '1')->pluck('parent_id');
         $exp_dates = AgencyInfo::whereIn('parent_id', $parent_ids)->where('key', 'exp_date')->whereNotNull('value')->where('value', '!=', '')->get();
         $parent_ids = [];
         $sDate = new SDate();
