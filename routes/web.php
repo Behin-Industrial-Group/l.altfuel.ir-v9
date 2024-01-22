@@ -59,14 +59,17 @@ Route::get('tst', function () {
 });
 
 Route::get('test', function (SMSController $sms) {
-    $excel = SimpleXLSX::parse(public_path('sms.xlsx'));
+    $excel = SimpleXLSX::parse(public_path('raste.xlsx'));
     $rows = $excel->rows();
-    for ($i = 1; $i < count($rows); $i++) {
-        $body = "مدیر محترم مرکز خدمات کد @code،  با سلام، پیرو پیامک ارسالی قبلی جهت ارسال مدارک خودرو با شاسی @shasi، هنوز مدارک خودرو دریافت نشده است. لطفا تا ۴۸ ساعت آینده نسبت به ارسال مدارک از طریق تیکت، اقدام نمایید‌. باتوجه به اهمیت بررسی این مدارک، در صورت عدم ارسال مدارک، اقدام مقتضی توسط اتحادیه صورت خواهد گرفت. 
-        اتحادیه کشوری سوختهای جایگزین";
-        $body = str_replace(['@code', '@shasi'], [$rows[$i][14], $rows[$i][6]], $body);
-        $mobile = $rows[$i][16];
-        // echo $mobile . '<br>';
+    echo "<pre>";
+    for ($i = 0; $i < count($rows); $i++) {
+        $raste = $rows[$i][6];
+        $str = '';
+        if(str_contains($raste, "خودرو" )){
+            $str .= "khodro";
+        }
+        echo "$raste \t $str <br>";
+        // sleep(3);
         // $sms->send($mobile, $body);
     }
 });

@@ -25,15 +25,24 @@ class ApiAuth
     {
         // Log::info($request->ip());
         $user = User::where('valid_ip', $request->ip())->first();
-        if(!$user){
+        Log::channel('irngv_poll_api_activity')->info("Request Received From IP=" . $request->ip());
+        if (!$user) {
+            Log::channel('irngv_poll_api_activity')->info(EnumsEntity::irngv_api_msg_code[6]);
+            Log::channel('irngv_poll_api_activity')->info("-----------END OF LOG-----------");
             return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[6], 403, [], 6);
         }
 
-        if($user->email != $request->username){
+        Log::channel('irngv_poll_api_activity')->info("Received username=". $request->username);
+        if ($user->email != $request->username) {
+            Log::channel('irngv_poll_api_activity')->info(EnumsEntity::irngv_api_msg_code[7]);
+            Log::channel('irngv_poll_api_activity')->info("-----------END OF LOG-----------");
             return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[7], 403, [], 7);
         }
 
-        if(!Hash::check($request->password, $user->password)){
+        Log::channel('irngv_poll_api_activity')->info("Received password=". $request->password);
+        if (!Hash::check($request->password, $user->password)) {
+            Log::channel('irngv_poll_api_activity')->info(EnumsEntity::irngv_api_msg_code[7]);
+            Log::channel('irngv_poll_api_activity')->info("-----------END OF LOG-----------");
             return $this->jsonResponse(EnumsEntity::irngv_api_msg_code[7], 403, [], 7);
         }
         Auth::loginUsingId($user->id);

@@ -99,6 +99,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'irngv_poll_api_activity' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/irngv/poll_api_activity.log'),
+            'level' => 'info'
+        ]
     ],
 
 ];
