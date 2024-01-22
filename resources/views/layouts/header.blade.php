@@ -16,7 +16,7 @@ use App\CustomClasses\Access;
       </li> --}}
         @if (auth()->user()->access('send-sms'))
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ url('admin/send-sms') }}" class="nav-link">
+                <a href="{{ url('admin/send-sms') }}" class="nav-link btn btn-default">
                     ارسال پیامک
                 </a>
             </li>
@@ -24,7 +24,7 @@ use App\CustomClasses\Access;
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    {{-- <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="جستجو" aria-label="Search">
             <div class="input-group-append">
@@ -33,12 +33,12 @@ use App\CustomClasses\Access;
                 </button>
             </div>
         </div>
-    </form>
+    </form> --}}
 
     <!-- Right navbar links -->
     <ul class="navbar-nav mr-auto">
         <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="fa fa-comments-o"></i>
                 <span class="badge badge-danger navbar-badge">3</span>
@@ -46,10 +46,10 @@ use App\CustomClasses\Access;
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
                 <a href="{{ url('admin/messages/list') }}" class="dropdown-item dropdown-footer">نمایش تماام پیام ها</a>
             </div>
-        </li>
+        </li> --}}
         <li class="">
             <a class="" href="{{ route('logout') }}">
-                <button class="btn btn-danger">خروج</button>
+                <i class="fa fa-power-off"></i>
             </a>
         </li>
     </ul>
