@@ -41,7 +41,7 @@ return [
             'fa_name' => 'گزارش',
             'submenu' => [
                 'issues' => [ 'fa_name' => 'تیکت', 'route-name' => '', 'route-url' => 'admin/report/ticket' ],
-                'call' => [ 'fa_name' => 'تماس', 'route-name' => '', 'route-url' => 'admin/report/call' ],
+                'call' => [ 'fa_name' => 'تماس', 'route-name' => 'voip.getCallReportByDate', 'route-url' => '' ],
                 'guild' => [ 'fa_name' => 'پروانه کسب', 'route-name' => '', 'route-url' => 'admin/report/license' ],
                 'irngv' => [ 'fa_name' => 'نظرسنجی irngv', 'route-name' => 'report.irngv.poll', 'route-url' => '' ],
             ]
