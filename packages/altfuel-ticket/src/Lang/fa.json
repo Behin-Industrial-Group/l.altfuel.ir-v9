@@ -1,0 +1,7 @@
+{
+    "success" : "انجام شد",
+    "change-catagory-text" : "تیکت شما به دسته بندی :parent_cat زیرمجموعه :child_cat منتقل شد.",
+    "This ticket is closed" : "این تیکت بسته شده است",
+    "Number" : "شماره",
+    "Unfortunately Generated Code Is Not Unique. Contact Support": "کد تولید شده یکتا نیست. لطفا با پشتیبانی تماس بگیرید"
+}

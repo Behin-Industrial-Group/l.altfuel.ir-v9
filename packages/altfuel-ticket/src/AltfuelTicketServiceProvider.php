@@ -19,6 +19,7 @@ class AltfuelTicketServiceProvider extends ServiceProvider{
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
         $this->loadRoutesFrom(__DIR__. '/routes.php');
         $this->loadViewsFrom(__DIR__.'/Views', 'ATView');
+        $this->loadJsonTranslationsFrom(__DIR__. '/Lang/');
         // $this->loadMigrationsFrom(__DIR__ .'src/migrations');
     }
 }
