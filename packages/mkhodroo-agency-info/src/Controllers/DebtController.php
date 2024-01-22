@@ -41,7 +41,9 @@ class DebtController extends Controller
         $debts = [];
         foreach(config("agency_info.customer_type.$customer_type.debts") as $row){
             //IF DEBT DOESNT HAS REF ID 
-            if(!AgencyInfo::where('parent_id', $parent_id)->where('key', $row[2])->first()?->value){
+            if(!AgencyInfo::where('parent_id', $parent_id)->where('key', $row[2])->first()?->value &&
+                AgencyInfo::where('parent_id', $parent_id)->where('key', $row[0])->where('value', '!=', '')->first()?->value
+            ){
                 $debts[] = [
                     'id' => AgencyInfo::where('parent_id', $parent_id)->where('key', $row[0])->first()?->id,
                     'title' => AgencyInfo::where('parent_id', $parent_id)->where('key', $row[3])->first()?->value,
