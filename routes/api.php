@@ -23,8 +23,8 @@ Route::prefix('/hamayesh/')->group(function(){
 });
 
 Route::prefix('irngv')->group(function(){
-    Route::any('get-token', [IrngvApiController::class, 'get_token'])->middleware('api_auth');
-    Route::any('poll-link', [IrngvApiController::class, 'send_sms'])->middleware('api_access');
+    Route::post('get-token', [IrngvApiController::class, 'get_token'])->middleware('api_auth');
+    Route::post('poll-link', [IrngvApiController::class, 'send_sms'])->middleware('api_access');
 });
 
 Route::name('blog.')->prefix('blog')->group(function(){
