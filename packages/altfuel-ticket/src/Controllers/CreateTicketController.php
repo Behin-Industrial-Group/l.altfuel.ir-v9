@@ -30,6 +30,8 @@ class CreateTicketController extends Controller
                 'status' => config('ATConfig.status.new')
             ]);
         }
+        $status = $this->changeStatus($ticket->cat_id);
+        $ticket->status = $status ? $status : $ticket->status;
         $ticket->save();
         $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->ticket_id): '';
 
@@ -47,10 +49,9 @@ class CreateTicketController extends Controller
     }
 
     function changeStatus($cat_id, $status = '') {
-        if(CatagoryActor::where('cat_id', $cat_id)->where('user_id', Auth::id())->first()){
-            return config('ATConfig.status.answered');
-        }else{
+        if(!CatagoryActor::where('cat_id', $cat_id)->where('user_id', Auth::id())->first()){
             return config('ATConfig.status.new');
         }
+        return null;
     }
 }
