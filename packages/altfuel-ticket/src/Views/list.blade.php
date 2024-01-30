@@ -74,7 +74,12 @@
                         return data
                     }
                 }},
-                {data: 'updated_at'}
+                {data: 'updated_at', render:function(data){
+                    datetime = new Date(data);
+                    date = datetime.toLocaleDateString('fa-IR');
+                    time = datetime.toLocaleTimeString('fa-IR');
+                    return '<span dir="auto" style="float: left">' + date + ' ' + time + '</span>';
+                }}
             ],
             null,
             [4 ,'asc']
