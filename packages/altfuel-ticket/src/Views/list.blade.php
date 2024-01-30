@@ -58,7 +58,22 @@
                 }},
                 {data: 'user'},
                 {data: 'catagory.name'},
-                {data: 'status'},
+                {data: 'status', render: function(data){
+                    if(data == "{{config('ATConfig.status.new')}}"){
+                        return '1-' + data
+                    }
+                    else if(data == "{{config('ATConfig.status.in_progress')}}"){
+                        return '2-' + data
+                    }
+                    else if(data == "{{config('ATConfig.status.answered')}}"){
+                        return '3-' + data
+                    }
+                    else if(data == "{{config('ATConfig.status.closed')}}"){
+                        return '4-' + data
+                    }else{
+                        return data
+                    }
+                }},
                 {data: 'updated_at'}
             ],
             null,
