@@ -25,7 +25,7 @@
             <div class="direct-chat-text">
                 <div>
                     <span class="direct-chat-name">{{ $comment->user()->display_name ?? '' }}</span>
-                    <span class="direct-chat-timestamp float-left">{{ $comment->created_at }}</span>
+                    <span class="direct-chat-timestamp float-left">{{ verta($comment->created_at) }}</span>
                 </div>
 
                 <hr>
