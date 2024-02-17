@@ -72,6 +72,7 @@ class DynaFormController extends Controller
         echo "<form action='javascript:void(0)' id='main-form' enctype='multipart/form-data'>";
         echo "<div class='row' style='border-bottom: solid 1px black'>
                 <h4>$caseTitle - $processTitle</h4>
+                <button class='btn btn-danger' style='flex: auto; text-align: left' onclick='show_process_map(`".$caseId."`)'>".trans('Process Map')."</button>
                 <button type='button' style='flex: auto; text-align: left' class='close' data-dismiss='modal'
                     aria-hidden='true'>&times;</button>
             </div>";
