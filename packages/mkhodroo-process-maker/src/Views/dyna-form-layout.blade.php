@@ -55,6 +55,17 @@
             }
         )
     }
+
+    function show_process_map(caseId){
+        url = "{{route('MkhodrooProcessMaker.api.getCaseProcessMap', ['caseId' =>'caseId'])}}";
+        url = url.replace('caseId', caseId);
+        send_ajax_get_request(
+            url,
+            function(data){
+                open_admin_modal_with_data(data)
+            }
+        )
+    }
 </script>
 
 @if (config('pm_config.debug'))
