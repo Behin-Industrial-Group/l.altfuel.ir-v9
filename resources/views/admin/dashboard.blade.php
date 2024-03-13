@@ -49,7 +49,7 @@
         @endif
         @include('VoipViews::first-online-avg')
         {{-- اطلاعات نظرسنجی تلفن ها --}}
-        @foreach ($voip_poll_info as $key => $value)
+        {{-- @foreach ($voip_poll_info as $key => $value)
             @if (auth()->user()->access('اطلاعات نظرسنجی تلفنها - ' . $value['name']))
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-primary">
@@ -80,17 +80,17 @@
                     </div>
                 </div>
             @endif
-        @endforeach
-        <script>
+        @endforeach --}}
+        {{-- <script>
             function getPeerPollInfo(queue_num) {
                 url = '{{ route('voip.getPeerPollInfo', ['queue_num' => 'queue_num']) }}';
                 url = url.replace('queue_num', queue_num);
                 open_admin_modal(url)
             }
-        </script>
+        </script> --}}
 
         {{-- گزارش تماس ها --}}
-        @if (auth()->user()->access('گزارش تماس'))
+        {{-- @if (auth()->user()->access('گزارش تماس'))
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
@@ -120,7 +120,7 @@
                 
                 open_admin_modal(url)
             }
-        </script>
+        </script> --}}
 
 
 
