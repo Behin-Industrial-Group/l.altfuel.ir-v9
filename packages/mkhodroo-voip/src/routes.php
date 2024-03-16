@@ -15,4 +15,5 @@ Route::name('voip.')->prefix('voip')->middleware(['web', 'auth', 'access'])->gro
     Route::get('test', function(){
         return view('VoipViews::webphone.webphone');
     });
+    Route::get('recorded-list', [VoipController::class, 'recordedList'])->name('recordedList');
 });
