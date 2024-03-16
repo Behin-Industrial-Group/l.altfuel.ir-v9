@@ -139,4 +139,8 @@ class VoipController extends Controller
             ['result' => $result]
         );
     }
+
+    function softphone() {
+        return view('VoipViews::softphone');
+    }
 }
