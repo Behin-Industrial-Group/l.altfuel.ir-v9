@@ -14,10 +14,13 @@ class SmsTemplateController extends Controller
             case "123456";
                 return view('SmsTempView::test');
                 break;
+            case "14030101";
+                return view('SmsTempView::happy-new-year');
+                break;
         }
     }
 
-    public static function send(Request $r, $sms_id, $to, $params = null, SendSmsController $sms ) {
+    public static function send( SendSmsController $sms ,$sms_id, $to, $params = null) {
         $body = self::getViewById($sms_id); 
         if(!$body){
             return response("no view founded",400);

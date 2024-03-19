@@ -23,6 +23,9 @@ class VoipServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/config.php' => config_path('voip-config.php')
+        ]);
         $this->loadMigrationsFrom(__DIR__. '/Migrations');
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadViewsFrom(__DIR__. '/Views', 'VoipViews');

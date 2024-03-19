@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Mkhodroo\Voip\Controllers\AMIController;
+use Mkhodroo\Voip\Controllers\CallHistoryController;
 use Mkhodroo\Voip\Controllers\FirstOnlineTimeController;
 use Mkhodroo\Voip\Controllers\VoipController;
 
@@ -13,8 +15,12 @@ Route::name('voip.')->prefix('voip')->middleware(['web', 'auth', 'access'])->gro
     Route::get('first-online-avg', [FirstOnlineTimeController::class, 'avg'])->name('firstOnlineAvg');
 
     Route::get('test', function(){
-        return view('VoipViews::webphone.webphone');
+        return AMIController::test();
     });
     Route::get('softphone', [VoipController::class, 'softphone'])->name('softphone');
     Route::get('recorded-list', [VoipController::class, 'recordedList'])->name('recordedList');
+    Route::name('callHistory.')->prefix('call-history')->group(function(){
+        Route::post('create', [CallHistoryController::class, 'create'])->name('create');
+        Route::post('update', [CallHistoryController::class, 'update'])->name('update');
+    });
 });
