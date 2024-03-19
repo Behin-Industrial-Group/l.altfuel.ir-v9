@@ -46,25 +46,25 @@
         <button class="col-sm-4 btn btn-default" onclick="dial('*')">*</button>
         <button class="col-sm-4 btn btn-default" onclick="dial(0)">0</button>
         <button class="col-sm-4 btn btn-default" onclick="dial('#')">#</button>
-        <button id="button_click2call" style="width: 100%;" class="btn btn-success" onclick="ButtonOnclick()">{{__("Call")}}</button>
+        <button id="button_click2call" style="width: 100%;" class="btn btn-success"
+            onclick="ButtonOnclick()">{{ __('Call') }}</button>
     </div>
     <iframe allow="microphone; camera; autoplay" style="display:none" height="0" width="0" id="loader"></iframe>
 
     <script>
-        function dial(char){
-            $('#callto').val( $('#callto').val() + char )
+        function dial(char) {
+            $('#callto').val($('#callto').val() + char)
         }
         var btnc2c = document.getElementById("button_click2call");
-        
-        
-        function ButtonOnclick()
-        {
-            if (webphone_api.isincall() === true){
+
+
+        function ButtonOnclick() {
+            if (webphone_api.isincall() === true) {
                 webphone_api.hangup();
-                btnc2c.innerHTML = '{{__("Call")}}';
-            }else{
+                btnc2c.innerHTML = '{{ __('Call') }}';
+            } else {
                 webphone_api.call($('#callto').val());
-                btnc2c.innerHTML = '{{__("Hangup")}}';
+                btnc2c.innerHTML = '{{ __('Hangup') }}';
             }
         }
     </script>
@@ -153,23 +153,14 @@
                     document.getElementById('caller_info_name').innerHTML = peername;
                     document.getElementById('caller_info_line').innerHTML = line;
                     send_sms(peerdisplayname)
-                    var fd = new FormData();
-                    fd.append('from', peerdisplayname);
-                    fd.append('status', "{{ config('voip-config.call-status.no-answer') }}")
-                    send_ajax_formdata_request(
-                        "{{ route('voip.callHistory.create') }}",
-                        fd,
-                        function(res) {
-                            $('#call_history_id').html(res.id)
-                        }
-                    )
+
                 }
             }
 
             // end of a call, even if it wasn't successfull
             if (event === 'disconnected') {
                 display_element_when_disconnected()
-                btnc2c.innerHTML = '{{__("Call")}}';
+                btnc2c.innerHTML = '{{ __('Call') }}';
 
             }
         });
@@ -186,24 +177,37 @@
             document.getElementById('end_time').innerHTML = '';
         }
 
-        function send_sms(number){
-            if(number[0] == '9' && number[1]== '8' && number[2] =='9'){
+        function send_sms(number) {
+            if (number[0] == '9' && number[1] == '8' && number[2] == '9') {
                 //its mobile number
                 number = number.substring(1);
                 number = number.substring(1);
                 number = '0' + number;
                 console.log(number);
-                url = '{{route("smsTemplate.send", ["sms_id" => "14030101", "to" => "number"])}}';
+                url = '{{ route('smsTemplate.send', ['sms_id' => '14030101', 'to' => 'number']) }}';
                 url = url.replace("number", number);
                 console.log(url)
                 send_ajax_get_request(
                     url,
-                    function(res){
+                    function(res) {
                         console.log('sms sended')
                     }
                 )
             }
         }
-    </script>
 
+
+        function create_history() {
+            var fd = new FormData();
+            fd.append('from', peerdisplayname);
+            fd.append('status', "{{ config('voip-config.call-status.no-answer') }}")
+            send_ajax_formdata_request(
+                "{{ route('voip.callHistory.create') }}",
+                fd,
+                function(res) {
+                    $('#call_history_id').html(res.id)
+                }
+            )
+        }
+    </script>
 @endsection
