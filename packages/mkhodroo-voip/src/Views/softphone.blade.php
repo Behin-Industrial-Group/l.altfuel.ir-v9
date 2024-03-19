@@ -154,7 +154,7 @@
                     document.getElementById('caller_info_line').innerHTML = line;
                     send_sms(peerdisplayname)
                     var fd = new FormData();
-                    fd.append('from', peername);
+                    fd.append('from', peerdisplayname);
                     fd.append('status', "{{ config('voip-config.call-status.no-answer') }}")
                     send_ajax_formdata_request(
                         "{{ route('voip.callHistory.create') }}",
