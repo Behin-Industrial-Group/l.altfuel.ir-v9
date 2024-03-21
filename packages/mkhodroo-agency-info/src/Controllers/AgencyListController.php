@@ -78,7 +78,7 @@ class AgencyListController extends Controller
         $sDate = new SDate();
         $agencies = [];
         foreach($exp_dates as $exp_date){
-            Log::info("get valid agencies. -> id: $exp_date->id");
+            // Log::info("get valid agencies. -> id: $exp_date->id");
             $exp = SDate::jalaliToGregorian($exp_date->value);
             $GregorianExpDate = SDate::gregorianToCarbon($exp);
             $now_carbon = Carbon::now();
