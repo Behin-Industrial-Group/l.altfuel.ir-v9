@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\Cities\Controllers\CityController;
 use Mkhodroo\DateConvertor\Controllers\SDate;
@@ -77,6 +78,7 @@ class AgencyListController extends Controller
         $sDate = new SDate();
         $agencies = [];
         foreach($exp_dates as $exp_date){
+            Log::info("get valid agencies. -> id: $exp_date->id");
             $exp = SDate::jalaliToGregorian($exp_date->value);
             $GregorianExpDate = SDate::gregorianToCarbon($exp);
             $now_carbon = Carbon::now();

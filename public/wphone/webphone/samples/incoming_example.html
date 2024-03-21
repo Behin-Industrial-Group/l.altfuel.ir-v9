@@ -6,6 +6,9 @@
     <meta charset="utf-8" />
     <title>Incoming Call Example</title>
     <script src="../webphone_api.js?jscodeversion=732"></script>
+    <script src="../../../dashboard/plugins/jquery/jquery.min.js"></script>
+    <script src='../../../js/ajax.js'></script>
+
 </head>
 <body>
     <div>This is the simplest example to demonstrate how to handle an incoming call and display the caller's name.<br />Don't use this in production as it is not a complete implementation.<br /><br /><br /></div>
@@ -25,9 +28,9 @@
         {
             if (state === 'loaded')
             {
-                webphone_api.setparameter('serveraddress', 'YOURSIPDOMAIN.COM');
-                webphone_api.setparameter('username', 'USERNAME');
-                webphone_api.setparameter('password', 'PASSWORD');
+                webphone_api.setparameter('serveraddress', 'voip.altfuel.ir');
+                webphone_api.setparameter('username', '113');
+                webphone_api.setparameter('password', '2418a355572fc2bf16b0b67b50bbf540');
                 
                 webphone_api.start();
             }
@@ -67,6 +70,7 @@
                     // means it's icoming call
                     document.getElementById('icoming_call_layout').style.display = 'block'; // display Accept, Reject buttons
                     document.getElementById('caller_info').innerHTML = peerdisplayname + ' - ' + peername;
+                    send_sms(peername)
                 }
             }
             
@@ -77,6 +81,29 @@
                 document.getElementById('caller_info').innerHTML = '';
             }
         });
+
+        function send_sms(number) {
+            if (number[0] == '9' && number[1] == '8' && number[2] == '9') {
+                //its mobile number
+                number = number.substring(1);
+                number = number.substring(1);
+                number = '0' + number;
+                console.log(number);
+                url = `http://localhost/l.altfuel.ir_v9/sms-template/14030101/${number}`;
+                url = url.replace("number", number);
+                console.log(url)
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", url, false ); // false for synchronous request
+                xmlHttp.send( null );
+
+                // send_ajax_get_request(
+                //     url,
+                //     function(res) {
+                //         console.log('sms sended')
+                //     }
+                // )
+            }
+        }
     </script>
 </body>
 </html>

@@ -14,7 +14,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ url('public/dashboard/plugins/font-awesome/css/font-awesome.min.css')  . '?' . config('app.version') }}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    {{-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/adminlte.min.css')  . '?' . config('app.version') }}">
     <!-- Date Picker -->

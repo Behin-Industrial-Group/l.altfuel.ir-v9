@@ -4,7 +4,7 @@
 @endsection
 @section('script_in_head')
     <meta charset="utf-8" />
-    <script src="{{ url('public/webphone/webphone_api.js?jscodeversion=732') }}"></script>
+    <script src="{{ url('public/webphone/webphone_api.js?jscodeversion=733') }}"></script>
 @endsection
 @section('content')
     <div>This is the simplest example to demonstrate how to handle an incoming call and display the caller's
