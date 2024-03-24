@@ -236,5 +236,6 @@ Route::prefix('/bedehi')->group(function () {
 
 
 Route::prefix('api/agencies')->group(function(){
+    Route::get('get/{code}', [AgencyListController::class, 'getByNidOrCode']);
     Route::get('{type?}', [AgencyListController::class, 'getValidAgencies']);
 });

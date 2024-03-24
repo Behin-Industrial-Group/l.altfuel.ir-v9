@@ -101,4 +101,20 @@ class AgencyListController extends Controller
 
     }
 
+    public static function getByNidOrCode($code){
+        $parent_ids = AgencyInfo::where('key', 'agency_code')->where('value', $code)->pluck('parent_id');
+        if(!$parent_ids){
+            $parent_ids = AgencyInfo::where('key', 'national_id')->where('value', $code)->pluck('parent_id');
+        }
+        $agency = AgencyInfo::whereIn('parent_id', $parent_ids)->get();
+        if(count($agency)){
+            $firstname = $agency->where('key', 'firstname')->first()->value;
+            $lastname = $agency->where('key', 'lastname')->first()?->value;
+
+            return $firstname .' '. $lastname .' ('. $code . ')';
+        }
+        return false;
+
+    }
+
 }
