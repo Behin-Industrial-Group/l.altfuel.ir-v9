@@ -102,7 +102,7 @@ class AgencyListController extends Controller
     }
 
     public static function getByNidOrCode($code){
-        $parent_ids = AgencyInfo::where('key', 'agency_code')->where('value', $code)->pluck('parent_id');
+        $parent_ids = AgencyInfo::where('key', 'agency_code')->where('value', 'like', "%$code%")->pluck('parent_id');
         if(!$parent_ids){
             $parent_ids = AgencyInfo::where('key', 'national_id')->where('value', $code)->pluck('parent_id');
         }
