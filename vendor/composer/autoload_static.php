@@ -117,6 +117,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             'Monolog\\' => 8,
             'Mkhodroo\\Voip\\' => 14,
+            'Mkhodroo\\VacationRequest\\' => 25,
             'Mkhodroo\\UserRoles\\' => 19,
             'Mkhodroo\\SmsTemplate\\' => 21,
             'Mkhodroo\\PMReport\\' => 18,
@@ -408,6 +409,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\Voip\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src',
+        ),
+        'Mkhodroo\\VacationRequest\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/vacation-request/src',
         ),
         'Mkhodroo\\UserRoles\\' => 
         array (
@@ -3651,13 +3656,19 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Livewire\\WithPagination' => __DIR__ . '/..' . '/livewire/livewire/src/WithPagination.php',
         'Mkhodroo\\AgencyInfo\\AgencyInfoProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/AgencyInfoProvider.php',
         'Mkhodroo\\AgencyInfo\\Controllers\\AgencyController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/AgencyController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\AgencyDebtPaymentController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/AgencyDebtPaymentController.php',
         'Mkhodroo\\AgencyInfo\\Controllers\\AgencyDocsController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/AgencyDocsController.php',
         'Mkhodroo\\AgencyInfo\\Controllers\\AgencyListController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/AgencyListController.php',
         'Mkhodroo\\AgencyInfo\\Controllers\\CreateAgencyController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/CreateAgencyController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\DebtController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/DebtController.php',
         'Mkhodroo\\AgencyInfo\\Controllers\\FileController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/FileController.php',
         'Mkhodroo\\AgencyInfo\\Controllers\\GetAgencyController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/GetAgencyController.php',
+        'Mkhodroo\\AgencyInfo\\Controllers\\HtmlCreatorController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/HtmlCreatorController.php',
         'Mkhodroo\\AgencyInfo\\Controllers\\SaveInfoController' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Controllers/SaveInfoController.php',
+        'Mkhodroo\\AgencyInfo\\Models\\AgencyDebtPayment' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Models/AgencyDebtPayment.php',
         'Mkhodroo\\AgencyInfo\\Models\\AgencyInfo' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Models/AgencyInfo.php',
+        'Mkhodroo\\AgencyInfo\\Requests\\AgencyDocRequest' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Requests/AgencyDocRequest.php',
+        'Mkhodroo\\AgencyInfo\\Requests\\AgencyInfoRequest' => __DIR__ . '/../..' . '/packages/mkhodroo-agency-info/src/Requests/AgencyInfoRequest.php',
         'Mkhodroo\\AltfuelTicket\\AltfuelTicketServiceProvider' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/AltfuelTicketServiceProvider.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\AddTicketCommentAttachmentController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/AddTicketCommentAttachmentController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\AddTicketCommentController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/AddTicketCommentController.php',
@@ -3668,6 +3679,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Controllers\\ReportController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/ReportController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\ShowTicketController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/ShowTicketController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\TicketCatagoryController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketCatagoryController.php',
+        'Mkhodroo\\AltfuelTicket\\Controllers\\TicketStatusController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketStatusController.php',
         'Mkhodroo\\AltfuelTicket\\Models\\CatagoryActor' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/CatagoryActor.php',
         'Mkhodroo\\AltfuelTicket\\Models\\CommentAttachments' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/CommentAttachments.php',
         'Mkhodroo\\AltfuelTicket\\Models\\Ticket' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/Ticket.php',
@@ -3699,6 +3711,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\PMUserController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/PMUserController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\PMVacationController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/PMVacationController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\ProcessController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/ProcessController.php',
+        'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\ProcessMapController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/ProcessMapController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\RestApiController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/RestApiController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\RouteCaseController' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/RouteCaseController.php',
         'Mkhodroo\\MkhodrooProcessMaker\\Controllers\\SDate' => __DIR__ . '/../..' . '/packages/mkhodroo-process-maker/src/Controllers/SDate.php',
@@ -3730,8 +3743,12 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\UserRoles\\Models\\Method' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/Method.php',
         'Mkhodroo\\UserRoles\\Models\\Role' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/Role.php',
         'Mkhodroo\\UserRoles\\UserRolesServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/UserRolesServiceProvider.php',
+        'Mkhodroo\\VacationRequest\\VacationRequestProvider' => __DIR__ . '/../..' . '/packages/vacation-request/src/VacationRequestProvider.php',
+        'Mkhodroo\\Voip\\Controllers\\AMIController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/AMIController.php',
+        'Mkhodroo\\Voip\\Controllers\\CallHistoryController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/CallHistoryController.php',
         'Mkhodroo\\Voip\\Controllers\\FirstOnlineTimeController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/FirstOnlineTimeController.php',
         'Mkhodroo\\Voip\\Controllers\\VoipController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/VoipController.php',
+        'Mkhodroo\\Voip\\Models\\CallHistory' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Models/CallHistory.php',
         'Mkhodroo\\Voip\\Models\\VoipInfo' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Models/VoipInfo.php',
         'Mkhodroo\\Voip\\VoipServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/VoipServiceProvider.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',

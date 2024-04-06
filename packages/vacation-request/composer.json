@@ -1,0 +1,16 @@
+{
+    "name": "mkhodroo/vacation-request",
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Mkhodroo\\VacationRequest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mkhodroo",
+            "email": "mkhodroo@yahoo.com"
+        }
+    ],
+    "require": {}
+}

@@ -235,6 +235,7 @@ return [
         \Hidro\Registration\HidroRegProvider::class,
         Mkhodroo\AgencyInfo\AgencyInfoProvider::class,
         Mkhodroo\Cities\CityProvider::class,
+        \Mkhodroo\VacationRequest\VacationRequestProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
