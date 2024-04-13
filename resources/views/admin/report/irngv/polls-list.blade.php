@@ -79,7 +79,7 @@
             } else {
                 $('#filters').fadeOut(500);
             }
-            
+
         }
         function filter(){
             send_ajax_request(
@@ -90,6 +90,6 @@
                 }
             );
         }
-        
+
     </script>
 @endsection
