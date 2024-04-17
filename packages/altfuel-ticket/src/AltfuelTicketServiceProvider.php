@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Mkhodroo\AltfuelTicket;
 
@@ -15,6 +15,7 @@ class AltfuelTicketServiceProvider extends ServiceProvider{
         $this->publishes([
             __DIR__ . '/config.php' => config_path('ATConfig.php'),
             __DIR__ . '/Lang' => lang_path(''),
+            __DIR__ . '/public' => public_path('packages/altfuel-ticket/')
         ]);
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
         $this->loadRoutesFrom(__DIR__. '/routes.php');
