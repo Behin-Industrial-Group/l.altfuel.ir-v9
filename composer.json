@@ -41,7 +41,8 @@
             "Hidro\\Registration\\": "packages/hidro-registration/src",
             "Mkhodroo\\AgencyInfo\\": "packages/mkhodroo-agency-info/src",
             "Mkhodroo\\Cities\\": "packages/mkhodroo-cities/src",
-            "Mkhodroo\\VacationRequest\\": "packages/vacation-request/src/"
+            "Mkhodroo\\VacationRequest\\": "packages/vacation-request/src/",
+            "UserProfile\\": "packages/user-profile/src/"
         }
     },
     "autoload-dev": {
