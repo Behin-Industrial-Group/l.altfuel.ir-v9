@@ -26,16 +26,17 @@
                         <th>دسته بندی</th>
                         <th>وضعیت</th>
                         <th>آخرین تغییرات</th>
+                        {{-- <th>امتیاز</th> --}}
                     </tr>
                 </thead>
             </table>
         </div>
-        
+
     </div>
 @endsection
 
 @section('script')
-    
+
     <script>
         function filter(){
             data = $('#cat-form').serialize();
@@ -79,7 +80,8 @@
                     date = datetime.toLocaleDateString('fa-IR');
                     time = datetime.toLocaleTimeString('fa-IR');
                     return '<span dir="auto" style="float: left">' + date + ' ' + time + '</span>';
-                }}
+                }},
+                // {data: 'score'}
             ],
             null,
             [4 ,'asc']

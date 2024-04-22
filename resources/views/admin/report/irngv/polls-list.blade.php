@@ -26,7 +26,7 @@
             @foreach ($report as $key => $value)
                 <tr>
                     <td>{{ $questions[$key]['question'] }}</td>
-                    <td>{{ $value }}</td>
+                    <td>{{ number_format($value, 2) }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -79,7 +79,7 @@
             } else {
                 $('#filters').fadeOut(500);
             }
-            
+
         }
         function filter(){
             send_ajax_request(
@@ -90,6 +90,6 @@
                 }
             );
         }
-        
+
     </script>
 @endsection

@@ -54,4 +54,14 @@ class CreateTicketController extends Controller
         }
         return null;
     }
+
+    public function setScore(Request $r){
+        $ticket = GetTicketController::findByTicketId($r->ticket_id);
+        $ticket->score = $r->score;
+        $ticket->save();
+    }
+
+    function score($id) {
+        return GetTicketController::findByTicketId($id)?->score;
+    }
 }
