@@ -1,10 +1,13 @@
+@if (auth()->user()->access('امتیاز دهی به تیکت'))
+    
+
 <link rel="stylesheet" href="{{ url('public/packages/altfuel-ticket/css/style.css')}}">
 
 
 <form action="" class="score col-12">
     <section class="d-flex justify-content-between col-12">
         <section class="">
-            <p>نظر شما در مورد کیفیت پاسخگویی : </p>
+            <p>نظر شما در مورد کیفیت پاسخگویی(محرمانه خواهد ماند) : </p>
         </section>
         <section class="ml-2">
             <label class="score-label" id="happy" onclick="set_score(3)">&#128578;</label>
@@ -62,4 +65,6 @@
         )
     }
 </script>
+
+@endif
 
