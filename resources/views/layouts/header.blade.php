@@ -48,11 +48,7 @@ use App\CustomClasses\Access;
             </div>
         </li> --}}
 
-        <li class="">
-            <a class="" href="{{ route('user-profile.profile') }}">
-                <i class="fa fa-user"></i>
-            </a>
-        </li>
+        @include('UserProfileViews::partial-views.user-profile-icon')
 
         <li class="mr-4">
             <a class="" href="{{ route('logout') }}">
