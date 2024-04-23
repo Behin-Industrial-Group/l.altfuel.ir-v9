@@ -31,7 +31,7 @@
                 "{{ route('user-profile.update-password') }}",
                 data,
                 function(response){
-                    console.log(response)
+                    show_message(response)
                 }
             )
         }
