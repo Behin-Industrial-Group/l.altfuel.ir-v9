@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class UserProfileController extends Controller
 {
 
-    public function index(User $user){
-        return view('UserProfileViews::index', compact('user'));
+
+    public function index(){
+        return view('UserProfileViews::index')->with([
+            'user' => Auth::user()
+        ]);
     }
 }
