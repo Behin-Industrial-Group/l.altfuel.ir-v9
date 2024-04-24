@@ -5,14 +5,16 @@
 
 
 <form action="" class="score col-12">
-    <section class="d-flex justify-content-between col-12">
-        <section class="">
+    <section class="d-flex justify-content-between row">
+        <section class="col-sm-6">
             <p>نظر شما در مورد کیفیت پاسخگویی(محرمانه خواهد ماند) : </p>
         </section>
-        <section class="ml-2">
-            <label class="score-label" id="happy" onclick="set_score(3)">&#128578;</label>
-            <label class="score-label" id="poker" onclick="set_score(2)">&#128528;</label>
-            <label class="score-label" id="sad" onclick="set_score(1)">&#128577;</label>
+        <section class="col-sm-6">
+            <label class="score-label" id="heart" onclick="set_score(5)">&#128525;</label>
+            <label class="score-label" id="happy" onclick="set_score(4)">&#128578;</label>
+            <label class="score-label" id="poker" onclick="set_score(3)">&#128528;</label>
+            <label class="score-label" id="sad" onclick="set_score(2)">&#128577;</label>
+            <label class="score-label" id="angry" onclick="set_score(1)">&#128545;</label>
         </section>
     </section>
 </form>
@@ -46,18 +48,28 @@
                 $('.score-label').css({
                     "filter": "grayscale(100)"
                 })
-                if(res == 3){
+                if(res == 5){
+                    $('#heart').css({
+                        "filter": "grayscale(0)"
+                    })
+                }
+                if(res == 4){
                     $('#happy').css({
                         "filter": "grayscale(0)"
                     })
                 }
-                if(res == 2){
+                if(res == 3){
                     $('#poker').css({
                         "filter": "grayscale(0)"
                     })
                 }
-                if(res == 1){
+                if(res == 2){
                     $('#sad').css({
+                        "filter": "grayscale(0)"
+                    })
+                }
+                if(res == 1){
+                    $('#angry').css({
                         "filter": "grayscale(0)"
                     })
                 }

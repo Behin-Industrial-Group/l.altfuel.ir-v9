@@ -25,8 +25,8 @@
 
 @media (max-width: 500px) {
     .score-label{
-        margin: 0 5px;
+        margin: 0px 10px;
         width: 10px;
-        font-size: 22px;
+        font-size: 20px;
     }
 }
