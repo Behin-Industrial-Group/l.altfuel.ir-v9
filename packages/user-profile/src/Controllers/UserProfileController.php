@@ -10,6 +10,7 @@ use UserProfile\Models\UserProfile;
 class UserProfileController extends Controller
 {
 
+
     public function index(){
         $user = Auth::user();
         return view('UserProfileViews::index')->with([

@@ -1,0 +1,32 @@
+
+.score label:hover,
+.score label:checked{
+    filter: grayscale(0);
+}
+
+
+.score-label{
+    animation: none;
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
+    transition: border 0.3s ease;
+    filter: grayscale(100% );
+    margin: 0px 20px;
+    transition: all 0.5s ease;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.score {
+    margin-top: 20px;
+}
+
+@media (max-width: 500px) {
+    .score-label{
+        margin: 0 5px;
+        width: 10px;
+        font-size: 20px;
+    }
+}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Mkhodroo\AltfuelTicket;
 
@@ -15,6 +15,7 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
     Route::post('store', [CreateTicketController::class, 'store'])->name('store');
     Route::post('change-status', [TicketStatusController::class, 'changeStatus'])->name('changeStatus');
     Route::post('change-catagory', [TicketCatagoryController::class, 'changeCatagory'])->name('changeCatagory');
+    Route::post('set-score', [CreateTicketController::class, 'setScore'])->name('setScore');
 
     Route::name('show.')->prefix('show')->group(function(){
         Route::get('all', [ShowTicketController::class, 'list'])->name('listForm');
@@ -25,6 +26,7 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
         Route::get('get-mine', [GetTicketController::class, 'getMyTickets'])->name('getMyTickets');
         Route::post('get-by-catagory', [GetTicketController::class, 'getByCatagory'])->name('getByCatagory');
         Route::get('status/{id}', [TicketStatusController::class, 'getStatus'])->name('status');
+        Route::get('score/{id}', [CreateTicketController::class, 'score'])->name('score');
         Route::get('{id}', [GetTicketController::class, 'get'])->name('get');
     });
 

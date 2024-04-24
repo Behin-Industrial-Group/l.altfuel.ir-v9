@@ -12,6 +12,7 @@
             </div>
         @endforeach
     </div>
+    @include('ATView::partial-view.score', ['ticket_id' => $ticket->ticket_id ])
 </div>
 <hr>
 <div class="direct-chat-messages" style="height: 500px">
