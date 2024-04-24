@@ -6,7 +6,7 @@ return [
     'ticket-uploads-folder' => '/ticket-uploads',
     'status' => [
         'new' => 'جدید', 
-        'opened' => 'بازشده', 
+        'opened' => 'درحال بررسی', 
         'answered' => 'پاسخ داده شده', 
         'closed' => 'بسته شده'
     ],
