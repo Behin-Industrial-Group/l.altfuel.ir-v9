@@ -4,6 +4,7 @@ namespace Mkhodroo\AgencyInfo\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class FileController extends Controller
@@ -17,7 +18,8 @@ class FileController extends Controller
         }
         $name = Str::random(40) . '.' . $file->getClientOriginalExtension();
         $full_path = public_path($dir);
-        if ( ! is_dir($full_path)) {
+        Log::info($full_path);
+        if ( !is_dir($full_path)) {
             mkdir($full_path);
         }
         $full_name = $full_path . '/' . $name;

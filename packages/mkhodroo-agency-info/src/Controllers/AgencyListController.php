@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\Cities\Controllers\CityController;
 use Mkhodroo\DateConvertor\Controllers\SDate;
@@ -17,13 +16,17 @@ class AgencyListController extends Controller
     public static function view()
     {
         // return AgencyInfo::groupBy('key')->pluck('key')->toArray();
+        // return self::getKeys();
         return view('AgencyView::list')->with([
             'cols' => self::getKeys()
         ]);
     }
 
     public static function getKeys(){
-        return AgencyInfo::groupBy('key')->pluck('key');
+        $keys = AgencyInfo::groupBy('key')->pluck('key');
+        // $keys[] = 'province';
+        $keys[] = 'city';
+        return $keys;
     }
 
     public static function list()
@@ -59,6 +62,8 @@ class AgencyListController extends Controller
                 $key = $keys[$key_index];
                 if($key === 'province'){
                     $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)->province;
+                }elseif($key === 'city'){
+                    $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, 'province')?->value)->city;
                 }else{
                     $agency->$key = __(GetAgencyController::getByKey($agency->parent_id, $key)?->value);
                 }
@@ -78,7 +83,6 @@ class AgencyListController extends Controller
         $sDate = new SDate();
         $agencies = [];
         foreach($exp_dates as $exp_date){
-            // Log::info("get valid agencies. -> id: $exp_date->id");
             $exp = SDate::jalaliToGregorian($exp_date->value);
             $GregorianExpDate = SDate::gregorianToCarbon($exp);
             $now_carbon = Carbon::now();
@@ -98,22 +102,6 @@ class AgencyListController extends Controller
             }
         }
         return json_encode($agencies);
-
-    }
-
-    public static function getByNidOrCode($code){
-        $parent_ids = AgencyInfo::where('key', 'agency_code')->where('value', 'like', "%$code%")->pluck('parent_id');
-        if(!$parent_ids){
-            $parent_ids = AgencyInfo::where('key', 'national_id')->where('value', $code)->pluck('parent_id');
-        }
-        $agency = AgencyInfo::whereIn('parent_id', $parent_ids)->get();
-        if(count($agency)){
-            $firstname = $agency->where('key', 'firstname')->first()->value;
-            $lastname = $agency->where('key', 'lastname')->first()?->value;
-
-            return $firstname .' '. $lastname .' ('. $code . ')';
-        }
-        return false;
 
     }
 

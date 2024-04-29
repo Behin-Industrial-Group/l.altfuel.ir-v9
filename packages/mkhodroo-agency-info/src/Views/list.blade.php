@@ -169,7 +169,7 @@
                 "{{ route('agencyInfo.filterList') }}",
                 fd,
                 function(res) {
-                    console.log(res);
+                    // console.log(res);
                     update_datatable(res.data);
                 }
             )

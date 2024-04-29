@@ -36,7 +36,7 @@
                             @else
                                 <input type="text" name="{{ $item }}"
                                     value="{{ $value }}"
-                                    class="form-control {{ (str_contains($item, 'date') or str_contains($item, 'ref_id')) ? '' : 'cama-seprator' }}"
+                                    class="form-control {{ (str_contains($item, 'date') or str_contains($item, 'ref_id')) ? '' : '' }}"
                                     id="">
                             @endif
                         </td>

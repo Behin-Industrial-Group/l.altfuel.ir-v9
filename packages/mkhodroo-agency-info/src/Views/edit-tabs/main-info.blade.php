@@ -17,7 +17,11 @@
                                     $required = '';
                                 @endphp
                                 <input type="text" name="{{ $field_key }}" value="{{ $value }}"
-                                    class="form-control" id="{{ $field_key }}">
+                                    class="form-control" id="{{ $field_key }}"
+                                    @if (isset($field_detail['disabled']) and $field_detail['disabled'] === true)
+                                        disabled
+                                    @endif
+                                    >
                                 @if ($field_key === 'agency_code')
                                     <span id="gen_code" class="col-sm-3"
                                         style="background: #db4f4f;padding-top:5px; height:32px; text-align:center; font-weight:bold; cursor:pointer">
@@ -69,6 +73,9 @@
                                     @endif
 
                                 </select>
+                            @endif
+                            @if ($field_detail['type'] == 'textarea')
+                                {{ $HtmlCreator::createInput($field_key, $field_detail, $value) }}
                             @endif
                         </td>
                     </tr>
