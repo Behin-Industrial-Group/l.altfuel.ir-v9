@@ -38,6 +38,10 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                 <a class="nav-link" id="debts-tab" data-toggle="pill" href="#debts" role="tab" aria-controls="info"
                     aria-selected="true">{{ __('Debts Info') }}</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="simfa-tab" data-toggle="pill" href="#simfa" role="tab" aria-controls="simfa"
+                    aria-selected="true">{{ __('Simfa Info') }}</a>
+            </li>
         </ul>
     </div>
     <div class="card-body">
@@ -64,6 +68,10 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                 'agency_fields' => $agency_fields
             ])
             @include('AgencyView::edit-tabs.inspection-info', [
+                'customer_type' => $customer_type,
+                'agency_fields' => $agency_fields
+            ])
+            @include('AgencyView::edit-tabs.simfa-info', [
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
             ])
