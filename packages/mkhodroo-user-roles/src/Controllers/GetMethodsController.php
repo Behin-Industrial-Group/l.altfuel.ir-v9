@@ -12,7 +12,7 @@ use Mkhodroo\UserRoles\Models\Method;
 class GetMethodsController extends Controller
 {
     public static function getByRoleAccess($role_id) {
-        return Method::get()->each(function($row) use($role_id){
+        return Method::orderBy('category', 'desc')->get()->each(function($row) use($role_id){
             $row->access = Access::where('role_id', $role_id)->where('method_id', $row->id)->first()?->access;
         });
     }
