@@ -2,7 +2,7 @@
 
 return [
     'menu' =>[
-        
+
         'dashboard' => [
             'fa_name' => 'داشبرد',
             'submenu' => [
@@ -35,6 +35,7 @@ return [
             'submenu' => [
                 'dashboard' => [ 'fa_name' => 'همه', 'route-name' => '', 'route-url' => 'admin/user/all' ],
                 'role' => [ 'fa_name' => 'نقش ها', 'route-name' => 'role.listForm', 'route-url' => '' ],
+                'method' => [ 'fa_name' => 'متد ها', 'route-name' => 'method.list', 'route-url' => '' ],
             ]
         ],
         'reports' => [

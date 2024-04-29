@@ -1,9 +1,10 @@
-<?php 
+<?php
 
 namespace Mkhodroo\UserRoles\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mkhodroo\UserRoles\Models\Access;
 use Mkhodroo\UserRoles\Models\Method;
@@ -19,4 +20,18 @@ class GetMethodsController extends Controller
     public static function getAll() {
         return Method::get();
     }
+
+    function list() {
+        return view('URPackageView::methods.list')->with([
+            'methods' => $this->getAll()
+        ]);
+    }
+
+    function edit(Request $r) {
+        foreach(GetMethodsController::getAll() as $method){
+            Method::where('id', $method->id)->update(['category' => $r->input("$method->id")]);
+        }
+        return response('ok');
+    }
+
 }
