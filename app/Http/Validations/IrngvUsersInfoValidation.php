@@ -64,8 +64,10 @@ class IrngvUsersInfoValidation
         if($irngv_user_info->where('certificate_number', $r->certificate_number)->first())
             return $this->jsonResponse("برای این شماره گواهی قبلا پیامک ارسال شده است.", 300, [],20);
 
-        
+        if(!in_array($r->reg_type, config('irngv.valid_reg_type'))){
+            return $this->jsonResponse("مقدار reg_type معتبر نیست", 400);
+        }
 
-        
+
     }
 }
