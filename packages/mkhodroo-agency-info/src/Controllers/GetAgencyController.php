@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Mkhodroo\AgencyInfo\Controllers;
 
@@ -27,5 +27,20 @@ class GetAgencyController extends Controller
         }
         return;
     }
-    
+
+    public static function getAllByKeyValue(array $key, array $value)
+    {
+        $parent_ids = AgencyInfo::whereIn('key', $key)->whereIn('value', $value)->pluck('parent_id')->toArray();
+        $parent_ids = array_unique($parent_ids);
+        $agencies = [];
+        $i=0;
+        foreach($parent_ids as $parent_id){
+            $agency = self::getByParentId($parent_id);
+            $agencies[$i] = $agency->pluck('value', 'key');
+            $agencies[$i]['parent_id'] = $agency->first()->parent_id;
+            $i++;
+        }
+        return $agencies;
+    }
+
 }
