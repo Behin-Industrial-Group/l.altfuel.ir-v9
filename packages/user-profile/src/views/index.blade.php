@@ -33,10 +33,14 @@
             <div class="col-sm-3">
                 <a href="{{ route('user-profile.change-password') }}" class="col-sm-10 btn btn-danger btn-sm" >تغییر رمز عبور</a>
             </div>
-            
-            
-            
+
+
+
             <hr>
+
+            <div id="agenciesInfo" class="col-sm-12">
+
+            </div>
         </div>
     </div>
 @endsection
@@ -52,6 +56,20 @@
                 function(response){
                     show_message("{{trans('ok')}}")
                     location.reload()
+                }
+            )
+        }
+        getAgencies()
+        function getAgencies(){
+            var data = new FormData();
+            data.append('national_id', '{{ $userProfile->national_id }}')
+            data.append('mobile', '{{ $user->email }}')
+            send_ajax_formdata_request(
+                "{{ route('user-profile.getUserAgencies') }}",
+                data,
+                function(response){
+                    console.log(response);
+                    $('#agenciesInfo').html(response)
                 }
             )
         }
