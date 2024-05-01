@@ -148,6 +148,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'I' => 
         array (
+            'IrngvPoll\\' => 10,
             'Intervention\\Image\\' => 19,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\' => 11,
@@ -501,6 +502,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Laravel\\Breeze\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/breeze/src',
+        ),
+        'IrngvPoll\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-irngv-poll/src',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -3149,6 +3154,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'IrngvPoll\\IrngvPollProvider' => __DIR__ . '/../..' . '/packages/behin-irngv-poll/src/IrngvPollProvider.php',
         'Laravel\\Breeze\\BreezeServiceProvider' => __DIR__ . '/..' . '/laravel/breeze/src/BreezeServiceProvider.php',
         'Laravel\\Breeze\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallCommand.php',
         'Laravel\\Breeze\\Console\\InstallsApiStack' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallsApiStack.php',
@@ -6413,7 +6419,11 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'UserProfile\\Controllers\\ChangePasswordController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/ChangePasswordController.php',
+        'UserProfile\\Controllers\\GetUserAgenciesController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/GetUserAgenciesController.php',
+        'UserProfile\\Controllers\\NationalIdController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/NationalIdController.php',
         'UserProfile\\Controllers\\UserProfileController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/UserProfileController.php',
+        'UserProfile\\Models\\UserProfile' => __DIR__ . '/../..' . '/packages/user-profile/src/Models/UserProfile.php',
         'UserProfile\\UserProfileProvider' => __DIR__ . '/../..' . '/packages/user-profile/src/UserProfileProvider.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
