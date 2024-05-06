@@ -53,7 +53,7 @@ return [
                 122 => ['name' => 'آقای شادمان'],
             ]
         ],
-        
+
     ],
 
     /*
@@ -237,6 +237,7 @@ return [
         Mkhodroo\Cities\CityProvider::class,
         \Mkhodroo\VacationRequest\VacationRequestProvider::class,
         \UserProfile\UserProfileProvider::class,
+        \IrngvPoll\IrngvPollProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
