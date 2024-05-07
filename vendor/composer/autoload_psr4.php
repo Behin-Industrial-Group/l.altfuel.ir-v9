@@ -106,6 +106,7 @@ return array(
     'Cviebrock\\EloquentSluggable\\' => array($vendorDir . '/cviebrock/eloquent-sluggable/src'),
     'Cron\\' => array($vendorDir . '/dragonmantank/cron-expression/src/Cron'),
     'Cocur\\Slugify\\' => array($vendorDir . '/cocur/slugify/src'),
+    'ChatGpt\\' => array($baseDir . '/packages/behin-chat-gpt/src'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'BinshopsBlog\\' => array($vendorDir . '/binshops/laravel-blog/src'),

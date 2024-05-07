@@ -238,6 +238,7 @@ return [
         \Mkhodroo\VacationRequest\VacationRequestProvider::class,
         \UserProfile\UserProfileProvider::class,
         \IrngvPoll\IrngvPollProvider::class,
+        \ChatGpt\ChatGptProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
