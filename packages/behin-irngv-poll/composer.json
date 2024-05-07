@@ -1,0 +1,16 @@
+{
+    "name": "behin/irngv-poll",
+    "description": "",
+    "authors": [
+        {
+            "name": "Amirali-Hosseini",
+            "email": "amiralihosseini216@yahoo.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "IrngvPoll\\": "src/"
+        }
+    },
+    "require": {}
+}
