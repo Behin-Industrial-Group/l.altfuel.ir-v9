@@ -17,7 +17,7 @@ class AgencyDocsController extends Controller
         $agency_fields =  AgencyInfo::where('parent_id', $r->id)->get();
         $data = $r->except('id');
         foreach ($data as $key => $value) {
-            $value = FileController::store($r->file($key));
+            $value = FileController::store($r->file($key),  AgencyController::docDir($r->id, 'doc'));
             if($value['status'] !== 200){
                 return response($value['message'], $value['status']);
             }

@@ -77,6 +77,19 @@ return [
             'docs' => [
                 'archive_docs',
             ],
+            'inspection' => [
+                '01' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '02' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '03' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '04' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '05' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+            ],
+            'foreman' => [
+                'foreman_firstname' => ['type' => 'text'],
+                'foreman_lastname' => ['type' => 'text'],
+                'foreman_national_id' => ['type' => 'text'],
+                'foreman_mobile' => ['type' => 'text'],
+            ],
             'debts' => [
                 '1' => [ 'debt1', 'debt1_pay_date', 'debt1_ref_id', 'debt1_description' ],
                 '2' => [ 'debt2', 'debt2_pay_date', 'debt2_ref_id', 'debt2_description' ],
@@ -142,6 +155,19 @@ return [
             ],
             'docs' => [
                 'archive_docs',
+            ],
+            'inspection' => [
+                '01' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '02' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '03' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '04' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '05' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+            ],
+            'foreman' => [
+                'foreman_firstname' => ['type' => 'text'],
+                'foreman_lastname' => ['type' => 'text'],
+                'foreman_national_id' => ['type' => 'text'],
+                'foreman_mobile' => ['type' => 'text'],
             ],
             'debts' => [
                 '1' => [ 'debt1', 'debt1_pay_date', 'debt1_ref_id', 'debt1_description' ],
@@ -214,6 +240,19 @@ return [
             ],
             'docs' => [
                 'archive_docs',
+            ],
+            'inspection' => [
+                '01' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '02' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '03' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '04' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+                '05' => ['name' => ['type' => 'text'] , 'file' => ['type' => 'file']],
+            ],
+            'foreman' => [
+                'foreman_firstname' => ['type' => 'text'],
+                'foreman_lastname' => ['type' => 'text'],
+                'foreman_national_id' => ['type' => 'text'],
+                'foreman_mobile' => ['type' => 'text'],
             ],
             'debts' => [
                 '1' => [ 'debt1', 'debt1_pay_date', 'debt1_ref_id', 'debt1_description' ],

@@ -37,6 +37,16 @@ class HtmlCreatorController extends Controller
             echo trans($field_name);
             echo "<textarea name='$field_name' class='form-control'>$default_value</textarea>";
         }
+        if($attr['type'] === 'file'){
+            if($default_value){
+                echo "<a href='" . url("public/$default_value") . "'";
+                echo "download=". trans($field_name) . ">". trans($field_name) ."</a>";
+                echo "<i class='fa fa-trash' onclick='delete_fin_pay_file(`$field_name`)' style='float: left; color: red; cursor: pointer'></i>";
+            }
+            else{
+                echo "<input type='file' name='$field_name' id='' class='form-control'>";
+            }
+        }
         
     }
 }

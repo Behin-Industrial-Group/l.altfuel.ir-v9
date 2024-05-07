@@ -18,13 +18,22 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                     aria-selected="true">{{ __('Agency Info') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="fin-info-tab" data-toggle="pill" href="#fin-info" role="tab"
-                    aria-controls="fin-info" aria-selected="false">{{ __('Agency Fin Info') }}</a>
+                <a class="nav-link" id="foreman-tab" data-toggle="pill" href="#foreman" role="tab" aria-controls="foreman-info"
+                    aria-selected="true">{{ __('Foreman Info') }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="docs-tab" data-toggle="pill" href="#docs" role="tab" aria-controls="docs"
                     aria-selected="false">{{ __('Docs') }}</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="inspection-tab" data-toggle="pill" href="#inspection" role="tab" aria-controls="inspection-info"
+                    aria-selected="true">{{ __('Inspection Info') }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="fin-info-tab" data-toggle="pill" href="#fin-info" role="tab"
+                    aria-controls="fin-info" aria-selected="false">{{ __('Agency Fin Info') }}</a>
+            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" id="debts-tab" data-toggle="pill" href="#debts" role="tab" aria-controls="info"
                     aria-selected="true">{{ __('Debts Info') }}</a>
@@ -41,6 +50,7 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
             ])
+            
             @include('AgencyView::edit-tabs.fin-info', [
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
@@ -50,6 +60,14 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                 'agency_fields' => $agency_fields
             ])
             @include('AgencyView::edit-tabs.debt-info', [
+                'customer_type' => $customer_type,
+                'agency_fields' => $agency_fields
+            ])
+            @include('AgencyView::edit-tabs.foreman-info', [
+                'customer_type' => $customer_type,
+                'agency_fields' => $agency_fields
+            ])
+            @include('AgencyView::edit-tabs.inspection-info', [
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
             ])
@@ -124,6 +142,19 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
         send_ajax_request(
             "{{ route('agencyInfo.edit') }}",
             $('#simfa-form').serialize(),
+            function(res) {
+                console.log(res);
+                show_message("{{ __('Edited') }}");
+                open_edit_form(res.parent_id, 'info')
+                filter()
+            }
+        )
+    }
+
+    function foreman_edit() {
+        send_ajax_request(
+            "{{ route('agencyInfo.foremanEdit') }}",
+            $('#foreman-form').serialize(),
             function(res) {
                 console.log(res);
                 show_message("{{ __('Edited') }}");
