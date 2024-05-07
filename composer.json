@@ -43,7 +43,8 @@
             "Mkhodroo\\Cities\\": "packages/mkhodroo-cities/src",
             "Mkhodroo\\VacationRequest\\": "packages/vacation-request/src/",
             "UserProfile\\": "packages/user-profile/src/",
-            "IrngvPoll\\": "packages/behin-irngv-poll/src/"
+            "IrngvPoll\\": "packages/behin-irngv-poll/src/",
+            "ChatGpt\\": "packages/behin-chat-gpt/src/"
         }
     },
     "autoload-dev": {

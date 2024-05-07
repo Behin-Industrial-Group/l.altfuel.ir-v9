@@ -192,6 +192,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Cviebrock\\EloquentSluggable\\' => 28,
             'Cron\\' => 5,
             'Cocur\\Slugify\\' => 14,
+            'ChatGpt\\' => 8,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -611,6 +612,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/..' . '/cocur/slugify/src',
         ),
+        'ChatGpt\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-chat-gpt/src',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -953,6 +958,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
         'Carbon\\TranslatorImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorImmutable.php',
         'Carbon\\TranslatorStrongTypeInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorStrongTypeInterface.php',
+        'ChatGpt\\ChatGptProvider' => __DIR__ . '/../..' . '/packages/behin-chat-gpt/src/ChatGptProvider.php',
+        'ChatGpt\\Controllers\\ChatController' => __DIR__ . '/../..' . '/packages/behin-chat-gpt/src/Controllers/ChatController.php',
         'Cocur\\Slugify\\Bridge\\Laravel\\SlugifyFacade' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Laravel/SlugifyFacade.php',
         'Cocur\\Slugify\\Bridge\\Laravel\\SlugifyServiceProvider' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Laravel/SlugifyServiceProvider.php',
         'Cocur\\Slugify\\Bridge\\Latte\\SlugifyHelper' => __DIR__ . '/..' . '/cocur/slugify/src/Bridge/Latte/SlugifyHelper.php',
@@ -3154,6 +3161,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'IrngvPoll\\Controllers\\GetIrngvUserController' => __DIR__ . '/../..' . '/packages/behin-irngv-poll/src/Controllers/GetIrngvUserController.php',
         'IrngvPoll\\IrngvPollProvider' => __DIR__ . '/../..' . '/packages/behin-irngv-poll/src/IrngvPollProvider.php',
         'Laravel\\Breeze\\BreezeServiceProvider' => __DIR__ . '/..' . '/laravel/breeze/src/BreezeServiceProvider.php',
         'Laravel\\Breeze\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallCommand.php',
