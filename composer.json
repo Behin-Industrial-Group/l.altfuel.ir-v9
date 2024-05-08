@@ -44,7 +44,8 @@
             "Mkhodroo\\VacationRequest\\": "packages/vacation-request/src/",
             "UserProfile\\": "packages/user-profile/src/",
             "IrngvPoll\\": "packages/behin-irngv-poll/src/",
-            "ChatGpt\\": "packages/behin-chat-gpt/src/"
+            "ChatGpt\\": "packages/behin-chat-gpt/src/",
+            "AiAssistant\\": "packages/behin-ai-assistant/src/"
         }
     },
     "autoload-dev": {

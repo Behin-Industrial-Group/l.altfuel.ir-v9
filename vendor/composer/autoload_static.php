@@ -203,6 +203,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'A' => 
         array (
             'App\\' => 4,
+            'AiAssistant\\' => 12,
         ),
     );
 
@@ -633,6 +634,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             0 => __DIR__ . '/../..' . '/app',
             1 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
+        'AiAssistant\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-ai-assistant/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -646,6 +651,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
     );
 
     public static $classMap = array (
+        'AiAssistant\\AiAssistantProvider' => __DIR__ . '/../..' . '/packages/behin-ai-assistant/src/AiAssistantProvider.php',
+        'AiAssistant\\Controllers\\SpeechToTextController' => __DIR__ . '/../..' . '/packages/behin-ai-assistant/src/Controllers/SpeechToTextController.php',
+        'AiAssistant\\Controllers\\TextToSpeechController' => __DIR__ . '/../..' . '/packages/behin-ai-assistant/src/Controllers/TextToSpeechController.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\CustomClasses\\Access' => __DIR__ . '/../..' . '/app/CustomClasses/Access.php',
         'App\\CustomClasses\\BarcodeQR' => __DIR__ . '/../..' . '/app/CustomClasses/BarcodeQR.php',
