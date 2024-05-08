@@ -24,7 +24,7 @@ class SpeechToTextController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Authorization: Bearer sk-f0fffc7d75hl34wd04ty61ed9i8ere427a4031ebe4',
+            'Authorization: Bearer 11',
             'Content-Length: ' . strlen($data_string)
         ]);
 

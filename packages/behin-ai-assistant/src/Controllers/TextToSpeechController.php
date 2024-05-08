@@ -11,7 +11,7 @@ class TextToSpeechController extends Controller
     public static function sendText(Request $request)
     {
         $headers = [
-            'Authorization: Bearer sk-6f0e36f5a114379e3cf2fb6c8b6c8c3a'
+            'Authorization: Bearer 11'
         ];
         $data = [
             'text' => "سلام شما با اتحادیه کشوری سوخت های جایگزین تماس گرفته اید",
