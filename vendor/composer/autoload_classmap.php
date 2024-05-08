@@ -6,6 +6,9 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AiAssistant\\AiAssistantProvider' => $baseDir . '/packages/behin-ai-assistant/src/AiAssistantProvider.php',
+    'AiAssistant\\Controllers\\SpeechToTextController' => $baseDir . '/packages/behin-ai-assistant/src/Controllers/SpeechToTextController.php',
+    'AiAssistant\\Controllers\\TextToSpeechController' => $baseDir . '/packages/behin-ai-assistant/src/Controllers/TextToSpeechController.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\CustomClasses\\Access' => $baseDir . '/app/CustomClasses/Access.php',
     'App\\CustomClasses\\BarcodeQR' => $baseDir . '/app/CustomClasses/BarcodeQR.php',

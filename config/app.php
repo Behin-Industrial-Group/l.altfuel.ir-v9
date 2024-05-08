@@ -239,6 +239,7 @@ return [
         \UserProfile\UserProfileProvider::class,
         \IrngvPoll\IrngvPollProvider::class,
         \ChatGpt\ChatGptProvider::class,
+        \AiAssistant\AiAssistantProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,

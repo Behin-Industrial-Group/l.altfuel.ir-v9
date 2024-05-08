@@ -1,0 +1,2 @@
+error => {"error":{"code":403,"message":"Access level issue","description":"You'r account type does not allow you to use the web service. Please review the payment terms for using the service in the TalkBot system"}}
+success => {"response":{"code":200,"message":"Success","id":"TTSTALKBOT_91446420065.mp3","download":"https:\/\/talkbot.ir\/tts_temp\/91446420065.mp3"}}
