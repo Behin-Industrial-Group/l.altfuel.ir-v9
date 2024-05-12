@@ -2,6 +2,7 @@
 
 namespace IrngvPoll\Controllers;
 
+use App\Enums\EnumsEntity;
 use App\Http\Controllers\Controller;
 use App\Models\IrngvPollAnswer;
 use App\Models\IrngvUsersInfo;
@@ -36,16 +37,15 @@ class GetIrngvUserController extends Controller
         $uniqueQuestions = IrngvPollAnswer::groupBy('question')->pluck('question');
         $averageAnswers = [];
         foreach($uniqueQuestions as $uniqueQuestion){
-            array_push($averageAnswers, $agenciesQuestions->where('question', $uniqueQuestion)->avg('answer'));
+            $key = EnumsEntity::irngv_poll_question[$uniqueQuestion]['question'];
+            $averageAnswer[$key] = $agenciesQuestions->where('question', $uniqueQuestion)->avg('answer');
+            
         }
 
-
-        return [
-            'numberOfSms' => count($irngvUsersId),
-            // foreach($averageAnswers as $key => $averageAnswer){
-            //     'avgOf'. $key => $averageAnswer,
-            // }
-        ];
+        $data = [];
+        $data['numberOfSms'] = count($irngvUsersId);
+        $data['data'] = $averageAnswer;
+        return $data;
     }
 
 }

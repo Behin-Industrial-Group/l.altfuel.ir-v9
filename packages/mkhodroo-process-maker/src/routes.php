@@ -38,17 +38,6 @@ Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', '
             $accessToken,
             "/api/1.0/workflow/home/todo"
         );
-        $r = new Request([
-            'table_name' => 'application'
-        ]);
-        $application = TableController::getData($r);
-        return $application;
-        echo "<pre>";
-        $a =  CurlRequestController::send(
-            $accessToken,
-            "/api/1.0/workflow/cases/2145753196538ef1c4d5f25096423406/tasks"
-        );
-        print_r($a);
     });
     Route::get('test1', function () {
         $accessToken = AuthController::getAccessToken();
@@ -57,34 +46,7 @@ Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', '
             $accessToken,
             "/api/1.0/workflow/cases/2145753196538ef1c4d5f25096423406/tasks"
         );
-        echo "<table>";
-        foreach ($a as $a) {
-            echo "<tr>";
-            echo "<td>";
-            echo $a->tas_title;
-            echo "</td>";
-            echo "<td>";
-            echo $a->usr_firstname . ' ' . $a->usr_lastname . "($a->usr_username)";
-            echo "</td>";
-            echo "<td>";
-            echo $a->status;
-            echo "</td>";
-            foreach ($a->delegations as $del) {
-                if ($del->del_init_date != 'Case not started yet') {
-                    echo "<td>";
-                    echo $del->del_init_date;
-                    echo "</td>";
-                    echo "<td>";
-                    echo $del->del_finish_date;
-                    echo "</td>";
-                    echo "<td>";
-                    echo $del->del_duration;
-                    echo "</td>";
-                }
-            }
-            echo "<tr>";
-        }
-        echo "</table>";
+        
     });
     Route::get('inbox', [CaseController::class, 'get'])->name('inbox');
     Route::get('new-case', [CaseController::class, 'newCase'])->name('newCase');

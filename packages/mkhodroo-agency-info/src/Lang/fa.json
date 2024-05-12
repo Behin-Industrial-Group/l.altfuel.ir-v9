@@ -173,6 +173,7 @@
     "Inspection Info": "اطلاعات بازرسی",
     "file": "فایل",
     "city": "شهرستان",
-    "guild_or_legal_name": "نام محل صنفی یا شرکت"
+    "guild_or_legal_name": "نام محل صنفی یا شرکت",
+    "number of sended sms": "تعداد پیامک های ارسال شده"
 
 }
