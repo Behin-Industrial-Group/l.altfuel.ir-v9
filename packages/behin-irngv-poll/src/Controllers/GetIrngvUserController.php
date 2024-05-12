@@ -38,7 +38,7 @@ class GetIrngvUserController extends Controller
         $averageAnswers = [];
         foreach($uniqueQuestions as $uniqueQuestion){
             $key = EnumsEntity::irngv_poll_question[$uniqueQuestion]['question'];
-            $averageAnswer[$key] = $agenciesQuestions->where('question', $uniqueQuestion)->avg('answer');
+            $averageAnswer[$key] = number_format($agenciesQuestions->where('question', $uniqueQuestion)->avg('answer'), 2);
             
         }
 
