@@ -47,6 +47,10 @@ use function PHPSTORM_META\type;
 |
 */
 
+// Route::get('pass', function(){
+//     return password_hash('', 1);
+// });
+
 Route::get('tst', function () {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'https://voip.altfuel.ir/test.php');

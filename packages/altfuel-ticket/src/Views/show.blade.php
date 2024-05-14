@@ -30,7 +30,10 @@
                 </div>
 
                 <hr>
-                {{ $comment->text ?? '' }} <br>
+                <p style="white-space: pre-line">
+                {{ $comment->text ?? ''}}
+                </p>
+                <br>
                 @empty(!$comment->voice)
                     <div class="green-player">
                         <audio controls>
