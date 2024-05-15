@@ -199,6 +199,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             'Brick\\Math\\' => 11,
             'BinshopsBlog\\' => 13,
+            'BehinTest\\' => 10,
         ),
         'A' => 
         array (
@@ -629,6 +630,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/..' . '/binshops/laravel-blog/src',
         ),
+        'BehinTest\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-test/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -813,6 +818,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'BehinTest\\BehinTestProvider' => __DIR__ . '/../..' . '/packages/behin-test/src/BehinTestProvider.php',
         'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Collection' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Collection.php',
         'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Model' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Model.php',
         'BinshopsBlog\\Baum\\Extensions\\Query\\Builder' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Query/Builder.php',

@@ -6,7 +6,7 @@ function create_datatable(element_id, url ='', cols, rowCallback = null, order= 
     }
     return table = $(`#${element_id}`).DataTable({
         dom: 'Bfrtip',
-        order: [order],
+        order: order,
         ajax: {
             url: url,
         },
@@ -25,11 +25,11 @@ function create_datatable(element_id, url ='', cols, rowCallback = null, order= 
         ],
         "displayLength": 25,
         language: {
-            url: '../resources/lang/fa.json' 
+            url: '../resources/lang/fa.json'
         },
         "rowCallback": rowCallback
     });
-    
+
 }
 
 function dblclick_on_inbox_row(element_id,  table, callback){

@@ -168,6 +168,7 @@ return array(
     'App\\View\\Components\\AppLayout' => $baseDir . '/app/View/Components/AppLayout.php',
     'App\\View\\Components\\GuestLayout' => $baseDir . '/app/View/Components/GuestLayout.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'BehinTest\\BehinTestProvider' => $baseDir . '/packages/behin-test/src/BehinTestProvider.php',
     'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Collection' => $vendorDir . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Collection.php',
     'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Model' => $vendorDir . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Model.php',
     'BinshopsBlog\\Baum\\Extensions\\Query\\Builder' => $vendorDir . '/binshops/laravel-blog/src/Baum/Extensions/Query/Builder.php',

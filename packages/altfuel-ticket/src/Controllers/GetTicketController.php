@@ -16,10 +16,11 @@ class GetTicketController extends Controller
 
     function getAll()
     {
-        return Ticket::get()->each(function ($row) {
+        $result = Ticket::get()->each(function ($row) {
             $row->catagory = $row->catagory();
             $row->user = $row->user()?->name;
         });
+        return $result;
     }
 
     function getMyTickets()

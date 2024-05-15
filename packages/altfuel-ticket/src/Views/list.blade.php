@@ -84,7 +84,7 @@
                 // {data: 'score'}
             ],
             null,
-            [4 ,'asc']
+            [[4 , 'asc'], [5, 'desc']]
         );
 
         send_ajax_get_request(

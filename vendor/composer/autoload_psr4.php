@@ -110,6 +110,7 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'BinshopsBlog\\' => array($vendorDir . '/binshops/laravel-blog/src'),
+    'BehinTest\\' => array($baseDir . '/packages/behin-test/src'),
     'App\\' => array($baseDir . '/app', $vendorDir . '/laravel/pint/app'),
     'AiAssistant\\' => array($baseDir . '/packages/behin-ai-assistant/src'),
 );

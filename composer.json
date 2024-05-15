@@ -45,7 +45,8 @@
             "UserProfile\\": "packages/user-profile/src/",
             "IrngvPoll\\": "packages/behin-irngv-poll/src/",
             "ChatGpt\\": "packages/behin-chat-gpt/src/",
-            "AiAssistant\\": "packages/behin-ai-assistant/src/"
+            "AiAssistant\\": "packages/behin-ai-assistant/src/",
+            "BehinTest\\": "packages/behin-test/src/"
         }
     },
     "autoload-dev": {
