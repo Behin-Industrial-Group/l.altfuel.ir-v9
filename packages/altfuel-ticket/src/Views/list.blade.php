@@ -88,13 +88,6 @@
         );
 
         send_ajax_get_request(
-            "{{ route('ATRoutes.get.getAll') }}",
-            function(data){
-                console.log(data);
-            }
-        )
-
-        send_ajax_get_request(
             "{{ route('ATRoutes.get.getMyTickets') }}",
             function(data){
                 update_datatable(data);
