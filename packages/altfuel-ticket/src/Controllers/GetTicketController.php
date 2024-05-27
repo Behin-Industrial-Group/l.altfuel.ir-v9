@@ -25,7 +25,7 @@ class GetTicketController extends Controller
     function getMyTickets()
     {
         return Ticket::where('user_id', Auth::id())->get()->each(function ($row) {
-            $row->catagory = $row->catagory();
+            $row->catagory = $row->catagory()['name'];
             $row->user = $row->user()?->name;
         });
     }
@@ -38,8 +38,9 @@ class GetTicketController extends Controller
                 $row->user = $row->user()?->name;
             });
         }
-        return Ticket::where('user_id', Auth::id())->where('cat_id', $catagory_id)->get()->each(function ($row) {
-            $row->catagory = $row->catagory();
+        $category = CatagoryController::get($catagory_id)->name;
+        return Ticket::where('user_id', Auth::id())->where('cat_id', $catagory_id)->get()->each(function ($row) use ($category){
+            $row->catagory = $category;
             $row->user = $row->user()?->name;
         });
     }
@@ -48,8 +49,9 @@ class GetTicketController extends Controller
     {
         if (auth()->user()->access("Ticket-Actors")) {
             // $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
-            return Ticket::where('cat_id', $r->catagory)->get()->each(function ($row) {
-                $row->catagory = $row->catagory();
+            $category = CatagoryController::get($r->catagory)->name;
+            return Ticket::where('cat_id', $r->catagory)->get()->each(function ($row) use ($category) {
+                $row->catagory = $category;
                 $row->user = $row->user()?->name;
             });
         }

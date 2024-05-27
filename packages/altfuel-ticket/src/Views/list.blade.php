@@ -58,7 +58,7 @@
                     return `<a href="#">${title}</a>`;
                 }},
                 {data: 'user'},
-                {data: 'catagory.name'},
+                {data: 'catagory'},
                 {data: 'status', render: function(data){
                     if(data == "{{config('ATConfig.status.new')}}"){
                         return '1-' + data
