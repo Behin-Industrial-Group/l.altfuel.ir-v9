@@ -1,0 +1,16 @@
+{
+    "name": "behin/todo-list",
+    "description": "",
+    "authors": [
+        {
+            "name": "Amirali-Hosseini",
+            "email": "amiralihosseini216@yahoo.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "TodoList\\": "src/"
+        }
+    },
+    "require": {}
+}
