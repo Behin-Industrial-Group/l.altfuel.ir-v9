@@ -58,7 +58,7 @@
                     return `<a href="#">${title}</a>`;
                 }},
                 {data: 'user'},
-                {data: 'catagory.name'},
+                {data: 'catagory'},
                 {data: 'status', render: function(data){
                     if(data == "{{config('ATConfig.status.new')}}"){
                         return '1-' + data
@@ -86,13 +86,6 @@
             null,
             [[4 , 'asc'], [5, 'desc']]
         );
-
-        send_ajax_get_request(
-            "{{ route('ATRoutes.get.getAll') }}",
-            function(data){
-                console.log(data);
-            }
-        )
 
         send_ajax_get_request(
             "{{ route('ATRoutes.get.getMyTickets') }}",

@@ -241,6 +241,7 @@ return [
         \ChatGpt\ChatGptProvider::class,
         \AiAssistant\AiAssistantProvider::class,
         BehinTest\BehinTestProvider::class,
+        \TodoList\TodoListProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
