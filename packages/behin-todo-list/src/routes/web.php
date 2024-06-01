@@ -12,7 +12,7 @@ Route::name('todoList.')->prefix('todo-list')->middleware(['web', 'auth'])->grou
     Route::put('update', [TodoListController::class, 'update'])->name('update');
     Route::delete('delete', [TodoListController::class, 'delete'])->name('delete');
 
-    Route::get('list', [OthersTodoListController::class, 'list'])->name('list');
-    Route::post('create', [OthersTodoListController::class, 'create'])->name('create');
+    Route::get('others-list', [OthersTodoListController::class, 'list'])->name('othersList');
+    Route::post('others-create', [OthersTodoListController::class, 'create'])->name('othersCreate');
 
     });

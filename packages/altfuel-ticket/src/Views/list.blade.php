@@ -2,7 +2,7 @@
 
 
 @php
-    $title ="";
+    $title = '';
 @endphp
 
 @section('content')
@@ -36,14 +36,13 @@
 @endsection
 
 @section('script')
-
     <script>
-        function filter(){
+        function filter() {
             data = $('#cat-form').serialize();
             send_ajax_request(
                 "{{ route('ATRoutes.get.getByCatagory') }}",
                 data,
-                function(data){
+                function(data) {
                     console.log(data);
                     update_datatable(data);
                 }
@@ -52,66 +51,83 @@
         var table = create_datatable(
             'tickets-table',
             "{{ route('ATRoutes.get.getAll') }}",
-            [
-                {data: 'id'},
-                {data: 'title', render: function(title){
-                    return `<a href="#">${title}</a>`;
-                }},
-                {data: 'user'},
-                {data: 'catagory'},
-                {data: 'status', render: function(data){
-                    if(data == "{{config('ATConfig.status.new')}}"){
-                        return '1-' + data
+            [{
+                    data: 'id'
+                },
+                {
+                    data: 'title',
+                    render: function(title) {
+                        return `<a href="#">${title}</a>`;
                     }
-                    else if(data == "{{config('ATConfig.status.in_progress')}}"){
-                        return '2-' + data
+                },
+                {
+                    data: 'user'
+                },
+                {
+                    data: 'catagory'
+                },
+                {
+                    data: 'status',
+                    render: function(data) {
+                        if (data == "{{ config('ATConfig.status.new') }}") {
+                            return '1-' + data
+                        } else if (data == "{{ config('ATConfig.status.in_progress') }}") {
+                            return '2-' + data
+                        } else if (data == "{{ config('ATConfig.status.answered') }}") {
+                            return '3-' + data
+                        } else if (data == "{{ config('ATConfig.status.closed') }}") {
+                            return '4-' + data
+                        } else {
+                            return data
+                        }
                     }
-                    else if(data == "{{config('ATConfig.status.answered')}}"){
-                        return '3-' + data
+                },
+                {
+                    data: 'updated_at',
+                    render: function(data) {
+                        datetime = new Date(data);
+                        date = datetime.toLocaleDateString('fa-IR');
+                        time = datetime.toLocaleTimeString('fa-IR');
+                        return '<span dir="auto" style="float: left">' + date + ' ' + time + '</span>';
                     }
-                    else if(data == "{{config('ATConfig.status.closed')}}"){
-                        return '4-' + data
-                    }else{
-                        return data
-                    }
-                }},
-                {data: 'updated_at', render:function(data){
-                    datetime = new Date(data);
-                    date = datetime.toLocaleDateString('fa-IR');
-                    time = datetime.toLocaleTimeString('fa-IR');
-                    return '<span dir="auto" style="float: left">' + date + ' ' + time + '</span>';
-                }},
+                },
                 // {data: 'score'}
             ],
             null,
-            [[4 , 'asc'], [5, 'desc']]
+            [
+                [4, 'asc'],
+                [5, 'desc']
+            ]
         );
 
         send_ajax_get_request(
             "{{ route('ATRoutes.get.getMyTickets') }}",
-            function(data){
+            function(data) {
                 update_datatable(data);
             }
         )
 
-        table.on('click', 'tr', function(){
-            var data = table.row( this ).data();
-            if(data != undefined){
+        table.on('click', 'tr', function() {
+            var data = table.row(this).data();
+            if (data != undefined) {
                 show_comment_modal(data.id, data.title, data.user_id);
             }
         })
-        function show_comment_modal(ticket_id, title ,user){
+
+        function show_comment_modal(ticket_id, title, user) {
             var fd = new FormData();
             fd.append('ticket_id', ticket_id);
             send_ajax_formdata_request(
                 "{{ route('ATRoutes.show.ticket') }}",
                 fd,
-                function(body){
-                    open_admin_modal_with_data(body, title, function(){
-                        $(".direct-chat-messages").animate({ scrollTop: $('.direct-chat-messages').prop("scrollHeight")}, 1);
+                function(body) {
+                    open_admin_modal_with_data(body, title, function() {
+                        $(".direct-chat-messages").animate({
+                            scrollTop: $('.direct-chat-messages').prop("scrollHeight")
+                        }, 1);
                     });
                 },
-                function(data){
+                function(data) {
                     show_error(data);
                 }
             )
