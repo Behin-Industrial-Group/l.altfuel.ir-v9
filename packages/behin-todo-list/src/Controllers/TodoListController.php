@@ -23,7 +23,9 @@ class TodoListController extends Controller
     public function list()
     {
         $tasks = Todo::where('user_id', Auth::id())->get();
-        return $tasks;
+        return [
+            'data'=> $tasks
+        ];
     }
 
     public function create(Request $request)
