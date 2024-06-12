@@ -24,24 +24,24 @@ class BotController extends Controller
             default:
                 $sentMsg = 'دستور درست را انتخاب کنید';
         }
-        $url = "https://tapi.bale.ai/bot" . config('telgram_bot_config.TOKEN') . "/sendmessage";
-        $curl = curl_init();
+        // $url = "https://tapi.bale.ai/bot" . config('telgram_bot_config.TOKEN') . "/sendmessage";
+        // $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL =>  $url . '?chat_id=' . $chat_id . '&text=' . $sentMsg,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-        ));
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL =>  $url . '?chat_id=' . $chat_id . '&text=' . $sentMsg,
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => '',
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => 'POST',
+        // ));
 
-        $response = curl_exec($curl);
-        $er = curl_error($curl);
-        Log::info($er);
-        curl_close($curl);
+        // $response = curl_exec($curl);
+        // $er = curl_error($curl);
+        // Log::info($er);
+        // curl_close($curl);
 
         $telegram = new TelegramController(config('telegram_bot_config.TOKEN'));
         $telegram->sendMessage(

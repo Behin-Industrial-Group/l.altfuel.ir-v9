@@ -24,7 +24,7 @@ class TelegramBotProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/telegram_bot_config.php' => config_path('telgram_bot_config.php')
+            __DIR__ . '/config/telegram_bot_config.php' => config_path('telegram_bot_config.php')
         ]);
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
     }

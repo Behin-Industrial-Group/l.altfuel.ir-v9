@@ -1857,7 +1857,7 @@ class TelegramController
         if ($this->log_errors) {
             if (class_exists('TelegramErrorLogger')) {
                 $loggerArray = ($this->getData() == null) ? [$content] : [$this->getData(), $content];
-                TelegramErrorLogger::log(json_decode($result, true), $loggerArray);
+                // TelegramErrorLogger::log(json_decode($result, true), $loggerArray);
             }
         }
 
