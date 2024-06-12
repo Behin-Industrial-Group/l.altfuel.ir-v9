@@ -5739,6 +5739,8 @@ return array(
     'Symfony\\Polyfill\\Php80\\PhpToken' => $vendorDir . '/symfony/polyfill-php80/PhpToken.php',
     'Symfony\\Polyfill\\Php81\\Php81' => $vendorDir . '/symfony/polyfill-php81/Php81.php',
     'Symfony\\Polyfill\\Uuid\\Uuid' => $vendorDir . '/symfony/polyfill-uuid/Uuid.php',
+    'TelegramBot\\Controllers\\BotController' => $baseDir . '/packages/behin-telegram-bot/src/Controllers/BotController.php',
+    'TelegramBot\\TelegramBotProvider' => $baseDir . '/packages/behin-telegram-bot/src/TelegramBotProvider.php',
     'Termwind\\Actions\\StyleToMethod' => $vendorDir . '/nunomaduro/termwind/src/Actions/StyleToMethod.php',
     'Termwind\\Components\\Anchor' => $vendorDir . '/nunomaduro/termwind/src/Components/Anchor.php',
     'Termwind\\Components\\BreakLine' => $vendorDir . '/nunomaduro/termwind/src/Components/BreakLine.php',

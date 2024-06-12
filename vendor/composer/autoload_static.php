@@ -61,6 +61,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'Termwind\\' => 9,
+            'TelegramBot\\' => 12,
         ),
         'S' => 
         array (
@@ -241,6 +242,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Termwind\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/termwind/src',
+        ),
+        'TelegramBot\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src',
         ),
         'Symfony\\Polyfill\\Uuid\\' => 
         array (
@@ -6394,6 +6399,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
         'Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'Symfony\\Polyfill\\Uuid\\Uuid' => __DIR__ . '/..' . '/symfony/polyfill-uuid/Uuid.php',
+        'TelegramBot\\Controllers\\BotController' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/Controllers/BotController.php',
+        'TelegramBot\\TelegramBotProvider' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/TelegramBotProvider.php',
         'Termwind\\Actions\\StyleToMethod' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Actions/StyleToMethod.php',
         'Termwind\\Components\\Anchor' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Components/Anchor.php',
         'Termwind\\Components\\BreakLine' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Components/BreakLine.php',

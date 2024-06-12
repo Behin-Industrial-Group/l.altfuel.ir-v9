@@ -47,7 +47,8 @@
             "ChatGpt\\": "packages/behin-chat-gpt/src/",
             "AiAssistant\\": "packages/behin-ai-assistant/src/",
             "BehinTest\\": "packages/behin-test/src/",
-            "TodoList\\": "packages/behin-todo-list/src/"
+            "TodoList\\": "packages/behin-todo-list/src/",
+            "TelegramBot\\": "packages/behin-telegram-bot/src/"
         }
     },
     "autoload-dev": {
