@@ -43,6 +43,14 @@ class BotController extends Controller
         Log::info($er);
         curl_close($curl);
 
+        $telegram = new TelegramController(config('telegram_bot_config.TOKEN'));
+        $telegram->sendMessage(
+            array(
+                'chat_id' => $chat_id,
+                'text' => $sentMsg
+            )
+        );
+
 
         // $return = file_get_contents($result);
 
