@@ -24,16 +24,26 @@ class BotController extends Controller
             default:
                 $sentMsg = 'دستور درست را انتخاب کنید';
         }
-        $url = "https://api.telegram.org/bot" . config('telgram_bot_config.TOKEN') . "/sendmessage?chat_id=$chat_id&text=$sentMsg" ;
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "chat_id=$chat_id&&text=$sentMsg");
+        $url = "https://tapi.bale.ai/bot" . config('telgram_bot_config.TOKEN') . "/sendmessage";
+        $curl = curl_init();
 
-        $results = json_decode(curl_exec($ch));
+        curl_setopt_array($curl, array(
+            CURLOPT_URL =>  $url . '?chat_id=' . $chat_id . '&text=' . $sentMsg,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
+
+        $response = curl_exec($curl);
+        Log::info($response);
+        curl_close($curl);
+
 
         // $return = file_get_contents($result);
 
-        return $results;
     }
 }
