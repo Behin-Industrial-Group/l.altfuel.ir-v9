@@ -19,7 +19,7 @@ class BotController extends Controller
                 $sentMsg = 'Hi';
                 break;
             case "/command1":
-                $sentMsg = 'کامند 1';
+                $sentMsg = 'Helllo';
                 break;
             default:
                 $sentMsg = 'دستور درست را انتخاب کنید';
