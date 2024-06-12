@@ -39,7 +39,8 @@ class BotController extends Controller
         ));
 
         $response = curl_exec($curl);
-        Log::info($response);
+        $er = curl_error($curl);
+        Log::info($er);
         curl_close($curl);
 
 
