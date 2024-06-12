@@ -1,6 +1,6 @@
 <?php
 
-namespace TelegramBot\Controllers;
+namespace BaleBot\Controllers;
 
 /**
  * Telegram Bot Class.
@@ -117,7 +117,7 @@ class TelegramController
      */
     public function endpoint($api, array $content, $post = true)
     {
-        $url = 'https://api.telegram.org/bot'.$this->bot_token.'/'.$api;
+        $url = 'https://tapi.bale.ai/bot'.$this->bot_token.'/'.$api;
         if ($post) {
             $reply = $this->sendAPIRequest($url, $content);
         } else {
