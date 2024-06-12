@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'TOKEN' => '',
+    'TOKEN' => env('TELEGRAM_BOT_TOKEN'),
 ];
