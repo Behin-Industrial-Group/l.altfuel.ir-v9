@@ -242,6 +242,7 @@ return [
         \AiAssistant\AiAssistantProvider::class,
         BehinTest\BehinTestProvider::class,
         \TodoList\TodoListProvider::class,
+        \TelegramBot\TelegramBotProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
