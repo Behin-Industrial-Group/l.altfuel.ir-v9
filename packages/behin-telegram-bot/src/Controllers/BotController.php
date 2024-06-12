@@ -16,7 +16,7 @@ class BotController extends Controller
         $text = $update['message']['text'];
         switch ($text) {
             case "/start":
-                $sentMsg = 'به ربات من خوش آمدید';
+                $sentMsg = 'Hi';
                 break;
             case "/command1":
                 $sentMsg = 'کامند 1';
