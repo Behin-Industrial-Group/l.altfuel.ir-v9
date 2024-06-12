@@ -33,6 +33,6 @@ class BotController extends Controller
 
         // $return = file_get_contents($result);
 
-        return $return;
+        return $results;
     }
 }
