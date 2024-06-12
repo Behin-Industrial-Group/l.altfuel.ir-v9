@@ -24,10 +24,11 @@ class BotController extends Controller
             default:
                 $sentMsg = 'دستور درست را انتخاب کنید';
         }
-        $result = "https://api.telegram.org/bot" . config('telgram_bot_config.TOKEN') . "/sendmessage?chat_id=$chat_id&text=$sentMsg" ;
-        $ch = curl_init($result);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $url = "https://api.telegram.org/bot" . config('telgram_bot_config.TOKEN') . "/sendmessage?chat_id=$chat_id&text=$sentMsg" ;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "chat_id=$chat_id&&text=$sentMsg");
 
         $results = json_decode(curl_exec($ch));
 
