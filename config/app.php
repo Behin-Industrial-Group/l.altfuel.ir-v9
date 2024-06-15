@@ -243,6 +243,7 @@ return [
         BehinTest\BehinTestProvider::class,
         \TodoList\TodoListProvider::class,
         \TelegramBot\TelegramBotProvider::class,
+        BaleBot\BaleBotProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,

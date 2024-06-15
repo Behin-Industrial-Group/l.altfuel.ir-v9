@@ -202,6 +202,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Brick\\Math\\' => 11,
             'BinshopsBlog\\' => 13,
             'BehinTest\\' => 10,
+            'BaleBot\\' => 8,
         ),
         'A' => 
         array (
@@ -644,6 +645,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/../..' . '/packages/behin-test/src',
         ),
+        'BaleBot\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-bale-bot/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -828,6 +833,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'BaleBot\\BaleBotProvider' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/BaleBotProvider.php',
+        'BaleBot\\Controllers\\BotController' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Controllers/BotController.php',
+        'BaleBot\\Controllers\\TelegramController' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Controllers/TelegramController.php',
         'BehinTest\\BehinTestProvider' => __DIR__ . '/../..' . '/packages/behin-test/src/BehinTestProvider.php',
         'BehinTest\\Models\\BehinTest' => __DIR__ . '/../..' . '/packages/behin-test/src/Models/BehinTest.php',
         'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Collection' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Collection.php',
@@ -6400,6 +6408,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'Symfony\\Polyfill\\Uuid\\Uuid' => __DIR__ . '/..' . '/symfony/polyfill-uuid/Uuid.php',
         'TelegramBot\\Controllers\\BotController' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/Controllers/BotController.php',
+        'TelegramBot\\Controllers\\TelegramController' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/Controllers/TelegramController.php',
         'TelegramBot\\TelegramBotProvider' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/TelegramBotProvider.php',
         'Termwind\\Actions\\StyleToMethod' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Actions/StyleToMethod.php',
         'Termwind\\Components\\Anchor' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Components/Anchor.php',

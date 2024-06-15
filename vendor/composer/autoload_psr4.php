@@ -113,6 +113,7 @@ return array(
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'BinshopsBlog\\' => array($vendorDir . '/binshops/laravel-blog/src'),
     'BehinTest\\' => array($baseDir . '/packages/behin-test/src'),
+    'BaleBot\\' => array($baseDir . '/packages/behin-bale-bot/src'),
     'App\\' => array($baseDir . '/app', $vendorDir . '/laravel/pint/app'),
     'AiAssistant\\' => array($baseDir . '/packages/behin-ai-assistant/src'),
 );
