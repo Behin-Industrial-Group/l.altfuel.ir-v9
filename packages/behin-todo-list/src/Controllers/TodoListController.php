@@ -47,6 +47,10 @@ class TodoListController extends Controller
         if ($task->creator != Auth::id()) {
             return response(trans("update not ok"), 403);
         }
+        $task->task = $request->task;
+        $task->description = $request->description;
+        $task->reminder_date = $request->reminder_date;
+        $task->due_date = $request->due_date;
         $task->done = $task->done ? 0 : 1;
         $task->save();
         return response(trans("update ok"));
