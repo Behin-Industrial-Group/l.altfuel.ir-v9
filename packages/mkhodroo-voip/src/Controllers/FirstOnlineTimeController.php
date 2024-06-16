@@ -13,7 +13,7 @@ class FirstOnlineTimeController extends Controller
         $value = Carbon::now();
         $data = VoipInfo::where('user_id', $user_id)->where('key', $key)->whereDate('created_at', Carbon::today())->first();
         if($data){
-            return null;
+            $key = 'online-time';
         }
         return VoipInfo::create([
             'user_id' => $user_id,
