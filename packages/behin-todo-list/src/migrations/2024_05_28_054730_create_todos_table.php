@@ -20,7 +20,7 @@ class CreateTodosTable extends Migration
             $table->text('task');
             $table->text('description')->nullable();
             $table->timestamp('reminder_date')->nullable();
-            $table->timestamp('due_date');
+            $table->timestamp('due_date')->nullable();
             $table->tinyInteger('done')->default(0);
             $table->timestamps();
             $table->softDeletes();

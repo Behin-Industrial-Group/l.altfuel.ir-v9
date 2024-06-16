@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'API_KEY' => '',
+    'API_KEY' => env('CHATGPT_API_KEY'),
 ];

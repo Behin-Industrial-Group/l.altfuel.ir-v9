@@ -104,6 +104,11 @@ return [
             'driver' => 'daily',
             'path' => storage_path('logs/irngv/poll_api_activity.log'),
             'level' => 'info'
+        ],
+        'ticketing' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/ticketing/ticketing.log'),
+            'level' => 'info'
         ]
     ],
 
