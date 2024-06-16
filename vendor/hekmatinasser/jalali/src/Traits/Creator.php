@@ -336,6 +336,15 @@ trait Creator
         return new static($datetime, $timezone);
     }
 
+    public static function createJalali2(string $datetime){
+        $datetime = explode(" ", $datetime);
+        $date = $datetime[0];
+        $date = explode("-", $date);
+        $time = $datetime[1];
+        $time = explode(":", $time);
+        return self::createJalali($date[0], $date[1], $date[2], $time[0], $time[1], 0);
+    }
+
     /**
      * Create a Jalali from just a date.
      *
