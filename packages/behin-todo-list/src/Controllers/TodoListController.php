@@ -41,6 +41,12 @@ class TodoListController extends Controller
         return view('TodoListViews::index');
     }
 
+    public function edit(Request $request)
+    {
+        $task = self::get($request->id);
+        return view('TodoListViews::edit', compact('task'));
+    }
+
     public function update(Request $request)
     {
         $task = self::get($request->id);
@@ -51,7 +57,7 @@ class TodoListController extends Controller
         $task->description = $request->description;
         $task->reminder_date = $request->reminder_date;
         $task->due_date = $request->due_date;
-        $task->done = $task->done ? 0 : 1;
+        $task->done = $request->done ? 1 : 0;
         $task->save();
         return response(trans("update ok"));
     }

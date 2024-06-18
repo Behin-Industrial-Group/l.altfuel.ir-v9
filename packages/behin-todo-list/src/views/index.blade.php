@@ -33,9 +33,13 @@
         <table class="table table-stripped" id="todos-table">
             <thead>
                 <tr>
+                    <th>شناسه</th>
+                    <th>ایجاد کننده</th>
                     <th>کار</th>
                     <th>توضیحات کار</th>
                     <th>وضعیت</th>
+                    <th>تاریخ یادآوری</th>
+                    <th>تاریخ تحویل</th>
                 </tr>
             </thead>
         </table>
@@ -49,14 +53,25 @@
             'todos-table',
             "{{ route('todoList.list') }}",
             [{
+                    data: 'id'
+                },
+                {
+                    data: 'creator'
+                },
+                {
                     data: 'task'
                 },
-
                 {
                     data: 'description'
                 },
                 {
                     data: 'done'
+                },
+                {
+                    data: 'reminder_date'
+                },
+                {
+                    data: 'due_date'
                 },
             ],
             null,
@@ -64,5 +79,33 @@
                 [2, 'asc']
             ]
         );
+
+
+        table.on('dblclick', 'tr', function() {
+            var data = table.row(this).data();
+            if (data != undefined) {
+                show_task_modal(data.id);
+            }
+        });
+
+        function show_task_modal(id) {
+            var fd = new FormData();
+            fd.append('id', id);
+            send_ajax_formdata_request(
+                "{{ route('todoList.edit') }}",
+                fd,
+                function(body) {
+                    open_admin_modal_with_data(body, '', function() {
+                        $(".direct-chat-messages").animate({
+                            scrollTop: $('.direct-chat-messages').prop("scrollHeight")
+                        }, 1);
+                    });
+                },
+                function(data) {
+                    show_error(data);
+                }
+            )
+        }
+
     </script>
 @endsection
