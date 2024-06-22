@@ -7,7 +7,7 @@
 @section('content')
     <div id="myDIV" class="header">
         <h2>To Do List</h2>
-        <form action="{{ route('todoList.create') }}" method="POST">
+        <form action="javascript:void(0)" method="POST" id="new-task">
             @csrf
             <div class="col-sm-12 mt-2">
                 <label for="task" class="col-sm-12">کار :</label>
@@ -25,7 +25,18 @@
                 <label for="due_date">تاریخ تحویل :</label class="col-sm-2">
                 <input type="date" id="due_date" name="due_date" class="col-sm-10">
             </div>
-            <button type="submit" class="col-sm-12 mt-2 btn btn-primary">اضافه کردن</button>
+            <div class="col-sm-12 mt-4">
+                <select name="user_id" id="" class="form-control form-control-sm">
+                    <option value="">کاربر را انتخاب کنید</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" @if (Auth::id() == $user->id) selected @endif>
+                            {{ $user->name }}
+                        </option>
+                    @endforeach
+
+                </select>
+            </div>
+            <button type="submit" onclick="add()" class="col-sm-12 mt-2 btn btn-primary">اضافه کردن</button>
         </form>
     </div>
 
@@ -49,6 +60,18 @@
 @section('script')
     <script src="{{ url('public/packages/behin-todo-list/script.js') }}"></script>
     <script>
+        function add() {
+            fd = new FormData($('#new-task')[0])
+            send_ajax_formdata_request(
+                "{{ route('todoList.create') }}",
+                fd,
+                function(res) {
+                    show_message(res);
+                    refresh_table();
+                }
+            )
+        }
+
         var table = create_datatable(
             'todos-table',
             "{{ route('todoList.list') }}",
@@ -106,6 +129,5 @@
                 }
             )
         }
-
     </script>
 @endsection
