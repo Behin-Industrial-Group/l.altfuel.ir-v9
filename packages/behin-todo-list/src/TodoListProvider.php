@@ -29,6 +29,6 @@ class TodoListProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
         $this->loadViewsFrom(__DIR__. '/views', 'TodoListViews');
-        $this->loadJsonTranslationsFrom(__DIR__. 'Lang');
+        $this->loadJsonTranslationsFrom(__DIR__. '/Lang');
     }
 }

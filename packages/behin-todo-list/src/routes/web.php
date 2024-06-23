@@ -9,6 +9,7 @@ Route::name('todoList.')->prefix('todo-list')->middleware(['web', 'auth'])->grou
     Route::get('index', [TodoListController::class, 'index'])->name('index');
     Route::get('list', [TodoListController::class, 'list'])->name('list');
     Route::post('create', [TodoListController::class, 'create'])->name('create');
+    Route::post('edit', [TodoListController::class, 'edit'])->name('edit');
     Route::put('update', [TodoListController::class, 'update'])->name('update');
     Route::delete('delete', [TodoListController::class, 'delete'])->name('delete');
 
