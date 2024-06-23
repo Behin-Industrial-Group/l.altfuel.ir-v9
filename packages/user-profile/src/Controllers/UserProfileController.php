@@ -22,7 +22,9 @@ class UserProfileController extends Controller
     }
 
     public static function getByUserId($user_id){
-        return UserProfile::where('user_id', $user_id)->first();
+        return UserProfile::where('user_id', $user_id)->firstOrCreate([
+            'user_id' => $user_id
+        ]);
     }
 }
 

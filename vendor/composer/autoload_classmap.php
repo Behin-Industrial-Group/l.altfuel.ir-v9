@@ -171,6 +171,8 @@ return array(
     'BaleBot\\BaleBotProvider' => $baseDir . '/packages/behin-bale-bot/src/BaleBotProvider.php',
     'BaleBot\\Controllers\\BotController' => $baseDir . '/packages/behin-bale-bot/src/Controllers/BotController.php',
     'BaleBot\\Controllers\\TelegramController' => $baseDir . '/packages/behin-bale-bot/src/Controllers/TelegramController.php',
+    'BehinLogging\\Controllers\\LoggingController' => $baseDir . '/packages/behin-logging/src/Controllers/LoggingController.php',
+    'BehinLogging\\ServiceProvider' => $baseDir . '/packages/behin-logging/src/ServiceProvider.php',
     'BehinTest\\BehinTestProvider' => $baseDir . '/packages/behin-test/src/BehinTestProvider.php',
     'BehinTest\\Models\\BehinTest' => $baseDir . '/packages/behin-test/src/Models/BehinTest.php',
     'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Collection' => $vendorDir . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Collection.php',

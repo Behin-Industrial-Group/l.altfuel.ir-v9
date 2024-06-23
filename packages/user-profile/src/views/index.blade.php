@@ -14,9 +14,6 @@
                 <div class="col-sm-4">شماره موبایل :</div>
                 <div class="col-sm-6">{{ $user->email }}</div>
                 <hr>
-                <div class="col-sm-4">مرورگر :</div>
-                <div class="col-sm-6">{{ $userAgent }}</div>
-                <hr>
                 @if ($userProfile?->national_id)
                     <div class="col-sm-4">کد ملی :</div>
                     <div class="col-sm-6">{{ $userProfile->national_id }}</div>

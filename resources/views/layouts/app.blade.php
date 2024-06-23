@@ -35,7 +35,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url('public/dashboard/plugins/datatables/dataTables.bootstrap4.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/dropzone.min.css')  . '?' . config('app.version') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" href="{{ Url('public/dist/css/persian-datepicker-0.4.5.min.css')  . '?' . config('app.version') }}" />
+
+    <link rel="stylesheet" href="{{ Url('public/plugins/persian-datepicker/persian-datepicker.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.min.css')  . '?' . config('app.version') }}" />
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
@@ -111,8 +112,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
-        <script src="{{ Url('public/dist/js/persian-date-0.1.8.min.js')  . '?' . config('app.version') }}"></script>
-        <script src="{{ Url('public/dist/js/persian-datepicker-0.4.5.min.js')  . '?' . config('app.version') }}"></script>
+        <script src="{{ Url('public/plugins/persian-datepicker/persian-date.js')  . '?' . config('app.version') }}"></script>
+        <script src="{{ Url('public/plugins/persian-datepicker/persian-datepicker.js')  . '?' . config('app.version') }}"></script>
 
         <script src="{{ url('public/dashboard/plugins/select2/select2.full.min.js')}}"></script>
         <!-- include FilePond library -->
@@ -148,7 +149,8 @@
                 $('.select2').select2();
                 $('.select2').css('width', '100%')
                 $(".persian-date").persianDatepicker({
-                    viewMode: 'year',
+                    initialValue: false,
+                    viewMode: 'day',
                     format: 'YYYY-MM-DD',
                     initialValueType: 'persian'
                 });

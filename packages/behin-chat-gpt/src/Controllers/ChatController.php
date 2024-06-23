@@ -31,8 +31,8 @@ class ChatController extends Controller
                 "temperature" => 0,
                 "max_tokens" => 2048
             ])->body();
-            return var_dump($response);
-            return $response['choices'][0]['message']['content'];
+            $response = json_decode($response);
+            return $response->choices[0]->message->content;
         } catch (Throwable $e) {
             return $e->getMessage();
             return "Chat GPT Limit Reached. This means too many people have used this demo this month and hit the FREE limit available. You will need to wait, sorry about that.";

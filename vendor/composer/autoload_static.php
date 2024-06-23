@@ -202,6 +202,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Brick\\Math\\' => 11,
             'BinshopsBlog\\' => 13,
             'BehinTest\\' => 10,
+            'BehinLogging\\' => 13,
             'BaleBot\\' => 8,
         ),
         'A' => 
@@ -645,6 +646,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/../..' . '/packages/behin-test/src',
         ),
+        'BehinLogging\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-logging/src',
+        ),
         'BaleBot\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/behin-bale-bot/src',
@@ -836,6 +841,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'BaleBot\\BaleBotProvider' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/BaleBotProvider.php',
         'BaleBot\\Controllers\\BotController' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Controllers/BotController.php',
         'BaleBot\\Controllers\\TelegramController' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Controllers/TelegramController.php',
+        'BehinLogging\\Controllers\\LoggingController' => __DIR__ . '/../..' . '/packages/behin-logging/src/Controllers/LoggingController.php',
+        'BehinLogging\\ServiceProvider' => __DIR__ . '/../..' . '/packages/behin-logging/src/ServiceProvider.php',
         'BehinTest\\BehinTestProvider' => __DIR__ . '/../..' . '/packages/behin-test/src/BehinTestProvider.php',
         'BehinTest\\Models\\BehinTest' => __DIR__ . '/../..' . '/packages/behin-test/src/Models/BehinTest.php',
         'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Collection' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Collection.php',

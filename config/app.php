@@ -244,6 +244,7 @@ return [
         \TodoList\TodoListProvider::class,
         \TelegramBot\TelegramBotProvider::class,
         BaleBot\BaleBotProvider::class,
+        BehinLogging\ServiceProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
