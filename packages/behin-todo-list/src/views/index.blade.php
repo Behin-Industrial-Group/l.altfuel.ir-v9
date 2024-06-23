@@ -15,7 +15,8 @@
                 <div class="row col-sm-12">
                     <input type="text" id="task" name="task" placeholder="{{ __('Task') }}"
                         class="form-control col-sm-11">
-                    <button type="button" class="btn btn-primary" onclick="register()"><i class="fa fa-paper-plane"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="register()"><i
+                            class="fa fa-paper-plane"></i></button>
                 </div>
                 <div class="row col-sm-12 mt-2">
                     <button class="btn btn-default m-1" onclick="show_element('description')"><i
@@ -24,24 +25,25 @@
                             class="fa fa-calendar">{{ __('Remember Me') }}</i></button>
                     <button class="btn btn-default m-1" onclick="show_element('due_date')"><i
                             class="fa fa-calendar">{{ __('Due Date') }}</i></button>
+
+                    <button class="btn btn-default m-1" onclick="show_element('assign_to')"><i
+                            class="fa fa-calendar">{{ __('Assign To') }}</i></button>
                 </div>
-                <div class="col-sm-12 mt-4">
-                    <select name="user_id" id="" class="form-control form-control-sm">
+                <div class="col-sm-12 mt-2">
+                    <textarea name="description" id="description" class="form-control" placeholder="{{ __('Description') }}"></textarea>
+                    <input type="text" id="reminder_date" name="reminder_date" class="col-sm-10 pdate form-control"
+                        placeholder="{{ __('Remember Me') }}">
+                    <input type="text" id="due_date" name="due_date" class="col-sm-10 pdate form-control"
+                        placeholder="{{ __('Due Date') }}">
+
+                    <select name="user_id" id="assign_to" class="form-control form-control-sm">
                         <option value="">کاربر را انتخاب کنید</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}" @if (Auth::id() == $user->id) selected @endif>
                                 {{ $user->name }}
                             </option>
                         @endforeach
-    
                     </select>
-                </div>
-                <div class="col-sm-12 mt-2">
-                    <textarea name="description" id="description" class="form-control" placeholder="{{ __('Description') }}"></textarea>
-                    <input type="text" id="reminder_date"  name="reminder_date" class="col-sm-10 pdate form-control"
-                        placeholder="{{ __('Remember Me') }}">
-                    <input type="text" id="due_date" name="due_date" class="col-sm-10 pdate form-control"
-                        placeholder="{{ __('Due Date') }}">
                 </div>
             </div>
         </form>
@@ -67,7 +69,6 @@
 @section('script')
     {{-- <script src="{{ url('public/packages/behin-todo-list/script.js') }}"></script> --}}
     <script>
-
         var table = create_datatable(
             'todos-table',
             "{{ route('todoList.list') }}",
@@ -109,13 +110,14 @@
                 }
             }
         });
-        function register(){
+
+        function register() {
             var form = $('#task-form')[0];
             var fd = new FormData(form);
             send_ajax_formdata_request(
                 '{{ route("todoList.create") }}',
                 fd,
-                function(response){
+                function(response) {
                     console.log(response);
                     table.ajax.reload()
                 }
@@ -153,9 +155,12 @@
         var des = $('#description');
         var reminder_date = $('#reminder_date');
         var due_date = $('#due_date');
+        var assign_to = $('#assign_to');
         des.hide()
         reminder_date.hide();
         due_date.hide();
+        assign_to.hide();
+
         function show_element(element) {
             if (element == 'description') {
                 if (des.css('display') === 'none') {
@@ -176,6 +181,13 @@
                     due_date.show()
                 } else {
                     due_date.hide()
+                }
+            }
+            if (element == 'assign_to') {
+                if (assign_to.css('display') === 'none') {
+                    assign_to.show()
+                } else {
+                    assign_to.hide()
                 }
             }
 
