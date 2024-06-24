@@ -32,7 +32,7 @@ use Illuminate\Http\Request;
 use Mkhodroo\PMReport\Controllers\TableController;
 use Mkhodroo\UserRoles\Middlewares\Access;
 
-Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', 'access'])->group(function () {
+Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', Access::class])->group(function () {
     Route::get('inbox', [CaseController::class, 'get'])->name('inbox');
     Route::get('new-case', [CaseController::class, 'newCase'])->name('newCase');
     Route::name('report.')->prefix('report')->group(function () {
