@@ -26,7 +26,7 @@ class User extends Authenticatable
         'showInReport', 
         'role_id', 
         'reset_code',
-        'pm_username',
+        'pm_username', 'pm_user_password', 'pm_user_access_token', 'pm_user_access_token_exp_date',
         'ext_num'
     ];
 
