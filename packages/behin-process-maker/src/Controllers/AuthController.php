@@ -78,6 +78,7 @@ class AuthController extends Controller
 
     private static function getAuthUser(){
         $user = Auth::user();
+        Log::info($user);
         if(!$user->pm_user_password){
             $newPass = RestApiController::changePass();
             $user = User::find($user->id);
