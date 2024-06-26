@@ -6480,6 +6480,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'UserProfile\\Controllers\\ChangePasswordController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/ChangePasswordController.php',
         'UserProfile\\Controllers\\GetUserAgenciesController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/GetUserAgenciesController.php',
+        'UserProfile\\Controllers\\MobileVerificationController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/MobileVerificationController.php',
         'UserProfile\\Controllers\\NationalIdController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/NationalIdController.php',
         'UserProfile\\Controllers\\UserAgentController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/UserAgentController.php',
         'UserProfile\\Controllers\\UserProfileController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/UserProfileController.php',

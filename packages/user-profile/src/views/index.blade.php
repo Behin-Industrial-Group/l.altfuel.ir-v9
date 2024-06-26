@@ -14,6 +14,8 @@
                 <div class="col-sm-4">شماره موبایل :</div>
                 <div class="col-sm-6">{{ $user->email }}</div>
                 <hr>
+                @include('UserProfileViews::partial-views.mobile-verification')
+                <hr>
                 @if ($userProfile?->national_id)
                     <div class="col-sm-4">کد ملی :</div>
                     <div class="col-sm-6">{{ $userProfile->national_id }}</div>
