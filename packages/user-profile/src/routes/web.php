@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\MobileVerfication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Mkhodroo\AgencyInfo\Controllers\GetAgencyController;
 use UserProfile\Controllers\ChangePasswordController;
 use UserProfile\Controllers\GetUserAgenciesController;
+use UserProfile\Controllers\MobileVerificationController;
 use UserProfile\Controllers\NationalIdController;
 use UserProfile\Controllers\UserProfileController;
 
@@ -17,6 +19,9 @@ Route::name('user-profile.')->prefix('user-profile')->middleware(['web','auth'])
 
     Route::get('/change-password', [ChangePasswordController::class, 'edit'])->name('change-password');
     Route::post('', [NationalIdController::class, 'store'])->name('storeNationalId');
-    Route::put('/', [ChangePasswordController::class, 'update'])->name('update-password');
+    Route::patch('/', [ChangePasswordController::class, 'update'])->name('update-password');
+
+    Route::post('/code', [MobileVerificationController::class, 'codeGenerator'])->name('codeGenerator');
+    Route::post('/verify', [MobileVerificationController::class, 'verify'])->name('verify');
 
 });
