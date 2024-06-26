@@ -15,7 +15,7 @@ class MobileVerificationController extends Controller
     public function codeGenerator(SendSmsController $sms)
     {
         $user = Auth::user();
-        $code = rand(10000, 99999);
+        $code = rand(1000, 9999);
         $message = 'کد تایید شماره موبایل : ' . $code;
         $sms->send($user->email, $message);
 
