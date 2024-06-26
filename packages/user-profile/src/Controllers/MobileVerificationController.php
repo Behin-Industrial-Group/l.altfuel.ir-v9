@@ -14,28 +14,46 @@ class MobileVerificationController extends Controller
 {
     public function codeGenerator(SendSmsController $sms)
     {
-        $user = Auth::user();
-        $code = rand(1000, 9999);
-        $message = 'کد تایید شماره موبایل : ' . $code;
-        $sms->send($user->email, $message);
+        $mv = MobileVerification::where('user_id', Auth::id())->first();
+        if (!$mv) {
+            $user = Auth::user();
+            $code = rand(1000, 9999);
+            $message = 'کد تایید شماره موبایل : ' . $code;
+            $sms->send($user->email, $message);
+            $mv = MobileVerification::updateOrCreate(
+                [
+                    'user_id' => $user->id
+                ],
+                [
+                    'verification_code' => $code,
+                    'expiration_date' => Carbon::now()->addMinute(5)
+                ]
+            );
+            return true;
+        }
 
-        $mv = MobileVerification::create([
-            'user_id' => $user->id,
-            'verification_code' => $code,
-            'expiration_date' => Carbon::now()->addMinute(5),
-        ]);
-        return true;
+        $currentTime = Carbon::now();
+        $diff = $currentTime->diffInMinutes($mv->expiration_date);
+        if ($diff < 5) {
+            return response(trans("code was sent"), 402);
+        }
     }
 
     public function verify(Request $request)
     {
+        $currentTime = Carbon::now();
+        $diff = $currentTime->diffInMinutes($mv->expiration_date);
         $mv = MobileVerification::where('user_id', Auth::id())->first();
-        if($request->code != $mv->verification_code){
-            return response(trans("code not ok"), 403);
+        if ($request->code != $mv->verification_code) {
+            return response(trans("code not ok"), 402);
         }
-        if(Carbon::now() > $mv->expiration_date){
-            return response(trans("date not ok"), 403);
+        if ($diff > 5) {
+            return response(trans("date not ok"), 402);
         }
+        User::where('id', Auth::id())->update([
+            'mobile_verified' => 1
+        ]);
+        $mv->forceDelete();
         return response(trans("mobile verification ok"));
     }
 }

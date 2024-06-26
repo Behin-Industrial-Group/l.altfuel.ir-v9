@@ -5,12 +5,11 @@ namespace UserProfile\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use UserProfile\Models\MobileVerification;
 use UserProfile\Models\UserProfile;
 
 class UserProfileController extends Controller
 {
-
-
     public function index(){
         $userAgent = request()->userAgent();
         $user = Auth::user();
