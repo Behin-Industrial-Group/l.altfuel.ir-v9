@@ -1,15 +1,15 @@
-<?php
-
-use Mkhodroo\MkhodrooProcessMaker\Controllers\TaskController;
+<?php 
 
 return [
-    'debug' => env('APP_DEBUG', false),
-    'process' => [
-        "61815949564e4999e9835d8060262100" => [
-            'mainFormId' => "186842745652bc12836fbb0044827570"
-        ],
-        "20109551764e348a7a8c913045934777" => [
-            'mainFormId' => "38427515364e34afc5c10a7052199230"
+    'max_multiple_file_upload' => 10,
+    'debug' => env('PM_DEBUG', false),
+    'access_token_exp_in_minute' => 10,
+    'processes' => [
+        'vacation' => [
+            'triggers' => [
+                'set user id' => '68379534364e3501fd57709063851566',
+                'set name of requester' => '98954906564e3553a082989062656447'
+            ]
         ]
-    ]
+    ],
 ];
