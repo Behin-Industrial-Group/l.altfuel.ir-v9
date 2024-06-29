@@ -37,6 +37,7 @@ class MobileVerificationController extends Controller
             return response(trans("code was sent recently"));
         }
 
+        $sms->send($user->email, $message);
         $mv->update([
             'verification_code' => $code,
             'expiration_date' => Carbon::now()->addMinute(5)
