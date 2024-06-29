@@ -51,6 +51,7 @@ use function PHPSTORM_META\type;
 //     return password_hash('', 1);
 // });
 
+
 Route::get('tst', function () {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'https://voip.altfuel.ir/test.php');
@@ -369,16 +370,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
         Route::post('/sendMsg', 'WhatsappController@sendMessage');
     });
 
-    Route::prefix('/user')->group(function () {
-        Route::get('/{id}', [Auth\UserController::class, 'index']);
-        Route::post('/{id}', [Auth\UserController::class, 'AccessReg']);
 
-        Route::post('/{id}/changepass', [Auth\UserController::class, 'ChangePass']);
-        Route::post('/{id}/change-pm-username', [Auth\UserController::class, 'changePMUsername'])->name('change-pm-username');
-        Route::post('/{id}/change-ip', [Auth\UserController::class, 'ChangeIp'])->name('change-user-ip');
-
-        Route::post('/{id}/changeShowInReport', [Auth\UserController::class, 'changeShowInReport']);
-    });
 
     Route::name('report.')->prefix('/report')->group(function () {
         Route::get('/count-issues', [RReport::class, 'get_number_of_issues']);

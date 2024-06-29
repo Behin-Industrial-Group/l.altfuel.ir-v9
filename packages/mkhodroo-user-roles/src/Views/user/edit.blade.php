@@ -4,11 +4,6 @@
     کاربران
 @endsection
 
-<?php
-use App\Models\AccessModel;
-use App\Models\User;
-?>
-
 @section('content')
     <div class="row">
         <div class="col-sm-12">
@@ -17,9 +12,9 @@ use App\Models\User;
         <div class="col-sm-6">
             <div class="box">
                 <div class="box-header">
-                    
+
                 </div>
-                
+
                 <div class="box-body">
                     <table class="table">
                         <tr>
@@ -62,12 +57,12 @@ use App\Models\User;
                     </table>
                 </div>
             </div>
-            
+
             <div class="box">
                 <div class="box-body">
                     <form method="post" action="{{$user->id}}/changeShowInReport">
                         @csrf
-                        <input type="checkbox" name="showInReport" class="" <?php if(User::find($user->id)->showInReport == 1) echo "checked" ?>>نمایش در گزارشها
+                        <input type="checkbox" name="showInReport" class="" <?php if($user->showInReport == 1) echo "checked" ?>>نمایش در گزارشها
                         <input type="submit" class="btn btn-success" value="ثبت">
                     </form>
                 </div>
@@ -78,7 +73,7 @@ use App\Models\User;
                 <div class="box-header">
                     <h3>دسترسی ها</h3>
                 </div>
-                
+
                 <div class="box-body">
                     <button class="" id="check_all">انتخاب همه</button>
                     <form class="form-horizontal" method="post" action="" id="role-table">
@@ -98,7 +93,7 @@ use App\Models\User;
     </div>
 @endsection
 @section('script')
-    
+
     <script>
         function change_role(){
             send_ajax_request(
