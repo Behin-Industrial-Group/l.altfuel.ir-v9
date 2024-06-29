@@ -81,7 +81,7 @@
                        <input type="text" name="user_id" id="" value="{{ $user->id }}">
                             <select name="role_id" id="">
                                 @foreach ($roles as $role)
-                                    <option value="{{$role->id}}" @if($user->role_id === $role->id) {{ 'selected' }}   @endif>{{$role->name}}</option>
+                                    <option value="{{$role->id}}" @if($user->role_id == $role->id) {{ 'selected' }}   @endif>{{$role->name}}</option>
                                 @endforeach
                             </select>
                     </form>
