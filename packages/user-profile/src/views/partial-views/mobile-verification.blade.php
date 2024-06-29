@@ -1,23 +1,56 @@
-<form action="javascript:void(0)" method="POST" id="mobile-verification">
-    {{-- @method('PUT') --}}
-    @csrf
-    <div class="col-sm-12 mt-2">
-        <label for="code" class="col-sm-12">کد تایید شماره موبایل</label>
-        <input type="text" id="code" name="code" placeholder="کد 4 رقمی ..." class="col-sm-12 mb-2">
+
+
+    <div class="col-sm-4">
+        <label for="code" class="col-sm-12">{{__('Mobile Verification')}}</label>
     </div>
-    <button type="submit" onclick="generate()" class="col-sm-12 mt-2 btn btn-primary">تولید کد تایید</button>
-    <button type="submit" onclick="verify()" class="col-sm-12 mt-2 btn btn-primary">تایید شماره موبایل</button>
-</form>
+    <div class="col-sm-8">
+        @if (auth()->user()?->mobile_verified)
+            {{ __('Mobile Verified') }}
+        @else
+        <div id="send-code">
+            <button class="btn btn-success" onclick="generate()" class="col-sm-12 mt-2 btn btn-primary">{{__('Send Code')}}</button>
+        </div>
+        <form action="javascript:void(0)" method="POST" id="mobile-verification">
+            @csrf
+            <div class="col-sm-12 mt-2">
+                <input type="text" id="code" name="code" placeholder="کد 4 رقمی ..." class="col-sm-12 mb-2">
+            </div>
+            <button type="submit" onclick="verify()" class="col-sm-12 mt-2 btn btn-primary">{{__('Verify')}}</button>
+        </form>
+        @endif
+    </div>
+
+
 
 <script>
+    var mobile_verification_form = $('#mobile-verification');
+    var send_code = $('#send-code')
+    function change_verify_display(){
+        if(mobile_verification_form.css('display') == 'none'){
+            mobile_verification_form.show();
+        }else{
+            mobile_verification_form.hide();
+        }
+    }
+
+    function change_send_code_display(){
+        if(send_code.css('display') == 'none'){
+            send_code.show();
+        }else{
+            send_code.hide();
+        }
+    }
+
+    change_verify_display()
     function generate() {
-        fd = new FormData($('#mobile-verification')[0])
+        fd = new FormData()
         send_ajax_formdata_request(
             "{{ route('user-profile.codeGenerator') }}",
             fd,
             function(res) {
                 show_message(res);
-
+                change_send_code_display()
+                change_verify_display()
             }
         )
     }
@@ -29,7 +62,7 @@
             fd,
             function(res) {
                 show_message(res);
-
+                location.reload()
             }
         )
     }
