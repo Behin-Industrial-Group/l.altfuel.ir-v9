@@ -31,7 +31,6 @@
             "Database\\Seeders\\": "database/seeders/",
             "Mkhodroo\\AltfuelTicket\\": "packages/altfuel-ticket/src/",
             "Mkhodroo\\UserRoles\\": "packages/mkhodroo-user-roles/src/",
-            "Mkhodroo\\MkhodrooProcessMaker\\": "packages/mkhodroo-process-maker/src",
             "Mkhodroo\\Voip\\": "packages/mkhodroo-voip/src",
             "Mkhodroo\\CaseInsensitiveTranslate\\": "packages/case-insensitive-translate/src",
             "Mkhodroo\\SmsTemplate\\": "packages/mkhodroo-sms-template/src",
@@ -50,7 +49,8 @@
             "TodoList\\": "packages/behin-todo-list/src/",
             "TelegramBot\\": "packages/behin-telegram-bot/src/",
             "BaleBot\\": "packages/behin-bale-bot/src/",
-            "BehinLogging\\": "packages/behin-logging/src/"
+            "BehinLogging\\": "packages/behin-logging/src/",
+            "BehinProcessMaker\\": "packages/behin-process-maker/src/"
         }
     },
     "autoload-dev": {

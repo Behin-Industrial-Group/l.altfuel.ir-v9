@@ -40,7 +40,7 @@ class TodoListController extends Controller
             'reminder_date' => $request->reminder_date,
             'due_date' => $request->due_date,
         ]);
-        return view('TodoListViews::index');
+        return $task;
     }
 
     public function edit(Request $request)
