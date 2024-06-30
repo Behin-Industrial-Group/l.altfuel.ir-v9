@@ -10,6 +10,9 @@ use UserProfile\Models\UserProfile;
 class NationalIdController extends Controller
 {
     public function store(Request $request){
+        $validated = $request->validate([
+            'national_id' => ['required', 'unique', 'numeric', 'digits:10']
+        ]);
         UserProfile::updateOrCreate(
             [
                 'user_id' => Auth::id()
