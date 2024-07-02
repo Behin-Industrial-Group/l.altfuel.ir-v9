@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="p-4">
         <div class="row m-10">
             <div class="col-sm-6 row">
@@ -29,6 +38,7 @@
                     
                 @endif
                 @include('UserProfileViews::partial-views.mobile-verification')
+                @include('UserProfileViews::partial-views.role-name')
             </div>
             <div class="col-sm-3"></div>
             <div class="col-sm-3">
