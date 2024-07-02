@@ -5,6 +5,7 @@ namespace Mkhodroo\AgencyInfo\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\AgencyInfo\Requests\AgencyInfoRequest;
 
@@ -173,5 +174,9 @@ class AgencyController extends Controller
         $row = GetAgencyController::getByKey($r->parent_id, $r->key);
         $row->delete();
         return $row;
+    }
+
+    public static function getAgencyFieldsByParentId($parent_id){
+        return AgencyInfo::where('parent_id', $parent_id)->get();
     }
 }

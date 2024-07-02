@@ -4,6 +4,7 @@ namespace Mkhodroo\AgencyInfo\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 
@@ -16,7 +17,9 @@ class GetAgencyController extends Controller
 
     public static function getByParentId($parent_id)
     {
-        return AgencyInfo::where('parent_id', $parent_id)->get();
+        $agency = AgencyInfo::where('parent_id', $parent_id)->get();
+        $data = AgencyListController::makeCustomFields($agency[0], array_keys(AgencyListController::getKeys()->toArray()));
+        return $data;
     }
 
     public static function getByKeyValue($key, $value)
@@ -36,10 +39,11 @@ class GetAgencyController extends Controller
         $i=0;
         foreach($parent_ids as $parent_id){
             $agency = self::getByParentId($parent_id);
-            $agencies[$i] = $agency->pluck('value', 'key');
-            $agencies[$i]['parent_id'] = $agency->first()->parent_id;
+            $agencies[$i] = $agency;
             $i++;
         }
+        
+
         return $agencies;
     }
 

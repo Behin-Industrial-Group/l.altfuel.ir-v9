@@ -29,6 +29,22 @@
                         @endif
                     </td>
                 </tr>
+                @if (config('agency_info.show_non_valid_info'))
+                    <tr>
+                        <td>
+                            {{ __("non_valid_") . __($field_detail) }}
+                        </td>
+                        @php
+                            $non_valid_value = $agency_fields->where('key', "non_valid_$field_detail")->first()?->value;
+                        @endphp
+                        <td style="text-align: center">
+                            @if ($non_valid_value)
+                                <a href="{{ url("public/$non_valid_value") }}"
+                                    download="{{ __("non_valid_") . __($field_detail) }}">{{ __("non_valid_") . __($field_detail) }}</a>
+                            @endif
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </table>
         <button class="btn btn-primary" onclick="docs_edit()">{{ __('Edit') }}</button>
