@@ -35,7 +35,6 @@
                             <button class="btn btn-primary btn-sm col-sm-3" onclick="store_national_id()">ثبت</button>
                         </form>
                     </div>
-                    
                 @endif
                 @include('UserProfileViews::partial-views.mobile-verification')
                 @include('UserProfileViews::partial-views.role-name')
@@ -88,5 +87,6 @@
                 }
             )
         }
+
     </script>
 @endsection
