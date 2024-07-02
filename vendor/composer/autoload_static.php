@@ -121,6 +121,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'M' => 
         array (
+            'MyAgencyInfo\\' => 13,
             'Monolog\\' => 8,
             'Mkhodroo\\Voip\\' => 14,
             'Mkhodroo\\VacationRequest\\' => 25,
@@ -425,6 +426,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
+        ),
+        'MyAgencyInfo\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/my-agency-info/src',
         ),
         'Monolog\\' => 
         array (
@@ -3804,10 +3809,12 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\UserRoles\\Controllers\\AccessController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/AccessController.php',
         'Mkhodroo\\UserRoles\\Controllers\\GetMethodsController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/GetMethodsController.php',
         'Mkhodroo\\UserRoles\\Controllers\\GetRoleController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/GetRoleController.php',
+        'Mkhodroo\\UserRoles\\Controllers\\UserController' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Controllers/UserController.php',
         'Mkhodroo\\UserRoles\\Middlewares\\Access' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Middlewares/Access.php',
         'Mkhodroo\\UserRoles\\Models\\Access' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/Access.php',
         'Mkhodroo\\UserRoles\\Models\\Method' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/Method.php',
         'Mkhodroo\\UserRoles\\Models\\Role' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/Role.php',
+        'Mkhodroo\\UserRoles\\Models\\User' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/User.php',
         'Mkhodroo\\UserRoles\\UserRolesServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/UserRolesServiceProvider.php',
         'Mkhodroo\\VacationRequest\\VacationRequestProvider' => __DIR__ . '/../..' . '/packages/vacation-request/src/VacationRequestProvider.php',
         'Mkhodroo\\Voip\\Controllers\\AMIController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/AMIController.php',
@@ -4019,6 +4026,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
         'Monolog\\Test\\TestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/TestCase.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
+        'MyAgencyInfo\\Controllers\\EditMyAgencyInfoController' => __DIR__ . '/../..' . '/packages/my-agency-info/src/Controllers/EditMyAgencyInfoController.php',
+        'MyAgencyInfo\\PackageServiceProvider' => __DIR__ . '/../..' . '/packages/my-agency-info/src/PackageServiceProvider.php',
         'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\DeprecatedException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\DirectoryNotFoundException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
@@ -6484,6 +6493,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'UserProfile\\Controllers\\NationalIdController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/NationalIdController.php',
         'UserProfile\\Controllers\\UserAgentController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/UserAgentController.php',
         'UserProfile\\Controllers\\UserProfileController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/UserProfileController.php',
+        'UserProfile\\Models\\MobileVerification' => __DIR__ . '/../..' . '/packages/user-profile/src/Models/MobileVerification.php',
         'UserProfile\\Models\\UserProfile' => __DIR__ . '/../..' . '/packages/user-profile/src/Models/UserProfile.php',
         'UserProfile\\UserProfileProvider' => __DIR__ . '/../..' . '/packages/user-profile/src/UserProfileProvider.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',

@@ -1,0 +1,17 @@
+{
+    "name": "behin/my-agency-info",
+    "version": "1.1",
+    "description": "",
+    "authors": [
+        {
+            "name": "MKhodroo",
+            "email": "mkhodroo@yahoo.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MyAgencyInfo\\": "src/"
+        }
+    },
+    "require": {}
+}

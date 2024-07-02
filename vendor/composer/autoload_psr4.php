@@ -59,6 +59,7 @@ return array(
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'NunoMaduro\\Collision\\' => array($vendorDir . '/nunomaduro/collision/src'),
+    'MyAgencyInfo\\' => array($baseDir . '/packages/my-agency-info/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Mkhodroo\\Voip\\' => array($baseDir . '/packages/mkhodroo-voip/src'),
     'Mkhodroo\\VacationRequest\\' => array($baseDir . '/packages/vacation-request/src'),

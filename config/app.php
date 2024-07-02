@@ -245,6 +245,7 @@ return [
         BaleBot\BaleBotProvider::class,
         BehinLogging\ServiceProvider::class,
         BehinProcessMaker\BehinProcessMakerProvider::class,
+        MyAgencyInfo\PackageServiceProvider::class,
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,
