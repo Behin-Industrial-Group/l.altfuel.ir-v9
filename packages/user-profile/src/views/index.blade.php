@@ -23,22 +23,22 @@
                 <div class="col-sm-4">شماره موبایل :</div>
                 <div class="col-sm-6">{{ $user->email }}</div>
                 <hr>
-                @include('UserProfileViews::partial-views.mobile-verification')
-                @include('UserProfileViews::partial-views.role-name')
                 @if ($userProfile?->national_id)
                     <div class="col-sm-4">کد ملی :</div>
                     <div class="col-sm-6">{{ $userProfile->national_id }}</div>
                 @else
-                    <form action="javascript:void(0)" class="row" id="store-national-id-form">
-                        @csrf
-                        <div class="col-sm-4">کد ملی :</div>
-                        <input type="text" class="form-control col-sm-6" name="national_id" id="national_id">
-                        <button class="btn btn-primary btn-sm col-sm-2" onclick="store_national_id()">ثبت</button>
-                    </form>
+                    <div class="col-sm-4">کد ملی :</div>
+                    <div class="col-sm-6">
+                        <form action="javascript:void(0)" class="row" id="store-national-id-form">
+                            @csrf
+                            <input type="text" class="form-control col-sm-9" name="national_id" id="national_id">
+                            <button class="btn btn-primary btn-sm col-sm-3" onclick="store_national_id()">ثبت</button>
+                        </form>
+                    </div>
+                    
                 @endif
-                <div class="row">
-
-                </div>
+                @include('UserProfileViews::partial-views.mobile-verification')
+                @include('UserProfileViews::partial-views.role-name')
             </div>
             <div class="col-sm-3"></div>
             <div class="col-sm-3">

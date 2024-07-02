@@ -1,3 +1,12 @@
 {
-    "Show My Agencies": "مشاهده مراکز مرتبط با من"
+    "Show My Agencies": "مشاهده مراکز مرتبط با من",
+    "Verify": "تایید",
+    "Send Code": "ارسال کد تایید",
+    "Mobile Verification": "تایید موبایل",
+    "Mobile Verified": "موبایل تایید شده است",
+    "code send": "کد ارسال شد",
+    "code was sent recently": "کد قبلا ارسال شده است",
+    "code is not valid": "کد نامعتبر است",
+    "code was expired": "کد منقضی شده است",
+    "mobile verified": "موبایل تایید شد"
 }
