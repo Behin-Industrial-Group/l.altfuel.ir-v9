@@ -19,16 +19,19 @@ class GetTicketController extends Controller
         $result = Ticket::get()->each(function ($row) {
             $row->catagory = $row->catagory();
             $row->user = $row->user()?->name;
+            $row->user_level = $row->user()->level();
         });
         return $result;
     }
 
     function getMyTickets()
     {
-        return Ticket::where('user_id', Auth::id())->get()->each(function ($row) {
+        $data = Ticket::where('user_id', Auth::id())->get()->each(function ($row) {
             $row->catagory = $row->catagory()['name'];
             $row->user = $row->user()?->name;
+            $row->user_level = $row->user()->level();
         });
+        return $data;
     }
 
     function getMyTicketsByCatagory($catagory_id)
@@ -37,12 +40,14 @@ class GetTicketController extends Controller
             return Ticket::where('user_id', Auth::id())->WhereIn('cat_id', $catagory_id)->get()->each(function ($row) {
                 $row->catagory = $row->catagory();
                 $row->user = $row->user()?->name;
+                $row->user_level = $row->user()->level();
             });
         }
         $category = CatagoryController::get($catagory_id)->name;
         return Ticket::where('user_id', Auth::id())->where('cat_id', $catagory_id)->get()->each(function ($row) use ($category){
             $row->catagory = $category;
             $row->user = $row->user()?->name;
+            $row->user_level = $row->user()->level();
         });
     }
 
@@ -54,6 +59,7 @@ class GetTicketController extends Controller
             return Ticket::where('cat_id', $r->catagory)->get()->each(function ($row) use ($category) {
                 $row->catagory = $category;
                 $row->user = $row->user()?->name;
+                $row->user_level = $row->user()->level();
             });
         }
         return $this->getMyTicketsByCatagory($r->catagory);

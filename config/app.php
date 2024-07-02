@@ -234,7 +234,6 @@ return [
         \Hidro\Registration\HidroRegProvider::class,
         Mkhodroo\AgencyInfo\AgencyInfoProvider::class,
         Mkhodroo\Cities\CityProvider::class,
-        \Mkhodroo\VacationRequest\VacationRequestProvider::class,
         \UserProfile\UserProfileProvider::class,
         \IrngvPoll\IrngvPollProvider::class,
         \ChatGpt\ChatGptProvider::class,
