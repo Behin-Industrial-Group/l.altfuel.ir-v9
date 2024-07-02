@@ -32,16 +32,19 @@
                             <td colspan="6">جهت مشاهده گزینه های هر سوال صفحه را به چپ یا راست بکشید</td>
                         </tr>
                         @foreach ($questions as $key => $value)
-                            @if ($value["enable"] === 1)
-                                <tr>
-                                    <td>{{ $value["question"] }}</td>
-                                    @foreach ($value["answers"] as $a_key => $a_value)
-                                        <td><input type="radio" name="{{ $key }}" id="{{ $key }}" value="{{ $a_key }}">{{ $a_value }}</td>
-                                    @endforeach
-                                </tr>
+                            @if ($value['enable'] === 1)
+                                @if ($value['reg_type'] == $info->reg_type)
+                                    <tr>
+                                        <td>{{ $value['question'] }}</td>
+                                        @foreach ($value['answers'] as $a_key => $a_value)
+                                            <td><input type="radio" name="{{ $key }}" id="{{ $key }}"
+                                                    value="{{ $a_key }}">{{ $a_value }}</td>
+                                        @endforeach
+                                    </tr>
+                                @endif
                             @endif
                         @endforeach
-                        
+
                         <tfoot>
                             <tr>
                                 <td>
@@ -59,8 +62,8 @@
     </div>
     <script>
         function register_answer() {
-            var v= validation();
-            if(v){
+            var v = validation();
+            if (v) {
                 alert(v);
                 return false;
             }
@@ -73,20 +76,22 @@
                 },
                 method: 'post',
                 success: function(data) {
-                    $('#main').html("<div class='alert alert-success'>اطلاعات با موفیت ذخیره شد. با تشکر از مشارکت شما</div>");
+                    $('#main').html(
+                        "<div class='alert alert-success'>اطلاعات با موفیت ذخیره شد. با تشکر از مشارکت شما</div>"
+                        );
                 },
-                error: function (er){
+                error: function(er) {
                     console.log(er);
                     alert("خطایی هنگام ذخیره اطلاعات رخ داد. با پشتیبانی تماس بگیرید.");
                 }
             })
         }
 
-        function validation(){
+        function validation() {
             @foreach ($questions as $key => $value)
-                @if ($value["enable"] === 1)
-                    if( !$('input[name="{{$key}}"]:checked').val() ){
-                        return `پاسخی برای سوال: {{$value['question']}} ثبت نشده است`;
+                @if ($value['enable'] === 1)
+                    if (!$('input[name="{{ $key }}"]:checked').val()) {
+                        return `پاسخی برای سوال: {{ $value['question'] }} ثبت نشده است`;
                     }
                 @endif
             @endforeach
