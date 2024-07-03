@@ -18,12 +18,15 @@
                 <td>{{ $agency['guild_number'] }}</td>
                 <td>{{ $agency['exp_date'] }}</td>
                 <td>{{ $agency['address'] }}</td>
-                <td><a href="{{ route('user-profile.getLocation', ['parent_id' => $agency['parent_id']]) }}">ویرایش
-                        لوکیشن</a></td>
+                <td><a href="{{ route('user-profile.getLocation', ['parent_id' => $agency['parent_id']]) }}">ویرایش لوکیشن</a></td>
                 <td>
+                    @if (isset($agency['participation']) and $agency['participation'] == 1)
+                    شما قبلا در طرح شرکت کرده اید
+                    @else
                     <form action="javascript:void(0)">
                         <button class="btn btn-primary btn-sm" onclick="create_ticket()">شرکت در طرح رتبه بندی</button>
                     </form>
+                    @endif
                 </td>
             </tr>
         @endforeach
@@ -36,12 +39,14 @@
             data.append('catagory', 6)
             data.append('title', 'تمایل به شرکت')
             data.append('text', '{{ $agency["province"] . $agency["agency_code"] }}')
+            data.append('parent_id', '{{ $agency["parent_id"] }}')
             send_ajax_formdata_request(
-                "{{ route('ATRoutes.store') }}",
+                "{{ route('user-profile.participation') }}",
                 data,
                 function(response) {
                     console.log(response);
-                    show_message("{{ trans('attendence success') }}")
+                    show_message("{{ trans('participation successfull') }}");
+                    getAgencies()
                 }
             )
         }

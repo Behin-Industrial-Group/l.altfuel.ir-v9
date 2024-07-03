@@ -14,6 +14,7 @@ use UserProfile\Controllers\UserProfileController;
 Route::name('user-profile.')->prefix('user-profile')->middleware(['web','auth'])->group(function(){
     Route::post('getUserAgencies', [GetUserAgenciesController::class, 'get'])->name('getUserAgencies');
     Route::get('agency/edit-location/{parent_id}', [GetUserAgenciesController::class, 'getLocation'])->name('getLocation');
+    Route::post('participation', [GetUserAgenciesController::class, 'participation'])->name('participation');
 
 
     Route::get('/', [UserProfileController::class, 'index'])->name('profile');
