@@ -144,7 +144,7 @@ class EnumsEntity
                 1 => "بله",
                 2 => "خیر",
             ],
-            'reg_type' => ['symfa']
+            'reg_type' => ['simfa']
         ],
         'q7' => [
             'enable' => 1,
@@ -156,7 +156,7 @@ class EnumsEntity
                 2 => "کم",
                 1 => "خیلی کم",
             ],
-            'reg_type' => ['symfa']
+            'reg_type' => ['simfa']
         ]
     ];
 
