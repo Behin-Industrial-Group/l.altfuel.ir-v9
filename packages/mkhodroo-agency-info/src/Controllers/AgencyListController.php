@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\Cities\Controllers\CityController;
 use Mkhodroo\DateConvertor\Controllers\SDate;
@@ -51,28 +52,28 @@ class AgencyListController extends Controller
                 $parent_ids =  AgencyInfo::where('value', 'like', "%". $r->field_value. "%")->groupBy('parent_id')->pluck('parent_id');
                 $agencies = AgencyInfo::whereIn('id', $parent_ids)->where('value', $r->$main_field)->groupBy('parent_id')->get();
             }
-            
-
         }
-        // return $agencies;
         $key_indexes = explode(',', $r->cols);
         $agencies =  $agencies->each(function ($agency) use($key_indexes) {
-            $keys = self::getKeys();
-            foreach($key_indexes as $key_index){
-                $key = $keys[$key_index];
-                if($key === 'province'){
-                    $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)->province;
-                }elseif($key === 'city'){
-                    $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, 'province')?->value)->city;
-                }else{
-                    $agency->$key = __(GetAgencyController::getByKey($agency->parent_id, $key)?->value);
-                }
-            }
-            $agency->fin_green = __(GetAgencyController::getByKey($agency->parent_id, 'fin_green')?->value);
-            
-
+            $agency = self::makeCustomFields($agency, $key_indexes);
         });
         return ['data' => $agencies];
+    }
+
+    public static function makeCustomFields(object $agency, array $cols) {
+        $keys = self::getKeys();
+        foreach($cols as $key_index){
+            $key = $keys[$key_index];
+            if($key === 'province'){
+                $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->province;
+            }elseif($key === 'city'){
+                $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, 'province')?->value)?->city;
+            }else{
+                $agency->$key = __(GetAgencyController::getByKey($agency->parent_id, $key)?->value);
+            }
+        }
+        $agency->fin_green = __(GetAgencyController::getByKey($agency->parent_id, 'fin_green')?->value);
+        return $agency;
     }
 
     public static function getValidAgencies($type = 'agency'){

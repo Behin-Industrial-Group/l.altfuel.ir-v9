@@ -3350,6 +3350,8 @@ return array(
     'Monolog\\SignalHandler' => $vendorDir . '/monolog/monolog/src/Monolog/SignalHandler.php',
     'Monolog\\Test\\TestCase' => $vendorDir . '/monolog/monolog/src/Monolog/Test/TestCase.php',
     'Monolog\\Utils' => $vendorDir . '/monolog/monolog/src/Monolog/Utils.php',
+    'MyAgencyInfo\\Controllers\\EditMyAgencyInfoController' => $baseDir . '/packages/my-agency-info/src/Controllers/EditMyAgencyInfoController.php',
+    'MyAgencyInfo\\PackageServiceProvider' => $baseDir . '/packages/my-agency-info/src/PackageServiceProvider.php',
     'Nette\\ArgumentOutOfRangeException' => $vendorDir . '/nette/utils/src/exceptions.php',
     'Nette\\DeprecatedException' => $vendorDir . '/nette/utils/src/exceptions.php',
     'Nette\\DirectoryNotFoundException' => $vendorDir . '/nette/utils/src/exceptions.php',

@@ -121,6 +121,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'M' => 
         array (
+            'MyAgencyInfo\\' => 13,
             'Monolog\\' => 8,
             'Mkhodroo\\Voip\\' => 14,
             'Mkhodroo\\UserRoles\\' => 19,
@@ -424,6 +425,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
+        ),
+        'MyAgencyInfo\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/my-agency-info/src',
         ),
         'Monolog\\' => 
         array (
@@ -4015,6 +4020,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
         'Monolog\\Test\\TestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/TestCase.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
+        'MyAgencyInfo\\Controllers\\EditMyAgencyInfoController' => __DIR__ . '/../..' . '/packages/my-agency-info/src/Controllers/EditMyAgencyInfoController.php',
+        'MyAgencyInfo\\PackageServiceProvider' => __DIR__ . '/../..' . '/packages/my-agency-info/src/PackageServiceProvider.php',
         'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\DeprecatedException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\DirectoryNotFoundException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
