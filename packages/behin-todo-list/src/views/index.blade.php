@@ -93,7 +93,8 @@
                 {
                     data: 'due_date'
                 },
-            ]
+            ],
+            
         )
 
         // initial_view()

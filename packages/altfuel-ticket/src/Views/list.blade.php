@@ -61,7 +61,12 @@
                     }
                 },
                 {
-                    data: 'user'
+                    data: 'user', render:function(data, type, row){
+                        if(row.user_level == 2){
+                            return data + ' <i style="color:royalblue" class="fa fa-check-circle"></i>'
+                        }
+                        return data
+                    }
                 },
                 {
                     data: 'catagory'

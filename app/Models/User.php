@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Mkhodroo\UserRoles\Controllers\AccessController;
+use UserProfile\Controllers\UserLevelController;
 
 class User extends Authenticatable
 {
@@ -23,8 +24,8 @@ class User extends Authenticatable
         'password',
         'level',
         'display_name',
-        'showInReport', 
-        'role_id', 
+        'showInReport',
+        'role_id',
         'reset_code',
         'pm_username', 'pm_user_password', 'pm_user_access_token', 'pm_user_access_token_exp_date',
         'ext_num'
@@ -72,6 +73,10 @@ class User extends Authenticatable
 
     function access($method_name) {
         return (new AccessController($method_name))->check();
+    }
+
+    function level(){
+        return UserLevelController::levelSetter($this->id);
     }
 
 }

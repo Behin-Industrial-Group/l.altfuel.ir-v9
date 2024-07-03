@@ -62,7 +62,6 @@ return array(
     'MyAgencyInfo\\' => array($baseDir . '/packages/my-agency-info/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Mkhodroo\\Voip\\' => array($baseDir . '/packages/mkhodroo-voip/src'),
-    'Mkhodroo\\VacationRequest\\' => array($baseDir . '/packages/vacation-request/src'),
     'Mkhodroo\\UserRoles\\' => array($baseDir . '/packages/mkhodroo-user-roles/src'),
     'Mkhodroo\\SmsTemplate\\' => array($baseDir . '/packages/mkhodroo-sms-template/src'),
     'Mkhodroo\\PMReport\\' => array($baseDir . '/packages/mkhodroo-pm-report/src'),

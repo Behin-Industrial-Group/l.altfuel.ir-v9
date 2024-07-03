@@ -124,7 +124,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'MyAgencyInfo\\' => 13,
             'Monolog\\' => 8,
             'Mkhodroo\\Voip\\' => 14,
-            'Mkhodroo\\VacationRequest\\' => 25,
             'Mkhodroo\\UserRoles\\' => 19,
             'Mkhodroo\\SmsTemplate\\' => 21,
             'Mkhodroo\\PMReport\\' => 18,
@@ -438,10 +437,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\Voip\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src',
-        ),
-        'Mkhodroo\\VacationRequest\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/packages/vacation-request/src',
         ),
         'Mkhodroo\\UserRoles\\' => 
         array (
@@ -3816,7 +3811,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\UserRoles\\Models\\Role' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/Role.php',
         'Mkhodroo\\UserRoles\\Models\\User' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/Models/User.php',
         'Mkhodroo\\UserRoles\\UserRolesServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-user-roles/src/UserRolesServiceProvider.php',
-        'Mkhodroo\\VacationRequest\\VacationRequestProvider' => __DIR__ . '/../..' . '/packages/vacation-request/src/VacationRequestProvider.php',
         'Mkhodroo\\Voip\\Controllers\\AMIController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/AMIController.php',
         'Mkhodroo\\Voip\\Controllers\\CallHistoryController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/CallHistoryController.php',
         'Mkhodroo\\Voip\\Controllers\\FirstOnlineTimeController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/FirstOnlineTimeController.php',
@@ -6492,6 +6486,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'UserProfile\\Controllers\\MobileVerificationController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/MobileVerificationController.php',
         'UserProfile\\Controllers\\NationalIdController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/NationalIdController.php',
         'UserProfile\\Controllers\\UserAgentController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/UserAgentController.php',
+        'UserProfile\\Controllers\\UserLevelController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/UserLevelController.php',
         'UserProfile\\Controllers\\UserProfileController' => __DIR__ . '/../..' . '/packages/user-profile/src/Controllers/UserProfileController.php',
         'UserProfile\\Models\\MobileVerification' => __DIR__ . '/../..' . '/packages/user-profile/src/Models/MobileVerification.php',
         'UserProfile\\Models\\UserProfile' => __DIR__ . '/../..' . '/packages/user-profile/src/Models/UserProfile.php',

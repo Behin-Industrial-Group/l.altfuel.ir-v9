@@ -31,7 +31,7 @@ class GetAgencyController extends Controller
         return;
     }
 
-    public static function getAllByKeyValue(array $key, array $value)
+    public static function getAllByKeyValue(array $key, array $value): array
     {
         $parent_ids = AgencyInfo::whereIn('key', $key)->whereIn('value', $value)->pluck('parent_id')->toArray();
         $parent_ids = array_unique($parent_ids);
