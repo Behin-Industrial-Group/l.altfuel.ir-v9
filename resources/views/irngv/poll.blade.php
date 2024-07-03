@@ -35,7 +35,7 @@
                             @if ($value['enable'] === 1)
                                 @if (in_array($info->reg_type, $value['reg_type']))
                                     <tr>
-                                        <td>{{ $value['question'] }}</td>
+                                        <td>{!! $value['question'] !!}</td>
                                         @foreach ($value['answers'] as $a_key => $a_value)
                                             <td><input type="radio" name="{{ $key }}" id="{{ $key }}"
                                                     value="{{ $a_key }}">{{ $a_value }}</td>
