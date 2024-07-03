@@ -90,7 +90,7 @@ class EnumsEntity
                 2 => "کم",
                 1 => "خیلی کم",
             ],
-            'reg_type' => 1
+            'reg_type' => ['none', 'niopdc']
         ],
         'q2' => [
             'enable' => 1,
@@ -102,7 +102,7 @@ class EnumsEntity
                 2 => "کم",
                 1 => "خیلی کم",
             ],
-            'reg_type' => 2
+            'reg_type' => ['none', 'niopdc']
         ],
         'q3' => [
             'enable' => 1,
@@ -114,7 +114,7 @@ class EnumsEntity
                 2 => "کم",
                 1 => "خیلی کم",
             ],
-            'reg_type' => 2
+            'reg_type' => ['none', 'niopdc']
         ],
         'q4' => [
             'enable' => 1,
@@ -126,7 +126,7 @@ class EnumsEntity
                 2 => "کم",
                 1 => "خیلی کم",
             ],
-            'reg_type' => 2
+            'reg_type' => ['none', 'niopdc']
         ],
         'q5' => [
             'enable' => 1,
@@ -135,8 +135,29 @@ class EnumsEntity
                 1 => "بله",
                 2 => "خیر",
             ],
-            'reg_type' => 1
+            'reg_type' => ['none', 'niopdc']
         ],
+        'q6' => [
+            'enable' => 1,
+            'question' => "با توجه به هزینه های ذکر شده در لینک راهنما، آیا هزینه های پرداخت شده با هزینه های اعلام منطبق است؟",
+            'answers' => [
+                1 => "بله",
+                2 => "خیر",
+            ],
+            'reg_type' => ['symfa']
+        ],
+        'q7' => [
+            'enable' => 1,
+            'question' => "به عملکرد مرکزخدمات/هیدرواستاتیک چه امتیازی می دهید؟",
+            'answers' => [
+                5 => "خیلی زیاد",
+                4 => "زیاد",
+                3 => "متوسط",
+                2 => "کم",
+                1 => "خیلی کم",
+            ],
+            'reg_type' => ['symfa']
+        ]
     ];
 
     const _3month_sms_template = 'یادآوری

@@ -9,11 +9,11 @@
 @section('content')
     <div class="row">
         <div class="box table-responsive" id="main">
-            {{-- @if (count($poll_info))
+            @if (count($poll_info))
                 <div class="alert alert-info">
                     شما قبلا در این نظرسنجی شرکت کرده اید
                 </div>
-            @else --}}
+            @else
                 <div class="col-sm-12" style="margin: 15px; background: gray; font-weight: bold; padding: 5px; color: white ">
                     <div class="">
                         نام و نام خانودگی: {{ $info->owner_fullname }}
@@ -33,7 +33,7 @@
                         </tr>
                         @foreach ($questions as $key => $value)
                             @if ($value['enable'] === 1)
-                                @if ((string)$value['reg_type'] === $info->reg_type)
+                                @if (in_array($info->reg_type, $value['reg_type']))
                                     <tr>
                                         <td>{{ $value['question'] }}</td>
                                         @foreach ($value['answers'] as $a_key => $a_value)
@@ -57,7 +57,7 @@
                         </tfoot>
                     </table>
                 </form>
-            {{-- @endif --}}
+            @endif
         </div>
     </div>
     <script>
@@ -90,9 +90,11 @@
         function validation() {
             @foreach ($questions as $key => $value)
                 @if ($value['enable'] === 1)
-                    if (!$('input[name="{{ $key }}"]:checked').val()) {
-                        return `پاسخی برای سوال: {{ $value['question'] }} ثبت نشده است`;
-                    }
+                    @if (in_array($info->reg_type, $value['reg_type']))
+                        if (!$('input[name="{{ $key }}"]:checked').val()) {
+                            return `پاسخی برای سوال: {{ $value['question'] }} ثبت نشده است`;
+                        }
+                    @endif
                 @endif
             @endforeach
             return false;
