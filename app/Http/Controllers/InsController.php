@@ -114,8 +114,8 @@ class InsController extends Controller
                 return "این کد ملی در کارگاه $ins->markaz_code تخصیص داده شده است";
             }
             $g = GetAgencyController::getByKeyValue('agency_code', $request->codeEtehadie);
-            $agency_code = $g->where('key', 'agency_code')->first()->value;
-            $guild_number = $g->where('key', 'guild_number')->first()->value;
+            $agency_code = $g->agency_code;
+            $guild_number = $g->guild_number;
             if(!$agency_code){
                 return "این کد مرکز وجود ندارد ";
             }
