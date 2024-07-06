@@ -80,8 +80,7 @@ class GetTicketController extends Controller
                 // $row->user_level = $row->user()->level();
             });
         }
-        $result = $this->getMyTicketsByCatagory($r->catagory);
-        return view('ATView::partial-view.old-list', compact('result'));
+        return $this->getMyTicketsByCatagory($r->catagory);
     }
 
     public static function get($id)
