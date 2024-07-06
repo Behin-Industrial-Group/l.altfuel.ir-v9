@@ -67,6 +67,23 @@ class GetTicketController extends Controller
         return $this->getMyTicketsByCatagory($r->catagory);
     }
 
+    function oldGetByCatagory(Request $r)
+    {
+        if (auth()->user()->access("Ticket-Actors")) {
+            // $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
+            $category = CatagoryController::get($r->catagory)->name;
+            return Ticket::where('cat_id', $r->catagory)
+            ->whereIn('status', [ config('ATConfig.status.answered'), config('ATConfig.status.closed') ])
+            ->get()->each(function ($row) use ($category) {
+                $row->catagory = $category;
+                $row->user = $row->user()?->name;
+                // $row->user_level = $row->user()->level();
+            });
+        }
+        $result = $this->getMyTicketsByCatagory($r->catagory);
+        return view('ATView::partial-view.old-list', compact('result'));
+    }
+
     public static function get($id)
     {
         return Ticket::find($id);

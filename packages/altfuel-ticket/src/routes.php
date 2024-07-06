@@ -25,6 +25,7 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
         Route::get('all', [GetTicketController::class, 'getAll'])->name('getAll');
         Route::get('get-mine', [GetTicketController::class, 'getMyTickets'])->name('getMyTickets');
         Route::post('get-by-catagory', [GetTicketController::class, 'getByCatagory'])->name('getByCatagory');
+        Route::post('old-get-by-catagory', [GetTicketController::class, 'oldGetByCatagory'])->name('oldGetByCatagory');
         Route::get('status/{id}', [TicketStatusController::class, 'getStatus'])->name('status');
         Route::get('score/{id}', [CreateTicketController::class, 'score'])->name('score');
         Route::get('{id}', [GetTicketController::class, 'get'])->name('get');

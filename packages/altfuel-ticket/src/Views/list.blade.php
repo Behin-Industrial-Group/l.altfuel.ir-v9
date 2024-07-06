@@ -13,6 +13,8 @@
                     <label for="">دسته بندی</label>
                     @include('ATView::partial-view.catagory')
                     <button class="btn btn-info" onclick="filter()">فیلتر</button>
+                    <br>
+                    <button class="btn btn-primary" onclick="oldTicket()">دیدن تیکت های قدیمی</button>
                 </div>
             </form>
         </div>
@@ -48,6 +50,19 @@
                 }
             )
         }
+
+        function oldTicket() {
+            data = $('#cat-form').serialize();
+            send_ajax_request(
+                "{{ route('ATRoutes.get.oldGetByCatagory') }}",
+                data,
+                function(data) {
+                    console.log(data);
+                    update_datatable(data);
+                }
+            )
+        }
+
         var table = create_datatable(
             'tickets-table',
             "{{ route('ATRoutes.get.getAll') }}",
