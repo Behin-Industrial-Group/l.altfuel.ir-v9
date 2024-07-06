@@ -9,34 +9,33 @@
         <h2>To Do List</h2>
 
         <form action="javascript:void(0)" id="task-form">
-
+            <input type="text" class="d-none" name="creator" value="{{ Auth::id() }}">
             <div class="row col-sm-12">
                 @csrf
                 <div class="row col-sm-12">
-                    <input type="text" id="task" name="task" placeholder="{{ __('Task') }}"
-                        class="form-control col-sm-11">
-                    <button type="button" class="btn btn-primary" onclick="register()"><i
+                    <input type="text" id="task" name="task" placeholder="{{ __('Task Title') }}"
+                        class="form-control col-sm-11 m-1">
+                    <button type="button" class="btn btn-primary m-1" onclick="register()"><i
                             class="fa fa-paper-plane"></i></button>
                 </div>
                 <div class="row col-sm-12 mt-2">
-                    <button class="btn btn-default m-1" onclick="show_element('description')"><i
-                            class="fa fa-edit">{{ __('Task Desctiption') }}</i></button>
-                    <button class="btn btn-default m-1" onclick="show_element('reminder_date')"><i
-                            class="fa fa-calendar">{{ __('Remember Me') }}</i></button>
-                    <button class="btn btn-default m-1" onclick="show_element('due_date')"><i
-                            class="fa fa-calendar">{{ __('Due Date') }}</i></button>
+                    <button class="btn btn-default m-2" onclick="show_element('description')"><i
+                            class="fa fa-edit">{{ __(' Task Description') }}</i></button>
+                    <button class="btn btn-default m-2" onclick="show_element('reminder_date_view')"><i
+                            class="fa fa-calendar">{{ __(' Reminder Date') }}</i></button>
+                    <button class="btn btn-default m-2" onclick="show_element('due_date_view')"><i
+                            class="fa fa-calendar">{{ __(' Due Date') }}</i></button>
 
-                    <button class="btn btn-default m-1" onclick="show_element('assign_to')"><i
-                            class="fa fa-calendar">{{ __('Assign To') }}</i></button>
+                    <button class="btn btn-default m-2" onclick="show_element('assign_to')"><i
+                            class="fa fa-user">{{ __(' Assign To') }}</i></button>
                 </div>
                 <div class="col-sm-12 mt-2">
-                    <textarea name="description" id="description" class="form-control" placeholder="{{ __('Description') }}"></textarea>
-                    <input type="text" id="reminder_date" name="reminder_date" class="col-sm-10 pdate form-control"
-                        placeholder="{{ __('Remember Me') }}">
-                    <input type="text" id="due_date" name="due_date" class="col-sm-10 pdate form-control"
-                        placeholder="{{ __('Due Date') }}">
-
-                    <select name="user_id" id="assign_to" class="form-control form-control-sm">
+                    <textarea name="description" id="description" class="form-control m-1" placeholder="{{ __('Description') }}"></textarea>
+                    <input type="hidden" id="reminder_date" name="reminder_date">
+                    <input type="text" id="reminder_date_view" class="col-sm-10 form-control m-1" placeholder="{{__('Reminder Date')}}">
+                    <input type="hidden" id="due_date" name="due_date">
+                    <input type="text" id="due_date_view" class="col-sm-10 form-control m-1" placeholder="{{__('Due Date')}}">
+                    <select name="user_id" id="assign_to" class="form-control form-control-sm m-1">
                         <option value="">کاربر را انتخاب کنید</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}" @if (Auth::id() == $user->id) selected @endif>
@@ -76,7 +75,7 @@
                     data: 'id'
                 },
                 {
-                    data: 'creator'
+                    data: 'creator_name'
                 },
                 {
                     data: 'task'
@@ -88,41 +87,77 @@
                     data: 'done'
                 },
                 {
-                    data: 'reminder_date'
+                    data: 'reminder_date',
+                    render: function(data) {
+                        if(data == null){
+                            return '';
+                        }
+                        let mydate = new Date(data);
+                        let mypersiandate = mydate.toLocaleDateString('fa-IR');
+                        return mypersiandate;
+                    }
                 },
                 {
-                    data: 'due_date'
+                    data: 'due_date',
+                    render: function(data) {
+                        if(data == null){
+                            return '';
+                        }
+                        let mydate = new Date(data);
+                        let mypersiandate = mydate.toLocaleDateString('fa-IR');
+                        return mypersiandate;
+                    }
                 },
             ],
-            
+            null,
+            [
+                [4, 'asc'],
+                [5, 'desc']
+            ]
+
         )
 
-        // initial_view()
-        $(".pdate").persianDatepicker({
-            initialValue: false,
-            viewMode: 'day',
-            format: 'YYYY-MM-DD H:m',
-            timePicker: {
-                enabled: true
-            },
-            calendar: {
-                persian: {
-                    locale: 'en'
-                }
-            }
+        $(document).ready(function() {
+            $("#due_date_view").persianDatepicker({
+                format: 'YYYY-MM-DD',
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: true
+                    }
+                },
+                initialValue: false,
+                observer: true,
+                altField: '#due_date'
+            });
+
+
+            $("#reminder_date_view").persianDatepicker({
+                format: 'YYYY-MM-DD',
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: true
+                    }
+                },
+                initialValue: false,
+                observer: true,
+                altField: '#reminder_date'
+            });
         });
+
 
         function register() {
             var form = $('#task-form')[0];
             var fd = new FormData(form);
             send_ajax_formdata_request(
-                '{{ route("todoList.create") }}',
+                '{{ route('todoList.create') }}',
                 fd,
                 function(response) {
                     console.log(response);
-                    table.ajax.reload()
+                    table.ajax.reload();
+                    form.reset();
                 }
             )
+
         }
 
 
@@ -154,8 +189,8 @@
         }
 
         var des = $('#description');
-        var reminder_date = $('#reminder_date');
-        var due_date = $('#due_date');
+        var reminder_date = $('#reminder_date_view');
+        var due_date = $('#due_date_view');
         var assign_to = $('#assign_to');
         des.hide()
         reminder_date.hide();
@@ -170,14 +205,14 @@
                     des.hide()
                 }
             }
-            if (element == 'reminder_date') {
+            if (element == 'reminder_date_view') {
                 if (reminder_date.css('display') === 'none') {
                     reminder_date.show()
                 } else {
                     reminder_date.hide()
                 }
             }
-            if (element == 'due_date') {
+            if (element == 'due_date_view') {
                 if (due_date.css('display') === 'none') {
                     due_date.show()
                 } else {

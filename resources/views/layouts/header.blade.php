@@ -48,6 +48,8 @@ use App\CustomClasses\Access;
             </div>
         </li> --}}
 
+        @include('TodoListViews::partial-views.todo-list-icon')
+
         @include('UserProfileViews::partial-views.user-profile-icon')
 
         <li class="mr-4">

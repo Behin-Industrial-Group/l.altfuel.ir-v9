@@ -24,7 +24,9 @@ class TodoListController extends Controller
 
     public function list()
     {
-        $tasks = Todo::where('user_id', Auth::id())->get();
+        $tasks = Todo::where('user_id', Auth::id())->get()->each(function($row){
+            $row->creator_name = User::find($row->creator)->display_name;
+        });
         return [
             'data'=> $tasks
         ];
@@ -33,7 +35,7 @@ class TodoListController extends Controller
     public function create(Request $request)
     {
         $task = Todo::create([
-            'creator' => Auth::id(),
+            'creator' => $request->creator,
             'user_id' => $request->user_id,
             'task' => $request->task,
             'description' => $request->description,
