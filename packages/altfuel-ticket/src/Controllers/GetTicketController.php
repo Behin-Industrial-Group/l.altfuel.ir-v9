@@ -57,7 +57,7 @@ class GetTicketController extends Controller
             // $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
             $category = CatagoryController::get($r->catagory)->name;
             return Ticket::where('cat_id', $r->catagory)
-            // ->whereIn('status', [ config('ATConfig.status.new'), config('ATConfig.status.in_progress') ])
+            ->whereIn('status', [ config('ATConfig.status.new'), config('ATConfig.status.in_progress') ])
             ->get()->each(function ($row) use ($category) {
                 $row->catagory = $category;
                 $row->user = $row->user()?->name;
