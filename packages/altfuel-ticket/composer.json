@@ -1,6 +1,7 @@
 {
     "name": "mkhodroo/altfuel-ticket",
     "description": "altfuel-tickets",
+    "version": "1.1",
     "autoload": {
         "psr-4": {
             "Mkhodroo\\AltfuelTicket\\": "src/"

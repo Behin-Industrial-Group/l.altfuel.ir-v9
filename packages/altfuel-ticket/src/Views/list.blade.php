@@ -12,9 +12,13 @@
                 <div class="form-group">
                     <label for="">دسته بندی</label>
                     @include('ATView::partial-view.catagory')
-                    <button class="btn btn-info" onclick="filter()">فیلتر</button>
-                    <br>
-                    <button class="btn btn-primary" onclick="oldTicket()">دیدن تیکت های قدیمی</button>
+                    @if (auth()->user()->access('Filter closed and answered tickets'))
+                        <button class="btn btn-info" onclick="filter()">فیلتر تیکت های جدید و درحال بررسی</button>
+                        <button class="btn btn-primary" onclick="oldTicket()">فیلتر تیکت های پاسخ داده شده و بسته
+                            شده</button>
+                    @else
+                        <button class="btn btn-info" onclick="filter()">فیلتر</button>
+                    @endif
                 </div>
             </form>
         </div>
@@ -76,8 +80,9 @@
                     }
                 },
                 {
-                    data: 'user', render:function(data, type, row){
-                        if(row.user_level == 2){
+                    data: 'user',
+                    render: function(data, type, row) {
+                        if (row.user_level == 2) {
                             return data + ' <i style="color:royalblue" class="fa fa-check-circle"></i>'
                         }
                         return data
