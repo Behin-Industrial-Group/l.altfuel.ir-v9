@@ -38,6 +38,12 @@ return [
                 'method' => [ 'fa_name' => 'متد ها', 'route-name' => 'method.list', 'route-url' => '' ],
             ]
         ],
+        'cities' => [
+            'fa_name' => 'شهر و استان',
+            'submenu' => [
+                'show' => [ 'fa_name' => 'نمایش لیست', 'route-name' => 'city.index' ]
+            ]
+        ],
         'reports' => [
             'fa_name' => 'گزارش',
             'submenu' => [
