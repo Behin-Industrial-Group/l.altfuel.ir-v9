@@ -3787,6 +3787,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => __DIR__ . '/../..' . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
         'Mkhodroo\\Cities\\CityProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/CityProvider.php',
         'Mkhodroo\\Cities\\Controllers\\CityController' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Controllers/CityController.php',
+        'Mkhodroo\\Cities\\Controllers\\CityViewController' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Controllers/CityViewController.php',
         'Mkhodroo\\Cities\\Models\\City' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Models/City.php',
         'Mkhodroo\\DateConvertor\\Controllers\\SDate' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/Controllers/SDate.php',
         'Mkhodroo\\DateConvertor\\DateConvertorProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/DateConvertorProvider.php',

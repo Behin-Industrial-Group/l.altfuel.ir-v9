@@ -3117,6 +3117,7 @@ return array(
     'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => $baseDir . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
     'Mkhodroo\\Cities\\CityProvider' => $baseDir . '/packages/mkhodroo-cities/src/CityProvider.php',
     'Mkhodroo\\Cities\\Controllers\\CityController' => $baseDir . '/packages/mkhodroo-cities/src/Controllers/CityController.php',
+    'Mkhodroo\\Cities\\Controllers\\CityViewController' => $baseDir . '/packages/mkhodroo-cities/src/Controllers/CityViewController.php',
     'Mkhodroo\\Cities\\Models\\City' => $baseDir . '/packages/mkhodroo-cities/src/Models/City.php',
     'Mkhodroo\\DateConvertor\\Controllers\\SDate' => $baseDir . '/packages/mkhodroo-date-convertor/src/Controllers/SDate.php',
     'Mkhodroo\\DateConvertor\\DateConvertorProvider' => $baseDir . '/packages/mkhodroo-date-convertor/src/DateConvertorProvider.php',

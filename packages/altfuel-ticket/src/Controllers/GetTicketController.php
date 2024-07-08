@@ -4,6 +4,7 @@ namespace Mkhodroo\AltfuelTicket\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -78,7 +79,7 @@ class GetTicketController extends Controller
                 $row->catagory = $category;
                 $row->user = $row->user()?->name;
                 // $row->user_level = $row->user()->level();
-            });
+            })->cursor();
         }
         return $this->getMyTicketsByCatagory($r->catagory);
     }
