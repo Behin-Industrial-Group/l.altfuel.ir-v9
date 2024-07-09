@@ -28,7 +28,7 @@ function create_datatable(element_id, url ='', cols, rowCallback = null, order= 
             url: '../resources/lang/fa.json'
         },
         "rowCallback": rowCallback
-    });
+
 
 }
 
