@@ -48,7 +48,9 @@ use App\CustomClasses\Access;
             </div>
         </li> --}}
 
-        @include('TodoListViews::partial-views.todo-list-icon')
+        @if (auth()->user()->access('ToDo List'))
+            @include('TodoListViews::partial-views.todo-list-icon')
+        @endif
 
         @include('UserProfileViews::partial-views.user-profile-icon')
 
