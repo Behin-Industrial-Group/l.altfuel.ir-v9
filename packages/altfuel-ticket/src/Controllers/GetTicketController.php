@@ -79,7 +79,7 @@ class GetTicketController extends Controller
                 $row->catagory = $category;
                 $row->user = $row->user()?->name;
                 // $row->user_level = $row->user()->level();
-            })->cursor();
+            }, 2);
         }
         return $this->getMyTicketsByCatagory($r->catagory);
     }
