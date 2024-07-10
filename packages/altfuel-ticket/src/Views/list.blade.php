@@ -13,8 +13,9 @@
                     <label for="">دسته بندی</label>
                     @include('ATView::partial-view.catagory')
                     @if (auth()->user()->access('Ticket-Actors'))
+                    <button class="btn btn-primary" onclick="filterAll()">فیلتر تمام تیکت ها</button>
                         <button class="btn btn-info" onclick="filter()">فیلتر تیکت های جدید و درحال بررسی</button>
-                        <button class="btn btn-primary" onclick="oldTicket()">فیلتر تیکت های پاسخ داده شده و بسته
+                        <button class="btn btn-secondary" onclick="oldTicket()">فیلتر تیکت های پاسخ داده شده و بسته
                             شده</button>
                     @else
                         <button class="btn btn-info" onclick="filter()">فیلتر</button>
@@ -43,6 +44,18 @@
 
 @section('script')
     <script>
+        function filterAll() {
+            data = $('#cat-form').serialize();
+            send_ajax_request(
+                "{{ route('ATRoutes.get.getAllByCatagory') }}",
+                data,
+                function(data) {
+                    console.log(data);
+                    update_datatable(data);
+                }
+            )
+        }
+
         function filter() {
             data = $('#cat-form').serialize();
             send_ajax_request(

@@ -84,6 +84,21 @@ class GetTicketController extends Controller
         return $this->getMyTicketsByCatagory($r->catagory);
     }
 
+    function getAllByCatagory(Request $r)
+    {
+        if (auth()->user()->access("Ticket-Actors")) {
+            // $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
+            $category = CatagoryController::get($r->catagory)->name;
+            return Ticket::where('cat_id', $r->catagory)
+            ->get()->each(function ($row) use ($category) {
+                $row->catagory = $category;
+                $row->user = $row->user()?->name;
+                // $row->user_level = $row->user()->level();
+            }, 2);
+        }
+        return $this->getMyTicketsByCatagory($r->catagory);
+    }
+
     public static function get($id)
     {
         return Ticket::find($id);

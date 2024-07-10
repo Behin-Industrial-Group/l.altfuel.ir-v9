@@ -17,13 +17,13 @@
     </div>
     <div class="col-sm-12 mt-2">
         <label for="edit_reminder_date" class="col-sm-12">تاریخ یادآوری :</label>
-        <input type="hidden" id="edit_reminder_date" name="reminder_date">
-        <input type="text" id="edit_reminder_date_view" class="col-sm-12 form-control m-1">
+        <input type="hidden" id="edit_reminder_date" name="reminder_date" value="{{ $task->reminder_date }}">
+        <input type="text" id="edit_reminder_date_view" class="col-sm-12 form-control m-1" value="{{ $task->reminder_date }}">
     </div>
     <div class="col-sm-12 mt-2">
         <label for="edit_due_date">تاریخ تحویل :</label class="col-sm-12">
-        <input type="hidden" id="edit_due_date" name="due_date">
-        <input type="text" id="edit_due_date_view" class="col-sm-12 form-control m-1">
+        <input type="hidden" id="edit_due_date" name="due_date" value="{{ $task->due_date }}">
+        <input type="text" id="edit_due_date_view" class="col-sm-12 form-control m-1" value="{{ $task->due_date }}">
     </div>
     <button type="submit" onclick="update()" class="col-sm-12 mt-2 btn btn-primary">بروزرسانی</button>
 </form>
@@ -36,6 +36,7 @@
             fd,
             function(res) {
                 show_message(res);
+                console.log(res);
                 refresh_table();
             }
         )
@@ -49,6 +50,7 @@
                 enabled: true
             }
         },
+        initialValue: false,
         observer: true,
         altField: '#edit_due_date'
     });
@@ -61,15 +63,18 @@
                 enabled: true
             }
         },
+        initialValue: false,
         observer: true,
         altField: '#edit_reminder_date'
     });
 
-    var DueUnixValue = "{{ $task->reminder_date }}";
+    var data = "{{ $task->reminder_date }}";
+    var DueUnixValue = new Date(data);
     var DueDate = DueUnixValue.toLocaleDateString('fa-IR');
     $("#edit_due_date_view").val(DueDate);
 
     var ReminderUnixValue = "{{ $task->reminder_date }}";
+    var ReminderUnixValue = new Date(ReminderUnixValue);;
     var ReminderDate = ReminderUnixValue.toLocaleDateString('fa-IR');
     $("#edit_reminder_date_view").val(ReminderDate);
 

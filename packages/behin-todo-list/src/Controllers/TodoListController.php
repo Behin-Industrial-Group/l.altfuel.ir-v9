@@ -4,9 +4,12 @@ namespace TodoList\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Brick\Math\BigInteger;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use TodoList\Models\Todo;
 
 class TodoListController extends Controller
@@ -53,6 +56,7 @@ class TodoListController extends Controller
 
     public function update(Request $request)
     {
+        return $request->all();
         $task = self::get($request->id);
         if ($task->creator != Auth::id()) {
             return response(trans("update not ok"), 403);
@@ -74,5 +78,36 @@ class TodoListController extends Controller
         }
         $task->delete();
         return response(trans("delete ok"));
+    }
+
+    public function othersList(Request $request){
+        $tasks = Todo::where('user_id', $request->user_id)->get();
+        return [
+            'data'=> $tasks
+        ];
+    }
+
+    public function today()
+    {
+        $start_today = Carbon::today()->timestamp * 1000;
+        $end_today = Carbon::tomorrow()->timestamp * 1000;
+        $tasks = Todo::where('user_id', Auth::id())->where('due_date', '>', $start_today)
+        ->where('due_date', '<', $end_today)->get()->each(function($row){
+            $row->creator_name = User::find($row->creator)->display_name;
+        });
+        return [
+            'data'=> $tasks
+        ];
+    }
+
+    public function expired()
+    {
+        $start_today = Carbon::today()->timestamp * 1000;
+        $tasks = Todo::where('user_id', Auth::id())->where('due_date', '<', $start_today)->where('done', 0)->get()->each(function($row){
+            $row->creator_name = User::find($row->creator)->display_name;
+        });
+        return [
+            'data'=> $tasks
+        ];
     }
 }
