@@ -32,7 +32,7 @@ use BehinProcessMaker\Controllers\VariableController;
 use Illuminate\Http\Request;
 use Mkhodroo\PMReport\Controllers\TableController;
 
-Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', Access::class])->group(function () {
+Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', 'access'])->group(function () {
     Route::get('inbox', [CaseController::class, 'get'])->name('inbox');
     Route::get('new-case', [CaseController::class, 'newCase'])->name('newCase');
     Route::name('report.')->prefix('report')->group(function () {
