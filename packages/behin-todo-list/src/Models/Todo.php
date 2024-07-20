@@ -19,4 +19,8 @@ class Todo extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function files(){
+        return $this->hasMany(TodoFile::class, 'task_id');
+    }
 }

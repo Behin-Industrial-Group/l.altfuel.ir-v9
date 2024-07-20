@@ -32,30 +32,32 @@
                 <div class="col-sm-12 mt-2">
                     <textarea name="description" id="description" class="form-control m-1" placeholder="{{ __('Description') }}"></textarea>
                     <input type="hidden" id="reminder_date" name="reminder_date">
-                    <input type="text" id="reminder_date_view" class="col-sm-10 form-control m-1" placeholder="{{__('Reminder Date')}}">
+                    <input type="text" id="reminder_date_view" class="col-sm-10 form-control m-1"
+                        placeholder="{{ __('Reminder Date') }}">
                     <input type="hidden" id="due_date" name="due_date">
-                    <input type="text" id="due_date_view" class="col-sm-10 form-control m-1" placeholder="{{__('Due Date')}}">
+                    <input type="text" id="due_date_view" class="col-sm-10 form-control m-1"
+                        placeholder="{{ __('Due Date') }}">
                     <select name="user_id" id="assign_to" class="form-control form-control-sm m-1">
-                        <option value="">کاربر را انتخاب کنید</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}" @if (Auth::id() == $user->id) selected @endif>
-                                {{ $user->name }}
+                                {{ $user->name }} : {{ $user->display_name }}
                             </option>
                         @endforeach
                     </select>
                 </div>
             </div>
         </form>
+        <button type="button" class="btn btn-primary m-1" onclick="all_task()">all tasks</button>
+        <button type="button" class="btn btn-info m-1" onclick="today_task()">today tasks</button>
+        <button type="button" class="btn btn-danger m-1" onclick="expired_task()">expired tasks</button>
     </div>
     <hr>
     <div class="table-responsive">
         <table class="table table-stripped" id="todos-table">
             <thead>
                 <tr>
-                    <th>شناسه</th>
-                    <th>ایجاد کننده</th>
                     <th>کار</th>
-                    <th>توضیحات کار</th>
+                    <th>ایجاد کننده</th>
                     <th>وضعیت</th>
                     <th>تاریخ یادآوری</th>
                     <th>تاریخ تحویل</th>
@@ -71,25 +73,22 @@
         var table = create_datatable(
             'todos-table',
             "{{ route('todoList.list') }}",
-            [{
-                    data: 'id'
-                },
-                {
-                    data: 'creator_name'
-                },
+            [
                 {
                     data: 'task'
                 },
                 {
-                    data: 'description'
+                    data: 'creator_name'
                 },
+
                 {
-                    data: 'done'
+                    data: 'done',
+                    visible: false
                 },
                 {
                     data: 'reminder_date',
                     render: function(data) {
-                        if(data == null){
+                        if (data == null) {
                             return '';
                         }
                         let mydate = new Date(data);
@@ -100,7 +99,7 @@
                 {
                     data: 'due_date',
                     render: function(data) {
-                        if(data == null){
+                        if (data == null) {
                             return '';
                         }
                         let mydate = new Date(data);
@@ -109,10 +108,26 @@
                     }
                 },
             ],
-            null,
+            function(row, data) {
+                // تغییر رنگ پس‌زمینه ردیف بر اساس مقدار فیلد done
+                if (data.done == 1) {
+                    $(row).css('background', 'lightgreen');
+                    var first_col = $($(row).children()[0]);
+                    first_col.css('text-decoration', 'line-through');
+                    first_col.html('<i class="fa fa-check-circle"></i> ' + first_col.html())
+                    console.log();
+                }
+                // if (data.done) {
+                //     $(row).css('background', 'lightgreen');
+                //     var first_col = $($(row).children()[0]);
+                //     first_col.css('text-decoration', 'line-through');
+                //     first_col.html('<i class="fa fa-check-circle"></i> ' + first_col.html())
+                //     console.log();
+                // }
+            },
             [
-                [4, 'asc'],
-                [5, 'desc']
+                [2, 'asc'],
+                [3, 'desc']
             ]
 
         )
@@ -160,6 +175,35 @@
 
         }
 
+        function all_task() {
+            send_ajax_get_request(
+                '{{ route('todoList.list') }}',
+                function(response) {
+                    console.log(response);
+                    update_datatable(response.data)
+                }
+            )
+        }
+
+        function today_task() {
+            send_ajax_get_request(
+                '{{ route('todoList.today') }}',
+                function(response) {
+                    console.log(response);
+                    update_datatable(response.data)
+                }
+            )
+        }
+
+        function expired_task() {
+            send_ajax_get_request(
+                '{{ route('todoList.expired') }}',
+                function(response) {
+                    console.log(response);
+                    update_datatable(response.data)
+                }
+            )
+        }
 
 
         table.on('dblclick', 'tr', function() {

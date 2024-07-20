@@ -51,7 +51,8 @@
             "BaleBot\\": "packages/behin-bale-bot/src/",
             "BehinLogging\\": "packages/behin-logging/src/",
             "BehinProcessMaker\\": "packages/behin-process-maker/src/",
-            "MyAgencyInfo\\": "packages/my-agency-info/src/"
+            "MyAgencyInfo\\": "packages/my-agency-info/src/",
+            "FileService\\": "packages/behin-file-service/src/"
         }
     },
     "autoload-dev": {

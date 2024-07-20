@@ -29,7 +29,6 @@ function create_datatable(element_id, url ='', cols, rowCallback = null, order= 
         },
         "rowCallback": rowCallback
     })
-
 }
 
 function dblclick_on_inbox_row(element_id,  table, callback){

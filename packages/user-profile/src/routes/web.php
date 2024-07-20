@@ -29,5 +29,5 @@ Route::name('user-profile.')->prefix('user-profile')->middleware(['web','auth'])
     Route::post('/verify', [MobileVerificationController::class, 'verify'])->name('verify');
 
 
-    Route::get('level-setter/{user_id}', [UserLevelController::class, 'levelSetter'])->name('level-setter');
+    Route::post('level-setter/{user_id}', [UserLevelController::class, 'levelSetter'])->name('level-setter');
 });

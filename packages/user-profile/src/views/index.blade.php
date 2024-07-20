@@ -36,6 +36,15 @@
                         </form>
                     </div>
                 @endif
+                @if ($userProfile->national_id and $user->email and $user->role_id != 4)
+                    <div class="col-12">
+                        <form action="javascript:void(0)" class="row" id="role-update-form">
+                            @csrf
+                            <button class="btn btn-primary btn-sm col-sm-3" onclick="role_update()">ارتقای سطح
+                                کاربری</button>
+                        </form>
+                    </div>
+                @endif
                 @include('UserProfileViews::partial-views.mobile-verification')
                 @include('UserProfileViews::partial-views.role-name')
             </div>
@@ -88,5 +97,17 @@
             )
         }
 
+        function role_update() {
+            var form = $('#role-update-form')[0];
+            var data = new FormData(form);
+            send_ajax_formdata_request(
+                "{{ route('user-profile.level-setter', $user->id) }}",
+                data,
+                function(response) {
+                    show_message("{{ trans('ok') }}")
+                    location.reload()
+                }
+            )
+        }
     </script>
 @endsection

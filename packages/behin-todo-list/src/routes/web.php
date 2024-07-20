@@ -12,8 +12,8 @@ Route::name('todoList.')->prefix('todo-list')->middleware(['web', 'auth'])->grou
     Route::post('edit', [TodoListController::class, 'edit'])->name('edit');
     Route::put('update', [TodoListController::class, 'update'])->name('update');
     Route::delete('delete', [TodoListController::class, 'delete'])->name('delete');
-
-    Route::get('others-list', [OthersTodoListController::class, 'list'])->name('othersList');
-    Route::post('others-create', [OthersTodoListController::class, 'create'])->name('othersCreate');
+    Route::get('today', [TodoListController::class, 'today'])->name('today');
+    Route::get('expired', [TodoListController::class, 'expired'])->name('expired');
+    Route::get('others-list', [TodoListController::class, 'othersList'])->name('othersList');
 
     });
