@@ -3,6 +3,7 @@
 namespace BehinProcessMaker;
 
 use App\CustomClasses\SimpleXLSX;
+use BehinInit\App\Http\Middleware\Access;
 use Exception;
 use Illuminate\Support\Facades\Route;
 use BehinProcessMaker\Controllers\AuthController;
@@ -30,7 +31,6 @@ use BehinProcessMaker\Controllers\TriggerController;
 use BehinProcessMaker\Controllers\VariableController;
 use Illuminate\Http\Request;
 use Mkhodroo\PMReport\Controllers\TableController;
-use Mkhodroo\UserRoles\Middlewares\Access;
 
 Route::name('MkhodrooProcessMaker.')->prefix('pm')->middleware(['web', 'auth', Access::class])->group(function () {
     Route::get('inbox', [CaseController::class, 'get'])->name('inbox');
