@@ -37,7 +37,7 @@ $videosCatagories = VideosCatagoriesModel::get();
                         @if ( auth()->user()->access('منو >>' .$menu['fa_name']) )
                           <li class="nav-item has-treeview">
                             <a href="#" class="nav-link active">
-                                <i class="nav-icon fa fa-dashboard"></i>
+                                <i class="nav-icon @isset($menu['icon']) {{$menu['icon']}} @endisset"></i>
                                 <p>
                                     {{ $menu['fa_name'] }}
                                     <i class="right fa fa-angle-left"></i>

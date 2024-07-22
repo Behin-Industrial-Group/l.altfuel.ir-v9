@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(config('pm_config.layout_name'))
 
 @section('content')
     <div class="col-sm-12" style="height: 10px;"></div>
@@ -31,7 +31,10 @@
                 {data : 'APP_NUMBER'},
                 {data : 'PRO_TITLE'},
                 {data : 'TAS_TITLE'},
-                {data : 'DEL_TITLE'},
+                {data : 'DEL_TITLE', render: function(data){
+                    data = data.replace('"', "")
+                    return data.replace('"', "")
+                }},
                 {data : 'TAS_STATUS', render: function(data){
                     if(data == 'ON_TIME'){
                         return '{{trans("ON_TIME")}}';
@@ -53,6 +56,9 @@
                 {data : 'DEL_DELEGATE_DATE', render: function(DEL_DELEGATE_DATE){ 
                     date = DEL_DELEGATE_DATE.split(" ")[0]
                     time = DEL_DELEGATE_DATE.split(" ")[1]
+                    datetime = new Date(DEL_DELEGATE_DATE);
+                    date = datetime.toLocaleDateString('fa-IR');
+                    time = datetime.toLocaleTimeString('fa-IR');
                     return `<span style="float: left; direction: ltr">${date} ${time}</span>`; 
                 }},
                 {data : 'DELAY' , render: function(DELAY, type, row){ 
@@ -60,7 +66,9 @@
                     delay_h = DELAY.split(" ")[3]
                     delay_m = DELAY.split(" ")[5]
                     delay_s = DELAY.split(" ")[7]
-                    return `<span style="float: left; direction: ltr; color: ${row.TAS_COLOR_LABEL}">${delay_day}d  ${delay_h}h ${delay_m}m ${delay_s}s</span>`; 
+                    h = parseFloat(parseFloat(delay_day*24) + parseFloat(delay_h) + parseFloat(delay_m / 60));
+                    h = h.toFixed(2)
+                    return `<span style="float: left; direction: ltr; color: ${row.TAS_COLOR_LABEL}">${h} h</span>`; 
                 }}
             ],
             function(row){
@@ -78,6 +86,7 @@
             fd.append('caseTitle', data.DEL_TITLE);
             fd.append('processId', data.PRO_UID);
             fd.append('delIndex', data.DEL_INDEX);
+            fd.append('taskStatus', data.TAS_STATUS)
             url = "{{ route('MkhodrooProcessMaker.api.getCaseDynaForm') }}";
             console.log(url);
             send_ajax_formdata_request(
