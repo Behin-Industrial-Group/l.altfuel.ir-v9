@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
+use Mkhodroo\AltfuelTicket\Models\CommentAttachments;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Requests\TicketRequest;
 
@@ -20,7 +21,8 @@ class CreateTicketController extends Controller
         return view('ATView::create');
     }
 
-    public function create($cat_id, $title){
+    public function create($cat_id, $title)
+    {
         $ticket = Ticket::create([
             'user_id' => Auth::id(),
             'ticket_id' => RandomStringController::Generate(20),
@@ -28,7 +30,7 @@ class CreateTicketController extends Controller
             'title' => $title,
             'status' => config('ATConfig.status.new')
         ]);
-        LoggingController::info('ticketing', "CREATE NEW TICKET BY  USER: ". Auth::id());
+        LoggingController::info('ticketing', "CREATE NEW TICKET BY  USER: " . Auth::id());
         return $ticket;
     }
 
@@ -37,6 +39,7 @@ class CreateTicketController extends Controller
         LoggingController::info('ticketing', "######################");
         LoggingController::info('ticketing', "Request info: ");
         LoggingController::info('ticketing', $r);
+
 
         if (isset($r->ticket_id)) {
             $ticket = GetTicketController::findByTicketId($r->ticket_id);
@@ -50,10 +53,11 @@ class CreateTicketController extends Controller
 
         $comment = AddTicketCommentController::add($ticket->id, $r->text, $file_path);
         Log::info("upload method " . $r->file('file'));
-
-        if ($r->file('file')) {
-            $attach = CommentAttachmentController::upload($r->file('file'), $ticket->ticket_id);
-            AddTicketCommentAttachmentController::add($comment->id, $attach);
+        if ($r->file('files')) {
+            foreach ($r->file('files') as $name) {
+                $attach = CommentAttachmentController::upload($name, $ticket->ticket_id);
+                AddTicketCommentAttachmentController::add($comment->id, $attach);
+            }
         }
         return response([
             'ticket' => $ticket,

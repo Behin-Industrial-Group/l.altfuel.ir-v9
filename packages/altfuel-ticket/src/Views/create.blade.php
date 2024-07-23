@@ -10,7 +10,7 @@
             ایجاد تیکت پشتیبانی
         </div>
         <div class="card-body">
-            <form action="javascript:void(0)" id="ticket-form">
+            <form action="javascript:void(0)" id="ticket-form" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="">دسته بندی</label>

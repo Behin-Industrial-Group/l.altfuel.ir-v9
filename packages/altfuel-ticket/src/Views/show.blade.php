@@ -43,8 +43,9 @@
                         </audio>
                     </div>
                 @endempty
-                @foreach ($comment->attachments() as $attach)
-                    <a href="{{ url("$attach->file") }}" target="_blank">پیوست</a>
+                @foreach ($comment->attachments() as $index => $attach)
+                    <a href="{{ url("$attach->file") }}" target="_blank">پیوست {{ $index + 1 }}</a>
+                    <br>
                 @endforeach
 
             </div>
