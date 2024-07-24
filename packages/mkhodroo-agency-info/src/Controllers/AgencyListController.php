@@ -46,14 +46,17 @@ class AgencyListController extends Controller
         if($r->field_value === null and $r->$main_field === null){
             $agencies =  AgencyInfo::where('parent_id', DB::raw('id'))->get();
         }else{
-            if($r->field_value == null){
+            if($r->field_value == null and $r->province == null){
                 $agencies =  AgencyInfo::where('value', $r->$main_field)->groupBy('parent_id')->get();
             }
-            elseif($r->$main_field == null){
+            elseif($r->$main_field == null and $r->province == null){
                 $agencies =  AgencyInfo::where('value', 'like', "%". $r->field_value. "%")->groupBy('parent_id')->get();
+            }
+            elseif($r->$main_field == null and $r->field_value == null){
+                $agencies =  AgencyInfo::where('value', $r->province)->groupBy('parent_id')->get();
             }else{
                 $parent_ids =  AgencyInfo::where('value', 'like', "%". $r->field_value. "%")->groupBy('parent_id')->pluck('parent_id');
-                $agencies = AgencyInfo::whereIn('id', $parent_ids)->where('value', $r->$main_field)->groupBy('parent_id')->get();
+                $agencies = AgencyInfo::whereIn('id', $parent_ids)->where('value', $r->$main_field)->where('value', $r->province)->groupBy('parent_id')->get();
             }
         }
         $key_indexes = explode(',', $r->cols);
