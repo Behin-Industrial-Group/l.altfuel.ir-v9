@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\Cities\Controllers\CityController;
+use Mkhodroo\Cities\Models\NewProvince;
 use Mkhodroo\DateConvertor\Controllers\SDate;
 
 class AgencyListController extends Controller
@@ -18,8 +19,10 @@ class AgencyListController extends Controller
     {
         // return AgencyInfo::groupBy('key')->pluck('key')->toArray();
         // return self::getKeys();
+        $provinces = NewProvince::all();
         return view('AgencyView::list')->with([
-            'cols' => self::getKeys()
+            'cols' => self::getKeys(),
+            'provinces' => $provinces
         ]);
     }
 
@@ -37,8 +40,8 @@ class AgencyListController extends Controller
         ];
     }
     public static function filterList(Request $r)
-    {   
-        
+    {
+
         $main_field = config('agency_info.main_field_name');
         if($r->field_value === null and $r->$main_field === null){
             $agencies =  AgencyInfo::where('parent_id', DB::raw('id'))->get();

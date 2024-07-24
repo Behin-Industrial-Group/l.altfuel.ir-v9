@@ -13,9 +13,9 @@
                     <label for="">دسته بندی</label>
                     @include('ATView::partial-view.catagory')
                     @if (auth()->user()->access('Ticket-Actors'))
-                    <button class="btn btn-primary" onclick="filterAll()">فیلتر تمام تیکت ها</button>
-                        <button class="btn btn-info" onclick="filter()">فیلتر تیکت های جدید و درحال بررسی</button>
-                        <button class="btn btn-secondary" onclick="oldTicket()">فیلتر تیکت های پاسخ داده شده و بسته
+                        <button class="btn btn-primary mt-2" onclick="filterAll()">فیلتر تمام تیکت ها</button>
+                        <button class="btn btn-info mt-2" onclick="filter()">فیلتر تیکت های جدید و درحال بررسی</button>
+                        <button class="btn btn-secondary mt-2" onclick="oldTicket()">فیلتر تیکت های پاسخ داده شده و بسته
                             شده</button>
                     @else
                         <button class="btn btn-info" onclick="filter()">فیلتر</button>
@@ -23,7 +23,7 @@
                 </div>
             </form>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive mt-2">
             <table class="table table-stripped" id="tickets-table">
                 <thead>
                     <tr>

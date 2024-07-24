@@ -1,5 +1,5 @@
 <button type="button" id="closer" class="btn-close border-0 bg-transparent" style="font-size:32px" data-dismiss="modal" aria-label="Close">&times;</button>
-<form action="javascript:void(0)" id="task-detail" enctype="multipart/form-data">
+<form action="javascript:void(0)" method="POST" id="task-detail" enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="id" id="" value="{{ $task->id }}">
     <div class="col-sm-12 mt-3">
@@ -38,7 +38,9 @@
         <input type="text" id="edit_due_date_view" class="col-sm-12 form-control m-1">
     </div>
     <button type="submit" onclick="update()" class="col-sm-12 mt-2 btn btn-primary">بروزرسانی</button>
+    @if ($task->creator == Auth::id())
     <button type="submit" onclick="destroy()" class="col-sm-12 mt-2 btn btn-danger">حذف</button>
+    @endif
 </form>
 
 <script>

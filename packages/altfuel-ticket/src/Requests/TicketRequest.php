@@ -29,22 +29,25 @@ class TicketRequest extends FormRequest
      */
     public function rules()
     {
-        if(!$this->input('text') and !$this->file('payload')){
+        foreach ($this->file('files') as $file) {
+            if ($file &&  $file->getSize() >= config('ATConfig.max-attach-file-size') * 1024) {
+                throw ValidationException::withMessages([
+                    'title' => "حجم فایل بیش از مقدار مجاز است. مقدار مجاز: " . config('ATConfig.max-attach-file-size') . "KB",
+                ]);
+            }
+            if ($file && !in_array($file->getClientMimeType(), config('ATConfig.attachment-file-types'))) {
+                throw ValidationException::withMessages([
+                    'title' => "فایل پشتیبانی نمیشود. فایل های مجاز: " . implode(' یا ', config('ATConfig.attachment-file-types-translate')),
+                ]);
+            }
+        }
+        if (!$this->input('text') and !$this->file('payload')) {
             throw ValidationException::withMessages([
                 'title' => "متن یا صدا را تکمیل کنید",
             ]);
         }
-        if($this->file('file') &&  $this->file('file')->getSize() >= config('ATConfig.max-attach-file-size') * 1024 ){
-            throw ValidationException::withMessages([
-                'title' => "حجم فایل بیش از مقدار مجاز است. مقدار مجاز: ". config('ATConfig.max-attach-file-size') . "KB",
-            ]);
-        }
-        if($this->file('file') && !in_array($this->file('file')->getClientMimeType(), config('ATConfig.attachment-file-types'))){
-            throw ValidationException::withMessages([
-                'title' => "فایل پشتیبانی نمیشود. فایل های مجاز: ". implode(' یا ', config('ATConfig.attachment-file-types-translate')),
-            ]);
-        }
-        if(!$this->input('ticket_id')){
+
+        if (!$this->input('ticket_id')) {
             Log::info($this->input('ticket_id'));
             return [
                 'catagory' => 'required|integer',
@@ -52,10 +55,10 @@ class TicketRequest extends FormRequest
             ];
         }
         return [];
-        
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'catagory.required' => "لطفا دسته بندی را انتخاب کنید",
             'title.required' => "لطفا عنوان را وارد کنید",
@@ -71,6 +74,5 @@ class TicketRequest extends FormRequest
      */
     public function authenticate()
     {
-
     }
 }

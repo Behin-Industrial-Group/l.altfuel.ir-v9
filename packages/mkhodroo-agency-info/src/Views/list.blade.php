@@ -5,7 +5,7 @@
         <div class="card p-4">
             <button onclick="new_agency()" class="btn btn-primary col-sm-2">{{ __('Add New Agency') }}</button>
         </div>
-        
+
         <div class="card p-4 ">
             <form action="javascript:void(0)" id="filter-form1" class="col-sm-12 table-responsive">
                 <table class="table table-striped table-responsive ">
@@ -15,6 +15,15 @@
                             <option value="">{{ __('All') }}</option>
                             @foreach (config('agency_info.customer_type') as $catagory => $catagory_detail)
                                 <option value="{{ $catagory }}">{{ __($catagory_detail['name']) }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>استان</td>
+                    <td>
+                        <select name="province" id="" class="form-control">
+                            <option value="">{{ __('All') }}</option>
+                            @foreach ($provinces as $province)
+                                <option value="{{ $province->id }}">{{ $province->name }}</option>
                             @endforeach
                         </select>
                     </td>
