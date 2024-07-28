@@ -11,7 +11,7 @@ class NationalIdController extends Controller
 {
     public function store(Request $request){
         $validated = $request->validate([
-            'national_id' => ['required', 'unique', 'numeric', 'digits:10']
+            'national_id' => ['required', 'numeric', 'digits:10']
         ]);
         UserProfile::updateOrCreate(
             [
