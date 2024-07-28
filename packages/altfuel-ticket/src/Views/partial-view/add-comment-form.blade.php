@@ -20,9 +20,11 @@
                 </div>
                 <div class="col-sm-4 float-left" style="font-size: 15px">
                     پیوست: فایل های مجاز {{ json_encode(config('ATConfig.attachment-file-types-translate')) }}
-                    <input type="file" name="file" class="">
+                    <input type="file" name="files[]" class="">
+                    <div id="inputFields"></div>
+                    <button class="btn btn-info" onclick="addFn()">افزودن فایل دیگر &plus;</button>
                 </div>
-                
+
             </div>
         </div>
 
@@ -190,5 +192,16 @@
                 console.log(data);
             }
         )
+    }
+
+    function addFn() {
+        const divEle = document.getElementById("inputFields");
+        const wrapper = document.createElement("div");
+        const iFeild = document.createElement("input");
+        iFeild.setAttribute("type", "file");
+        iFeild.setAttribute("name", "files[]");
+        iFeild.classList.add("input-field");
+        wrapper.appendChild(iFeild);
+        divEle.appendChild(wrapper);
     }
 </script>

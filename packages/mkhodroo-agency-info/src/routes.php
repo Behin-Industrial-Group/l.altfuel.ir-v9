@@ -11,13 +11,14 @@ use Mkhodroo\AgencyInfo\Controllers\AgencyDocsController;
 use Mkhodroo\AgencyInfo\Controllers\AgencyListController;
 use Mkhodroo\AgencyInfo\Controllers\CreateAgencyController;
 use Mkhodroo\AgencyInfo\Controllers\DebtController;
+use Mkhodroo\AgencyInfo\Controllers\QueryController;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\Cities\Controllers\CityController;
 use Mkhodroo\UserRoles\Controllers\GetRoleController;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth', 'access'])->group(function () {
-    
+
     Route::get('create-form', [CreateAgencyController::class, 'view'])->name('createForm');
     Route::post('create', [CreateAgencyController::class, 'create'])->name('create');
     Route::get('list-form', [AgencyListController::class, 'view'])->name('listForm');
@@ -43,4 +44,8 @@ Route::prefix('/bedehi')->group(function () {
 
 Route::prefix('api/agencies')->group(function(){
     Route::get('{type?}', [AgencyListController::class, 'getValidAgencies']);
+});
+
+Route::name('query.')->prefix('query')->group(function(){
+    Route::get('agency-editor', [QueryController::class, 'agencyEditor'])->name('agencyEditor');
 });

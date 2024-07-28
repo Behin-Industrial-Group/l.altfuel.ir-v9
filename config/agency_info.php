@@ -8,7 +8,7 @@ return [
     'filter_fields' => [
         'customer_type','firstname', 'lastname', 'national_id', 'agency_code',
         'address', 'guild_number', 'mobile', 'phone', 'issued_date', 'exp_date', 'description',
-        'province', 'agency_code', 'membership_96', 'membership_97', 'membership_98',
+        'province', 'city', 'agency_code', 'membership_96', 'membership_97', 'membership_98',
         'membership_99', 'membership_00', 'membership_01', 'membership_02', 'debt1'
     ],
     'customer_type' => [
@@ -34,7 +34,8 @@ return [
                 'guild_number' => ['type' => 'text', 'default' => '', 'required' => false],
                 'issued_date' => ['type' => 'text', 'default' => '', 'required' => false],
                 'exp_date' => ['type' => 'text', 'default' => '', 'required' => false],
-                'province' => ['type' => 'select', 'default' => '', 'options' => '', 'option-url' => 'city.all'],
+                'province' => ['type' => 'select', 'default' => '', 'options' => '', 'option-url' => 'province.all'],
+                'city' => ['type' => 'select', 'default' => '', 'options' => '', 'option-url' => 'city.all'],
                 'address' => ['type' => 'text', 'default' => ''],
                 'postal_code' => ['type' => 'text'],
                 'location' => ['type' => 'text', 'default' => ''],
@@ -47,7 +48,7 @@ return [
                         ['value' => '1', 'label' => 'تحویل داده شد'],
                     ]
                 ],
-                
+
 
             ],
             'memberships' => [
@@ -72,7 +73,7 @@ return [
                         ['value' => 'ok', 'label' => 'فعال'],
                     ]
                 ],
-                
+
             ],
             'docs' => [
                 'archive_docs',
@@ -151,7 +152,7 @@ return [
                         ['value' => 'ok', 'label' => 'فعال'],
                     ]
                 ],
-                
+
             ],
             'docs' => [
                 'archive_docs',
@@ -236,7 +237,7 @@ return [
                         ['value' => 'ok', 'label' => 'فعال'],
                     ]
                 ],
-                
+
             ],
             'docs' => [
                 'archive_docs',
