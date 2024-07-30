@@ -12,12 +12,12 @@ class QueryController extends Controller
 {
     public static function agencyEditor()
     {
-        // $cities = City::all()->groupBy('province');
-        // foreach($cities as $province => $city){
-        //     NewProvince::create([
-        //         'name' => $province
-        //     ]);
-        // }
+        $cities = City::all()->groupBy('province');
+        foreach($cities as $province => $city){
+            NewProvince::create([
+                'name' => $province
+            ]);
+        }
         $cities = City::all();
         $provinces = NewProvince::all();
         $agencies = AgencyInfo::where('key', 'province')->get();
