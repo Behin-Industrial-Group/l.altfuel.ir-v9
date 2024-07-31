@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\Cities\Controllers\CityController;
+use Mkhodroo\Cities\Controllers\ProvinceController;
 use Mkhodroo\Cities\Models\NewProvince;
 use Mkhodroo\DateConvertor\Controllers\SDate;
 
@@ -101,9 +102,9 @@ class AgencyListController extends Controller
         foreach($cols as $key_index){
             $key = $keys[$key_index];
             if($key === 'province'){
-                $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->province;
+                $agency->$key = ProvinceController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->province;
             }elseif($key === 'city'){
-                $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, 'province')?->value)?->city;
+                $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, 'city')?->value)?->city;
             }else{
                 $agency->$key = __(GetAgencyController::getByKey($agency->parent_id, $key)?->value);
             }
