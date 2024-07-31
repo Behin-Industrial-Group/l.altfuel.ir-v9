@@ -29,18 +29,21 @@ class TicketRequest extends FormRequest
      */
     public function rules()
     {
-        foreach ($this->file('files') as $file) {
-            if ($file &&  $file->getSize() >= config('ATConfig.max-attach-file-size') * 1024) {
-                throw ValidationException::withMessages([
-                    'title' => "حجم فایل بیش از مقدار مجاز است. مقدار مجاز: " . config('ATConfig.max-attach-file-size') . "KB",
-                ]);
-            }
-            if ($file && !in_array($file->getClientMimeType(), config('ATConfig.attachment-file-types'))) {
-                throw ValidationException::withMessages([
-                    'title' => "فایل پشتیبانی نمیشود. فایل های مجاز: " . implode(' یا ', config('ATConfig.attachment-file-types-translate')),
-                ]);
+        if($this->file('files')){
+            foreach ($this->file('files') as $file) {
+                if ($file &&  $file->getSize() >= config('ATConfig.max-attach-file-size') * 1024) {
+                    throw ValidationException::withMessages([
+                        'title' => "حجم فایل بیش از مقدار مجاز است. مقدار مجاز: " . config('ATConfig.max-attach-file-size') . "KB",
+                    ]);
+                }
+                if ($file && !in_array($file->getClientMimeType(), config('ATConfig.attachment-file-types'))) {
+                    throw ValidationException::withMessages([
+                        'title' => "فایل پشتیبانی نمیشود. فایل های مجاز: " . implode(' یا ', config('ATConfig.attachment-file-types-translate')),
+                    ]);
+                }
             }
         }
+        
         if (!$this->input('text') and !$this->file('payload')) {
             throw ValidationException::withMessages([
                 'title' => "متن یا صدا را تکمیل کنید",
