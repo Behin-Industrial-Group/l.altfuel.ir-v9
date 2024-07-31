@@ -4,6 +4,7 @@ namespace Mkhodroo\AltfuelTicket\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\RandomStringController;
+use BehinLogging\Controllers\LoggingController;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,7 @@ class CommentAttachmentController extends Controller
 
         $a = Storage::disk('ticket')->put($ticket_id,$file);
         $return_path = "/public". config('ATConfig.ticket-uploads-folder') . "/$a";
+        LoggingController::info('daily', $return_path);
         return $return_path;
     }
 }
