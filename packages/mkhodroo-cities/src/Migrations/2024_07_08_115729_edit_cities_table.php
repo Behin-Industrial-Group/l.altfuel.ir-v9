@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('cities', function (Blueprint $table) {
-            $table->string('latitude')->default(null)->change();
-            $table->string('longitude')->default(null)->change();
-        });
+        // Schema::table('cities', function (Blueprint $table) {
+        //     $table->string('latitude')->default(null)->change();
+        //     $table->string('longitude')->default(null)->change();
+        // });
     }
 
     /**
