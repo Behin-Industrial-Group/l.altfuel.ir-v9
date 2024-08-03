@@ -18,7 +18,7 @@ use Mkhodroo\UserRoles\Controllers\GetRoleController;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth', 'access'])->group(function () {
-
+    
     Route::get('create-form', [CreateAgencyController::class, 'view'])->name('createForm');
     Route::post('create', [CreateAgencyController::class, 'create'])->name('create');
     Route::get('list-form', [AgencyListController::class, 'view'])->name('listForm');
@@ -27,6 +27,8 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth', 'a
     Route::get('edit/{parent_id}', [AgencyController::class, 'view'])->name('editForm');
     Route::post('edit', [AgencyController::class, 'edit'])->name('edit');
     Route::post('foreman-edit', [AgencyController::class, 'foremanEdit'])->name('foremanEdit');
+    Route::post('partner-edit', [AgencyController::class, 'foremanEdit'])->name('partnerEdit');
+    Route::post('additional-docs-edit', [AgencyController::class, 'foremanEdit'])->name('additionalDocsEdit');
     Route::post('fin-edit', [AgencyController::class, 'finEdit'])->name('finEdit');
     Route::post('inspection-edit', [AgencyController::class, 'InspectionEdit'])->name('InspectionEdit');
     Route::post('docs-edit', [AgencyDocsController::class, 'docsEdit'])->name('docsEdit');
@@ -47,5 +49,5 @@ Route::prefix('api/agencies')->group(function(){
 });
 
 Route::name('query.')->prefix('query')->group(function(){
-    Route::get('agency-editor', [QueryController::class, 'agencyEditor'])->name('agencyEditor');
+    Route::get('', [QueryController::class, 'agencyEditor'])->name('agencyEditor');
 });

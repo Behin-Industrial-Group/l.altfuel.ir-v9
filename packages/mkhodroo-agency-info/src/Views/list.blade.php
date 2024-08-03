@@ -8,36 +8,48 @@
 
         <div class="card p-4 ">
             <form action="javascript:void(0)" id="filter-form1" class="col-sm-12 table-responsive">
-                <table class="table table-striped table-responsive ">
-                    <td>{{ __(config('agency_info.main_field_name')) }}</td>
-                    <td>
-                        <select name="{{ config('agency_info.main_field_name') }}" id="" class="form-control">
-                            <option value="">{{ __('All') }}</option>
-                            @foreach (config('agency_info.customer_type') as $catagory => $catagory_detail)
-                                <option value="{{ $catagory }}">{{ __($catagory_detail['name']) }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>استان</td>
-                    <td>
-                        <select name="province" id="" class="form-control">
-                            <option value="">{{ __('All') }}</option>
-                            @foreach ($provinces as $province)
-                                <option value="{{ $province->id }}">{{ $province->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" name="field_value" id="" class="form-control"
+                <div class="row col-sm-12">
+                    <div class="col-sm-3 row">
+                        <div class="col-sm-4">
+                            {{ __(config('agency_info.main_field_name')) }}
+                        </div>
+                        <div class="col-sm-8">
+                            <select name="{{ config('agency_info.main_field_name') }}_search" id="" class="form-control">
+                                <option value="">{{ __('All') }}</option>
+                                @foreach (config('agency_info.customer_type') as $catagory => $catagory_detail)
+                                    <option value="{{ $catagory }}">{{ __($catagory_detail['name']) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 row">
+                        <div class="col-sm-4">
+                            {{__('province')}}
+                        </div>
+                        <div class="col-sm-8">
+                            <select name="province_search" id="" class="form-control col-sm-12">
+                                <option value="">{{ __('All') }}</option>
+                                @foreach ($provinces as $province)
+                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 row">
+                        <div class="-col-sm-8">
+                            <input type="text" name="field_value" id="" class="form-control col-sm-12"
                             placeholder="{{ __('Everything') }}">
-                    </td>
-                    <td>
-                        <button onclick="filter()" class="btn btn-primary">{{ __('Filter') }}</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-default" onclick="show_columns()">{{ __('Columns') }}</button>
-                    </td>
-                </table>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 row">
+                        <div class="col-sm-6">
+                            <button onclick="filter()" class="btn btn-primary">{{ __('Filter') }}</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-default" onclick="show_columns()">{{ __('Columns') }}</button>
+                        </div>
+                    </div>
+                </div>
             </form>
 
         </div>
@@ -178,7 +190,7 @@
                 "{{ route('agencyInfo.filterList') }}",
                 fd,
                 function(res) {
-                    // console.log(res);
+                    console.log(res);
                     update_datatable(res.data);
                 }
             )

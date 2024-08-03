@@ -30,7 +30,7 @@ class AgencyListController extends Controller
     public static function getKeys(){
         $keys = AgencyInfo::groupBy('key')->pluck('key');
         // $keys[] = 'province';
-        $keys[] = 'city';
+        // $keys[] = 'city';
         return $keys;
     }
 
@@ -43,16 +43,17 @@ class AgencyListController extends Controller
     public static function filterList(Request $r)
     {
 
+        $main_field_search = config('agency_info.main_field_name'). "_search";
         $main_field = config('agency_info.main_field_name');
         $agencies = AgencyInfo::get();
         $parent_ids = [];
-        if($r->$main_field){
-            $parent_ids[] = AgencyInfo::where('key', $main_field)->where('value', $r->$main_field)->pluck('parent_id')->toArray();
+        if($r->$main_field_search){
+            $parent_ids[] = AgencyInfo::where('key', $main_field)->where('value', $r->$main_field_search)->pluck('parent_id')->toArray();
             // $parent_ids = array_merge($parent_ids, $a);
             
         }
-        if($r->province){
-            $parent_ids[] = AgencyInfo::where('key', 'province')->where('value', $r->province)->pluck('parent_id')->toArray();
+        if($r->province_search){
+            $parent_ids[] = AgencyInfo::where('key', 'province')->where('value', $r->province_search)->pluck('parent_id')->toArray();
             // $parent_ids = array_merge($parent_ids, $a);
         }
         if($r->field_value){
@@ -102,7 +103,7 @@ class AgencyListController extends Controller
         foreach($cols as $key_index){
             $key = $keys[$key_index];
             if($key === 'province'){
-                $agency->$key = ProvinceController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->province;
+                $agency->$key = ProvinceController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->name;
             }elseif($key === 'city'){
                 $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, 'city')?->value)?->city;
             }else{
