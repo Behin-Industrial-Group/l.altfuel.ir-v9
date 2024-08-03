@@ -97,13 +97,7 @@ class DynaFormController extends Controller
                 if($field->type === 'form'){
                     $scripts[] = self::getFormScriptCode($field->script);
                     $parent_mode = $field->mode;
-                    foreach($field->items as $subFormRows){
-                        echo "<div class='row col-sm-12' style='margin-bottom: 10px'>";
-                        foreach($subFormRows as $field){
-                            self::createField($field, $local_fields, $parent_mode);
-                        }
-                        echo "</div>";
-                    }
+                    self::createForm($field, $local_fields, $parent_mode);
                 }else{
                     $parent_mode = isset($field->mode) ? $field->mode : '';
 
@@ -121,6 +115,19 @@ class DynaFormController extends Controller
             echo "<script>console.log($data)</script>";
         }
         
+    }
+
+    public static function createForm($field, $local_fields, $parent_mode){
+        foreach($field->items as $subFormRows){
+            echo "<div class='row col-sm-12' style='margin-bottom: 10px'>";
+            foreach($subFormRows as $field){
+                if($field->type == 'form'){
+                    self::createForm($field, $local_fields, $field->mode);
+                }
+                self::createField($field, $local_fields, $parent_mode);
+            }
+            echo "</div>";
+        }
     }
 
     public static function createField($field, $local_fields, $parent_mode){
@@ -196,7 +203,6 @@ class DynaFormController extends Controller
             if ($field->type == 'checkbox') {
                 echo  "<div class='col-sm-$field->colSpan' id='$field->name-div'>";
                 $check = $field_value == 'on' ? 'checked' : '';
-                $field_mode = $field_mode ? 'disabled' : '';
                 echo  "<input type='checkbox' name='$field->name' $check $field_mode>". trans($field->label) . "<br>";
                 echo  "<input type='hidden' name='$field->name' value='$field_value'>";
 
@@ -264,7 +270,7 @@ class DynaFormController extends Controller
                         $field_row->id
                     )'></i> <br>";
                 }
-                if($field_mode == 'edit'){
+                if(in_array($field->mode, ['parent', 'edit'])){
                     echo "<input id='$field->name' multiple='multiple' type='file' name='$field->name[]' class='form-control' >";
                 }
 
