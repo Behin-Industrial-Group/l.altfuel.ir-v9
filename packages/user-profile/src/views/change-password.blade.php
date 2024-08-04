@@ -7,7 +7,7 @@
 @section('content')
     <form action="javascript:void(0)" method="POST" id="change-pass-form">
         @csrf
-        {{ method_field('put') }}
+        {{ method_field('patch') }}
         <section class="row pt-2">
             <section class="col-12 col-md-6 my-2">
                 <div class="form-group">
