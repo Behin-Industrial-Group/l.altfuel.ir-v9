@@ -30,17 +30,11 @@ class CreateTicketController extends Controller
             'title' => $title,
             'status' => config('ATConfig.status.new')
         ]);
-        LoggingController::info('ticketing', "CREATE NEW TICKET BY  USER: " . Auth::id());
         return $ticket;
     }
 
     public function store(TicketRequest $r)
     {
-        LoggingController::info('ticketing', "######################");
-        LoggingController::info('ticketing', "Request info: ");
-        LoggingController::info('ticketing', $r);
-
-
         if (isset($r->ticket_id)) {
             $ticket = GetTicketController::findByTicketId($r->ticket_id);
         } else { //Create new Ticket
@@ -52,7 +46,6 @@ class CreateTicketController extends Controller
         $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->ticket_id) : '';
 
         $comment = AddTicketCommentController::add($ticket->id, $r->text, $file_path);
-        Log::info("upload method " . $r->file('file'));
         if ($r->file('files')) {
             foreach ($r->file('files') as $name) {
                 $attach = CommentAttachmentController::upload($name, $ticket->ticket_id);
