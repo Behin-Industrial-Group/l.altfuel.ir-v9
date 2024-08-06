@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Mkhodroo\UserRoles\Controllers\DisableUserController;
 use Mkhodroo\UserRoles\Controllers\GetMethodsController;
 use Mkhodroo\UserRoles\Controllers\GetRoleController;
 use Mkhodroo\UserRoles\Controllers\UserController;
@@ -18,7 +19,7 @@ Route::name('method.')->prefix('method')->middleware(['web', 'auth','access'])->
     Route::post('edit', [GetMethodsController::class, 'edit'])->name('edit');
 });
 
-Route::prefix('/user')->middleware(['web', 'auth','access'])->group(function () {
+Route::prefix('/user')->middleware(['web', 'auth', 'access'])->group(function () {
     Route::get('/{id}', [UserController::class, 'index'])->name('user.all');
     Route::post('/{id}', [UserController::class, 'AccessReg']);
 
@@ -27,4 +28,8 @@ Route::prefix('/user')->middleware(['web', 'auth','access'])->group(function () 
     Route::post('/{id}/change-ip', [UserController::class, 'ChangeIp'])->name('change-user-ip');
 
     Route::post('/{id}/changeShowInReport', [UserController::class, 'changeShowInReport']);
+
+
+    Route::patch('/enable', [DisableUserController::class, 'enable'])->name('user.enable');
+    Route::patch('/disable', [DisableUserController::class, 'disable'])->name('user.disable');
 });

@@ -4138,6 +4138,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\Cities\\Controllers\\CityViewController' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Controllers/CityViewController.php',
         'Mkhodroo\\Cities\\Controllers\\ProvinceController' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Controllers/ProvinceController.php',
         'Mkhodroo\\Cities\\Models\\City' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Models/City.php',
+        'Mkhodroo\\Cities\\Models\\NewProvince' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Models/NewProvince.php',
         'Mkhodroo\\Cities\\Models\\Province' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Models/Province.php',
         'Mkhodroo\\DateConvertor\\Controllers\\SDate' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/Controllers/SDate.php',
         'Mkhodroo\\DateConvertor\\DateConvertorProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-date-convertor/src/DateConvertorProvider.php',
