@@ -24,13 +24,15 @@
                     <div id="inputFields"></div>
                     <button class="btn btn-info" onclick="addFn()">افزودن فایل دیگر &plus;</button>
                 </div>
-
+                <button type="button" id="record-button">شروع ضبط</button>
             </div>
+
         </div>
 
     </div>
 
 </form>
+<audio id="audio-playback" controls></audio>
 <div class="btn btn-success" id="submit-btn" onclick="submit()">
     ثبت
 </div>
@@ -204,4 +206,131 @@
         wrapper.appendChild(iFeild);
         divEle.appendChild(wrapper);
     }
+</script>
+
+<script type="text/javascript">
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const recordButton = document.getElementById('record-button');
+    //     const audioPlayback = document.getElementById('audio-playback');
+    //     const form = document.getElementById('{{ $form_id ?? 'comment-form' }}');
+    //     let mediaRecorder;
+    //     let audioChunks = [];
+
+    //     recordButton.addEventListener('click', async () => {
+    //         if (recordButton.textContent === 'شروع ضبط') {
+    //             recordButton.textContent = 'توقف ضبط';
+    //             audioChunks = [];
+    //             const stream = await navigator.mediaDevices.getUserMedia({
+    //                 audio: true
+    //             });
+    //             mediaRecorder = new MediaRecorder(stream);
+
+    //             mediaRecorder.ondataavailable = event => {
+    //                 if (event.data.size > 0) {
+    //                     audioChunks.push(event.data);
+    //                 }
+    //             };
+
+    //             mediaRecorder.onstop = () => {
+    //                 const audioBlob = new Blob(audioChunks, {
+    //                     type: 'audio/wav'
+    //                 });
+    //                 const audioUrl = URL.createObjectURL(audioBlob);
+    //                 audioPlayback.src = audioUrl;
+
+    //                 // Append the audio blob to the form data
+    //                 formData = new FormData(form);
+    //                 formData.append('audio', audioBlob, 'recording.wav');
+
+    //                 // Submit the form data with the audio blob
+    //                 form.onsubmit = function(e) {
+    //                     e.preventDefault();
+    //                     fetch('/submit-audio', {
+    //                             method: 'POST',
+    //                             body: formData
+    //                         })
+    //                         .then(response => response.json())
+    //                         .then(data => {
+    //                             console.log('Success:', data);
+    //                         })
+    //                         .catch((error) => {
+    //                             console.error('Error:', error);
+    //                         });
+    //                 };
+    //             };
+
+    //             mediaRecorder.start();
+    //         } else {
+    //             recordButton.textContent = 'شروع ضبط';
+    //             mediaRecorder.stop();
+    //         }
+    //     });
+    // });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const recordButton = document.getElementById('record-button');
+        const audioPlayback = document.getElementById('audio-playback');
+        const form = document.getElementById('{{ $form_id ?? 'comment-form' }}');
+        const playButton = document.getElementById('play-btn');
+        let mediaRecorder;
+        let audioChunks = [];
+        let audioBlob;
+
+        recordButton.addEventListener('click', async () => {
+            if (recordButton.textContent === 'شروع ضبط') {
+                recordButton.textContent = 'توقف ضبط';
+                audioChunks = [];
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    audio: true
+                });
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    audioBlob = new Blob(audioChunks, {
+                        type: 'audio/wav'
+                    });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    audioPlayback.src = audioUrl;
+                    playButton.style.display = 'inline';
+                };
+
+                mediaRecorder.start();
+            } else {
+                recordButton.textContent = 'شروع ضبط';
+                mediaRecorder.stop();
+            }
+        });
+
+        playButton.addEventListener('click', () => {
+            audioPlayback.play();
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            if (audioBlob) {
+                formData.append('audio', audioBlob, 'recording.wav');
+            }
+
+            fetch("{{ route('ATRoutes.store') }}", {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    // Add your success handling code here
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Add your error handling code here
+                });
+        });
+    });
 </script>
