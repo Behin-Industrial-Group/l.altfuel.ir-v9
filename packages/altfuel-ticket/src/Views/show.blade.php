@@ -1,8 +1,9 @@
 <button type="button" class="btn-close border-0 bg-transparent" style="font-size:32px" data-dismiss="modal" aria-label="Close">&times;</button>
 <div class="row">
     <div class="col-sm-4">
-        {{ $ticket->user()->display_name }} @if($ticket->user()->role_id == config('user_profile.agency_role')) <i style="color:royalblue" class="fa fa-check-circle"></i> @endif <br>
-        شماره همراه: {{ $ticket->user()->email ?? '' }}
+        {{ $ticket->user()->display_name }} @if($ticket->user()->role_id == config('user_profile.agency_role')) <i style="color:royalblue" class="fa fa-check-circle"></i> @endif  <br>
+        شناسه تیکت : {{ $ticket->id }} <br>
+        شماره همراه : {{ $ticket->user()->email ?? '' }}
     </div>
     <div class="row col-sm-8">
         @foreach (config('ATConfig.status') as $key => $status)
