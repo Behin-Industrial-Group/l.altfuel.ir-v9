@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\Route;
 use Mkhodroo\AltfuelTicket\Controllers\GetTicketController;
 use Mkhodroo\AltfuelTicket\Controllers\ReportController;
 use Mkhodroo\AltfuelTicket\Controllers\ShowTicketController;
-use Mkhodroo\AltfuelTicket\Controllers\TicketAssignController;
 use Mkhodroo\AltfuelTicket\Controllers\TicketCatagoryController;
 use Mkhodroo\AltfuelTicket\Controllers\TicketStatusController;
 
-Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->middleware(['web','auth'])->group(function(){
+Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->middleware(['web','auth', 'access'])->group(function(){
     Route::get('', [CreateTicketController::class, 'index'])->name('index');
     Route::post('store', [CreateTicketController::class, 'store'])->name('store');
     Route::post('change-status', [TicketStatusController::class, 'changeStatus'])->name('changeStatus');
@@ -41,12 +40,5 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
 
     Route::name('report.')->prefix('report')->group(function(){
         Route::get('summary', [ReportController::class, 'summary'])->name('summary');
-    });
-
-    Route::name('assign.')->prefix('assign')->group(function(){
-        Route::get('category', [TicketAssignController::class, 'category'])->name('category');
-        Route::patch('actor', [TicketAssignController::class, 'actor'])->name('actor');
-        Route::patch('category-and-actor', [TicketAssignController::class, 'categoryAndActor'])->name('categoryAndActor');
-
     });
 });

@@ -24,7 +24,6 @@
             </form>
         </div>
     </div>
-    <a href="{{ route('ATRoutes.assign.category') }}" class="btn btn-danger">click</a>
 @endsection
 
 @section('script')

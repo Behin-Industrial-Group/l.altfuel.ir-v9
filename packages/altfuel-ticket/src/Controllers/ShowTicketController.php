@@ -21,3 +21,4 @@ class ShowTicketController extends Controller
         ]);
     }
 }
+
