@@ -9,7 +9,7 @@ use Mkhodroo\UserRoles\Models\User;
 class ActorsTicketCounter extends Model
 {
     use HasFactory;
-
+    public $table = "actors_ticket_counter";
     protected $fillable = [
         'actor_id', 'count'
     ];

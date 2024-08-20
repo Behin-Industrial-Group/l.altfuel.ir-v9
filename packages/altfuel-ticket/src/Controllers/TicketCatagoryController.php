@@ -34,13 +34,14 @@ class TicketCatagoryController extends Controller
     function changeCatagory(Request $r) {
         $ticket = GetTicketController::findByTicketId($r->ticket_id);
         $ticket->cat_id = $r->catagory;
+        $render = TicketAssignController::assign($ticket->cat_id, $ticket->id);
         $ticket->save();
 
         // ADD TICKET CATAGORY CHANGE TEXT IN COMMENTS
         $catagory = $this->get($ticket->cat_id);
-        $text = trans('ATTrans.change-catagory-text', [ 
-            'parent_cat' => $this->get($catagory->parent_id)->name, 
-            'child_cat' => $catagory->name 
+        $text = trans('ATTrans.change-catagory-text', [
+            'parent_cat' => $this->get($catagory->parent_id)->name,
+            'child_cat' => $catagory->name
         ]);
         AddTicketCommentController::add($ticket->id, $text);
         return $r->ticket_id;

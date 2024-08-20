@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-    $title = "ایجاد تیکت پشتیبانی";
+    $title = 'ایجاد تیکت پشتیبانی';
 @endphp
 
 @section('content')
@@ -24,12 +24,11 @@
             </form>
         </div>
     </div>
-    <a href="{{ route('ATRoutes.assign.category') }}" class="btn btn-danger">click</a>
 @endsection
 
 @section('script')
     <script>
         $('.filepond').filepond();
-    $('.filepond').filepond('storeAsFile', true);
+        $('.filepond').filepond('storeAsFile', true);
     </script>
 @endsection

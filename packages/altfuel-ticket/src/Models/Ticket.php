@@ -12,7 +12,7 @@ class Ticket extends Model
 
     public $table = "altfuel_tickets";
     protected $fillable = [
-        'ticket_id', 'user_id', 'cat_id', 'title', 'status', 'junk'
+        'ticket_id', 'user_id', 'cat_id', 'title', 'status', 'junk', 'actor_id'
     ];
 
     public function comments() {
@@ -25,5 +25,9 @@ class Ticket extends Model
 
     function user() {
         return User::find($this->user_id);
+    }
+
+    function actor() {
+        return User::find($this->actor_id);
     }
 }

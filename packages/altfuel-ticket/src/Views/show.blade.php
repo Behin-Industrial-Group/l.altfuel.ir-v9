@@ -3,7 +3,8 @@
     <div class="col-sm-4">
         شناسه تیکت : {{ $ticket->id }} <br>
         {{ $ticket->user()->display_name }} @if($ticket->user()->role_id == config('user_profile.agency_role')) <i style="color:royalblue" class="fa fa-check-circle"></i> @endif  <br>
-        شماره همراه : {{ $ticket->user()->email ?? '' }}
+        شماره همراه : {{ $ticket->user()->email ?? '' }} <br>
+        کارشناس : {{ $ticket->actor()->display_name }}
     </div>
     <div class="row col-sm-8">
         @foreach (config('ATConfig.status') as $key => $status)

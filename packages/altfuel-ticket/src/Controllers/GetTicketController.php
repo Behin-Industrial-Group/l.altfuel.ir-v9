@@ -20,6 +20,7 @@ class GetTicketController extends Controller
         $result = Ticket::get()->each(function ($row) {
             $row->catagory = $row->catagory();
             $row->user = $row->user()?->name;
+            $row->actor = $row->actor()?->name;
             // $row->user_level = $row->user()->level();
         });
         return $result;
@@ -30,6 +31,7 @@ class GetTicketController extends Controller
         $data = Ticket::where('user_id', Auth::id())->get()->each(function ($row) {
             $row->catagory = $row->catagory()['name'];
             $row->user = $row->user()?->name;
+            $row->actor = $row->actor()?->name;
             // $row->user_level = $row->user()->level();
         });
         return $data;
@@ -41,6 +43,7 @@ class GetTicketController extends Controller
             return Ticket::where('user_id', Auth::id())->WhereIn('cat_id', $catagory_id)->get()->each(function ($row) {
                 $row->catagory = $row->catagory();
                 $row->user = $row->user()?->name;
+                $row->actor = $row->actor()?->name;
                 // $row->user_level = $row->user()->level();
             });
         }
@@ -48,6 +51,7 @@ class GetTicketController extends Controller
         return Ticket::where('user_id', Auth::id())->where('cat_id', $catagory_id)->get()->each(function ($row) use ($category){
             $row->catagory = $category;
             $row->user = $row->user()?->name;
+            $row->actor = $row->actor()?->name;
             // $row->user_level = $row->user()->level();
         });
     }
@@ -62,6 +66,7 @@ class GetTicketController extends Controller
             ->get()->each(function ($row) use ($category) {
                 $row->catagory = $category;
                 $row->user = $row->user()?->name;
+                $row->actor = $row->actor()?->name;
                 // $row->user_level = $row->user()->level();
             });
         }
@@ -78,6 +83,7 @@ class GetTicketController extends Controller
             ->get()->each(function ($row) use ($category) {
                 $row->catagory = $category;
                 $row->user = $row->user()?->name;
+                $row->actor = $row->actor()?->name;
                 // $row->user_level = $row->user()->level();
             }, 2);
         }
@@ -93,6 +99,7 @@ class GetTicketController extends Controller
             ->get()->each(function ($row) use ($category) {
                 $row->catagory = $category;
                 $row->user = $row->user()?->name;
+                $row->actor = $row->actor()?->name;
                 // $row->user_level = $row->user()->level();
             }, 2);
         }

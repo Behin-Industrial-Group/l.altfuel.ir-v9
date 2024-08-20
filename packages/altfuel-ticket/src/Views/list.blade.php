@@ -31,6 +31,7 @@
                         <th>عنوان</th>
                         <th>ثبت کننده</th>
                         <th>دسته بندی</th>
+                        <th>کارشناس</th>
                         <th>وضعیت</th>
                         <th>آخرین تغییرات</th>
                         {{-- <th>امتیاز</th> --}}
@@ -105,6 +106,9 @@
                     data: 'catagory'
                 },
                 {
+                    data: 'actor'
+                },
+                {
                     data: 'status',
                     render: function(data) {
                         if (data == "{{ config('ATConfig.status.new') }}") {
@@ -133,8 +137,8 @@
             ],
             null,
             [
-                [4, 'asc'],
-                [5, 'desc']
+                [5, 'asc'],
+                [6, 'desc']
             ]
         );
 

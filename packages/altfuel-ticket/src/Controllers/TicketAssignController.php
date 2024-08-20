@@ -9,32 +9,26 @@ use Mkhodroo\AltfuelTicket\Models\Ticket;
 
 class TicketAssignController extends Controller
 {
+    public static function assign($catId, $ticketId, $actorId = 'random')
+    {
+        $render = new TicketCountController();
+        if ($actorId = 'random') {
+            $categoryActorIds = CatagoryActor::where('cat_id', $catId)->pluck('user_id');
+            $actorId = $render->actorAssigner($categoryActorIds);
 
-    public function category(Request $request){
+            // $this->category($request);
+        } else {
+            $actorId = $render->actorAssigner([$actorId]);
 
-        $categoryActors = CatagoryActor::where('cat_id', 7)->pluck('user_id');
-        
-        dd('hi');
-        $ticket = Ticket::where('id', $request->id)->first();
-        // $actor = CatagoryActor::where('cat_id', $request->category);
+            // $this->categoryAndActor($request);
+        }
+        $ticket = Ticket::where('id', $ticketId)->first();
         $ticket->update([
-            'cat_id' => $request->category
+            'cat_id' => $catId,
+            'actor_id' => $actorId
         ]);
-    }
+        return true;
 
-    public function actor(Request $request){
-        $ticket = Ticket::where('id', $request->id)->first();
-        $ticket->update([
-            'actor_id' => $request->actor
-        ]);
-    }
-
-    public function categoryAndActor(Request $request){
-        $ticket = Ticket::where('id', $request->id)->first();
-        $ticket->update([
-            'cat_id' => $request->category,
-            'actor_id' => $request->actor
-        ]);
     }
 
 }
