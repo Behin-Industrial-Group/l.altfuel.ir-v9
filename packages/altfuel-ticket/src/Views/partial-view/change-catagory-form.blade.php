@@ -9,7 +9,7 @@
                 <div class="input-group mb-3 col-sm-12 float-right">
                     <button class="btn btn-success" id="play-btn" style="display: none">پخش</button>
                     <div class="input-group-append">
-                        @include('ATView::partial-view.catagory')
+                        @include('ATView::partial-view.modal-category')
                     </div>
                     <div class="btn btn-danger" id="submit-btn" onclick="change_cat()">
                         تغییر دسته بندی
@@ -37,7 +37,7 @@
             $('#{{ $form_id ?? 'change-cat-form' }}').serialize(),
             function(response) {
                 show_message("{{ trans('ATTrans.success') }}")
-                // filter()
+                filter()
             },
             function(data) {
                 show_error(data);

@@ -34,8 +34,11 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
     });
 
     Route::name('catagory.')->prefix('catagory')->group(function(){
+        Route::get('modal', [TicketCatagoryController::class, 'modalCategory'])->name('modal');
+        Route::get('for-actor', [TicketCatagoryController::class, 'categoryForActor'])->name('forActor');
         Route::get('all-parent', [TicketCatagoryController::class, 'getAllParent'])->name('getAllParent');
         Route::get('get-children/{parent_id?}/{count?}', [TicketCatagoryController::class, 'getChildrenByParentId'])->name('getChildrenByParentId');
+        Route::get('get-actors/{cat_id?}', [TicketCatagoryController::class, 'getActorsByCatId'])->name('getActorsByCatId');
         Route::get('count/{id?}', [TicketCatagoryController::class, 'count'])->name('count');
     });
 

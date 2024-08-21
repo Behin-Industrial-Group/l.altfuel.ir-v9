@@ -4,12 +4,23 @@ namespace Mkhodroo\AltfuelTicket\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketCatagory;
+use Mkhodroo\UserRoles\Models\User;
 
 class TicketCatagoryController extends Controller
 {
     function get($id){
+        return TicketCatagory::find($id);
+    }
+
+    function modalCategory($id){
+        return TicketCatagory::find($id);
+    }
+
+    function categoryForActor($id){
         return TicketCatagory::find($id);
     }
 
@@ -26,6 +37,12 @@ class TicketCatagoryController extends Controller
         return TicketCatagory::where('parent_id', $parent_id)->get();
     }
 
+    function getActorsByCatId($catId) {
+        $userIds =  CatagoryActor::where('cat_id', $catId)->pluck('user_id');
+        $users = User::wherein('id', $userIds)->get();
+        return $users;
+    }
+
     function getAllParent() {
         return TicketCatagory::whereRaw('parent_id = id')->get();
     }
@@ -33,6 +50,9 @@ class TicketCatagoryController extends Controller
 
     function changeCatagory(Request $r) {
         $ticket = GetTicketController::findByTicketId($r->ticket_id);
+        if($ticket->actor_id != Auth::id()){
+            return response(trans("change category access denied"), 402);
+        }
         $ticket->cat_id = $r->catagory;
         $render = TicketAssignController::assign($ticket->cat_id, $ticket->id);
         $ticket->save();
