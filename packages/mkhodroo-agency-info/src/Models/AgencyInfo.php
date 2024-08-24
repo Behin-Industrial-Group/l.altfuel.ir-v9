@@ -10,7 +10,7 @@ class AgencyInfo extends Model
     use SoftDeletes;
     public $table = "agency_info";
     protected $fillable = [
-        'key', 'value', 'parent_id', 'desciption'
+        'key', 'value', 'parent_id', 'description'
     ];
 
     function children() {

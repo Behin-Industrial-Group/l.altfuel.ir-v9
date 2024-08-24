@@ -10,10 +10,8 @@
             <form action="javascript:void(0)" id="filter-form1" class="col-sm-12 table-responsive">
                 <div class="row col-sm-12">
                     <div class="col-sm-3 row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             {{ __(config('agency_info.main_field_name')) }}
-                        </div>
-                        <div class="col-sm-8">
                             <select name="{{ config('agency_info.main_field_name') }}_search" id="" class="form-control">
                                 <option value="">{{ __('All') }}</option>
                                 @foreach (config('agency_info.customer_type') as $catagory => $catagory_detail)
@@ -23,10 +21,8 @@
                         </div>
                     </div>
                     <div class="col-sm-3 row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             {{__('province')}}
-                        </div>
-                        <div class="col-sm-8">
                             <select name="province_search" id="" class="form-control col-sm-12">
                                 <option value="">{{ __('All') }}</option>
                                 @foreach ($provinces as $province)
@@ -36,7 +32,30 @@
                         </div>
                     </div>
                     <div class="col-sm-3 row">
-                        <div class="-col-sm-8">
+                        <div class="col-sm-12">
+                            {{__('last referal')}}
+                            <select name="last_referral_search" id="" class="form-control col-sm-12">
+                                <option value="">{{ __('All') }}</option>
+                                @foreach ($last_referrals as $last_refferal)
+                                    <option value="{{ $last_refferal->value }}">{{ $last_refferal->value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 row">
+                        <div class="col-sm-12">
+                            {{__('new status')}}
+                            <select name="new_status_search" id="" class="form-control col-sm-12">
+                                <option value="">{{ __('All') }}</option>
+                                @foreach ($new_statuses as $new_status)
+                                    <option value="{{ $new_status->value }}">{{ $new_status->value }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 row p-1"></div>
+                    <div class="col-sm-3 row">
+                        <div class="col-sm-12">
                             <input type="text" name="field_value" id="" class="form-control col-sm-12"
                             placeholder="{{ __('Everything') }}">
                         </div>

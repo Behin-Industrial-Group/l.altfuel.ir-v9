@@ -47,4 +47,8 @@ class GetAgencyController extends Controller
         return $agencies;
     }
 
+    public static function getUniqueValueOfKey($key) {
+        return AgencyInfo::where('key', $key)->groupBy('value')->get();
+    }
+
 }
