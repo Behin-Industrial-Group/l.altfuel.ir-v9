@@ -89,7 +89,7 @@
                     data.forEach(element => {
                         actor_select.append(
                             new Option(
-                                element.name,
+                                element.display_name,
                                 element.id
                             )
                         )
