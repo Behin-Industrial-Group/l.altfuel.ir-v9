@@ -10,6 +10,7 @@
             "{{ route('ATRoutes.catagory.getAllParent') }}",
             function(data) {
                 parent_cat.html('');
+                parent_cat.append(new Option("لطفا دسته بندی را انتخاب کنید", "notSelected"))
                 data.forEach(element => {
                     parent_cat.append(new Option(`${element.name}`, element.id));
                 });

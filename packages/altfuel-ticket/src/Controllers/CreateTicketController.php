@@ -38,7 +38,7 @@ class CreateTicketController extends Controller
         if (isset($r->ticket_id)) {
             $ticket = GetTicketController::findByTicketId($r->ticket_id);
             // فقط ایجاد کننده و یا اپراتور باید بتواند کامنت بگذارد
-            if(!in_array(Auth::id(), [$ticket->user_id, $ticket->actor_id]) or $ticket->actor_id != null){
+            if(!in_array(Auth::id(), [$ticket->user_id, $ticket->actor_id]) and $ticket->actor_id != null){
                 return response(trans("access denied"), 402);
             }
         } else { //Create new Ticket

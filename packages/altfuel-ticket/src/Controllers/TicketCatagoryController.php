@@ -50,7 +50,7 @@ class TicketCatagoryController extends Controller
 
     function changeCatagory(Request $r) {
         $ticket = GetTicketController::findByTicketId($r->ticket_id);
-        if($ticket->actor_id != Auth::id()){
+        if($ticket->actor_id != Auth::id() and $ticket->actor_id != null){
             return response(trans("change category access denied"), 402);
         }
         $ticket->cat_id = $r->catagory;
