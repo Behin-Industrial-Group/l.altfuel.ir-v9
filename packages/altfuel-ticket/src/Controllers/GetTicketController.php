@@ -19,8 +19,8 @@ class GetTicketController extends Controller
     {
         $result = Ticket::get()->each(function ($row) {
             $row->catagory = $row->catagory();
-            $row->user = $row->user()?->name;
-            $row->actor = $row->actor()?->name;
+            $row->user = $row->user()?->display_name;
+            $row->actor = $row->actor()?->display_name;
             // $row->user_level = $row->user()->level();
         });
         return $result;
@@ -30,8 +30,8 @@ class GetTicketController extends Controller
     {
         $data = Ticket::where('user_id', Auth::id())->get()->each(function ($row) {
             $row->catagory = $row->catagory()['name'];
-            $row->user = $row->user()?->name;
-            $row->actor = $row->actor()?->name;
+            $row->user = $row->user()?->display_name;
+            $row->actor = $row->actor()?->display_name;
             // $row->user_level = $row->user()->level();
         });
         return $data;
@@ -42,16 +42,16 @@ class GetTicketController extends Controller
         if (is_array($catagory_id)) {
             return Ticket::where('user_id', Auth::id())->WhereIn('cat_id', $catagory_id)->get()->each(function ($row) {
                 $row->catagory = $row->catagory();
-                $row->user = $row->user()?->name;
-                $row->actor = $row->actor()?->name;
+                $row->user = $row->user()?->display_name;
+                $row->actor = $row->actor()?->display_name;
                 // $row->user_level = $row->user()->level();
             });
         }
         $category = CatagoryController::get($catagory_id)->name;
         return Ticket::where('user_id', Auth::id())->where('cat_id', $catagory_id)->get()->each(function ($row) use ($category){
             $row->catagory = $category;
-            $row->user = $row->user()?->name;
-            $row->actor = $row->actor()?->name;
+            $row->user = $row->user()?->display_name;
+            $row->actor = $row->actor()?->display_name;
             // $row->user_level = $row->user()->level();
         });
     }
@@ -65,8 +65,8 @@ class GetTicketController extends Controller
             ->whereIn('status', [ config('ATConfig.status.new'), config('ATConfig.status.in_progress') ])
             ->get()->each(function ($row) use ($category) {
                 $row->catagory = $category;
-                $row->user = $row->user()?->name;
-                $row->actor = $row->actor()?->name;
+                $row->user = $row->user()?->display_name;
+                $row->actor = $row->actor()?->display_name;
                 // $row->user_level = $row->user()->level();
             });
         }
@@ -82,8 +82,8 @@ class GetTicketController extends Controller
             ->whereIn('status', [ config('ATConfig.status.answered'), config('ATConfig.status.closed') ])
             ->get()->each(function ($row) use ($category) {
                 $row->catagory = $category;
-                $row->user = $row->user()?->name;
-                $row->actor = $row->actor()?->name;
+                $row->user = $row->user()?->display_name;
+                $row->actor = $row->actor()?->display_name;
                 // $row->user_level = $row->user()->level();
             }, 2);
         }
@@ -98,8 +98,8 @@ class GetTicketController extends Controller
             return Ticket::where('cat_id', $r->catagory)
             ->get()->each(function ($row) use ($category) {
                 $row->catagory = $category;
-                $row->user = $row->user()?->name;
-                $row->actor = $row->actor()?->name;
+                $row->user = $row->user()?->display_name;
+                $row->actor = $row->actor()?->display_name;
                 // $row->user_level = $row->user()->level();
             }, 2);
         }
