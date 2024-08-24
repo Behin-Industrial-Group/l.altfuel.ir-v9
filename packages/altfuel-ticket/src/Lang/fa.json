@@ -4,5 +4,7 @@
     "This ticket is closed" : "این تیکت بسته شده است",
     "Number" : "شماره",
     "Unfortunately Generated Code Is Not Unique. Contact Support": "کد تولید شده یکتا نیست. لطفا با پشتیبانی تماس بگیرید",
-    "score set": "امتیاز ثبت شد"
+    "score set": "امتیاز ثبت شد",
+    "access denied": "دسترسی برای ایجاد کامنت ندارید",
+    "change category access denied": "دسترسی برای تغییر دسته بندی ندارید"
 }

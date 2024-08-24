@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-    $title = "ایجاد تیکت پشتیبانی";
+    $title = 'ایجاد تیکت پشتیبانی';
 @endphp
 
 @section('content')
@@ -29,6 +29,6 @@
 @section('script')
     <script>
         $('.filepond').filepond();
-    $('.filepond').filepond('storeAsFile', true);
+        $('.filepond').filepond('storeAsFile', true);
     </script>
 @endsection

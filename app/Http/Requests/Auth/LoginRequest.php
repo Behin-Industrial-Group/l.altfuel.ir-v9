@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Auth;
 
+use Exception;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Mkhodroo\UserRoles\Models\User;
 
 class LoginRequest extends FormRequest
 {
@@ -44,7 +46,11 @@ class LoginRequest extends FormRequest
     public function authenticate()
     {
         $this->ensureIsNotRateLimited();
-
+        // return response("",500);
+        $user = User::where('email', $this->only('email'))->first();
+        if($user->disabled === 1){
+            throw new Exception("کاربر غیر فعال شده");
+        }
         if (! Auth::attempt($this->only('email', 'password'), 1)) {
             RateLimiter::hit($this->throttleKey());
 

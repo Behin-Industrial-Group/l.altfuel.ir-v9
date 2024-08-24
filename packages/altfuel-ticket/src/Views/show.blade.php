@@ -1,8 +1,10 @@
 <button type="button" class="btn-close border-0 bg-transparent" style="font-size:32px" data-dismiss="modal" aria-label="Close">&times;</button>
 <div class="row">
     <div class="col-sm-4">
-        {{ $ticket->user()->display_name }} @if($ticket->user()->role_id == config('user_profile.agency_role')) <i style="color:royalblue" class="fa fa-check-circle"></i> @endif <br>
-        شماره همراه: {{ $ticket->user()->email ?? '' }}
+        شناسه تیکت : {{ $ticket->id }} <br>
+        {{ $ticket->user()?->display_name }} @if($ticket->user()->role_id == config('user_profile.agency_role')) <i style="color:royalblue" class="fa fa-check-circle"></i> @endif  <br>
+        شماره همراه : {{ $ticket->user()->email ?? '' }} <br>
+        کارشناس : {{ $ticket->actor()?->display_name }}
     </div>
     <div class="row col-sm-8">
         @foreach (config('ATConfig.status') as $key => $status)
@@ -26,7 +28,7 @@
                 alt="message user image">
             <div class="direct-chat-text">
                 <div>
-                    <span class="direct-chat-name">{{ $comment->user()->display_name ?? '' }}</span>
+                    <span class="direct-chat-name">{{ $comment->user()?->display_name ?? '' }}</span>
                     <span class="direct-chat-timestamp float-left">{{ verta($comment->created_at) }}</span>
                 </div>
 

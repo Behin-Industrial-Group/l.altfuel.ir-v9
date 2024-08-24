@@ -11,13 +11,15 @@
             <form action="javascript:void(0)" id="cat-form">
                 <div class="form-group">
                     <label for="">دسته بندی</label>
-                    @include('ATView::partial-view.catagory')
+
                     @if (auth()->user()->access('Ticket-Actors'))
+                    @include('ATView::partial-view.category-for-actor')
                         <button class="btn btn-primary mt-2" onclick="filterAll()">فیلتر تمام تیکت ها</button>
                         <button class="btn btn-info mt-2" onclick="filter()">فیلتر تیکت های جدید و درحال بررسی</button>
                         <button class="btn btn-secondary mt-2" onclick="oldTicket()">فیلتر تیکت های پاسخ داده شده و بسته
                             شده</button>
                     @else
+                    @include('ATView::partial-view.catagory')
                         <button class="btn btn-info" onclick="filter()">فیلتر</button>
                     @endif
                 </div>
@@ -31,6 +33,7 @@
                         <th>عنوان</th>
                         <th>ثبت کننده</th>
                         <th>دسته بندی</th>
+                        <th>کارشناس</th>
                         <th>وضعیت</th>
                         <th>آخرین تغییرات</th>
                         {{-- <th>امتیاز</th> --}}
@@ -105,6 +108,9 @@
                     data: 'catagory'
                 },
                 {
+                    data: 'actor'
+                },
+                {
                     data: 'status',
                     render: function(data) {
                         if (data == "{{ config('ATConfig.status.new') }}") {
@@ -133,8 +139,8 @@
             ],
             null,
             [
-                [4, 'asc'],
-                [5, 'desc']
+                [5, 'asc'],
+                [6, 'desc']
             ]
         );
 
