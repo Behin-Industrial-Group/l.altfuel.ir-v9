@@ -6,4 +6,5 @@ use IrngvPoll\Controllers\GetIrngvUserController;
 
 Route::name('irngvPoll.')->prefix('irngv-poll')->middleware(['web', 'auth'])->group(function(){
     Route::get('get-users/{agency_code}', [GetIrngvUserController::class, 'getUsers'])->name('getUsers');
+    Route::post('get-answers', [GetIrngvUserController::class, 'getAnswers'])->name('getAnswers');
 });
