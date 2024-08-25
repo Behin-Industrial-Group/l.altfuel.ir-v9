@@ -54,7 +54,7 @@ class TicketCatagoryController extends Controller
             return response(trans("change category access denied"), 402);
         }
         $ticket->cat_id = $r->catagory;
-        $render = TicketAssignController::assign($ticket->cat_id, $ticket->id);
+        $render = TicketAssignController::assign($ticket->cat_id, $ticket->id, $r->actor);
         $ticket->save();
 
         // ADD TICKET CATAGORY CHANGE TEXT IN COMMENTS

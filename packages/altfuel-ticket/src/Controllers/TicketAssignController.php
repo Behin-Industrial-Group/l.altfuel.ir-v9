@@ -12,7 +12,7 @@ class TicketAssignController extends Controller
     public static function assign($catId, $ticketId, $actorId = 'random')
     {
         $render = new TicketCountController();
-        if ($actorId = 'random') {
+        if ($actorId == 'random') {
             $categoryActorIds = CatagoryActor::where('cat_id', $catId)->pluck('user_id');
             if (!count($categoryActorIds)) {
                 $actorId = null;
