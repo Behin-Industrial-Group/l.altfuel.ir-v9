@@ -22,11 +22,13 @@
                 </div>
                 <div class="col-sm-3">
                     <label for="">از: </label>
-                    <input type="text" name="created_from" id="created-from">
+                    <input type="hidden" id="created-from" name="created_from">
+                    <input type="text" id="created-from-view">
                 </div>
                 <div class="col-sm-3">
                     <label for="">تا: </label>
-                    <input type="text" name="created_to" id="created-to">
+                    <input type="hidden" id="created-to" name="created_to">
+                    <input type="text"  id="created-to-view">
                 </div>
                 <div class="col-sm-3">
                     <button class="btn btn-default" onclick="filtered()">اعمال فیلتر</button>
@@ -82,24 +84,43 @@
 
 @section('script')
     <script>
-         $(document).ready(function () {
-            $('#created-from').persianDatepicker({
-                altFormat: 'X',
-                format: 'YYYY-MM-D',
-                observer: true
+        $(document).ready(function() {
+            $('#created-from-view').persianDatepicker({
+                format: 'YYYY-MM-DD',
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: true
+                    }
+                },
+                initialValue: false,
+                observer: true,
+                altField: '#created-from'
             });
-        });
-        $(document).ready(function () {
-            $('#created-to').persianDatepicker({
-                altFormat: 'X',
-                format: 'YYYY-MM-D',
-                observer: true
+
+
+            $('#created-to-view').persianDatepicker({
+                format: 'YYYY-MM-DD',
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: true
+                    }
+                },
+                initialValue: false,
+                observer: true,
+                altField: '#created-to'
             });
         });
 
+        send_ajax_request(
+                '{{ route("irngvPoll.getAnswers") }}',
+                $('#created-form').serialize(),
+                function(data){
+                    console.log(data);
+                }
+            );
         function filtered(){
             send_ajax_request(
-                '{{ route("admin.irngv.get.poll-answers") }}',
+                '{{ route("irngvPoll.getAnswers") }}',
                 $('#created-form').serialize(),
                 function(data){
                     console.log(data);
@@ -110,7 +131,7 @@
 
         var table = create_datatable(
             "poll-answer-table",
-            '{{ route("admin.irngv.get.poll-answers") }}',
+            '{{ route("irngvPoll.getAnswers") }}',
             [
                 {data: 'id'},
                 {data: 'irngv_user.customer_fullname'},
@@ -124,13 +145,13 @@
                     }
                 }},
                 {data: 'irngv_user.issued_date'},
-                {data: 'question'},
+                {data: 'question_value'},
                 {data: 'answer'},
                 {data: 'answer_string'},
             ]
         );
 
-        
+
 
 
         function show_filters(){
@@ -139,7 +160,7 @@
             } else {
                 $('#filters').fadeOut(500);
             }
-            
+
         }
     </script>
 @endsection

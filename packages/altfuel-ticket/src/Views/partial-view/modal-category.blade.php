@@ -1,8 +1,7 @@
 <div class="row">
     <select name="" id="parent_cat_on_modal" class="parent-cat form-control col-sm-4"></select>
     <select name="catagory" id="child_cat_on_modal" class="child-cat form-control col-sm-4 "></select>
-    <select name="actor" id="actor_select_on_modal" class="actor-select form-control col-sm-4 ">
-    </select>
+    <select name="actor" id="actor_select_on_modal" class="actor-select form-control col-sm-4 "></select>
 </div>
 <script>
     $(document).ready(function() {

@@ -16,6 +16,9 @@ class TicketStatusController extends Controller
 
     public static function changeStatus(Request $r) {
         $ticket = GetTicketController::findByTicketId($r->ticket_id);
+        if($ticket->actor_id != Auth::id() and $ticket->actor_id != null){
+            return response(trans("change status access denied"), 402);
+        }
         $ticket->status = config("ATConfig.status.$r->status_key");
         $ticket->save();
         return $r->all();
