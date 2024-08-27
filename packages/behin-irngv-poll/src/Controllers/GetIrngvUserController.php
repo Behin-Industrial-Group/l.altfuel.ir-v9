@@ -69,5 +69,19 @@ class GetIrngvUserController extends Controller
         return $results;
     }
 
+    public function getInfos(Request $request){
+        if(!$request->created_from){
+            return [ 'data' => [] ];
+        }
+
+        $fromDate = Carbon::createFromTimestamp($request->created_from / 1000);
+        $toDate = Carbon::createFromTimestamp($request->created_to / 1000);
+        $fromFormattedDate = $fromDate->format('Y-m-d');
+        $toFormattedDate = $toDate->format('Y-m-d');
+        $results = IrngvUsersInfo::whereBetween('created_at', [$fromFormattedDate, $toFormattedDate])->get();
+
+        return $results;
+    }
+
 }
 
