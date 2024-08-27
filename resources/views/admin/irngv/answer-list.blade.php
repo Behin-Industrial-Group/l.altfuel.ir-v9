@@ -148,7 +148,9 @@
                 {data: 'question_value'},
                 {data: 'answer'},
                 {data: 'answer_string'},
-            ]
+            ],
+            null,
+            [1, 'asc'],
         );
 
 
