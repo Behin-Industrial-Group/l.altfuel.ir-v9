@@ -48,7 +48,7 @@ class TodoListController extends Controller
             'reminder_date' => $request->reminder_date,
             'due_date' => $request->due_date,
         ]);
-        return $task;
+        return response(trans("task assigned successfully"));
     }
 
     public function edit(Request $request)
