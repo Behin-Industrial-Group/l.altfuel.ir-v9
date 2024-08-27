@@ -54,6 +54,7 @@ class GetIrngvUserController extends Controller
         if(!$request->created_from){
             return [ 'data' => [] ];
         }
+
         $enums = EnumsEntity::irngv_poll_question;
         $fromDate = Carbon::createFromTimestamp($request->created_from / 1000);
         $toDate = Carbon::createFromTimestamp($request->created_to / 1000);

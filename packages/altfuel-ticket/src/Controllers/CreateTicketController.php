@@ -13,6 +13,7 @@ use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\CommentAttachments;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Requests\TicketRequest;
+use Mkhodroo\SmsTemplate\Controllers\SendSmsController;
 
 class CreateTicketController extends Controller
 {
@@ -56,6 +57,11 @@ class CreateTicketController extends Controller
                 $attach = CommentAttachmentController::upload($name, $ticket->ticket_id);
                 AddTicketCommentAttachmentController::add($comment->id, $attach);
             }
+        }
+        if(Auth::id() != $ticket->user_id){
+            $message = "کاربر گرامی \n یک پاسخ برای تیکت شماره $ticket->id ثبت شد. \n l.altfuel.ir";
+            $smsSender = new SendSmsController();
+            $smsSender->send($ticket->user()->email, $message);
         }
         return response([
             'ticket' => $ticket,

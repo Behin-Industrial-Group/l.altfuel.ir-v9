@@ -170,6 +170,7 @@
                     console.log(response);
                     table.ajax.reload();
                     form.reset();
+                    show_message(response);
                 }
             )
 

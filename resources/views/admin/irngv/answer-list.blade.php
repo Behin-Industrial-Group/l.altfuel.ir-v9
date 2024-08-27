@@ -17,21 +17,21 @@
     <div class="row" id="filters" style="display: none">
         <form action="javascript:void(0)" id="created-form">
             <div class="box box-default col-sm-12">
-                <div class="col-sm-3">
+                <div class="col-sm-12 m-2">
                     تاریخ ایجاد:
                 </div>
-                <div class="col-sm-3">
-                    <label for="">از: </label>
+                <div class="col-sm-12 m-2">
+                    <label for="created-from-view">از: </label>
                     <input type="hidden" id="created-from" name="created_from">
                     <input type="text" id="created-from-view">
                 </div>
-                <div class="col-sm-3">
-                    <label for="">تا: </label>
+                <div class="col-sm-12 m-2">
+                    <label for="created-to-view">تا: </label>
                     <input type="hidden" id="created-to" name="created_to">
                     <input type="text"  id="created-to-view">
                 </div>
-                <div class="col-sm-3">
-                    <button class="btn btn-default" onclick="filtered()">اعمال فیلتر</button>
+                <div class="col-sm-12 m-2">
+                    <button class="btn btn-primary" onclick="filtered()">اعمال فیلتر</button>
                 </div>
             </div>
         </form>
@@ -148,7 +148,9 @@
                 {data: 'question_value'},
                 {data: 'answer'},
                 {data: 'answer_string'},
-            ]
+            ],
+            null,
+            [1, 'asc'],
         );
 
 
