@@ -131,12 +131,13 @@ $catagories = IssuesCatagoryModel::get();
         });
 
         function show_filters(){
-            if ($("#filters").css("display") == "none") {
-                $('#filters').fadeIn(500);
-            } else {
-                $('#filters').fadeOut(500);
-            }
+            // if ($("#filters").css("display") == "none") {
+            //     $('#filters').fadeIn(500);
+            // } else {
+            //     $('#filters').fadeOut(500);
+            // }
 
+            $("#filters").fadeToggle(500);
         }
 
         function filtered(){

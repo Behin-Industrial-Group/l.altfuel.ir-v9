@@ -111,13 +111,13 @@
             });
         });
 
-        send_ajax_request(
-                '{{ route("irngvPoll.getAnswers") }}',
-                $('#created-form').serialize(),
-                function(data){
-                    console.log(data);
-                }
-            );
+        // send_ajax_request(
+        //         '{{ route("irngvPoll.getAnswers") }}',
+        //         $('#created-form').serialize(),
+        //         function(data){
+        //             console.log(data);
+        //         }
+        //     );
         function filtered(){
             send_ajax_request(
                 '{{ route("irngvPoll.getAnswers") }}',
@@ -157,11 +157,12 @@
 
 
         function show_filters(){
-            if ($("#filters").css("display") == "none") {
-                $('#filters').fadeIn(500);
-            } else {
-                $('#filters').fadeOut(500);
-            }
+            // if ($("#filters").css("display") == "none") {
+            //     $('#filters').fadeIn(500);
+            // } else {
+            //     $('#filters').fadeOut(500);
+            // }
+            $("#filters").fadeToggle(500);
 
         }
     </script>
