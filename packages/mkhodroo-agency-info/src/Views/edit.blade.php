@@ -22,8 +22,16 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                     aria-selected="true">{{ __('Foreman Info') }}</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="partner-tab" data-toggle="pill" href="#partner" role="tab" aria-controls="partner-info"
+                    aria-selected="true">{{ __('Partner Info') }}</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="docs-tab" data-toggle="pill" href="#docs" role="tab" aria-controls="docs"
                     aria-selected="false">{{ __('Docs') }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="additional_docs-tab" data-toggle="pill" href="#additional_docs" role="tab" aria-controls="additional_docs-info"
+                    aria-selected="true">{{ __('Additional Docs') }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="inspection-tab" data-toggle="pill" href="#inspection" role="tab" aria-controls="inspection-info"
@@ -39,12 +47,8 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                     aria-selected="true">{{ __('Debts Info') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="simfa-tab" data-toggle="pill" href="#simfa" role="tab" aria-controls="simfa"
-                    aria-selected="true">{{ __('Simfa Info') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="poll-info-tab" data-toggle="pill" href="#poll-info" role="tab" aria-controls="poll-info"
-                    aria-selected="true">{{ __('Poll Info') }}</a>
+                <a class="nav-link" id="last_action-tab" data-toggle="pill" href="#last_action" role="tab" aria-controls="last_action"
+                    aria-selected="true">{{ __('Last Actions Info') }}</a>
             </li>
         </ul>
     </div>
@@ -63,6 +67,10 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
             ])
+            @include('AgencyView::edit-tabs.additional-docs-info', [
+                'customer_type' => $customer_type,
+                'agency_fields' => $agency_fields
+            ])
             @include('AgencyView::edit-tabs.debt-info', [
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
@@ -71,15 +79,15 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
             ])
+            @include('AgencyView::edit-tabs.partner-info', [
+                'customer_type' => $customer_type,
+                'agency_fields' => $agency_fields
+            ])
             @include('AgencyView::edit-tabs.inspection-info', [
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
             ])
-            @include('AgencyView::edit-tabs.simfa-info', [
-                'customer_type' => $customer_type,
-                'agency_fields' => $agency_fields
-            ])
-            @include('AgencyView::edit-tabs.poll-info', [
+            @include('AgencyView::edit-tabs.last-actions', [
                 'customer_type' => $customer_type,
                 'agency_fields' => $agency_fields
             ])
@@ -160,9 +168,10 @@ use Mkhodroo\AgencyInfo\Controllers\HtmlCreatorController;
     }
 
     function foreman_edit() {
-        send_ajax_request(
+        var fd = new FormData($('#foreman-form')[0]);
+        send_ajax_formdata_request(
             "{{ route('agencyInfo.foremanEdit') }}",
-            $('#foreman-form').serialize(),
+            fd,
             function(res) {
                 console.log(res);
                 show_message("{{ __('Edited') }}");

@@ -11,6 +11,7 @@ use Mkhodroo\AgencyInfo\Controllers\AgencyDocsController;
 use Mkhodroo\AgencyInfo\Controllers\AgencyListController;
 use Mkhodroo\AgencyInfo\Controllers\CreateAgencyController;
 use Mkhodroo\AgencyInfo\Controllers\DebtController;
+use Mkhodroo\AgencyInfo\Controllers\LastActionController;
 use Mkhodroo\AgencyInfo\Controllers\QueryController;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
 use Mkhodroo\Cities\Controllers\CityController;
@@ -31,6 +32,7 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth', 'a
     Route::post('additional-docs-edit', [AgencyController::class, 'foremanEdit'])->name('additionalDocsEdit');
     Route::post('fin-edit', [AgencyController::class, 'finEdit'])->name('finEdit');
     Route::post('inspection-edit', [AgencyController::class, 'InspectionEdit'])->name('InspectionEdit');
+    Route::post('last-actions-edit', [LastActionController::class, 'createNewAction'])->name('createNewAction');
     Route::post('docs-edit', [AgencyDocsController::class, 'docsEdit'])->name('docsEdit');
     Route::post('delete-info', [AgencyController::class, 'deleteByKey'])->name('deleteByKey');
 });

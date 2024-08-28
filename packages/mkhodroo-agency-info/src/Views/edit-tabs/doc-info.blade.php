@@ -32,12 +32,12 @@
                 @if (config('agency_info.show_non_valid_info'))
                     <tr>
                         <td>
-                            {{ __("non_valid_") . __($field_detail) }}
                         </td>
                         @php
                             $non_valid_value = $agency_fields->where('key', "non_valid_$field_detail")->first()?->value;
                         @endphp
-                        <td style="text-align: center">
+                        <td style="text-align: center; font-size: 10px">
+                            {{ __("non_valid_") . __($field_detail) }}<br>
                             @if ($non_valid_value)
                                 <a href="{{ url("public/$non_valid_value") }}"
                                     download="{{ __("non_valid_") . __($field_detail) }}">{{ __("non_valid_") . __($field_detail) }}</a>

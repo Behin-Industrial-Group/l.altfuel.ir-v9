@@ -1,7 +1,7 @@
 {
     "name": "mkhodroo/agency-info",
     "description": "agency informations key value based",
-    "version": "1.5.7",
+    "version": "1.5.8",
     "autoload": {
         "psr-4": {
             "Mkhodroo\\AgencyInfo\\": "src/"
