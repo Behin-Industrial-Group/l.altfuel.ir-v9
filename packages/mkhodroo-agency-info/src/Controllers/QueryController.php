@@ -16,7 +16,7 @@ class QueryController extends Controller
     {
         // self::editProvinceToCity();
         // self::createProvince();
-        // self::convertProvinceToOldProvince();
+        self::convertProvinceToOldProvince();
         self::convertNewProvinceToProvince();
         // 
 
