@@ -15,9 +15,9 @@ class QueryController extends Controller
     public static function agencyEditor()
     {
         // self::editProvinceToCity();
-        self::createProvince();
+        // self::createProvince();
         // self::convertProvinceToOldProvince();
-        // self::convertNewProvinceToProvince();
+        self::convertNewProvinceToProvince();
         // 
 
         // $cities = City::all()->groupBy('province');
