@@ -26,9 +26,9 @@
                                     </span>
                                     <script>
                                         $('#gen_code').on('click', function() {
-                                            var province = $('#province').val();
+                                            var city = $('#city').val();
                                             send_ajax_get_request(
-                                                "{{ url('GenCode') }}/{{ $customer_type->value }}/" + province,
+                                                "{{ url('GenCode') }}/{{ $customer_type->value }}/" + city,
                                                 function(data) {
                                                     alert('کد جدید:  ' + data)
                                                     console.log(data);
