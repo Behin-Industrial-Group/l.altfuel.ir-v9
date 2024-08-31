@@ -16,8 +16,8 @@ class QueryController extends Controller
     {
         // self::editProvinceToCity();
         // self::createProvince();
-        self::convertProvinceToOldProvince();
-        self::convertNewProvinceToProvince();
+        // self::convertProvinceToOldProvince();
+        // self::convertNewProvinceToProvince();
         // 
 
         // $cities = City::all()->groupBy('province');
