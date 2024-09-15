@@ -13,7 +13,7 @@ class SendSmsController extends Controller
     private $org;
 
     public function __construct() {
-        $this->url = 'https://new.payamsms.com/services/rest/index.php';
+        $this->url = 'https://payamsms.com/services/rest/index.php';
         $this->org = 'irngv';
         $this->user = 'irngv';
         $this->pass = 'irngv123';
@@ -55,6 +55,7 @@ class SendSmsController extends Controller
         $result = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($result);
+        Log::info($result);
         if(isset($result->data[0]->serverId)){
             // SmsLog::set(Auth::user(), $to, $msg);
             return 'ok';
