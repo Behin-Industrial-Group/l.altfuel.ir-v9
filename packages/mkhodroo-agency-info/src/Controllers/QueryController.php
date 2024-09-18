@@ -60,9 +60,12 @@ class QueryController extends Controller
     }
 
     public static function createProvince(){
-        $provinces = AgencyInfo::where('key', 'province')->get();
+        $provinces = AgencyInfo::where('key', 'city')->get();
         foreach($provinces as $province){
             $p_name = CityController::getById($province->value)?->province;
+            if(!$p_name){
+                $p_name = '';
+            }
             $pr = ProvinceController::create($p_name);
             if(!AgencyInfo::where('key', 'new_province')->where('parent_id', $province->parent_id)->first()){
                 AgencyInfo::create([
