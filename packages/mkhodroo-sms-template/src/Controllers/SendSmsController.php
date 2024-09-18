@@ -50,12 +50,14 @@ class SendSmsController extends Controller
         # Return response instead of printing.
         # Send request.
         $er = curl_error($ch);
-        if($er)
+        if($er){
+            $er = json_encode($er);
             Log::info("send sms curl error: $er ");
+        }
         $result = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($result);
-        Log::info($result);
+        // Log::info($result);
         if(isset($result->data[0]->serverId)){
             // SmsLog::set(Auth::user(), $to, $msg);
             return 'ok';
