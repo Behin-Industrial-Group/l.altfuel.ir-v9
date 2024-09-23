@@ -5,6 +5,7 @@ namespace Mkhodroo\AltfuelTicket\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Ticket extends Model
 {
@@ -14,6 +15,23 @@ class Ticket extends Model
     protected $fillable = [
         'ticket_id', 'user_id', 'cat_id', 'title', 'status', 'junk', 'actor_id'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($ticket) {
+            Cache::put('ticket_' . $ticket->id, $ticket, now()->addMinutes(60));
+        });
+
+        static::updated(function ($ticket) {
+            Cache::put('ticket_' . $ticket->id, $ticket, now()->addMinutes(60));
+        });
+
+        static::deleted(function ($ticket) {
+            Cache::forget('ticket_' . $ticket->id);
+        });
+    }
 
     public function comments() {
         return TicketComment::where('ticket_id', $this->id)->get();
