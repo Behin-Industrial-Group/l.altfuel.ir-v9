@@ -44,7 +44,7 @@ class CreateTicketController extends Controller
             }
         } else { //Create new Ticket
             $ticket = $this->create($r->catagory, $r->title);
-            TicketAssignController::assign($ticket->cat_id, $ticket->id);
+            // TicketAssignController::assign($ticket->cat_id, $ticket->id);
         }
         $status = $this->changeStatus($ticket->cat_id);
         $ticket->status = $status ? $status : $ticket->status;
