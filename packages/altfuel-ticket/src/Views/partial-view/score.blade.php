@@ -1,5 +1,5 @@
 @if (auth()->user()->access('امتیاز دهی به تیکت'))
-    
+
 
 <link rel="stylesheet" href="{{ url('public/packages/altfuel-ticket/css/style.css')}}">
 
@@ -19,7 +19,7 @@
     </section>
 </form>
 
-<script src="{{ url('public/packages/altfuel-ticket/js/script.js')}}"></script>
+{{-- <script src="{{ url('public/packages/altfuel-ticket/js/script.js')}}"></script> --}}
 
 <script>
     function set_score(score){

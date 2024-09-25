@@ -109,9 +109,10 @@ class GetTicketController extends Controller
 
     public static function get($id)
     {
-        $ticket = Cache::remember('ticket_' . $id, 60, function () use ($id) {
-            return Ticket::find($id);
-        });
+        return Ticket::find($id);
+        // $ticket = Cache::remember('ticket_' . $id, 60, function () use ($id) {
+
+        // });
     }
 
     public static function findByTicketId($ticket_id)

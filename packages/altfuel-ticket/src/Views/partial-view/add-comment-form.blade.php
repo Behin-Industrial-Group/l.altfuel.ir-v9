@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-sm-4 float-left" style="font-size: 15px">
                     پیوست: فایل های مجاز {{ json_encode(config('ATConfig.attachment-file-types-translate')) }}
-                    <input type="file" name="files[]" class="">
+                    <input type="file" id="file-input" name="files[]" class="file-input">
                     <div id="inputFields"></div>
                     <button class="btn btn-info" onclick="addFn()">افزودن فایل دیگر &plus;</button>
                 </div>
@@ -44,135 +44,73 @@
 </script>
 
 <script type="text/javascript">
-    // var recordAudio = () => {
-    //     audio = '';
-    //     return new Promise(async resolve => {
-    //         const stream = await navigator.mediaDevices.getUserMedia({
-    //             audio: true
-    //         });
-    //         const mediaRecorder = new MediaRecorder(stream);
-    //         const audioChunks = [];
+    var maxFileSizeInMB = parseInt('{{ config('ATConfig.max-attach-file-size') }}') / 1024;
 
-    //         mediaRecorder.addEventListener("dataavailable", event => {
-    //             audioChunks.push(event.data);
-    //         });
+    function checkFileSize(file) {
+        var maxSizeInBytes = maxFileSizeInMB * 1024 * 1024;
+        return file.size <= maxSizeInBytes;
+    }
 
-    //         const start = () => mediaRecorder.start();
+    async function compressImage(file) {
+        return new Promise(function(resolve, reject) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
 
-    //         const stop = () =>
-    //             new Promise(resolve => {
-    //                 mediaRecorder.addEventListener("stop", () => {
-    //                     const audioBlob = new Blob(audioChunks);
-    //                     const audioUrl = URL.createObjectURL(audioBlob);
-    //                     const audio = new Audio(audioUrl);
-    //                     const play = () => audio.play();
-    //                     resolve({
-    //                         audioBlob,
-    //                         audioUrl,
-    //                         play
-    //                     });
-    //                 });
+            reader.onload = function(event) {
+                const img = new Image();
+                img.src = event.target.result;
 
-    //                 mediaRecorder.stop();
-    //             });
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
 
-    //         resolve({
-    //             start,
-    //             stop
-    //         });
-    //     });
-    // }
+                    const maxWidth = 700;
+                    const scaleSize = maxWidth / img.width;
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scaleSize;
 
-    // /* simple timeout */
-    // var sleep = time => new Promise(resolve => setTimeout(resolve, time));
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    canvas.toBlob(function(blob) {
+                        resolve(blob)
+                    }, 'image/jpeg', 1);
+                };
+            };
+        })
+    }
 
-    // /* init */
-    // (async () => {
-    //     const btn = $('#voice-input')[0];
-    //     const playBtn = $('#play-btn');
-    //     const recorder = await recordAudio();
-    //     let audio; // filled in end cb
-    //     const submitBtn = $('#submit-btn')
+    async function submit() {
 
+        const fileInput = $('.file-input');
+        let f = new FormData($('#{{ $form_id ?? 'comment-form' }}')[0]);
 
+        // حلقه برای بررسی فایل‌ها و فشرده‌سازی تصاویر
+        for (let i = 0; i < fileInput.length; i++) {
+            const inputElement = fileInput[i];
+            const file = inputElement.files[0]; // دریافت فایل از input
 
-    //     const recStart = e => {
-    //         console.log('start');
-    //         recorder.start();
-    //         btn.initialValue = btn.innerHTML;
-    //         btn.innerHTML = "درحال ضبط...";
-    //     }
-    //     const recEnd = async e => {
-    //         console.log('end');
-    //         btn.innerHTML = btn.initialValue;
-    //         audio = await recorder.stop();
-    //         showPlayAudioBtn();
-    //         // audio.play();
-    //         // uploadAudio(audio.audioBlob);
-    //     }
+            if (!file) continue; // اگر فایل وجود نداشت، حلقه ادامه پیدا کند
 
-    //     const recPlay = e => {
-    //         console.log('play');
-    //         audio.play();
-    //     }
+            if (!checkFileSize(file)) {
+                // اگر فایل تصویری بود، حجم آن را کاهش می‌دهیم
+                if (file.type.startsWith('image/')) {
+                    try {
+                        const convasBlob = await compressImage(file); // کاهش حجم تصویر
 
-    //     const showPlayAudioBtn = e => {
-    //         console.log('show');
-    //         playBtn.show()
-    //     }
+                        // اضافه کردن فایل فشرده‌شده به FormData
+                        // f.delete('files[0]');
+                        f.set(`files[${i}]`, convasBlob, file.name);
+                    } catch (error) {
+                        console.error('Error compressing image:', error);
+                        alert('خطا در فشرده‌سازی تصویر!');
+                        return; // متوقف کردن ارسال فرم در صورت بروز خطا
+                    }
+                } else {
+                    alert(`فایل ${file.name} بیش از حد مجاز است و نمی‌تواند آپلود شود.`);
+                    return; // متوقف کردن ارسال فرم در صورت عدم پذیرش فایل
+                }
+            }
+        }
 
-
-    //     const uploadAudio = a => {
-    //         if (a.size > (10 * Math.pow(1024, 2))) {
-    //             document.body.innerHTML += "Too big; could not upload";
-    //             return;
-    //         }
-    //         const f = new FormData($('#{{ $form_id ?? 'comment-form' }}')[0]);
-
-    //         if (audio) {
-    //             a = audio.audioBlob;
-    //             f.append("payload", a);
-    //         }
-    //         console.log('send');
-    //         // f.append("nonce", window.nonce);
-    //         send_ajax_formdata_request(
-    //             "{{ route('ATRoutes.store') }}",
-    //             f,
-    //             function(response) {
-    //                 ticket = response.ticket;
-    //                 show_message(response.message)
-    //                 console.log(response);
-    //                 if (typeof(show_comment_modal) === "function") {
-    //                     show_comment_modal(ticket.id, ticket.title, ticket.user_id)
-    //                 } else {
-    //                     // window.location = "{{ route('ATRoutes.show.listForm') }}"
-    //                 }
-    //             },
-    //             function(data) {
-    //                 show_error(data);
-    //                 console.log(data);
-    //             }
-    //         )
-    //     }
-
-
-    //     btn.addEventListener("mousedown", recStart);
-    //     btn.addEventListener("touchstart", recStart);
-    //     btn.addEventListener("mouseup", recEnd);
-    //     btn.addEventListener("touchend", recEnd);
-    //     playBtn.on('click', recPlay);
-    //     submitBtn.on('click', uploadAudio);
-    //     playBtn.addEventListener("mousedown", recPlay);
-    //     playBtn.addEventListener("touchstart", recPlay);
-    // })();
-
-    function submit() {
-        const f = new FormData($('#{{ $form_id ?? 'comment-form' }}')[0]);
-
-        // if(audio){
-        //     a = audio.audioBlob;
-        //     f.append("payload", a);
-        // }
         console.log('send1');
         // f.append("nonce", window.nonce);
         send_ajax_formdata_request(
@@ -202,135 +140,8 @@
         const iFeild = document.createElement("input");
         iFeild.setAttribute("type", "file");
         iFeild.setAttribute("name", "files[]");
-        iFeild.classList.add("input-field");
+        iFeild.classList.add("file-input");
         wrapper.appendChild(iFeild);
         divEle.appendChild(wrapper);
     }
-</script>
-
-<script type="text/javascript">
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const recordButton = document.getElementById('record-button');
-    //     const audioPlayback = document.getElementById('audio-playback');
-    //     const form = document.getElementById('{{ $form_id ?? 'comment-form' }}');
-    //     let mediaRecorder;
-    //     let audioChunks = [];
-
-    //     recordButton.addEventListener('click', async () => {
-    //         if (recordButton.textContent === 'شروع ضبط') {
-    //             recordButton.textContent = 'توقف ضبط';
-    //             audioChunks = [];
-    //             const stream = await navigator.mediaDevices.getUserMedia({
-    //                 audio: true
-    //             });
-    //             mediaRecorder = new MediaRecorder(stream);
-
-    //             mediaRecorder.ondataavailable = event => {
-    //                 if (event.data.size > 0) {
-    //                     audioChunks.push(event.data);
-    //                 }
-    //             };
-
-    //             mediaRecorder.onstop = () => {
-    //                 const audioBlob = new Blob(audioChunks, {
-    //                     type: 'audio/wav'
-    //                 });
-    //                 const audioUrl = URL.createObjectURL(audioBlob);
-    //                 audioPlayback.src = audioUrl;
-
-    //                 // Append the audio blob to the form data
-    //                 formData = new FormData(form);
-    //                 formData.append('audio', audioBlob, 'recording.wav');
-
-    //                 // Submit the form data with the audio blob
-    //                 form.onsubmit = function(e) {
-    //                     e.preventDefault();
-    //                     fetch('/submit-audio', {
-    //                             method: 'POST',
-    //                             body: formData
-    //                         })
-    //                         .then(response => response.json())
-    //                         .then(data => {
-    //                             console.log('Success:', data);
-    //                         })
-    //                         .catch((error) => {
-    //                             console.error('Error:', error);
-    //                         });
-    //                 };
-    //             };
-
-    //             mediaRecorder.start();
-    //         } else {
-    //             recordButton.textContent = 'شروع ضبط';
-    //             mediaRecorder.stop();
-    //         }
-    //     });
-    // });
-
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const recordButton = document.getElementById('record-button');
-    //     const audioPlayback = document.getElementById('audio-playback');
-    //     const form = document.getElementById('{{ $form_id ?? 'comment-form' }}');
-    //     const playButton = document.getElementById('play-btn');
-    //     let mediaRecorder;
-    //     let audioChunks = [];
-    //     let audioBlob;
-
-    //     recordButton.addEventListener('click', async () => {
-    //         if (recordButton.textContent === 'شروع ضبط') {
-    //             recordButton.textContent = 'توقف ضبط';
-    //             audioChunks = [];
-    //             const stream = await navigator.mediaDevices.getUserMedia({
-    //                 audio: true
-    //             });
-    //             mediaRecorder = new MediaRecorder(stream);
-
-    //             mediaRecorder.ondataavailable = event => {
-    //                 if (event.data.size > 0) {
-    //                     audioChunks.push(event.data);
-    //                 }
-    //             };
-
-    //             mediaRecorder.onstop = () => {
-    //                 audioBlob = new Blob(audioChunks, {
-    //                     type: 'audio/wav'
-    //                 });
-    //                 const audioUrl = URL.createObjectURL(audioBlob);
-    //                 audioPlayback.src = audioUrl;
-    //                 playButton.style.display = 'inline';
-    //             };
-
-    //             mediaRecorder.start();
-    //         } else {
-    //             recordButton.textContent = 'شروع ضبط';
-    //             mediaRecorder.stop();
-    //         }
-    //     });
-
-    //     playButton.addEventListener('click', () => {
-    //         audioPlayback.play();
-    //     });
-
-    //     form.addEventListener('submit', function(e) {
-    //         e.preventDefault();
-    //         const formData = new FormData(form);
-    //         if (audioBlob) {
-    //             formData.append('audio', audioBlob, 'recording.wav');
-    //         }
-
-    //         fetch("{{ route('ATRoutes.store') }}", {
-    //                 method: 'POST',
-    //                 body: formData
-    //             })
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 console.log('Success:', data);
-    //                 // Add your success handling code here
-    //             })
-    //             .catch(error => {
-    //                 console.error('Error:', error);
-    //                 // Add your error handling code here
-    //             });
-    //     });
-    // });
 </script>
