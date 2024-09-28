@@ -69,4 +69,12 @@
             )
         }
     </script>
+    <script>
+        document.getElementById("login-form").addEventListener("keypress", function(event) {
+          if (event.key === "Enter") {
+            event.preventDefault(); // از ارسال فرم به صورت پیش‌فرض جلوگیری می‌کند
+            document.querySelector("button[type='submit']").click(); // دکمه لاگین را شبیه‌سازی می‌کند
+          }
+        });
+      </script>
 @endsection

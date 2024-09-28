@@ -23,19 +23,21 @@ $catagories = IssuesCatagoryModel::get();
     <div class="row" id="filters" style="display: none">
         <form action="javascript:void(0)" id="created-form">
             <div class="box box-default col-sm-12">
-                <div class="col-sm-3">
+                <div class="col-sm-12 m-2">
                     تاریخ ایجاد:
                 </div>
-                <div class="col-sm-3">
-                    <label for="">از: </label>
-                    <input type="text" name="created_from" id="created-from">
+                <div class="col-sm-12 m-2">
+                    <label for="created-from-view">از: </label>
+                    <input type="hidden" id="created-from" name="created_from">
+                    <input type="text" id="created-from-view">
                 </div>
-                <div class="col-sm-3">
-                    <label for="">تا: </label>
-                    <input type="text" name="created_to" id="created-to">
+                <div class="col-sm-12 m-2">
+                    <label for="created-to-view">تا: </label>
+                    <input type="hidden" id="created-to" name="created_to">
+                    <input type="text"  id="created-to-view">
                 </div>
-                <div class="col-sm-3">
-                    <button class="btn btn-default" onclick="filtered()">اعمال فیلتر</button>
+                <div class="col-sm-12 m-2">
+                    <button class="btn btn-primary" onclick="filtered()">اعمال فیلتر</button>
                 </div>
             </div>
         </form>
@@ -98,37 +100,50 @@ $catagories = IssuesCatagoryModel::get();
                     return "{{ config('irngv.irngv-poll-link') }}" + link;
                 } },
             ],
-            'ajax': "{{ route('admin.irngv.get.users.info') }}"
+            'ajax': "{{ route('irngvPoll.getInfos') }}"
         });
 
-        $(document).ready(function () {
-            $('#created-from').persianDatepicker({
-                altFormat: 'X',
-                format: 'YYYY-MM-D',
-                observer: true
+        $(document).ready(function() {
+            $('#created-from-view').persianDatepicker({
+                format: 'YYYY-MM-DD',
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: true
+                    }
+                },
+                initialValue: false,
+                observer: true,
+                altField: '#created-from'
             });
-        });
-        $(document).ready(function () {
-            $('#created-to').persianDatepicker({
-                altFormat: 'X',
-                format: 'YYYY-MM-D',
-                observer: true
+
+
+            $('#created-to-view').persianDatepicker({
+                format: 'YYYY-MM-DD',
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: true
+                    }
+                },
+                initialValue: false,
+                observer: true,
+                altField: '#created-to'
             });
         });
 
         function show_filters(){
-            if ($("#filters").css("display") == "none") {
-                $('#filters').fadeIn(500);
-            } else {
-                $('#filters').fadeOut(500);
-            }
-            
+            // if ($("#filters").css("display") == "none") {
+            //     $('#filters').fadeIn(500);
+            // } else {
+            //     $('#filters').fadeOut(500);
+            // }
+
+            $("#filters").fadeToggle(500);
         }
 
         function filtered(){
             var data = $('#created-form').serialize();
             send_ajax_request(
-                "{{ route('admin.irngv.get.users.info') }}",
+                "{{ route('irngvPoll.getInfos') }}",
                 data,
                 function(data){
                     console.log(data);

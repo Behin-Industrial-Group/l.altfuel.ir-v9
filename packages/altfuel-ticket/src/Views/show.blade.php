@@ -107,6 +107,7 @@
             function(res) {
                 console.log(res);
                 change_status_btn_color()
+                filter();
             }
         )
     }

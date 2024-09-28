@@ -15,7 +15,7 @@ class ShowTicketController extends Controller
         return view('ATView::list');
     }
 
-    function show(Request $r) : View {
+    function show(Request $r)  {
         return view('ATView::show')->with([
             'ticket' => GetTicketController::get($r->ticket_id)
         ]);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use App\CustomClasses\UserInfo;
 use App\CustomClasses\Access;
@@ -12,7 +12,7 @@ $videosCatagories = VideosCatagoriesModel::get();
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ url('admin') }}" class="brand-link">
         <img src="{{ url('public/dashboard/dist/img/avatar5.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light">پنل مدیریت</span>
@@ -26,7 +26,7 @@ $videosCatagories = VideosCatagoriesModel::get();
                         class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{ auth()->user()->name ?? ''}}</a>
+                    <a href="{{ route('user-profile.profile') }}" class="d-block">{{ auth()->user()->name ?? ''}}</a>
                 </div>
             </div>
 
@@ -49,12 +49,12 @@ $videosCatagories = VideosCatagoriesModel::get();
                                     <li class="nav-item">
                                         <a
                                           @isset($submenu['target']) target="{{ $submenu['target'] }}" @endisset
-                                         href="@if(Route::has($submenu['route-name'])) 
-                                                    {{ route($submenu['route-name']) }} 
+                                         href="@if(Route::has($submenu['route-name']))
+                                                    {{ route($submenu['route-name']) }}
                                                 @elseif(isset($submenu['static-url']))
                                                     {{ $submenu['static-url'] }}
                                                 @else
-                                                    {{ url($submenu['route-url']) }} 
+                                                    {{ url($submenu['route-url']) }}
                                                 @endif" class="nav-link active">
                                             <i class="fa fa-circle-o nav-icon"></i>
                                             <p>{{ $submenu['fa_name'] }}</p>
@@ -65,7 +65,7 @@ $videosCatagories = VideosCatagoriesModel::get();
                             </ul>
                           </li>
                         @endif
-                        
+
                     @endforeach
                         @if(Access::checkView('Issues_issue_show'))
                             <li class="nav-item has-treeview">
@@ -256,7 +256,7 @@ $videosCatagories = VideosCatagoriesModel::get();
                               <ul class="treeview-menu" style="display: none;">
                                     <li><a href="{{ route('add-class-form') }}"><i class="fa fa-minus"></i>افزودن دوره آموزشی</a></li>
                                     <li><a href="{{ route('hamayesh-list') }}"><i class="fa fa-minus"></i>لیست ثبت نامی ها</a></li>
-            
+
                               </ul>
                             </li>
                         @endif --}}

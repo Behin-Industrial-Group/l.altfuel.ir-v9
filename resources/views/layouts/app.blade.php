@@ -52,14 +52,14 @@
     <script src="{{ url('public/js/dataTable.js')  . '?' . config('app.version') }}"></script>
     <script src="{{ url('public/js/dropzone.js')  . '?' . config('app.version') }}"></script>
     @yield('script_in_head')
-    
+
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-    
+
         @include('layouts.header')
-    
+
         @include('layouts.main-sidebar')
         <div class="content-wrapper">
             <section class="content">
@@ -124,9 +124,9 @@
 
         <!-- include FilePond jQuery adapter -->
         <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
-        
-        
-        
+
+
+
         <script>
 
             // $(document).ready(function() {
@@ -156,23 +156,14 @@
                 });
             }
 
-            
 
-            
 
-            
 
-        </script>
 
-        <script>
-            // $('form').keypress(function(event) {
-            //     if (event.keyCode == 13) {
-            //         event.preventDefault();
-            //     }
-            // });
-            
+
 
         </script>
+
         <script src="{{ url('public/js/loader.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ url('public/js/clearcach.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ url('public/js/scripts.js')  . '?' . config('app.version') }}"></script>

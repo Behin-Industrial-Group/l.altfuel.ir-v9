@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
@@ -109,6 +110,9 @@ class GetTicketController extends Controller
     public static function get($id)
     {
         return Ticket::find($id);
+        // $ticket = Cache::remember('ticket_' . $id, 60, function () use ($id) {
+
+        // });
     }
 
     public static function findByTicketId($ticket_id)
