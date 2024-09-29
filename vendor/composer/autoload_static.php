@@ -103,6 +103,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
+        'Q' => 
+        array (
+            'QrCodeScanner\\' => 14,
+        ),
         'P' => 
         array (
             'Psy\\' => 4,
@@ -389,6 +393,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Ramsey\\Collection\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
+        ),
+        'QrCodeScanner\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-qrcode-scanner-input/src',
         ),
         'Psy\\' => 
         array (
@@ -5919,6 +5927,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Psy\\VersionUpdater\\IntervalChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/IntervalChecker.php',
         'Psy\\VersionUpdater\\NoopChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/NoopChecker.php',
         'Psy\\VersionUpdater\\SelfUpdate' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/SelfUpdate.php',
+        'QrCodeScanner\\QrCodeScannerProvider' => __DIR__ . '/../..' . '/packages/behin-qrcode-scanner-input/src/QrCodeScannerProvider.php',
         'Ramsey\\Collection\\AbstractArray' => __DIR__ . '/..' . '/ramsey/collection/src/AbstractArray.php',
         'Ramsey\\Collection\\AbstractCollection' => __DIR__ . '/..' . '/ramsey/collection/src/AbstractCollection.php',
         'Ramsey\\Collection\\AbstractSet' => __DIR__ . '/..' . '/ramsey/collection/src/AbstractSet.php',

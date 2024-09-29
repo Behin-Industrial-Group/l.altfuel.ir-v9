@@ -1,0 +1,16 @@
+{
+    "name": "behin/qr-code-scanner",
+    "description": "input for scanning qr codes",
+    "autoload": {
+        "psr-4": {
+            "QrCodeScanner\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Amirali-Hosseini",
+            "email": "amiralihosseini216@yahoo.com"
+        }
+    ],
+    "require": {}
+}

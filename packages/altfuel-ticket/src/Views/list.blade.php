@@ -8,6 +8,11 @@
 @section('content')
     <div class="card">
         <div class="card-header">
+            @if (auth()->id() == 10)
+            <div class="col-12">
+                @include('QrCodeView::qr-code-input')
+            </div>
+            @endif
             <form action="javascript:void(0)" id="cat-form">
                 <div class="form-group">
                     <label for="">دسته بندی</label>

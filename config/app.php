@@ -246,6 +246,8 @@ return [
         BehinProcessMaker\BehinProcessMakerProvider::class,
         MyAgencyInfo\PackageServiceProvider::class,
         \FileService\FileServiceProvider::class,
+        \QrCodeScanner\QrCodeScannerProvider::class,
+
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
         // Mkhodroo\ShahabTicketSystem\ShahabTicketServiceProvider::class,

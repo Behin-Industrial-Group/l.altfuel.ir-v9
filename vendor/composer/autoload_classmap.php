@@ -5224,6 +5224,7 @@ return array(
     'Psy\\VersionUpdater\\IntervalChecker' => $vendorDir . '/psy/psysh/src/VersionUpdater/IntervalChecker.php',
     'Psy\\VersionUpdater\\NoopChecker' => $vendorDir . '/psy/psysh/src/VersionUpdater/NoopChecker.php',
     'Psy\\VersionUpdater\\SelfUpdate' => $vendorDir . '/psy/psysh/src/VersionUpdater/SelfUpdate.php',
+    'QrCodeScanner\\QrCodeScannerProvider' => $baseDir . '/packages/behin-qrcode-scanner-input/src/QrCodeScannerProvider.php',
     'Ramsey\\Collection\\AbstractArray' => $vendorDir . '/ramsey/collection/src/AbstractArray.php',
     'Ramsey\\Collection\\AbstractCollection' => $vendorDir . '/ramsey/collection/src/AbstractCollection.php',
     'Ramsey\\Collection\\AbstractSet' => $vendorDir . '/ramsey/collection/src/AbstractSet.php',
