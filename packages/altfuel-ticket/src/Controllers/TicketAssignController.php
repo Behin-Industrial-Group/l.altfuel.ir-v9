@@ -13,12 +13,14 @@ class TicketAssignController extends Controller
     {
         $render = new TicketCountController();
         if ($actorId == 'random') {
-            $categoryActorIds = CatagoryActor::where('cat_id', $catId)->pluck('user_id');
-            if (!count($categoryActorIds)) {
-                $actorId = null;
-            } else {
-                $actorId = $render->actorAssigner($categoryActorIds);
-            }
+            // $categoryActorIds = CatagoryActor::where('cat_id', $catId)->pluck('user_id');
+            // if (!count($categoryActorIds)) {
+            //     $actorId = null;
+            // } else {
+            //     $actorId = $render->actorAssigner($categoryActorIds);
+            // }
+
+            $actorId = null;
 
             // $this->category($request);
         } else {

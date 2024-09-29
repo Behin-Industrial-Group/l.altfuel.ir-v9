@@ -1,7 +1,7 @@
 <div class="row">
     <select name="" id="parent_cat_for_user" class="parent-cat form-control col-sm-4"></select>
     <select name="catagory" id="child_cat_for_user" class="child-cat form-control col-sm-4 "></select>
-    <select name="actor" id="actor_select_for_user" class="actor-select form-control col-sm-4 d-none "></select>
+    {{-- <select name="actor" id="actor_select_for_user" class="actor-select form-control col-sm-4 d-none "></select> --}}
 </div>
 <script>
     $(document).ready(function() {
