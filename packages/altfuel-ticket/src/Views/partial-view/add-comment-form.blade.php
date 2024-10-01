@@ -5,6 +5,11 @@
     @endisset
     <div class="card">
         <div class="row">
+            @if (auth()->id() == 10)
+            <div class="col-12">
+                @include('QrCodeView::qr-code-input')
+            </div>
+            @endif
             <div class="col-sm-12 p-2">
                 <div class="input-group mb-3 col-sm-8 float-right">
                     <button class="btn btn-success" id="play-btn" style="display: none">پخش</button>
@@ -24,6 +29,7 @@
                     <div id="inputFields"></div>
                     <button class="btn btn-info" onclick="addFn()">افزودن فایل دیگر &plus;</button>
                 </div>
+
                 {{-- <button type="button" id="record-button">شروع ضبط</button> --}}
             </div>
 

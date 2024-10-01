@@ -53,7 +53,8 @@
             "BehinLogging\\": "packages/behin-logging/src/",
             "BehinProcessMaker\\": "packages/behin-process-maker/src/",
             "MyAgencyInfo\\": "packages/my-agency-info/src/",
-            "FileService\\": "packages/behin-file-service/src/"
+            "FileService\\": "packages/behin-file-service/src/",
+            "QrCodeScanner\\": "packages/behin-qrcode-scanner-input/src/"
         }
     },
     "autoload-dev": {
