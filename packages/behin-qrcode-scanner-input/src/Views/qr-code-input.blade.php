@@ -9,10 +9,12 @@
         display: flex;
     }
 </style>
+
 <div class="row">
     <div class="col" style="padding:30px;">
         <h4>SCAN RESULT</h4>
         <div id="result">Result Here</div>
+        <button id="startScan">Start Scanning</button> <!-- دکمه برای شروع اسکن -->
     </div>
     <div class="col">
         <div style="width:500px;" id="reader"></div>
@@ -32,6 +34,7 @@
     domReady(function() {
         var myqr = document.getElementById("result");
         var lastResult, countResults = 0;
+        var html5QrcodeScanner; // متغیر برای اسکنر
 
         function onScanSuccess(decodeText, decodeResult) {
             if (decodeText !== lastResult) {
@@ -48,13 +51,16 @@
             console.error(errorMessage);
         }
 
-        // Create the scanner instance and render the scanning area
-        var html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", {
-                fps: 10,
-                qrbox: 250
-            }
-        );
-        html5QrcodeScanner.render(onScanSuccess, onScanError);
+        // ایجاد رویداد کلیک برای شروع اسکن
+        document.getElementById('startScan').addEventListener('click', function() {
+            // ایجاد نمونه اسکنر و رندر منطقه اسکن
+            html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader", {
+                    fps: 10,
+                    qrbox: 250
+                }
+            );
+            html5QrcodeScanner.render(onScanSuccess, onScanError);
+        });
     });
 </script>

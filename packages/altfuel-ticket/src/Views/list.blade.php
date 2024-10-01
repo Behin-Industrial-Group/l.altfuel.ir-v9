@@ -8,23 +8,18 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            @if (auth()->id() == 10)
-            <div class="col-12">
-                @include('QrCodeView::qr-code-input')
-            </div>
-            @endif
             <form action="javascript:void(0)" id="cat-form">
                 <div class="form-group">
                     <label for="">دسته بندی</label>
 
                     @if (auth()->user()->access('Ticket-Actors'))
-                    @include('ATView::partial-view.category-for-actor')
+                        @include('ATView::partial-view.category-for-actor')
                         <button class="btn btn-primary mt-2" onclick="filterAll()">فیلتر تمام تیکت ها</button>
                         <button class="btn btn-info mt-2" onclick="filter()">فیلتر تیکت های جدید و درحال بررسی</button>
                         <button class="btn btn-secondary mt-2" onclick="oldTicket()">فیلتر تیکت های پاسخ داده شده و بسته
                             شده</button>
                     @else
-                    @include('ATView::partial-view.catagory')
+                        @include('ATView::partial-view.catagory')
                         <button class="btn btn-info" onclick="filter()">فیلتر</button>
                     @endif
                 </div>
@@ -181,5 +176,6 @@
                 }
             )
         }
+
     </script>
 @endsection
