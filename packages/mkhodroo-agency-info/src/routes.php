@@ -19,7 +19,7 @@ use Mkhodroo\UserRoles\Controllers\GetRoleController;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth', 'access'])->group(function () {
-    
+
     Route::get('create-form', [CreateAgencyController::class, 'view'])->name('createForm');
     Route::post('create', [CreateAgencyController::class, 'create'])->name('create');
     Route::get('list-form', [AgencyListController::class, 'view'])->name('listForm');
@@ -35,6 +35,7 @@ Route::name('agencyInfo.')->prefix('agency-info')->middleware(['web', 'auth', 'a
     Route::post('last-actions-edit', [LastActionController::class, 'createNewAction'])->name('createNewAction');
     Route::post('docs-edit', [AgencyDocsController::class, 'docsEdit'])->name('docsEdit');
     Route::post('delete-info', [AgencyController::class, 'deleteByKey'])->name('deleteByKey');
+    Route::post('code-generator', [AgencyController::class, 'codeGenerator'])->name('codeGenerator');
 });
 
 Route::prefix('/bedehi')->group(function () {
