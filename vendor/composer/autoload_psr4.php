@@ -99,6 +99,7 @@ return array(
     'Fruitcake\\Cors\\' => array($vendorDir . '/fruitcake/php-cors/src'),
     'FileService\\' => array($baseDir . '/packages/behin-file-service/src'),
     'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
+    'ExcelReader\\' => array($baseDir . '/packages/behin-excel-reader/src'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),

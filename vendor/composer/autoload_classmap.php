@@ -930,6 +930,8 @@ return array(
     'Egulias\\EmailValidator\\Warning\\QuotedString' => $vendorDir . '/egulias/email-validator/src/Warning/QuotedString.php',
     'Egulias\\EmailValidator\\Warning\\TLD' => $vendorDir . '/egulias/email-validator/src/Warning/TLD.php',
     'Egulias\\EmailValidator\\Warning\\Warning' => $vendorDir . '/egulias/email-validator/src/Warning/Warning.php',
+    'ExcelReader\\Controllers\\ExcelController' => $baseDir . '/packages/behin-excel-reader/src/Controllers/ExcelController.php',
+    'ExcelReader\\ExcelReaderServiceProvider' => $baseDir . '/packages/behin-excel-reader/src/ExcelReaderServiceProvider.php',
     'Faker\\Calculator\\Ean' => $vendorDir . '/fakerphp/faker/src/Faker/Calculator/Ean.php',
     'Faker\\Calculator\\Iban' => $vendorDir . '/fakerphp/faker/src/Faker/Calculator/Iban.php',
     'Faker\\Calculator\\Inn' => $vendorDir . '/fakerphp/faker/src/Faker/Calculator/Inn.php',
