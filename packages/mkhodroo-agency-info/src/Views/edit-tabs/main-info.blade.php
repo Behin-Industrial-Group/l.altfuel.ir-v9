@@ -27,13 +27,28 @@
                                     <script>
                                         $('#gen_code').on('click', function() {
                                             var city = $('#city').val();
-                                            send_ajax_get_request(
-                                                "{{ url('GenCode') }}/{{ $customer_type->value }}/" + city,
-                                                function(data) {
-                                                    alert('کد جدید:  ' + data)
-                                                    console.log(data);
+                                            var nationalId = $('#national_id').val();
+                                            var postalCode = $('#postal_code').val();
+                                            let formData = new FormData();
+
+                                            formData.append('city', city);
+                                            formData.append('national_id', nationalId);
+                                            formData.append('postal_code', postalCode);
+                                            formData.append('customer_type', "{{ $customer_type->value }}")
+                                            send_ajax_formdata_request(
+                                                "{{ route('agencyInfo.codeGenerator') }}",
+                                                formData,
+                                                function(response) {
+                                                    console.log(response);
                                                 }
                                             )
+                                            // send_ajax_get_request(
+                                            //     "{{ url('GenCode') }}/{{ $customer_type->value }}/" + city,
+                                            //     function(data) {
+                                            //         alert('کد جدید:  ' + data)
+                                            //         console.log(data);
+                                            //     }
+                                            // )
                                         })
                                     </script>
                                 @endif

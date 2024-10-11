@@ -182,6 +182,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'E' => 
         array (
+            'ExcelReader\\' => 12,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -596,6 +597,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
+        ),
+        'ExcelReader\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-excel-reader/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
@@ -1633,6 +1638,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
+        'ExcelReader\\Controllers\\ExcelController' => __DIR__ . '/../..' . '/packages/behin-excel-reader/src/Controllers/ExcelController.php',
+        'ExcelReader\\ExcelReaderServiceProvider' => __DIR__ . '/../..' . '/packages/behin-excel-reader/src/ExcelReaderServiceProvider.php',
         'Faker\\Calculator\\Ean' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Ean.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Inn.php',

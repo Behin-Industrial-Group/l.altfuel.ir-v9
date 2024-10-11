@@ -247,6 +247,7 @@ return [
         MyAgencyInfo\PackageServiceProvider::class,
         \FileService\FileServiceProvider::class,
         \QrCodeScanner\QrCodeScannerProvider::class,
+        \ExcelReader\ExcelReaderServiceProvider::class,
 
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
