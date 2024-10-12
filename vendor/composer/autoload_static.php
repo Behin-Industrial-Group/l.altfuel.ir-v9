@@ -1639,6 +1639,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
         'ExcelReader\\Controllers\\ExcelController' => __DIR__ . '/../..' . '/packages/behin-excel-reader/src/Controllers/ExcelController.php',
+        'ExcelReader\\Controllers\\ExcelReader' => __DIR__ . '/../..' . '/packages/behin-excel-reader/src/Controllers/ExcelReader.php',
         'ExcelReader\\ExcelReaderServiceProvider' => __DIR__ . '/../..' . '/packages/behin-excel-reader/src/ExcelReaderServiceProvider.php',
         'Faker\\Calculator\\Ean' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Ean.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Calculator/Iban.php',
