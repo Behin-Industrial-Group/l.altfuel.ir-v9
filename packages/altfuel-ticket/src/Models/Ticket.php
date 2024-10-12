@@ -16,22 +16,22 @@ class Ticket extends Model
         'ticket_id', 'user_id', 'cat_id', 'title', 'status', 'junk', 'actor_id'
     ];
 
-    // protected static function boot()
-    // {
-    //     parent::boot();
+    protected static function boot()
+    {
+        parent::boot();
 
-    //     static::created(function ($ticket) {
-    //         Cache::put('ticket_' . $ticket->id, $ticket, now()->addMinutes(60));
-    //     });
+        static::created(function ($ticket) {
+            Cache::put('ticket_' . $ticket->id, $ticket, now()->addMinutes(60));
+        });
 
-    //     static::updated(function ($ticket) {
-    //         Cache::put('ticket_' . $ticket->id, $ticket, now()->addMinutes(60));
-    //     });
+        static::updated(function ($ticket) {
+            Cache::put('ticket_' . $ticket->id, $ticket, now()->addMinutes(60));
+        });
 
-    //     static::deleted(function ($ticket) {
-    //         Cache::forget('ticket_' . $ticket->id);
-    //     });
-    // }
+        static::deleted(function ($ticket) {
+            Cache::forget('ticket_' . $ticket->id);
+        });
+    }
 
     public function comments() {
         return TicketComment::where('ticket_id', $this->id)->get();
