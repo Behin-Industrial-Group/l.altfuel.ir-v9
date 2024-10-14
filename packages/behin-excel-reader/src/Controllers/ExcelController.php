@@ -37,6 +37,10 @@ class ExcelController extends Controller
                 $data = array_combine($header, $row);
                 $data = ExcelController::headerRenameAndFilter($data);
 
+                if (empty($data['customer_type'])) {
+                    return response("فیلد نوع مشتری (customer_type) نباید خالی باشد", 400);
+                }
+
                 $parentId = DB::table('agency_info as a1')
                     ->join('agency_info as a2', function ($join) {
                         $join->on('a1.parent_id', '=', 'a2.parent_id')
@@ -79,9 +83,10 @@ class ExcelController extends Controller
                 $i++;
             }
 
-            return response("تعداد $i ردیف ذخیره شد");
+            return response("تعداد $i ردیف ذخیره شد", 200);
         } else {
-            echo ExcelReader::parseError();
+            $msg = ExcelReader::parseError();
+            return response($msg, 400);
         }
     }
 
