@@ -40,6 +40,7 @@
                                                 formData,
                                                 function(response) {
                                                     console.log(response);
+                                                    alert(response.msg)
                                                 }
                                             )
                                             // send_ajax_get_request(
