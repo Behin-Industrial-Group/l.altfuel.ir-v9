@@ -13,6 +13,7 @@ use Mkhodroo\Cities\Controllers\CityController;
 use Mkhodroo\Cities\Controllers\ProvinceController;
 use Mkhodroo\Cities\Models\NewProvince;
 use Mkhodroo\DateConvertor\Controllers\SDate;
+use Morilog\Jalali\Jalalian;
 
 class AgencyListController extends Controller
 {
@@ -31,7 +32,8 @@ class AgencyListController extends Controller
         ]);
     }
 
-    public static function getKeys(){
+    public static function getKeys()
+    {
         $keys = AgencyInfo::groupBy('key')->pluck('key');
         // $keys[] = 'province';
         // $keys[] = 'city';
@@ -47,55 +49,55 @@ class AgencyListController extends Controller
     public static function filterList(Request $r)
     {
 
-        $main_field_search = config('agency_info.main_field_name'). "_search";
+        $main_field_search = config('agency_info.main_field_name') . "_search";
         $main_field = config('agency_info.main_field_name');
         $agencies = AgencyInfo::get();
         $parent_ids = [];
-        if($r->$main_field_search){
+        if ($r->$main_field_search) {
             $parent_ids[] = AgencyInfo::where('key', $main_field)->where('value', $r->$main_field_search)->pluck('parent_id')->toArray();
         }
-        if($r->province_search){
+        if ($r->province_search) {
             $parent_ids[] = AgencyInfo::where('key', 'province')->where('value', $r->province_search)->pluck('parent_id')->toArray();
         }
-        if($r->last_referral_search){
+        if ($r->last_referral_search) {
             $parent_ids[] = AgencyInfo::where('key', 'last_referral')->where('value', $r->last_referral_search)->pluck('parent_id')->toArray();
         }
-        if($r->new_status_search){
+        if ($r->new_status_search) {
             $parent_ids[] = AgencyInfo::where('key', 'new_status')->where('value', $r->new_status_search)->pluck('parent_id')->toArray();
         }
-        if($r->field_value){
-            $parent_ids[] = AgencyInfo::where('value' , 'like', "%". $r->field_value. "%")->pluck('parent_id')->toArray();
-            
+        if ($r->field_value) {
+            $parent_ids[] = AgencyInfo::where('value', 'like', "%" . $r->field_value . "%")->pluck('parent_id')->toArray();
         }
         $count = count($parent_ids);
-        if($count > 1){
+        if ($count > 1) {
             $intersects = $parent_ids[0];
-            foreach($parent_ids as $parent_id){
+            foreach ($parent_ids as $parent_id) {
                 $intersects = array_intersect($intersects, $parent_id);
             }
             $parent_ids = $intersects;
         }
-        if($count === 1){
+        if ($count === 1) {
             $parent_ids = $parent_ids[0];
         }
         $agencies = AgencyInfo::whereIn('id', $parent_ids)->groupBy('parent_id')->get();
-        
+
         $key_indexes = explode(',', $r->cols);
-        $agencies =  $agencies->each(function ($agency) use($key_indexes) {
+        $agencies =  $agencies->each(function ($agency) use ($key_indexes) {
             $agency = self::makeCustomFields($agency, $key_indexes);
         });
         return ['data' => $agencies];
     }
 
-    public static function makeCustomFields(object $agency, array $cols) {
+    public static function makeCustomFields(object $agency, array $cols)
+    {
         $keys = self::getKeys();
-        foreach($cols as $key_index){
+        foreach ($cols as $key_index) {
             $key = $keys[$key_index];
-            if($key === 'province'){
+            if ($key === 'province') {
                 $agency->$key = ProvinceController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->name;
-            }elseif($key === 'city'){
-                $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, 'city')?->value)?->city;
-            }else{
+            } elseif ($key === 'city') {
+                $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->city;
+            } else {
                 $agency->$key = __(GetAgencyController::getByKey($agency->parent_id, $key)?->value);
             }
         }
@@ -103,42 +105,109 @@ class AgencyListController extends Controller
         return $agency;
     }
 
-    public static function getValidAgencies($type = 'agency'){
-        $parent_ids = AgencyInfo::where('key', config('agency_info.main_field_name'))->where('value', $type)->pluck('id');
+    public static function getValidAgencies($type = 'agency')
+    {
+        //  -----  jalali date to timestamp
+        // $expDateFix = self::expDateFix();
+
+        $parent_ids = DB::table('agency_info as a1')
+        ->join('agency_info as a2', function ($join) {
+            $join->on('a1.parent_id', '=', 'a2.parent_id')
+                ->where('a1.key', config('agency_info.main_field_name'))
+                ->where('a2.key', 'exp_date');
+        })
+        ->where('a1.value', $type)
+        ->where('a2.value', '>', Carbon::now()->timestamp)
+        ->pluck('a1.parent_id');
+
+        dd($parent_ids);
+        // $parent_ids = AgencyInfo::where('key', config('agency_info.main_field_name'))->where('value', $type)->pluck('id');
+
         // $parent_ids = AgencyInfo::whereIn('parent_id', $parent_ids)->where('key', 'enable')->where('value', '1')->pluck('parent_id');
         // $exp_dates = AgencyInfo::whereIn('parent_id', $parent_ids)->where('key', 'exp_date')->whereNotNull('value')->where('value', '!=', '')->get();
         // $parent_ids = [];
         // $sDate = new SDate();
         $agencies = AgencyInfo::whereIn('id', $parent_ids)->groupBy('parent_id')->get();
-        // return $agencies;
         $key_indexes = explode(',', '0,1,2');
+
+
         $agencies =  $agencies->each(function ($agency) use($key_indexes) {
-            $agency = self::makeCustomFields($agency, $key_indexes);
+            $agency = self::makeMyCustomFields($agency, $key_indexes);
         });
+
+        // $agencies->chunk(100, function ($results) use ($key_indexes) {
+        //     foreach ($results as $result) {
+        //         $result = self::makeCustomFields($result, $key_indexes);
+        //     }
+        // });
+
         return ['data' => $agencies];
         $agencies = [];
-        foreach($parent_ids as $parent_id){
+        foreach ($parent_ids as $parent_id) {
             // $exp = $sDate->toGrDate($exp_date->value);
             // $GregorianExpDate = $sDate->gregorianToCarbon($exp);
             // $now_carbon = Carbon::now();
             // $diff = $now_carbon->diffInDays($exp, false);
             // echo $diff;
             // if($diff >= 0){
-                $parent_ids[] = $parent_id;
-                $agencies[] = [
-                    'agency_code' => GetAgencyController::getByKey($parent_id, 'agency_code')?->value,
-                    'name' => GetAgencyController::getByKey($parent_id, 'firstname')?->value,
-                    'province' => CityController::getById(GetAgencyController::getByKey($parent_id, 'province')?->value)->province,
-                    'city' => CityController::getById(GetAgencyController::getByKey($parent_id, 'province')?->value)->city,
-                    'address' => GetAgencyController::getByKey($parent_id, 'address')?->value,
-                    'phone' => GetAgencyController::getByKey($parent_id, 'phone')?->value,
-                    'mobile' => GetAgencyController::getByKey($parent_id, 'mobile')?->value,
-                    'exp_date' => GetAgencyController::getByKey($parent_id, 'exp_date')?->value,
-                ];
+            $parent_ids[] = $parent_id;
+            $agencies[] = [
+                'agency_code' => GetAgencyController::getByKey($parent_id, 'agency_code')?->value,
+                'name' => GetAgencyController::getByKey($parent_id, 'firstname')?->value,
+                'province' => CityController::getById(GetAgencyController::getByKey($parent_id, 'province')?->value)->province,
+                'city' => CityController::getById(GetAgencyController::getByKey($parent_id, 'province')?->value)->city,
+                'address' => GetAgencyController::getByKey($parent_id, 'address')?->value,
+                'phone' => GetAgencyController::getByKey($parent_id, 'phone')?->value,
+                'mobile' => GetAgencyController::getByKey($parent_id, 'mobile')?->value,
+                'exp_date' => GetAgencyController::getByKey($parent_id, 'exp_date')?->value,
+            ];
             // }
         }
         return json_encode($agencies);
-
     }
 
+    public static function makeMyCustomFields(object $agency, array $cols)
+    {
+        $keys = [
+            'firstname', 'lastname', 'agency_code', 'phone', 'province', 'city', 'address', 'fin_green'
+        ];
+        foreach ($cols as $key_index) {
+            $key = $keys[$key_index];
+            if ($key === 'province') {
+                $agency->$key = ProvinceController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->name;
+            } elseif ($key === 'city') {
+                $agency->$key = CityController::getById(GetAgencyController::getByKey($agency->parent_id, $key)?->value)?->city;
+            } else {
+                $agency->$key = __(GetAgencyController::getByKey($agency->parent_id, $key)?->value);
+            }
+        }
+        $agency->fin_green = __(GetAgencyController::getByKey($agency->parent_id, 'fin_green')?->value);
+        return $agency;
+    }
+
+    public static function expDateFix()
+    {
+        $records = AgencyInfo::where('key', 'exp_date')->get();
+
+        foreach ($records as $record) {
+            try {
+                $dateValue = $record->value;
+
+                if (strpos($dateValue, '/') !== false) {
+                    $timestamp = Jalalian::fromFormat('Y/m/d', $dateValue)->getTimestamp();
+                } elseif (strpos($dateValue, '-') !== false) {
+                    $timestamp = Jalalian::fromFormat('Y-m-d', $dateValue)->getTimestamp();
+                } else {
+                    continue;
+                }
+
+                $render = AgencyInfo::where('id', $record->id)->update(['value' => $timestamp]);
+
+            } catch (\Exception $e) {
+                continue;
+            }
+        }
+        return true;
+    }
 }
+
