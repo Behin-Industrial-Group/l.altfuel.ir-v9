@@ -120,7 +120,7 @@ class AgencyListController extends Controller
         ->where('a2.value', '>', Carbon::now()->timestamp)
         ->pluck('a1.parent_id');
 
-        dd($parent_ids);
+        // dd($parent_ids);
         // $parent_ids = AgencyInfo::where('key', config('agency_info.main_field_name'))->where('value', $type)->pluck('id');
 
         // $parent_ids = AgencyInfo::whereIn('parent_id', $parent_ids)->where('key', 'enable')->where('value', '1')->pluck('parent_id');
