@@ -11,11 +11,15 @@ use Mkhodroo\AltfuelTicket\Models\TicketComment;
 
 class ShowTicketController extends Controller
 {
-    function list() : View {
+    function list(): View
+    {
+        $render = new TicketAssignController();
+        $render->updateActorIdToNull();
         return view('ATView::list');
     }
 
-    function show(Request $r)  {
+    function show(Request $r)
+    {
         return view('ATView::show')->with([
             'ticket' => GetTicketController::get($r->ticket_id)
         ]);
