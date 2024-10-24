@@ -187,18 +187,16 @@ class AgencyController extends Controller
         $type = $request->customer_type;
         $province = $request->city;
 
-        $count = DB::table('agency_info as a1')
+        $exists = DB::table('agency_info as a1')
             ->join('agency_info as a2', function ($join) {
-                $join->on('a1.parent_id', '=', 'a2.parent_id')
-                    ->where('a1.key', 'national_id')
-                    ->where('a2.key', 'postal_code');
+                $join->on('a1.parent_id', '=', 'a2.parent_id')        // رکوردها باید متعلق به یک مرکز باشند
+                    ->where('a1.key', 'national_id')          // ستون key در a1 باید national_code باشد
+                    ->where('a2.key', 'postal_code');           // ستون key در a2 باید postal_code باشد
             })
-            ->where('a1.value', $request->national_id)
-            ->where('a2.value', $request->postal_code)
-            ->count();
+            ->where('a1.value', $request->national_id)  // مقدار کد ملی
+            ->where('a2.value', $request->postal_code)    // مقدار کد پستی
+            ->exists();
 
-        $count > 1 ? $exists = true : $exists = false;
-        
         if (!$province) {
             return response(trans("Province is not set"), 300);
         }

@@ -49,11 +49,6 @@
                     <a href="{{ url("$attach->file") }}" target="_blank">پیوست {{ $index + 1 }}</a>
                     <br>
                 @endforeach
-                @if ($comment->attachments()->count() > 1)
-                <a href="{{ route('ATRoutes.download.zip', ['id' => $comment->id]) }}" target="_blank" class="btn btn-primary">
-                    دانلود پیوست ها به صورت زیپ
-                </a>
-                @endif
 
             </div>
         </div>

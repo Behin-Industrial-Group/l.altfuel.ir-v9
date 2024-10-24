@@ -63,7 +63,6 @@ return array(
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'NunoMaduro\\Collision\\' => array($vendorDir . '/nunomaduro/collision/src'),
     'MyAgencyInfo\\' => array($baseDir . '/packages/my-agency-info/src'),
-    'Morilog\\Jalali\\' => array($vendorDir . '/morilog/jalali/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Mkhodroo\\Voip\\' => array($baseDir . '/packages/mkhodroo-voip/src'),
     'Mkhodroo\\UserRoles\\' => array($baseDir . '/packages/mkhodroo-user-roles/src'),
@@ -123,7 +122,6 @@ return array(
     'BehinProcessMaker\\' => array($baseDir . '/packages/behin-process-maker/src'),
     'BehinLogging\\' => array($baseDir . '/packages/behin-logging/src'),
     'BaleBot\\' => array($baseDir . '/packages/behin-bale-bot/src'),
-    'Assert\\' => array($vendorDir . '/beberlei/assert/lib/Assert'),
     'App\\' => array($baseDir . '/app', $vendorDir . '/laravel/pint/app'),
     'AiAssistant\\' => array($baseDir . '/packages/behin-ai-assistant/src'),
 );

@@ -16,11 +16,10 @@
                                 @php
                                     $required = '';
                                 @endphp
-
+                                <input type="text" name="{{ $field_key }}" value="{{ $value }}"
+                                    class="form-control" id="{{ $field_key }}"
+                                    @if (isset($field_detail['disabled']) and $field_detail['disabled'] === true) disabled @endif>
                                 @if ($field_key === 'agency_code')
-                                    <input type="text" name="{{ $field_key }}" value="{{ $value }}"
-                                        class="form-control" id="{{ $field_key }}"
-                                        @if (isset($field_detail['disabled']) and $field_detail['disabled'] === true) disabled @endif>
                                     <span id="gen_code" class="col-sm-3"
                                         style="background: #db4f4f;padding-top:5px; height:32px; text-align:center; font-weight:bold; cursor:pointer">
                                         تولید کد
@@ -53,64 +52,6 @@
                                             // )
                                         })
                                     </script>
-                                @elseif ($field_key === 'exp_date')
-                                    <input type="hidden" id="exp_date" value="{{ $value }}" name="exp_date">
-                                    <input type="text" id="exp_date_view" class="form-control">
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#exp_date_view").persianDatepicker({
-                                                format: 'YYYY-MM-DD',
-                                                toolbox: {
-                                                    calendarSwitch: {
-                                                        enabled: true
-                                                    }
-                                                },
-                                                initialValue: false,
-                                                observer: true,
-                                                altField: '#exp_date'
-                                            });
-                                        });
-
-                                        var ExpDateData = "{{ $value }}";
-                                        var ExpDate = convertTimeStampToJalali(parseInt(ExpDateData));
-                                        $("#exp_date_view").val(ExpDate);
-
-                                        function convertTimeStampToJalali(timestamp) {
-                                            var date = new Date(timestamp);
-                                            if (!date)
-                                                return false;
-                                            return (gregorian_to_jalali(date.getFullYear(), (date.getMonth() + 1), date.getDate()));
-                                        }
-
-                                        function gregorian_to_jalali(gy, gm, gd) {
-                                            g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-                                            if (gy > 1600) {
-                                                jy = 979;
-                                                gy -= 1600;
-                                            } else {
-                                                jy = 0;
-                                                gy -= 621;
-                                            }
-                                            gy2 = (gm > 2) ? (gy + 1) : gy;
-                                            days = (365 * gy) + (parseInt((gy2 + 3) / 4)) - (parseInt((gy2 + 99) / 100)) + (parseInt((gy2 + 399) / 400)) -
-                                                80 + gd + g_d_m[gm - 1];
-                                            jy += 33 * (parseInt(days / 12053));
-                                            days %= 12053;
-                                            jy += 4 * (parseInt(days / 1461));
-                                            days %= 1461;
-                                            if (days > 365) {
-                                                jy += parseInt((days - 1) / 365);
-                                                days = (days - 1) % 365;
-                                            }
-                                            jm = (days < 186) ? 1 + parseInt(days / 31) : 7 + parseInt((days - 186) / 30);
-                                            jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
-                                            return jy + '/' + jm + '/' + jd;
-                                        }
-                                    </script>
-                                @else
-                                    <input type="text" name="{{ $field_key }}" value="{{ $value }}"
-                                        class="form-control" id="{{ $field_key }}"
-                                        @if (isset($field_detail['disabled']) and $field_detail['disabled'] === true) disabled @endif>
                                 @endif
                             @endif
                             @if ($field_detail['type'] == 'select')
