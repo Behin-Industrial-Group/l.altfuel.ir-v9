@@ -1,52 +1,49 @@
-<table class="table table-striped ">
-    <thead>
-        <tr>
-            <th>شماره</th>
-            <th>مقصد</th>
-            <th>وضعیت</th>
-            <th>تاریخ</th>
-            <th>مدت مکالمه</th>
-            <th>دانلود</th>
-        </tr>
-    </thead>
-    @if (is_array($data))
-        @foreach ($data as $item)
-            <tr>
-                <td>{{ $item['src'] }}</td>
-                <td>{{ $item['dst'] }}</td>
-                <td>{{ __($item['disposition']) }}</td>
-                <td dir="ltr">{{ $item['calldate'] }}</td>
-                <td dir="ltr">{{ $item['duration'] }}</td>
-                <td dir="ltr">
-                    <p style="cursor: pointer"
-                        onclick="dl(`https://voip.altfuel.ir/voice.php?date={{ explode(' ', $item['calldate'])[0] }}&id={{ $item['uniqueid'] }}`)">
-                        دانلود
-                    </p>
-                </td>
-            </tr>
-        @endforeach
-    @endif
+@extends('layouts.app')
 
-</table>
-<script>
-    function dl(link) {
-        var fd = new FormData();
-        fd.append('link', link)
-        send_ajax_formdata_request(
-            "{{ route('voip.dlVoice') }}",
-            fd,
-            function(res) {
-                if (res == "404") {
-                    show_error("فایل وجود ندارد");
-                } else {
-                    var link = document.createElement("a");
-                    link.setAttribute('download', name);
-                    link.href = res;
-                    document.body.appendChild(link);
-                    link.click();
-                    link.remove();
-                }
-            }
-        )
-    }
-</script>
+@section('content')
+    <div class="container">
+        <div class="">
+            <form action="{{ route('voip.getCallReport') }}" method="get">
+                {{ trans('start') }}: <input type="date" name="start_date" id="" class="form-control col-sm-3">
+                {{ trans('end') }}: <input type="date" name="end_date" id="" class="form-control col-sm-3">
+                <input type="submit" class="btn btn-default" name="" id="">
+            </form>
+        </div>
+        <div class="mt-3">
+            <h2>آمار تماس‌ها</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>داخلی</th>
+                        <th>کارشناس</th>
+                        <th>تعداد تماس‌های پاسخ داده شده</th>
+                        <th>تعداد تماس‌های مشغول</th>
+                        <th>تعداد تماس‌های بی پاسخ</th>
+                        <th>تعداد کل تماس‌ها</th>
+                        <th>درصد پاسخگویی</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($callStats as $item)
+                    @php
+                        $total_calls  =  $item->answered_calls  + $item->busy_calls + $item->no_answered_calls;
+                        $percentage = $item->answered_calls / ($total_calls - $item->busy_calls) * 100;
+                        $percentage = round($percentage,1);
+                    @endphp
+                        <tr>
+                            <td>{{ $item->dst }}</td>
+                            <td>{{ $dstMapToExpert[$item->dst] }}</td>
+                            <td>{{ $item->answered_calls }}</td>
+                            <td>{{ $item->busy_calls }}</td>
+                            <td>{{ $item->no_answered_calls }}</td>
+                            <td>{{ $total_calls }}</td>
+                            <td>{{ $percentage }}</td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+@endsection
