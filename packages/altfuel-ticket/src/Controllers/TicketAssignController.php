@@ -35,4 +35,16 @@ class TicketAssignController extends Controller
         ]);
         return true;
     }
+
+    public function updateActorIdToNull()
+    {
+        $tickets = Ticket::whereNotNull('actor_id')->get();
+        foreach ($tickets as $ticket) {
+            $ticket->actor_id = null;
+            $ticket->save();
+        }
+
+        return response()->json(['msg' => 'Actor IDs updated to null successfully!']);
+    }
+
 }

@@ -65,7 +65,7 @@ class AgencyListController extends Controller
         }
         if($r->field_value){
             $parent_ids[] = AgencyInfo::where('value' , 'like', "%". $r->field_value. "%")->pluck('parent_id')->toArray();
-            
+
         }
         $count = count($parent_ids);
         if($count > 1){
@@ -79,7 +79,7 @@ class AgencyListController extends Controller
             $parent_ids = $parent_ids[0];
         }
         $agencies = AgencyInfo::whereIn('id', $parent_ids)->groupBy('parent_id')->get();
-        
+
         $key_indexes = explode(',', $r->cols);
         $agencies =  $agencies->each(function ($agency) use($key_indexes) {
             $agency = self::makeCustomFields($agency, $key_indexes);
@@ -103,8 +103,26 @@ class AgencyListController extends Controller
         return $agency;
     }
 
-    public static function getValidAgencies($type = 'agency'){
-        $parent_ids = AgencyInfo::where('key', config('agency_info.main_field_name'))->where('value', $type)->pluck('id');
+
+    public static function getValidAgencies($type = 'agency')
+    {
+        //  -----  jalali date to timestamp
+        // $expDateFix = self::expDateFix();
+
+        $parent_ids = DB::table('agency_info as a1')
+        ->join('agency_info as a2', function ($join) {
+            $join->on('a1.parent_id', '=', 'a2.parent_id')
+                ->where('a1.key', config('agency_info.main_field_name'))
+                ->where('a2.key', 'exp_date');
+        })
+        ->where('a1.value', $type)
+        ->where('a2.value', '>', Carbon::now()->timestamp)
+        ->pluck('a1.parent_id');
+
+        // dd($parent_ids);
+        // $parent_ids = AgencyInfo::where('key', config('agency_info.main_field_name'))->where('value', $type)->pluck('id');
+
+
         // $parent_ids = AgencyInfo::whereIn('parent_id', $parent_ids)->where('key', 'enable')->where('value', '1')->pluck('parent_id');
         // $exp_dates = AgencyInfo::whereIn('parent_id', $parent_ids)->where('key', 'exp_date')->whereNotNull('value')->where('value', '!=', '')->get();
         // $parent_ids = [];
