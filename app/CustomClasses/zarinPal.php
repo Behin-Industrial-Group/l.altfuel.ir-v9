@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\CustomClasses;
 
@@ -17,10 +17,11 @@ class zarinPal
             'Mobile'         => $mobile,
             'CallbackURL'    => $callbackUrl,
         ]);
-        
-        if ($result->Status == 100) 
+
+        if ($result->Status == 100)
             return $result->Authority;
     }
+
     public static function pay($request)
     {
         $MerchantID = config('zarinpal.merchantId');
@@ -32,7 +33,7 @@ class zarinPal
             'Mobile'         => $request['mobile'],
             'CallbackURL'    => $request['callbackUrl'],
         ]);
-        
+
         if ($result->Status == 100) {
             return redirect(config('zarinpal.pay_url').$result->Authority);
         } else {
@@ -40,23 +41,23 @@ class zarinPal
         }
 
     }
-    
+
     public static function verify(Request $request, $price)
     {
         $MerchantID = config('zarinpal.merchantId');
         if ($request->Status == 'OK') {
             // URL also can be ir.zarinpal.com or de.zarinpal.com
             $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
-    
+
             $result = $client->PaymentVerification([
                 'MerchantID'     => $MerchantID,
                 'Authority'      => $request->Authority,
                 'Amount'         => $price,
             ]);
-    
+
             if ($result->Status == 100) {
                 return $result->RefID;
-                
+
             }else {
                 return 0;
             }

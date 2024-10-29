@@ -118,6 +118,7 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'BinshopsBlog\\' => array($vendorDir . '/binshops/laravel-blog/src'),
+    'Behin\\Complaint\\' => array($baseDir . '/packages/behin-complaint/src'),
     'BehinTest\\' => array($baseDir . '/packages/behin-test/src'),
     'BehinProcessMaker\\' => array($baseDir . '/packages/behin-process-maker/src'),
     'BehinLogging\\' => array($baseDir . '/packages/behin-logging/src'),
