@@ -248,6 +248,7 @@ return [
         \FileService\FileServiceProvider::class,
         \QrCodeScanner\QrCodeScannerProvider::class,
         \ExcelReader\ExcelReaderServiceProvider::class,
+        Behin\Complaint\ComplaintProvider::class,
 
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
