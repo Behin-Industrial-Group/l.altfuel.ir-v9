@@ -100,6 +100,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'R' => 
         array (
+            'Registration\\' => 13,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -386,6 +387,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Spatie\\Backtrace\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
+        ),
+        'Registration\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-registration/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -4193,6 +4198,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\Voip\\Controllers\\CallHistoryController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/CallHistoryController.php',
         'Mkhodroo\\Voip\\Controllers\\FirstOnlineTimeController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/FirstOnlineTimeController.php',
         'Mkhodroo\\Voip\\Controllers\\VoipController' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Controllers/VoipController.php',
+        'Mkhodroo\\Voip\\Models\\AsteriskCdr' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Models/AsteriskCdr.php',
         'Mkhodroo\\Voip\\Models\\CallHistory' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Models/CallHistory.php',
         'Mkhodroo\\Voip\\Models\\VoipInfo' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/Models/VoipInfo.php',
         'Mkhodroo\\Voip\\VoipServiceProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-voip/src/VoipServiceProvider.php',
@@ -6077,6 +6083,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'Registration\\Controllers\\RegisterUserController' => __DIR__ . '/../..' . '/packages/behin-registration/src/Controllers/RegisterUserController.php',
+        'Registration\\RegistrationServiceProvider' => __DIR__ . '/../..' . '/packages/behin-registration/src/RegistrationServiceProvider.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',

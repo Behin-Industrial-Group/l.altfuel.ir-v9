@@ -55,7 +55,8 @@
             "MyAgencyInfo\\": "packages/my-agency-info/src/",
             "FileService\\": "packages/behin-file-service/src/",
             "QrCodeScanner\\": "packages/behin-qrcode-scanner-input/src/",
-            "ExcelReader\\": "packages/behin-excel-reader/src/"
+            "ExcelReader\\": "packages/behin-excel-reader/src/",
+            "Registration\\": "packages/behin-registration/src/"
         }
     },
     "autoload-dev": {
