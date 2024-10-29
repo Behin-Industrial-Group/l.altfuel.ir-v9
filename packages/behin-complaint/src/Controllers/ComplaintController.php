@@ -30,7 +30,7 @@ class ComplaintController extends Controller
             'address' => 'required|string',
             'center_type' => 'required|string|max:255',
             'complaint_subject' => 'required|string|max:255',
-            'visit_date' => 'required|date',
+            'visit_date' => 'required',
             'description' => 'nullable|string',
         ]);
         $data = $request->except('_token');
