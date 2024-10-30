@@ -1,7 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.welcome')
 
 @section('title')
-    پرداخت موفق
+    نتیجه تراکنش
+@endsection
+
+@section('style')
+
+<style>
+    body{
+        background: aqua !important;
+    }
+</style>
+
 @endsection
 @section('content')
     @if ($refId === 0 or $refId === 1)
@@ -12,7 +22,7 @@
                 <hr>
                 <p class="mb-0">در صورت بروز مشکل، با پشتیبانی تماس بگیرید.</p>
             </div>
-            {{-- <a href="{{  }}" class="btn btn-primary mt-3">بازگشت به صفحه پرداخت</a> --}}
+            <a href="{{ route('registration.form') }}" class="btn btn-primary mt-3">بازگشت به صفحه پرداخت</a>
         </div>
     @else
         <div class="container pt-5 text-center">

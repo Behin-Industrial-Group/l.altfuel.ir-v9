@@ -1,9 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.welcome')
 
 @section('title')
     ثبت نام
 @endsection
+@section('style')
 
+<style>
+    body{
+        background: rgb(81, 42, 79) !important;
+    }
+</style>
+
+@endsection
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
