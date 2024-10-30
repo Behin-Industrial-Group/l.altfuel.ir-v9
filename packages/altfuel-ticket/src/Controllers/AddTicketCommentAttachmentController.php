@@ -27,20 +27,25 @@ class AddTicketCommentAttachmentController extends Controller
         $commentIds = TicketComment::where('ticket_id', $request->id)->pluck('id');
         $files = CommentAttachments::whereIn('comment_id', $commentIds)->pluck('file');
 
-        $zipFileName = 'ticket_' . $request->id . '.zip';
+        if (count($files)) {
+            $zipFileName = 'ticket_' . $request->id . '.zip';
 
-        $zip = new \ZipArchive;
-        $zipPath = public_path($zipFileName);
+            $zip = new \ZipArchive;
+            $zipPath = public_path($zipFileName);
 
-        if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-            foreach ($files as $file) {
-                $filePath = public_path('\..\\' .$file);
-                $zip->addFile($filePath, basename($filePath));
+            if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+                foreach ($files as $file) {
+                    $filePath = public_path('\..\\' .$file);
+                    $zip->addFile($filePath, basename($filePath));
+                }
+
+                $zip->close();
             }
 
-            $zip->close();
+            return response()->download($zipPath)->deleteFileAfterSend(true);
+        }else{
+            return response('پیوستی وجود ندارد', 404);
         }
 
-        return response()->download($zipPath)->deleteFileAfterSend(true);
     }
 }
