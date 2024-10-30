@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Mkhodroo\AltfuelTicket\Models\CommentAttachments;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketComment;
+use ZipArchive;
 
 class CommentAttachmentController extends Controller
 {
@@ -35,5 +37,26 @@ class CommentAttachmentController extends Controller
         $a = Storage::disk('ticket')->put($ticket_id,$file);
         $return_path = "/public". config('ATConfig.ticket-uploads-folder') . "/$a";
         return $return_path;
+    }
+    public function downloadZip(Request $request)
+    {
+
+        $files = CommentAttachments::where('comment_id', $request->id)->get();
+
+        $zipFileName = 'ticket_' . $files->first()->comment()->ticket_id. '_comment_'. $request->id  . '.zip';
+
+        $zip = new \ZipArchive;
+        $zipPath = public_path($zipFileName);
+
+        if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+            foreach ($files as $file) {
+                $filePath = public_path('\..\\' .$file->file);
+                $zip->addFile($filePath, basename($filePath));
+            }
+
+            $zip->close();
+        }
+
+        return response()->download($zipPath)->deleteFileAfterSend(true);
     }
 }
