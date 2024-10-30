@@ -23,20 +23,22 @@ class RegisterUserController extends Controller
             'price' => 'required|string',
         ]);
 
+        $price = config('registration.price')[$request->price];
+
         $registerUser = RegisterUser::create([
             'name' => $request->input('name'),
             'national_id' => $request->input('national_id'),
             'mobile' => $request->input('mobile'),
-            'price' => $request->input('price'),
+            'price' => $price,
         ]);
 
         $callbackUrl = route('registration.verify');
-        $authorityCode = zarinPal::getAuthority($registerUser->price, $registerUser->name, $registerUser->mobile, $callbackUrl);
+        $authorityCode = zarinPal::getAuthority($price, $registerUser->name, $registerUser->mobile, $callbackUrl);
         $registerUser->update([
             'authority' => $authorityCode,
             'status' => 'pending'
         ]);
-        
+
         return redirect(config('zarinpal.pay_url') . $authorityCode);
     }
 
