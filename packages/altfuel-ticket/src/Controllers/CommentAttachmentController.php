@@ -38,10 +38,11 @@ class CommentAttachmentController extends Controller
         $return_path = "/public". config('ATConfig.ticket-uploads-folder') . "/$a";
         return $return_path;
     }
+
     public function downloadZip(Request $request)
     {
 
-        $files = CommentAttachments::where('comment_id', $request->id)->get();
+        $files = CommentAttachments::where('comment_id', $request->id)->pluck('file');
 
         $zipFileName = 'ticket_' . $files->first()->comment()->ticket_id. '_comment_'. $request->id  . '.zip';
 
@@ -50,7 +51,7 @@ class CommentAttachmentController extends Controller
 
         if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
             foreach ($files as $file) {
-                $filePath = public_path('\..\\' .$file->file);
+                $filePath = public_path('\..\\' .$file);
                 $zip->addFile($filePath, basename($filePath));
             }
 

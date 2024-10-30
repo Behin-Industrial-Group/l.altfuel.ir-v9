@@ -56,9 +56,13 @@
                 @endif
 
             </div>
+
         </div>
         <div id="end"></div>
     @endforeach
+    <a href="{{ route('ATRoutes.ticket.download.zip', [ 'id' => $ticket->id ]) }}"  class="btn btn-primary">
+        {{ trans('دانلود همه پیوست ها به صورت یکجا') }}
+    </a>
 </div>
 
 
