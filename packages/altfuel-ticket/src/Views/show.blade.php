@@ -49,11 +49,20 @@
                     <a href="{{ url("$attach->file") }}" target="_blank">پیوست {{ $index + 1 }}</a>
                     <br>
                 @endforeach
+                @if ($comment->attachments()->count() > 1)
+                    <a href="{{ route('ATRoutes.download.zip', [ 'id' => $comment->id ]) }}"  class="btn btn-primary">
+                        {{ trans('دانلود همه به صورت یکجا') }}
+                    </a>
+                @endif
 
             </div>
+
         </div>
         <div id="end"></div>
     @endforeach
+    <a href="{{ route('ATRoutes.ticket.download.zip', [ 'id' => $ticket->id ]) }}"  class="btn btn-primary">
+        {{ trans('دانلود همه پیوست ها به صورت یکجا') }}
+    </a>
 </div>
 
 

@@ -4,6 +4,8 @@ namespace Mkhodroo\AltfuelTicket;
 
 use Mkhodroo\AltfuelTicket\Controllers\CreateTicketController;
 use Illuminate\Support\Facades\Route;
+use Mkhodroo\AltfuelTicket\Controllers\AddTicketCommentAttachmentController;
+use Mkhodroo\AltfuelTicket\Controllers\CommentAttachmentController;
 use Mkhodroo\AltfuelTicket\Controllers\GetTicketController;
 use Mkhodroo\AltfuelTicket\Controllers\ReportController;
 use Mkhodroo\AltfuelTicket\Controllers\ShowTicketController;
@@ -47,4 +49,8 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
     });
 
     Route::post('assign', [TicketAssignController::class, 'assign'])->name('assign');
+    Route::get('download-zip', [CommentAttachmentController::class, 'downloadZip'])->name('download.zip');
+
+    Route::get('ticket-download-zip', [AddTicketCommentAttachmentController::class, 'downloadZip'])->name('ticket.download.zip');
 });
+
