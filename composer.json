@@ -57,6 +57,7 @@
             "QrCodeScanner\\": "packages/behin-qrcode-scanner-input/src/",
             "ExcelReader\\": "packages/behin-excel-reader/src/",
             "Registration\\": "packages/behin-registration/src/"
+            "Behin\\Complaint\\": "packages/behin-complaint/src/"
         }
     },
     "autoload-dev": {

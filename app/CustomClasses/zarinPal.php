@@ -21,6 +21,7 @@ class zarinPal
         if ($result->Status == 100)
             return $result->Authority;
     }
+
     public static function pay($request)
     {
         $MerchantID = config('zarinpal.merchantId');

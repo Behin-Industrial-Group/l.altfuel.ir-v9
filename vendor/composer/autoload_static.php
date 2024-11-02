@@ -211,6 +211,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             'Brick\\Math\\' => 11,
             'BinshopsBlog\\' => 13,
+            'Behin\\Complaint\\' => 16,
             'BehinTest\\' => 10,
             'BehinProcessMaker\\' => 18,
             'BehinLogging\\' => 13,
@@ -681,6 +682,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/..' . '/binshops/laravel-blog/src',
         ),
+        'Behin\\Complaint\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-complaint/src',
+        ),
         'BehinTest\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/behin-test/src',
@@ -926,6 +931,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'BehinProcessMaker\\Models\\PmVars' => __DIR__ . '/../..' . '/packages/behin-process-maker/src/Models/PmVars.php',
         'BehinTest\\BehinTestProvider' => __DIR__ . '/../..' . '/packages/behin-test/src/BehinTestProvider.php',
         'BehinTest\\Models\\BehinTest' => __DIR__ . '/../..' . '/packages/behin-test/src/Models/BehinTest.php',
+        'Behin\\Compliant\\Controllers\\ComplaintController' => __DIR__ . '/../..' . '/packages/behin-complaint/src/Controllers/ComplaintController.php',
+        'Behin\\Compliant\\Models\\Complaint' => __DIR__ . '/../..' . '/packages/behin-complaint/src/Models/Complaint.php',
         'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Collection' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Collection.php',
         'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Model' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Model.php',
         'BinshopsBlog\\Baum\\Extensions\\Query\\Builder' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Query/Builder.php',
@@ -3844,6 +3851,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Requests\\TicketRequest' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Requests/TicketRequest.php',
         'Mkhodroo\\CaseInsensitiveTranslate\\CaseInsensitiveTranslateProvider' => __DIR__ . '/../..' . '/packages/case-insensitive-translate/src/CaseInsensitiveTranslateProvider.php',
         'Mkhodroo\\Cities\\CityProvider' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/CityProvider.php',
+        'Mkhodroo\\Cities\\ComplaintProvider' => __DIR__ . '/../..' . '/packages/behin-complaint/src/ComplaintProvider.php',
         'Mkhodroo\\Cities\\Controllers\\CityController' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Controllers/CityController.php',
         'Mkhodroo\\Cities\\Controllers\\CityViewController' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Controllers/CityViewController.php',
         'Mkhodroo\\Cities\\Controllers\\ProvinceController' => __DIR__ . '/../..' . '/packages/mkhodroo-cities/src/Controllers/ProvinceController.php',
