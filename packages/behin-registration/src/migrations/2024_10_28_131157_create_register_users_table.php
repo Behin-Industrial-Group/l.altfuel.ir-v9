@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('national_id');
             $table->string('mobile');
             $table->string('price');
-            $table->text('authority')->unique()->nullable();
+            $table->string('authority')->unique()->nullable();
             $table->string('status')->nullable();
             $table->string('ref_id')->nullable();
             $table->softDeletes();
