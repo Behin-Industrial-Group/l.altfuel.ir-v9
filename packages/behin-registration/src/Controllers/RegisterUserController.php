@@ -33,7 +33,8 @@ class RegisterUserController extends Controller
         ]);
 
         $callbackUrl = route('registration.verify');
-        $authorityCode = zarinPal::getAuthority($price, $registerUser->name, $registerUser->mobile, $callbackUrl);
+        $des = "پرداخت هزینه آزمون: $price تومانی $registerUser->name با کدملی: $registerUser->national_id";
+        $authorityCode = zarinPal::getAuthority($price, $des, $registerUser->mobile, $callbackUrl);
         $registerUser->update([
             'authority' => $authorityCode,
             'status' => 'pending'
