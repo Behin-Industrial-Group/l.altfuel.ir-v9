@@ -28,7 +28,7 @@
             <form action="{{ route('registration.submit') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="name" class="form-label">نام:</label>
+                    <label for="name" class="form-label">نام و نام خانوادگی:</label>
                     <input type="text" class="form-control" name="name" id="name" required>
                 </div>
 
