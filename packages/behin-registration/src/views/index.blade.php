@@ -45,10 +45,9 @@
                 <div class="mb-4">
                     <label for="price" class="form-label">نوع آزمون:</label>
                     <select name="price" id="price" class="form-select" required>
-                        <option value="1">150 هزار تومان</option>
-                        <option value="2">300 هزار تومان</option>
-                        <option value="3">800 هزار تومان</option>
-                        <option value="4">1200 هزار تومان</option>
+                        <option value="1">آزمون مقدماتی - 150 هزار تومان</option>
+                        <option value="2">آزمون آنلاین اصلی و بالانس - 400 هزار تومان</option>
+                        <option value="3">آزمون حضوری - 3 میلیون تومان</option>
                     </select>
                 </div>
 
