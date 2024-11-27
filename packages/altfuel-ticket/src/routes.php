@@ -2,6 +2,7 @@
 
 namespace Mkhodroo\AltfuelTicket;
 
+use Mkhodroo\AltfuelTicket\Controllers\LangflowController;
 use Mkhodroo\AltfuelTicket\Controllers\CreateTicketController;
 use Illuminate\Support\Facades\Route;
 use Mkhodroo\AltfuelTicket\Controllers\GetTicketController;
@@ -47,4 +48,6 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
     });
 
     Route::post('assign', [TicketAssignController::class, 'assign'])->name('assign');
+
+    Route::post('langflow', [LangflowController::class, 'run'])->name('langflow');
 });
