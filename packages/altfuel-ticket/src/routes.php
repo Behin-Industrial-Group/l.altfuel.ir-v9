@@ -49,5 +49,5 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
 
     Route::post('assign', [TicketAssignController::class, 'assign'])->name('assign');
 
-    Route::post('langflow', [LangflowController::class, 'run'])->name('langflow');
+    Route::post('langflow', [LangflowController::class, 'ticketLastCommentReply'])->name('langflow');
 });

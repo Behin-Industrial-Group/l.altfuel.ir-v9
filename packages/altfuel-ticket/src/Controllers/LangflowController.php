@@ -10,45 +10,21 @@ use stdClass;
 
 class LangflowController extends Controller
 {
-    public static function run()
+    public static function ticketLastCommentReply(Request $request)
     {
-        // $lastComment = TicketComment::where('ticket_id', $request->ticket_id)->orderBy('id', 'desc')->first();
-        // return response()->json(['message' => $lastComment->text]);
-
-
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . 'AstraCS:NefmcszgGgzjPsmBbyUGaSra:6a543b5db7f883861cee2b0926451700b5d973b21d06127cea6fe25e223e6c3f',
-        ])->post('https://api.langflow.astra.datastax.com/lf/f52522a6-cf86-4c2b-867b-b619da53ddee/api/v1/run/f1540628-e150-4805-be8a-59111e1852c1?stream=false', [
-            'input_value' => 'من چند ساله هستم؟',
-            'output_type' => 'chat',
-            'input_type' => 'chat',
-            'tweaks' => [
-                'ChatInput-S6pVj' => [],
-                'ParseData-RKLei' => [],
-                'Prompt-ipfvP' => [],
-                'SplitText-9KAvp' => [],
-                'ChatOutput-dUVEn' => [],
-                'AstraDB-y5TS6' => [],
-                'AstraDB-LYPfX' => [],
-                'File-q7DuD' => [],
-                'GroqModel-LutP7' => [],
-                'CohereEmbeddings-jUybi' => [],
-                'CohereEmbeddings-2MzXP' => [],
-            ],
-        ]);
-
-        return $response->json();
+        $lastComment = TicketComment::where('ticket_id', $request->ticket_id)->orderBy('id', 'desc')->first();
+        $question = $lastComment->text;
+        $reply = self::run($question);
+        return response()->json(['message' => $reply]);
     }
 
-    public static function run2()
+    public static function run($question)
     {
 
         $curl = curl_init();
 
-        // داده‌های JSON به عنوان آرایه PHP
         $data = [
-            "input_value" => "hello",
+            "input_value" => $question,
             "output_type" => "chat",
             "input_type" => "chat",
             "tweaks" => [
@@ -62,7 +38,7 @@ class LangflowController extends Controller
 
         // مقداردهی تنظیمات cURL
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.langflow.astra.datastax.com/lf/13e73b34-94df-445b-a1ad-60ad9e0a0087/api/v1/run/8e085f9d-3d5a-46ab-bb19-0c17a6adbbd8?stream=false',
+            CURLOPT_URL => 'https://api.langflow.astra.datastax.com/lf/f52522a6-cf86-4c2b-867b-b619da53ddee/api/v1/run/6035afb9-f9b9-4286-9277-ad72fb94e276?stream=false',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -73,14 +49,17 @@ class LangflowController extends Controller
             CURLOPT_POSTFIELDS => json_encode($data), // داده‌های JSON به‌درستی اینجا رمزگذاری می‌شوند
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json',
-                'Authorization: Bearer AstraCS:APxfrRDFpEeZQUjRsbQhufgM:bb0f87f52dfdbb5d7e9dbf0c87b4919adb7a1610cba4fc808ede0716e4f5e704'
+                'Authorization: Bearer AstraCS:XvKnENkZZPDNePzJAXBTeFzj:ac237056b29826e020f83cf1ed1e91098782edc9be9ce82e7f52ab8371992ee1'
             ),
         ));
 
         $response = curl_exec($curl);
         curl_close($curl);
 
-        // نمایش پاسخ
-        echo $response;
+        $decodedResponse = json_decode($response, true);
+
+        $reply = $decodedResponse['outputs'][0]['outputs'][0]['results']['message']['text'];
+
+        return $reply;
     }
 }
