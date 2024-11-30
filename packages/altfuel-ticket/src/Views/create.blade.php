@@ -20,7 +20,7 @@
                     <label for="">عنوان</label>
                     <input type="text" name="title" id="" class="form-control">
                 </div>
-                @include('ATView::partial-view.add-comment-form', ['form_id' => 'ticket-form'])
+                @include('ATView::partial-view.create-comment-form', ['form_id' => 'ticket-form'])
             </form>
         </div>
     </div>
