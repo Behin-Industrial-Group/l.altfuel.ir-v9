@@ -52,11 +52,11 @@ class CreateTicketController extends Controller
         $ticket->status = $status ? $status : $ticket->status;
         $ticket->save();
         $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->ticket_id) : '';
-
-        $question = self::getLastComment($ticket->id)->getData()->last_comment;
-        $answer = $r->text;
-        $saveImprovedResponse = self::saveImprovedResponse($question, $answer);
-
+        if(Auth::id() != $ticket->user_id){
+            $question = self::getLastComment($ticket->id)->getData()->last_comment;
+            $answer = $r->text;
+            $saveImprovedResponse = self::saveImprovedResponse($question, $answer);
+        }
         $comment = AddTicketCommentController::add($ticket->id, $r->text, $file_path);
         if ($r->file('files')) {
             foreach ($r->file('files') as $name) {
