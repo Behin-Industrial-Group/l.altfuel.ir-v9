@@ -12,8 +12,8 @@ class LangflowController extends Controller
 {
     public static function ticketLastCommentReply(Request $request)
     {
-        $lastComment = TicketComment::where('ticket_id', $request->ticket_id)->orderBy('id', 'desc')->first();
-        $question = $lastComment->text;
+        $lastCommentResponse = CreateTicketController::getLastComment($request->ticket_id);
+        $question = $lastCommentResponse->getData()->last_comment;
         $reply = self::run($question);
         return response()->json(['message' => $reply]);
     }

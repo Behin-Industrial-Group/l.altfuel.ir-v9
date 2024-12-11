@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\CommentAttachments;
+use Mkhodroo\AltfuelTicket\Models\ImprovedAnswer;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
+use Mkhodroo\AltfuelTicket\Models\TicketComment;
 use Mkhodroo\AltfuelTicket\Requests\TicketRequest;
 use Mkhodroo\SmsTemplate\Controllers\SendSmsController;
 
@@ -51,6 +53,10 @@ class CreateTicketController extends Controller
         $ticket->save();
         $file_path = ($r->file('payload')) ? CommentVoiceController::upload($r->file('payload'), $ticket->ticket_id) : '';
 
+        $question = self::getLastComment($ticket->id)->getData()->last_comment;
+        $answer = $r->text;
+        $saveImprovedResponse = self::saveImprovedResponse($question, $answer);
+
         $comment = AddTicketCommentController::add($ticket->id, $r->text, $file_path);
         if ($r->file('files')) {
             foreach ($r->file('files') as $name) {
@@ -87,5 +93,21 @@ class CreateTicketController extends Controller
     function score($id)
     {
         return GetTicketController::findByTicketId($id)?->score;
+    }
+
+    public static function getLastComment($ticket_id)
+    {
+        $lastComment = TicketComment::where('ticket_id', $ticket_id)->orderBy('id', 'desc')->first();
+        return response()->json(['last_comment' => $lastComment ? $lastComment->text : '']);
+    }
+
+    public static function saveImprovedResponse($question, $answer)
+    {
+        $improvedResponse = new ImprovedAnswer();
+        $improvedResponse->question = $question;
+        $improvedResponse->answer = $answer;
+        $improvedResponse->save();
+
+        return response()->json(['message' => 'پاسخ بهبود یافته با موفقیت ذخیره شد.']);
     }
 }
