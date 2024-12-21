@@ -56,7 +56,8 @@
             "FileService\\": "packages/behin-file-service/src/",
             "QrCodeScanner\\": "packages/behin-qrcode-scanner-input/src/",
             "ExcelReader\\": "packages/behin-excel-reader/src/",
-            "Behin\\Complaint\\": "packages/behin-complaint/src/"
+            "Behin\\Complaint\\": "packages/behin-complaint/src/",
+            "Behin\\Hamayesh\\": "packages/behin-hamayesh/src/"
         }
     },
     "autoload-dev": {

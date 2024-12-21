@@ -249,6 +249,7 @@ return [
         \QrCodeScanner\QrCodeScannerProvider::class,
         \ExcelReader\ExcelReaderServiceProvider::class,
         Behin\Complaint\ComplaintProvider::class,
+        Behin\Hamayesh\BehinHamayeshServiceProvider::class,
 
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
