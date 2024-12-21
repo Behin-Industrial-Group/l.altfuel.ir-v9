@@ -2,6 +2,7 @@
 
 namespace Mkhodroo\AltfuelTicket;
 
+use Mkhodroo\AltfuelTicket\Controllers\LangflowController;
 use Mkhodroo\AltfuelTicket\Controllers\CreateTicketController;
 use Illuminate\Support\Facades\Route;
 use Mkhodroo\AltfuelTicket\Controllers\AddTicketCommentAttachmentController;
@@ -49,6 +50,8 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
     });
 
     Route::post('assign', [TicketAssignController::class, 'assign'])->name('assign');
+
+    Route::post('langflow', [LangflowController::class, 'ticketLastCommentReply'])->name('langflow');
     Route::get('download-zip', [CommentAttachmentController::class, 'downloadZip'])->name('download.zip');
 
     Route::get('ticket-download-zip', [AddTicketCommentAttachmentController::class, 'downloadZip'])->name('ticket.download.zip');

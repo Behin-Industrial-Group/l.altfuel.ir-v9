@@ -1,15 +1,7 @@
 <form action="javascript:void(0)" id="{{ $form_id ?? 'comment-form' }}" enctype="multipart/form-data">
     @csrf
-    @isset($ticket_id)
-        <input type="hidden" name="ticket_id" id="" value="{{ $ticket_id }}">
-    @endisset
+
     <div class="card">
-        @if(auth()->user()->access('ai-ticket-assistant'))
-        <button class="btn btn-primary rounded-pill px-4 py-2 mx-2 mb-3" onclick="callLangflow()" style="background: linear-gradient(45deg, #4e54c8, #8f94fb); border:none; transition: all 0.3s">            
-            <i class="fa fa-robot fa-lg me-2"></i>
-            <span style="font-size: 16px; font-weight: 500">پاسخ هوش مصنوعی</span>
-        </button>
-        @endif
         <div class="row">
             @if (auth()->id() == 10)
             <div class="col-12">
@@ -155,17 +147,5 @@
         iFeild.classList.add("file-input");
         wrapper.appendChild(iFeild);
         divEle.appendChild(wrapper);
-    }
-</script>
-
-<script type="text/javascript">
-    async function callLangflow() {
-        send_ajax_request(
-            "{{ route('ATRoutes.langflow', ['ticket_id' => $ticket->id]) }}",
-            {},
-            function(res) {
-                document.querySelector('textarea[name="text"]').value = res.message;
-            }
-        )
     }
 </script>
