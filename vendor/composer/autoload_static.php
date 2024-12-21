@@ -100,6 +100,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'R' => 
         array (
+            'Registration\\' => 13,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -388,6 +389,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Spatie\\Backtrace\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
+        ),
+        'Registration\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-registration/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -5241,6 +5246,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'Registration\\Controllers\\RegisterUserController' => __DIR__ . '/../..' . '/packages/behin-registration/src/Controllers/RegisterUserController.php',
+        'Registration\\Models\\RegisterUser' => __DIR__ . '/../..' . '/packages/behin-registration/src/Models/RegisterUser.php',
+        'Registration\\RegistrationServiceProvider' => __DIR__ . '/../..' . '/packages/behin-registration/src/RegistrationServiceProvider.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
