@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Mkhodroo\AgencyInfo\Controllers\AgencyController;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
+use Mkhodroo\Cities\Controllers\CityController;
+use Mkhodroo\Cities\Controllers\ProvinceController;
 
 class ExcelController extends Controller
 {
@@ -27,66 +29,59 @@ class ExcelController extends Controller
         if ($xlsx = ExcelReader::parse($file->getPathname())) {
 
             $header = $xlsx->rows()[0];
-
+            $header = ExcelController::headerRenameAndFilter($header);
+            // $query = DB::table('agency_info as a1')
+            // ->join('agency_info as a2', function ($join) {
+            //     $join->on('a1.parent_id', '=', 'a2.parent_id')
+            //         ->where('a1.key', 'agency_code');
+            // });
             $i = 0;
+            $numberOfUpdatedRows = 0;
+            $numberOfAddedRows = 0;
+            $errorRows = [];
+            $insertData = [];
             foreach ($xlsx->rows() as $index => $row) {
-                if ($index === 0) {
+                if ($index == 0) {
                     continue;
                 }
 
                 $data = array_combine($header, $row);
-                $data = ExcelController::headerRenameAndFilter($data);
+                // $data = ExcelController::headerRenameAndFilter($data);
 
-                if (empty($data['customer_type'])) {
-                    return response("فیلد نوع مشتری (customer_type) نباید خالی باشد", 400);
-                }
+                $searchQuery = AgencyInfo::where('key', 'agency_code')->where('value', $data['agency_code'])->first();
 
-                $parentId = DB::table('agency_info as a1')
-                    ->join('agency_info as a2', function ($join) {
-                        $join->on('a1.parent_id', '=', 'a2.parent_id')
-                            ->where('a1.key', 'national_id')
-                            ->where('a2.key', 'postal_code');
-                    })
-                    ->where('a1.value', $data['national_id'])
-                    ->where('a2.value', $data['postal_code'])
-                    ->select('a1.parent_id')
-                    ->first()?->parent_id;
-
+                // $searchQuery = (clone $query)
+                //     ->where('a1.value', $data['agency_code'])
+                //     ->select('a1.parent_id')
+                //     ->first();
+                $parentId = $searchQuery?->parent_id;
                 if ($parentId) {
                     foreach ($data as $key => $value) {
-                        AgencyController::create($parentId, $key, $value);
+                        // AgencyController::create($parentId, $key, trim($value));
+                        $insertData[] = [
+                            'key' => $key,
+                            'value' => trim($value),
+                            'parent_id' => $parentId
+                        ];
                     }
+                    $numberOfUpdatedRows++;
                 } else {
-                    $parentRecord = AgencyInfo::create(
-                        [
-                            'key' => 'customer_type',
-                            'value' => $data['customer_type'],
-                            'parent_id' => null
-                        ]
-                    );
-
-                    $parentId = $parentRecord->id;
-
-                    $parentRecord->parent_id = $parentId;
-                    $parentRecord->save();
-
-                    foreach ($data as $key => $value) {
-                        if ($key !== 'customer_type') {
-                            AgencyInfo::create([
-                                'key' => $key,
-                                'value' => $value,
-                                'parent_id' => $parentId
-                            ]);
-                        }
-                    }
+                    $errorRows[] = [ 'row' => $index+1, 'file_number' => $data['agency_code'] ];
                 }
                 $i++;
             }
-
-            return response("تعداد $i ردیف ذخیره شد", 200);
+            foreach($insertData as $row){
+                AgencyController::create($row['parent_id'], $row['key'], trim($row['value']));
+            }
+            // AgencyInfo::upsert($insertData, ['key', 'parent_id'], ['value']);
+            return response()->json([
+                'msg' => "تعداد $i ردیف ذخیره شد",
+                "numberOfAddedRows" => $numberOfAddedRows,
+                "numberOfUpdatedRows" => $numberOfUpdatedRows,
+                "errorRows" => $errorRows
+            ]);
         } else {
-            $msg = ExcelReader::parseError();
-            return response($msg, 400);
+            echo ExcelReader::parseError();
         }
     }
 
@@ -94,13 +89,20 @@ class ExcelController extends Controller
     {
 
         $keysToRename = [
-            'کد ملی' => 'national_id',
-            'کد پستی' => 'postal_code',
-            'شماره موبایل' => 'mobile',
-            'نوع مشتری' => 'customer_type'
+            'کد مرکز' => 'agency_code',
+            'مبلغ بدهی' => 'debt2',
+            'توضیحات' => 'debt2_description',
         ];
 
         $result = [];
+        foreach ($array as $ar) {
+            if (isset($keysToRename[$ar])) {
+                $result[] = $keysToRename[$ar];
+            } else {
+                $result[] = $ar;
+            }
+        }
+        return $result;
 
         foreach ($keysToRename as $oldKey => $newKey) {
             if (array_key_exists($oldKey, $array)) {
