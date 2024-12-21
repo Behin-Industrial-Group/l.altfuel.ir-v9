@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
+@php
+    use Behin\Hamayesh\Http\EventEnum as EventEnum;
+@endphp
+
 @section('content')
 <div class="container">
     <div class="card">
-        <div class="card-header">Verify Participant - Event {{ $eventId }}</div>
+        <div class="card-header">پذیرش رویداد {{ EventEnum::Title[$eventId] }} شماره {{ $eventId }}</div>
         <div class="card-body">
             @if(session('success'))
                 <div class="alert alert-success">
