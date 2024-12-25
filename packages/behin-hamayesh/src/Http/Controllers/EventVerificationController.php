@@ -43,16 +43,16 @@ class EventVerificationController extends Controller
                     // return response("کاربر با شناسه {$data['user_id']} قبلا در سیستم ثبت شده است", 400);
                 }else{
                     $eventParticipant = $table->insert([
-                        'ticket_id' => $data['ticket_id'],
-                        'user_id' => $data['user_id'],
-                        'first_name' => $data['first_name'],
-                        'last_name' => $data['last_name'],
-                        'username' => $data['username'],
-                        'national_code' => $data['national_code'],
-                        'ticket' => $data['ticket'],
-                        'role' => $data['role'],
-                        'type' => $data['type'],
-                        'status' => $data['status'],
+                        'ticket_id' => trim($data['ticket_id']),
+                        'user_id' => trim($data['user_id']),
+                        'first_name' => trim($data['first_name']),
+                        'last_name' => trim($data['last_name']),
+                        'username' => trim($data['username']),
+                        'national_code' => trim($data['national_code']),
+                        'ticket' => trim($data['ticket']),
+                        'role' => trim($data['role']),
+                        'type' => trim($data['type']),
+                        'status' => trim($data['status']),
                     ]);
                 }
 
