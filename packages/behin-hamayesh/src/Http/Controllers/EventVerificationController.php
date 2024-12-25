@@ -162,4 +162,33 @@ class EventVerificationController extends Controller
             'message' => 'پذیرش شرکت کننده با موفقیت انجام شد',
         ], 200);
     }
+
+    public function register(Request $request, $eventId)
+    {
+        $request->validate([
+            'national_code' => 'string',
+        ]);
+        $table = DB::table("event_{$eventId}_participants");
+
+        if ($table->where('national_code', $request->national_code)->exists()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'شرکت کننده قبلا ثبت شده است',
+            ], 400);
+        }
+
+        $table->insert([
+            'first_name' => (string)trim($request->first_name),
+            'last_name' => (string)trim($request->last_name),
+            'national_code' => (string)trim($request->national_code),
+            'mobile' => (string)trim($request->mobile),
+            'is_verified' => true,
+            'verified_by' => auth()->id() . ' ' . auth()->user()->name,
+            'verified_at' => now(),
+        ]);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'شرکت کننده با موفقیت ثبت شد',
+        ], 200);
+    }
 }

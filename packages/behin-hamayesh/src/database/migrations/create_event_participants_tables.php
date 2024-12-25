@@ -26,6 +26,7 @@ return new class extends Migration
                 $table->string('verified_by')->nullable();
                 $table->timestamp('verified_at')->nullable();
                 $table->timestamps();
+                $table->string('mobile')->nullable();
             });
         }
     }

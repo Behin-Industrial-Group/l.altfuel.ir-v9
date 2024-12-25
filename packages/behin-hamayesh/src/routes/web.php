@@ -8,4 +8,5 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'event-verification']
     Route::post('/import/{eventId}', [EventVerificationController::class, 'import'])->name('event-verification.import');
     Route::get('/verify/{eventId}', [EventVerificationController::class, 'verificationForm'])->name('event-verification.verify-form');
     Route::post('/verify/{eventId}', [EventVerificationController::class, 'verify'])->name('event-verification.verify');
+    Route::post('/register/{eventId}', [EventVerificationController::class, 'register'])->name('event-verification.register');
 });
