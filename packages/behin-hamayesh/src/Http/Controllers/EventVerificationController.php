@@ -162,7 +162,7 @@ class EventVerificationController extends Controller
         ]);
         $text = "سلام خوش آمدید
         ";
-        $text = "پذیرش شما با موفقیت انجام شد
+        $text .= "پذیرش شما با موفقیت انجام شد
         ";
         $sms = new SendSmsController();
         $sms->send('0'. $participant->first()->mobile, $text);
