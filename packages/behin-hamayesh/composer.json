@@ -1,0 +1,23 @@
+{
+    "name": "Behin/hamayesh",
+    "description": "Laravel package for event verification and Excel import",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Behin\\Hamayesh\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^9.0",
+        "maatwebsite/excel": "^3.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Behin\\Hamayesh\\BehinHamayeshServiceProvider"
+            ]
+        }
+    }
+}

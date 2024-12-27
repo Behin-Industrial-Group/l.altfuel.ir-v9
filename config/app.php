@@ -1,5 +1,6 @@
 <?php
 
+use Registration\RegistrationServiceProvider;
 
 return [
     'version' => '9.1.22',
@@ -249,6 +250,8 @@ return [
         \QrCodeScanner\QrCodeScannerProvider::class,
         \ExcelReader\ExcelReaderServiceProvider::class,
         Behin\Complaint\ComplaintProvider::class,
+        Behin\Hamayesh\BehinHamayeshServiceProvider::class,
+        RegistrationServiceProvider::class,
 
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,

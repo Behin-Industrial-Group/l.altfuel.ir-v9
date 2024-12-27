@@ -100,6 +100,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'R' => 
         array (
+            'Registration\\' => 13,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -210,6 +211,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             'Brick\\Math\\' => 11,
             'BinshopsBlog\\' => 13,
+            'Behin\\Hamayesh\\' => 15,
             'Behin\\Complaint\\' => 16,
             'BehinTest\\' => 10,
             'BehinProcessMaker\\' => 18,
@@ -387,6 +389,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Spatie\\Backtrace\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
+        ),
+        'Registration\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-registration/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -677,6 +683,10 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/..' . '/binshops/laravel-blog/src',
         ),
+        'Behin\\Hamayesh\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/behin-hamayesh/src',
+        ),
         'Behin\\Complaint\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/behin-complaint/src',
@@ -928,6 +938,11 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'BehinTest\\Models\\BehinTest' => __DIR__ . '/../..' . '/packages/behin-test/src/Models/BehinTest.php',
         'Behin\\Complaint\\ComplaintProvider' => __DIR__ . '/../..' . '/packages/behin-complaint/src/ComplaintProvider.php',
         'Behin\\Complaint\\Mail\\ComplaintSubmitted' => __DIR__ . '/../..' . '/packages/behin-complaint/src/Mail/ComplaintSubmitted.php',
+        'Behin\\Compliant\\Controllers\\ComplaintController' => __DIR__ . '/../..' . '/packages/behin-complaint/src/Controllers/ComplaintController.php',
+        'Behin\\Compliant\\Models\\Complaint' => __DIR__ . '/../..' . '/packages/behin-complaint/src/Models/Complaint.php',
+        'Behin\\Hamayesh\\BehinHamayeshServiceProvider' => __DIR__ . '/../..' . '/packages/behin-hamayesh/src/BehinHamayeshServiceProvider.php',
+        'Behin\\Hamayesh\\Http\\Controllers\\EventVerificationController' => __DIR__ . '/../..' . '/packages/behin-hamayesh/src/Http/Controllers/EventVerificationController.php',
+        'Behin\\Hamayesh\\Models\\EventParticipant' => __DIR__ . '/../..' . '/packages/behin-hamayesh/src/Models/EventParticipant.php',
         'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Collection' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Collection.php',
         'BinshopsBlog\\Baum\\Extensions\\Eloquent\\Model' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Eloquent/Model.php',
         'BinshopsBlog\\Baum\\Extensions\\Query\\Builder' => __DIR__ . '/..' . '/binshops/laravel-blog/src/Baum/Extensions/Query/Builder.php',
@@ -6086,6 +6101,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'Registration\\Controllers\\RegisterUserController' => __DIR__ . '/../..' . '/packages/behin-registration/src/Controllers/RegisterUserController.php',
+        'Registration\\Models\\RegisterUser' => __DIR__ . '/../..' . '/packages/behin-registration/src/Models/RegisterUser.php',
+        'Registration\\RegistrationServiceProvider' => __DIR__ . '/../..' . '/packages/behin-registration/src/RegistrationServiceProvider.php',
         'ReturnTypeWillChange' => __DIR__ . '/..' . '/symfony/polyfill-php81/Resources/stubs/ReturnTypeWillChange.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
