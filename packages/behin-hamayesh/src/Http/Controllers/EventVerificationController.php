@@ -9,6 +9,7 @@ use Behin\Hamayesh\Imports\ParticipantsImport;
 use Behin\Hamayesh\Models\EventParticipant;
 use ExcelReader\Controllers\ExcelReader;
 use Illuminate\Support\Facades\DB;
+use Mkhodroo\SmsTemplate\Controllers\SendSmsController;
 
 class EventVerificationController extends Controller
 {
@@ -65,7 +66,7 @@ class EventVerificationController extends Controller
             $msg = ExcelReader::parseError();
             return response($msg, 400);
         }
-    
+
 
         return redirect()->back()->with('success', 'Data imported successfully.');
     }
@@ -159,6 +160,12 @@ class EventVerificationController extends Controller
             'verified_by' => auth()->id() . ' ' . auth()->user()->name,
             'verified_at' => now(),
         ]);
+        $text = "سلام خوش آمدید
+        ";
+        $text = "پذیرش شما با موفقیت انجام شد
+        ";
+        $sms = new SendSmsController();
+        $sms->send('0'. $participant->first()->mobile, $text);
         return response()->json([
             'status' => 'success',
             'message' => 'پذیرش شرکت کننده با موفقیت انجام شد',
