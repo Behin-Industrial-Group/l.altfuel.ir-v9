@@ -4,6 +4,7 @@ namespace TelegramBot\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use Mkhodroo\AltfuelTicket\Controllers\LangflowController;
 
 class BotController extends Controller
 {
@@ -14,16 +15,18 @@ class BotController extends Controller
         $update = json_decode($content, true);
         $chat_id = $update['message']['chat']['id'];
         $text = $update['message']['text'];
-        switch ($text) {
-            case "/start":
-                $sentMsg = 'Hi';
-                break;
-            case "/command1":
-                $sentMsg = 'Helllo';
-                break;
-            default:
-                $sentMsg = 'دستور درست را انتخاب کنید';
-        }
+        // switch ($text) {
+        //     case "/start":
+        //         $sentMsg = 'Hi';
+        //         break;
+        //     case "/command1":
+        //         $sentMsg = 'Helllo';
+        //         break;
+        //     default:
+        //         $sentMsg = 'دستور درست را انتخاب کنید';
+        // }
+
+        $sentMsg = LangflowController::run($text);
 
         $telegram = new TelegramController(config('telegram_bot_config.TOKEN'));
         $telegram->sendMessage(

@@ -51,9 +51,10 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
 
     Route::post('assign', [TicketAssignController::class, 'assign'])->name('assign');
 
+    Route::post('get-last-comment', [LangflowController::class, 'getLastComment'])->name('getLastComment');
     Route::post('langflow', [LangflowController::class, 'ticketLastCommentReply'])->name('langflow');
+    Route::post('save-improved-answer', [LangflowController::class, 'saveImprovedResponse'])->name('saveImprovedResponse');
     Route::get('download-zip', [CommentAttachmentController::class, 'downloadZip'])->name('download.zip');
-
     Route::get('ticket-download-zip', [AddTicketCommentAttachmentController::class, 'downloadZip'])->name('ticket.download.zip');
 });
 
