@@ -53,6 +53,7 @@ class EventVerificationController extends Controller
                         'role' => (string)trim($data['role']),
                         'type' => (string)trim($data['type']),
                         'status' => (string)trim($data['status']),
+                        'mobile' => (string)trim($data['mobile'])
                     ]);
                 }
 
@@ -83,6 +84,7 @@ class EventVerificationController extends Controller
             'نوع' => 'type',
             'وضعیت' => 'status',
             'کد ملی' => 'national_code',
+            'موبایل' => 'mobile'
         ];
 
         $result = [];
@@ -166,6 +168,9 @@ class EventVerificationController extends Controller
     public function register(Request $request, $eventId)
     {
         $request->validate([
+            'first_name' => 'string',
+            'last_name' => 'string',
+            'mobile' => 'string',
             'national_code' => 'string',
         ]);
         $table = DB::table("event_{$eventId}_participants");
