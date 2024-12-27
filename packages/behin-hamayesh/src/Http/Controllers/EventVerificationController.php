@@ -203,4 +203,27 @@ class EventVerificationController extends Controller
             'message' => 'شرکت کننده با موفقیت ثبت شد',
         ], 200);
     }
+
+    public function smsForm($eventId)
+    {
+        return view('event-verification::sms', compact('eventId'));
+    }
+
+    public function sms(Request $request, $eventId)
+    {
+        $table = DB::table("event_{$eventId}_participants")->where('is_verified', 1)->get();
+
+        $request->validate([
+            'message' => 'string',
+        ]);
+        $message = $request->message;
+        $sms = new SendSmsController();
+        foreach ($table as $participant) {
+            $sms->send('0'. $participant->mobile, $message);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'پیام با موفقیت ارسال شد',
+        ], 200);
+    }
 }
