@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Mkhodroo\UserRoles\Controllers;
 
@@ -58,4 +58,5 @@ class GetRoleController extends Controller
     public static function getByName($name){
         return Role::where('name', $name)->first();
     }
+
 }
