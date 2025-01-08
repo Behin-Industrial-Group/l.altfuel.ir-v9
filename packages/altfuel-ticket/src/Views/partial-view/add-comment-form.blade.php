@@ -40,6 +40,12 @@
         </div>
 
     </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="frequently_asked" id="frequently_asked">
+        <label class="form-check-label" for="frequently_asked">
+            سوال متداول
+        </label>
+    </div>
 
 </form>
 {{-- <audio id="audio-playback" controls></audio> --}}
