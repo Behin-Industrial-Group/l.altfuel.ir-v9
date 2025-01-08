@@ -183,6 +183,7 @@ class EventVerificationController extends Controller
         $table = DB::table("event_{$eventId}_participants");
 
         if ($table->where('national_code', $request->national_code)->exists()) {
+            return $this->verify($request, $eventId);
             return response()->json([
                 'status' => 'error',
                 'message' => 'شرکت کننده قبلا ثبت شده است',
