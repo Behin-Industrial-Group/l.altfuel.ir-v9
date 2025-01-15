@@ -1,0 +1,16 @@
+{
+    "name": "behin/iso-agent",
+    "description": "",
+    "authors": [
+        {
+            "name": "Amirali-Hosseini",
+            "email": "amiralihosseini216@yahoo.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AiAssistant\\": "src/"
+        }
+    },
+    "require": {}
+}

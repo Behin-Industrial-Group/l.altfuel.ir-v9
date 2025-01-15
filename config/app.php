@@ -1,5 +1,6 @@
 <?php
 
+use IsoAgent\IsoAgentProvider;
 use Registration\RegistrationServiceProvider;
 
 return [
@@ -252,6 +253,7 @@ return [
         Behin\Complaint\ComplaintProvider::class,
         Behin\Hamayesh\BehinHamayeshServiceProvider::class,
         RegistrationServiceProvider::class,
+        IsoAgentProvider::class,
 
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,

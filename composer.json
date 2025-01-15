@@ -58,7 +58,8 @@
             "ExcelReader\\": "packages/behin-excel-reader/src/",
             "Behin\\Hamayesh\\": "packages/behin-hamayesh/src/",
             "Registration\\": "packages/behin-registration/src/",
-            "Behin\\Complaint\\": "packages/behin-complaint/src/"
+            "Behin\\Complaint\\": "packages/behin-complaint/src/",
+            "IsoAgent\\": "packages/behin-iso-agent/src/"
         }
     },
     "autoload-dev": {
