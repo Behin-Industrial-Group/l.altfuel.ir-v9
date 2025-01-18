@@ -2905,6 +2905,7 @@ return array(
     'IrngvPoll\\Controllers\\GetIrngvUserController' => $baseDir . '/packages/behin-irngv-poll/src/Controllers/GetIrngvUserController.php',
     'IrngvPoll\\IrngvPollProvider' => $baseDir . '/packages/behin-irngv-poll/src/IrngvPollProvider.php',
     'IsoAgent\\Controllers\\IsoAgentController' => $baseDir . '/packages/behin-iso-agent/src/Controllers/IsoAgentController.php',
+    'IsoAgent\\Controllers\\LangflowIsoController' => $baseDir . '/packages/behin-iso-agent/src/Controllers/LangflowIsoController.php',
     'IsoAgent\\IsoAgentProvider' => $baseDir . '/packages/behin-iso-agent/src/IsoAgentProvider.php',
     'Laravel\\Breeze\\BreezeServiceProvider' => $vendorDir . '/laravel/breeze/src/BreezeServiceProvider.php',
     'Laravel\\Breeze\\Console\\InstallCommand' => $vendorDir . '/laravel/breeze/src/Console/InstallCommand.php',

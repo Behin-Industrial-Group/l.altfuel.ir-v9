@@ -3633,6 +3633,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'IrngvPoll\\Controllers\\GetIrngvUserController' => __DIR__ . '/../..' . '/packages/behin-irngv-poll/src/Controllers/GetIrngvUserController.php',
         'IrngvPoll\\IrngvPollProvider' => __DIR__ . '/../..' . '/packages/behin-irngv-poll/src/IrngvPollProvider.php',
         'IsoAgent\\Controllers\\IsoAgentController' => __DIR__ . '/../..' . '/packages/behin-iso-agent/src/Controllers/IsoAgentController.php',
+        'IsoAgent\\Controllers\\LangflowIsoController' => __DIR__ . '/../..' . '/packages/behin-iso-agent/src/Controllers/LangflowIsoController.php',
         'IsoAgent\\IsoAgentProvider' => __DIR__ . '/../..' . '/packages/behin-iso-agent/src/IsoAgentProvider.php',
         'Laravel\\Breeze\\BreezeServiceProvider' => __DIR__ . '/..' . '/laravel/breeze/src/BreezeServiceProvider.php',
         'Laravel\\Breeze\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/breeze/src/Console/InstallCommand.php',

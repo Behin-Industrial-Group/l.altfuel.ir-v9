@@ -25,5 +25,6 @@ class IsoAgentProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/Views', 'IsoAgentViews');
+        $this->loadMigrationsFrom(__DIR__ . '/Migrations');
     }
 }
