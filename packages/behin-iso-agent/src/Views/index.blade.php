@@ -6,10 +6,10 @@
         <div id="chat-container" class="card shadow">
             <div id="messages" class="card-body overflow-auto" style="height: 300px;">
                 <!-- پیام‌ها در اینجا نمایش داده می‌شوند -->
-                {{-- @foreach ($messages as $message)
+                @foreach ($messages as $message)
                     <div class="alert alert-primary">{{ $message->message }}</div>
                     <div class="alert alert-warning">{{ $message->response }}</div>
-                @endforeach --}}
+                @endforeach
             </div>
             <div class="card-footer">
                 <form id="chat-form" class="d-flex">

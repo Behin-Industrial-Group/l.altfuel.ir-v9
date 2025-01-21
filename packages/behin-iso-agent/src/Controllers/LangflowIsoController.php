@@ -4,7 +4,6 @@ namespace IsoAgent\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Langflow\Models\LangflowMessage;
 
 class LangflowIsoController extends Controller
 {

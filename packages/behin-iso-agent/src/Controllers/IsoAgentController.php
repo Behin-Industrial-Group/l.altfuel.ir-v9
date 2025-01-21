@@ -3,7 +3,7 @@
 namespace IsoAgent\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\LangflowMessage;
+use IsoAgent\Models\LangflowMessage;
 use Illuminate\Http\Request;
 
 class IsoAgentController extends Controller
@@ -11,8 +11,7 @@ class IsoAgentController extends Controller
     public function index()
     {
         $userId = auth()->user()->id;
-        // $messages = LangflowMessage::all();
-        $messages = 1;
+        $messages = LangflowMessage::all();
         return view('IsoAgentViews::index', compact('messages'));
     }
 
