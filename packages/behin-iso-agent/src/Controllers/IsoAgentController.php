@@ -11,29 +11,31 @@ class IsoAgentController extends Controller
     public function index()
     {
         $userId = auth()->user()->id;
-        $messages = LangflowMessage::all();
+        $messages = LangflowMessage::where('user_id', $userId)->get();
         return view('IsoAgentViews::index', compact('messages'));
     }
 
     public function sendMessage(Request $request)
     {
-        // صدا زدن تابع run از LangflowIsoController
         $langflowController = new LangflowIsoController();
-        $response = $langflowController->run($request->question);
+        $response = $langflowController->run($request->message);
+        dd($response);
 
         // ذخیره سوال و پاسخ در پایگاه داده
-        $this->saveMessageToDatabase($request->question, $response, $request->user()->id);
+        $this->saveMessageToDatabase($request->message, $response, $request->user_id);
 
-        return $response;
+        return response([
+            'response' => $response
+        ], 200);
     }
 
-    private function saveMessageToDatabase($question, $response, $userId)
+    private function saveMessageToDatabase($message, $response, $userId)
     {
         // کد برای ذخیره‌سازی در پایگاه داده
         LangflowMessage::create([
-            'user_id' => $userId,
-            'question' => $question,
+            'message' => $message,
             'response' => $response,
+            'user_id' => $userId,
         ]);
     }
 

@@ -28,7 +28,7 @@ class LangflowIsoController extends Controller
 
         // مقداردهی تنظیمات cURL
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.langflow.astra.datastax.com/lf/' . env('LANGFLOW_PROJECT_ID') . '/api/v1/run/' . env('LANGFLOW_FLOW_ID') . '?stream=false',
+            CURLOPT_URL => 'https://api.langflow.astra.datastax.com/lf/' . env('ISO_LANGFLOW_PROJECT_ID') . '/api/v1/run/' . env('ISO_LANGFLOW_FLOW_ID') . '?stream=false',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -39,7 +39,7 @@ class LangflowIsoController extends Controller
             CURLOPT_POSTFIELDS => json_encode($data), // داده‌های JSON به‌درستی اینجا رمزگذاری می‌شوند
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json',
-                'Authorization: Bearer ' . env('APPLICATION_TOKEN')
+                'Authorization: Bearer ' . env('ISO_APPLICATION_TOKEN')
             ),
         ));
 
