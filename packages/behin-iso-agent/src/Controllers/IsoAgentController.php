@@ -19,7 +19,6 @@ class IsoAgentController extends Controller
     {
         $langflowController = new LangflowIsoController();
         $response = $langflowController->run($request->message);
-        dd($response);
 
         // ذخیره سوال و پاسخ در پایگاه داده
         $this->saveMessageToDatabase($request->message, $response, $request->user_id);
@@ -37,6 +36,13 @@ class IsoAgentController extends Controller
             'response' => $response,
             'user_id' => $userId,
         ]);
+    }
+
+    public function getMessages(Request $request)
+    {
+        $userId = $request->user()->id;
+        $messages = LangflowMessage::where('user_id', $userId)->get();
+        return view('IsoAgentViews::messages', compact('messages'));
     }
 
 
