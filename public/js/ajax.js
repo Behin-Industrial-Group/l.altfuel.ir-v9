@@ -170,7 +170,7 @@ function hide_loading(){
 }
 
 function open_admin_modal(url, title = ''){
-    var modal = $('<div class="modal fade" id="admin-modal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+    var modal = $('<div class="modal fade" id="admin-modal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-focus="false">' +
                     '<div class="modal-dialog modal-lg">' +
                     '<div class="modal-content">' +
                     '<div class="modal-body" id="modal-body">' +
@@ -200,7 +200,7 @@ function open_admin_modal(url, title = ''){
 }
 
 function open_admin_modal_with_data(data, title = '', customFun = null){
-    var modal = $('<div class="modal fade" id="admin-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+    var modal = $('<div class="modal fade" id="admin-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-focus="false">' +
                     '<div class="modal-dialog modal-lg">' +
                     '<div class="modal-content">' +
                     '<div class="modal-body" id="modal-body">' +
