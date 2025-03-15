@@ -4,17 +4,18 @@
         <input type="hidden" name="ticket_id" id="" value="{{ $ticket_id }}">
     @endisset
     <div class="card">
-        @if(auth()->user()->access('ai-ticket-assistant'))
-        <button class="btn btn-primary rounded-pill px-4 py-2 mx-2 mb-3" onclick="callLangflow()" style="background: linear-gradient(45deg, #4e54c8, #8f94fb); border:none; transition: all 0.3s">            
-            <i class="fa fa-robot fa-lg me-2"></i>
-            <span style="font-size: 16px; font-weight: 500">پاسخ هوش مصنوعی</span>
-        </button>
+        @if (auth()->user()->access('ai-ticket-assistant'))
+            <button class="btn btn-primary rounded-pill px-4 py-2 mx-2 mb-3" onclick="callLangflow()"
+                style="background: linear-gradient(45deg, #4e54c8, #8f94fb); border:none; transition: all 0.3s">
+                <i class="fa fa-robot fa-lg me-2"></i>
+                <span style="font-size: 16px; font-weight: 500">پاسخ هوش مصنوعی</span>
+            </button>
         @endif
         <div class="row">
             @if (auth()->id() == 10)
-            <div class="col-12">
-                @include('QrCodeView::qr-code-input')
-            </div>
+                <div class="col-12">
+                    @include('QrCodeView::qr-code-input')
+                </div>
             @endif
             <div class="col-sm-12 p-2">
                 <div class="input-group mb-3 col-sm-8 float-right">
@@ -42,12 +43,15 @@
         </div>
 
     </div>
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="frequently_asked" id="frequently_asked">
-        <label class="form-check-label" for="frequently_asked">
-            سوال متداول
-        </label>
-    </div>
+    @if (auth()->user()->access('ذخیره سوالات متداول'))
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="frequently_asked" id="frequently_asked">
+            <label class="form-check-label" for="frequently_asked">
+                سوال متداول
+            </label>
+        </div>
+    @endif
+
 
 </form>
 {{-- <audio id="audio-playback" controls></audio> --}}
@@ -167,8 +171,7 @@
 <script type="text/javascript">
     async function callLangflow() {
         send_ajax_request(
-            "{{ route('ATRoutes.langflow', ['ticket_id' => $ticket->id]) }}",
-            {},
+            "{{ route('ATRoutes.langflow', ['ticket_id' => $ticket->id]) }}", {},
             function(res) {
                 document.querySelector('textarea[name="text"]').value = res.message;
             }
