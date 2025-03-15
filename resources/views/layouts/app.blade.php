@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{ Url('public/plugins/persian-datepicker/persian-datepicker.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css')  . '?' . config('app.version') }}" />
     <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.min.css')  . '?' . config('app.version') }}" />
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    {{-- <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ url('public/dashboard/plugins/select2/select2.min.css') }}">
     @yield('style')
 
