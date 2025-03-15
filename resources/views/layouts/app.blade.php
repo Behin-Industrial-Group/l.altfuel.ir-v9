@@ -106,24 +106,24 @@
         <!-- AdminLTE App -->
         <script src="{{ url('public/dashboard/dist/js/adminlte.js')  . '?' . config('app.version') }}"></script>
 
-        <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        {{-- <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script> --}}
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> --}}
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> --}}
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> --}}
         <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+        {{-- <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script> --}}
         <script src="{{ Url('public/plugins/persian-datepicker/persian-date.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ Url('public/plugins/persian-datepicker/persian-datepicker.js')  . '?' . config('app.version') }}"></script>
 
         <script src="{{ url('public/dashboard/plugins/select2/select2.full.min.js')}}"></script>
         <!-- include FilePond library -->
-        <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+        {{-- <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script> --}}
 
         <!-- include FilePond plugins -->
-        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+        {{-- <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script> --}}
 
         <!-- include FilePond jQuery adapter -->
-        <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+        {{-- <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script> --}}
 
 
 
