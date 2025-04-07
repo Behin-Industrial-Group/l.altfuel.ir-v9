@@ -5,6 +5,7 @@ namespace Mkhodroo\AltfuelTicket\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Mkhodroo\AltfuelTicket\Models\TicketComment;
 use stdClass;
 
@@ -54,6 +55,7 @@ class LangflowController extends Controller
         ));
 
         $response = curl_exec($curl);
+        Log::info($response);
         curl_close($curl);
 
         $decodedResponse = json_decode($response, true);
