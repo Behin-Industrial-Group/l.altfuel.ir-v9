@@ -43,10 +43,17 @@ class BotController extends Controller
         // $er = curl_error($curl);
         // Log::info($er);
         // curl_close($curl);
+        $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
+
+        $telegram->sendMessage(
+            array(
+                'chat_id' => $chat_id,
+                'text' => "لطفا چند لحظه منتظز بمانید"
+            )
+        );
 
         $sentMsg = LangflowController::run($text);
 
-        $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
         $telegram->sendMessage(
             array(
                 'chat_id' => $chat_id,

@@ -57,9 +57,11 @@ class LangflowController extends Controller
         curl_close($curl);
 
         $decodedResponse = json_decode($response, true);
-
-        $reply = $decodedResponse['outputs'][0]['outputs'][0]['results']['message']['text'];
-
+        if (isset($decodedResponse['outputs'][0]['outputs'][0]['results']['message']['text'])) {
+            $reply = $decodedResponse['outputs'][0]['outputs'][0]['results']['message']['text'];
+        } else {
+            $reply = 'خطا در دریافت پاسخ';
+        }
         return $reply;
     }
 }
