@@ -111,7 +111,7 @@ class BotController extends Controller
         $msgTelegramId = $responseData['result']['message_id'] ?? null;
 
         // ذخیره message_id
-        DB::table('messages')->where('id', $messageId)->update([
+        DB::table('bale_messages')->where('id', $messageId)->update([
             'telegram_message_id' => $msgTelegramId
         ]);
     }
