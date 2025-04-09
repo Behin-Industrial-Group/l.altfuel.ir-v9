@@ -19,7 +19,7 @@ class LangflowController extends Controller
         return response()->json(['message' => $reply]);
     }
 
-    public static function run($question)
+    public static function run($question, $sessionId = null)
     {
 
         $curl = curl_init();
@@ -28,7 +28,7 @@ class LangflowController extends Controller
             "input_value" => $question,
             "output_type" => "chat",
             "input_type" => "chat",
-            "session_id" => '12312312312',
+            "session_id" => $sessionId,
             "tweaks" => [
                 "Agent-lCMES" => new stdClass(),
                 "ChatInput-sr1BR" => new stdClass(),

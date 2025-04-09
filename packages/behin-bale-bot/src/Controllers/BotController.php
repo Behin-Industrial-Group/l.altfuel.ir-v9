@@ -73,7 +73,7 @@ class BotController extends Controller
         Log::info("Receive Message");
         $content = file_get_contents('php://input');
         $update = json_decode($content, true);
-        Log::info($update);
+        
 
         if (isset($update['callback_query'])) {
             return $this->handleCallback(); // فراخوانی مستقیم متد
@@ -81,8 +81,8 @@ class BotController extends Controller
 
         $chat_id = $update['message']['chat']['id'];
         $text = $update['message']['text'];
-
-        $botResponse = LangflowController::run($text);
+        Log::info($chat_id);
+        $botResponse = LangflowController::run($text, $chat_id);
 
         // ذخیره اولیه
         $messageId = DB::table('bale_messages')->insertGetId([
