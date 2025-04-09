@@ -19,13 +19,14 @@ class LangflowController extends Controller
         return response()->json(['message' => $reply]);
     }
 
-    public static function run($question)
+    public static function run($question, $sessionId = null)
     {
 
         $curl = curl_init();
 
         $data = [
             "input_value" => $question,
+            "session_id" => $sessionId,
             "output_type" => "chat",
             "input_type" => "chat",
             "tweaks" => [

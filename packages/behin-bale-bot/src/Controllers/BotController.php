@@ -82,7 +82,7 @@ class BotController extends Controller
         $chat_id = $update['message']['chat']['id'];
         $text = $update['message']['text'];
 
-        $botResponse = LangflowController::run($text);
+        $botResponse = LangflowController::run($text, $chat_id);
 
         // ذخیره اولیه
         $messageId = DB::table('bale_messages')->insertGetId([
