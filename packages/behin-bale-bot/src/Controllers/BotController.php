@@ -71,53 +71,41 @@ class BotController extends Controller
 
     public function chat()
     {
-
         Log::info("Receive Message");
         $content = file_get_contents('php://input');
         $update = json_decode($content, true);
 
         $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
 
+        $message = $update['message'] ?? null;
+        $chat_id = $message['chat']['id'] ?? null;
+        $text = $message['text'] ?? null;
+        $contact = $message['contact'] ?? null;
+
+        if (!$chat_id) {
+            return;
+        }
+
+        $user = BaleUser::firstOrCreate(['chat_id' => $chat_id]);
+        $step = $user->step;
+
         // هندل callback دکمه‌ها
         if (isset($update['callback_query'])) {
             return $this->handleCallback();
         }
 
-        // گرفتن پیام و اطلاعات کاربر
-        $message = $update['message'];
-        $chat_id = $message['chat']['id'];
-        $text = $message['text'] ?? null;
-        $contact = $message['contact'] ?? null;
-
-        Log::info("Chat ID: $chat_id");
-
-        $user = BaleUser::firstOrCreate(['chat_id' => $chat_id]);
-
-        // اگر کاربر شماره‌اش را با دکمه فرستاده
-        if ($contact && isset($contact['phone_number'])) {
-            $user->update([
-                'phone' => $contact['phone_number'],
-                'step' => null
-            ]);
-            $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => "✅ شماره تماس ذخیره شد. حالا می‌تونی سوالتو بپرسی!"
-            ]);
-            return;
-        }
-
-        // اگر /start زده
+        // هندل /start
         if ($text === '/start') {
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
-                'text' => "سلام! من صفا هستم 🤖\nدستیار هوش مصنوعی شما در پیام‌رسان بله!\nبیا با هم گفتگو کنیم 😉"
+                'text' => "سلام! من صفا هستم 🤖\nدستیار هوش مصنوعی شما در بله.\nلطفاً اطلاعات زیر را برای شروع وارد کنید."
             ]);
 
             if (!$user->name) {
                 $user->update(['step' => 'awaiting_name']);
                 $telegram->sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => "لطفاً نام خود را وارد کنید:"
+                    'text' => "👤 لطفاً نام خود را وارد کنید:"
                 ]);
                 return;
             }
@@ -126,7 +114,7 @@ class BotController extends Controller
                 $user->update(['step' => 'awaiting_phone']);
                 $telegram->sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => "برای ادامه، لطفاً شماره تماس خود را ارسال کن:",
+                    'text' => "📱 لطفاً شماره تماس خود را ارسال کنید:",
                     'reply_markup' => json_encode([
                         'keyboard' => [
                             [['text' => '📞 ارسال شماره من', 'request_contact' => true]]
@@ -140,14 +128,15 @@ class BotController extends Controller
 
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
-                'text' => "همه‌چی مرتبه ✅\nسوالت رو بپرس..."
+                'text' => "✅ همه‌چیز آمادست! حالا سوالت رو بپرس."
             ]);
             return;
         }
 
-        // اگر در مرحله گرفتن نام است
-        if ($user->step === 'awaiting_name') {
+        // مرحله دریافت نام
+        if ($step === 'awaiting_name') {
             $user->update(['name' => $text, 'step' => 'awaiting_phone']);
+
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
                 'text' => "مرسی {$text} 🙏\nحالا لطفاً شماره تماس خود را ارسال کن:",
@@ -162,27 +151,58 @@ class BotController extends Controller
             return;
         }
 
-        // اگر در مرحله گرفتن شماره است
-        if ($user->step === 'awaiting_phone') {
-            if (preg_match('/^09\d{9}$/', $text)) {
-                $user->update(['phone' => $text, 'step' => null]);
-                $telegram->sendMessage([
-                    'chat_id' => $chat_id,
-                    'text' => "✅ شماره تماس ذخیره شد. حالا می‌تونی سوالتو بپرسی!"
-                ]);
+        // مرحله دریافت شماره
+        if ($step === 'awaiting_phone') {
+            if ($contact && isset($contact['phone_number'])) {
+                $phone = $contact['phone_number'];
+            } elseif (preg_match('/^09\d{9}$/', $text)) {
+                $phone = $text;
             } else {
                 $telegram->sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => "❗️شماره تماس معتبر وارد کنید (مثل 09121234567):"
+                    'text' => "❗ لطفاً شماره تلفن معتبر وارد کنید یا از دکمه پایین استفاده کنید:"
                 ]);
+                return;
             }
+
+            $user->update(['phone' => $phone, 'step' => null]);
+            $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => "✅ شماره تماس ذخیره شد. حالا سوالت رو بپرس ✨"
+            ]);
             return;
         }
 
-        // در اینجا مطمئنیم که اطلاعات کامل هست، پس می‌ریم سراغ پردازش هوش مصنوعی
+        // اگر اطلاعات هنوز کامل نیست (کاربر مستقیماً پیام داده)
+        if (!$user->name) {
+            $user->update(['step' => 'awaiting_name']);
+            $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => "👤 لطفاً نام خود را وارد کنید:"
+            ]);
+            return;
+        }
+
+        if (!$user->phone) {
+            $user->update(['step' => 'awaiting_phone']);
+            $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => "📱 لطفاً شماره تماس خود را ارسال کنید:",
+                'reply_markup' => json_encode([
+                    'keyboard' => [
+                        [['text' => '📞 ارسال شماره من', 'request_contact' => true]]
+                    ],
+                    'resize_keyboard' => true,
+                    'one_time_keyboard' => true
+                ])
+            ]);
+            return;
+        }
+
+        // ✅ ارسال به Langflow چون اطلاعات کامله
         $botResponse = LangflowController::run($text, $chat_id);
 
-        // ذخیره در دیتابیس
+        // ذخیره پیام و پاسخ
         $messageId = DB::table('bale_messages')->insertGetId([
             'user_id' => $chat_id,
             'user_message' => $text,
@@ -202,7 +222,7 @@ class BotController extends Controller
             ]
         ];
 
-        // ارسال پیام با دکمه
+        // ارسال پاسخ با دکمه
         $response = $telegram->sendMessage([
             'chat_id' => $chat_id,
             'text' => $botResponse . "\n\nآیا این پاسخ مفید بود؟",
@@ -212,7 +232,7 @@ class BotController extends Controller
         $responseData = json_decode($response, true);
         $msgTelegramId = $responseData['result']['message_id'] ?? null;
 
-        // ذخیره شناسه پیام
+        // ذخیره آی‌دی پیام تلگرام
         DB::table('bale_messages')->where('id', $messageId)->update([
             'telegram_message_id' => $msgTelegramId
         ]);

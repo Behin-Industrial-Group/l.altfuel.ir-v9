@@ -172,6 +172,7 @@ return array(
     'BaleBot\\Controllers\\BotController' => $baseDir . '/packages/behin-bale-bot/src/Controllers/BotController.php',
     'BaleBot\\Controllers\\TelegramController' => $baseDir . '/packages/behin-bale-bot/src/Controllers/TelegramController.php',
     'BaleBot\\Models\\BaleMessage' => $baseDir . '/packages/behin-bale-bot/src/Models/BaleMessage.php',
+    'BaleBot\\Models\\BaleUser' => $baseDir . '/packages/behin-bale-bot/src/Models/BaleUser.php',
     'BehinLogging\\Controllers\\LoggingController' => $baseDir . '/packages/behin-logging/src/Controllers/LoggingController.php',
     'BehinLogging\\ServiceProvider' => $baseDir . '/packages/behin-logging/src/ServiceProvider.php',
     'BehinProcessMaker\\BehinProcessMakerProvider' => $baseDir . '/packages/behin-process-maker/src/BehinProcessMakerProvider.php',

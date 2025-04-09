@@ -895,6 +895,7 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'BaleBot\\Controllers\\BotController' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Controllers/BotController.php',
         'BaleBot\\Controllers\\TelegramController' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Controllers/TelegramController.php',
         'BaleBot\\Models\\BaleMessage' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Models/BaleMessage.php',
+        'BaleBot\\Models\\BaleUser' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Models/BaleUser.php',
         'BehinLogging\\Controllers\\LoggingController' => __DIR__ . '/../..' . '/packages/behin-logging/src/Controllers/LoggingController.php',
         'BehinLogging\\ServiceProvider' => __DIR__ . '/../..' . '/packages/behin-logging/src/ServiceProvider.php',
         'BehinProcessMaker\\BehinProcessMakerProvider' => __DIR__ . '/../..' . '/packages/behin-process-maker/src/BehinProcessMakerProvider.php',
