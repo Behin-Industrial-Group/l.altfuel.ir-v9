@@ -75,6 +75,9 @@ class BotController extends Controller
         $update = json_decode($content, true);
         Log::info($update);
 
+        if (isset($update['callback_query'])) {
+            return $this->handleCallback(); // فراخوانی مستقیم متد
+        }
 
         $chat_id = $update['message']['chat']['id'];
         $text = $update['message']['text'];
