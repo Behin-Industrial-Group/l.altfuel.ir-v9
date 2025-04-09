@@ -73,6 +73,8 @@ class BotController extends Controller
         Log::info("Receive Message");
         $content = file_get_contents('php://input');
         $update = json_decode($content, true);
+        Log::info($update);
+
 
         $chat_id = $update['message']['chat']['id'];
         $text = $update['message']['text'];
