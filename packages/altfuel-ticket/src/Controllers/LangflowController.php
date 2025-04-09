@@ -26,9 +26,9 @@ class LangflowController extends Controller
 
         $data = [
             "input_value" => $question,
-            "session_id" => $sessionId,
             "output_type" => "chat",
             "input_type" => "chat",
+            "session_id" => $sessionId,
             "tweaks" => [
                 "Agent-lCMES" => new stdClass(),
                 "ChatInput-sr1BR" => new stdClass(),
