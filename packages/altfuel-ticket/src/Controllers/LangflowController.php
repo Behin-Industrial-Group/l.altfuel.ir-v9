@@ -56,6 +56,7 @@ class LangflowController extends Controller
         ));
 
         $response = curl_exec($curl);
+        Log::info("Response of Langflow");
         Log::info($response);
         curl_close($curl);
 
