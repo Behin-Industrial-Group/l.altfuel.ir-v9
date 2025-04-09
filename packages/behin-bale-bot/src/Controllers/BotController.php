@@ -118,10 +118,12 @@ class BotController extends Controller
 
     public function handleCallback()
     {
+        Log::info("Receive Callback");
         $content = file_get_contents("php://input");
         $update = json_decode($content, true);
 
         if (isset($update['callback_query'])) {
+            Log::info($update);
             $callbackData = $update['callback_query']['data'];
             $chatId = $update['callback_query']['message']['chat']['id'];
             $msgTelegramId = $update['callback_query']['message']['message_id'];
