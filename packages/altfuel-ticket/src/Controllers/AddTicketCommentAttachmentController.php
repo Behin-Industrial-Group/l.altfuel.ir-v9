@@ -13,7 +13,7 @@ use ZipArchive;
 
 class AddTicketCommentAttachmentController extends Controller
 {
-
+    
     public static function add($comment_id , $file){
         return CommentAttachments::create([
             'comment_id' => $comment_id,
