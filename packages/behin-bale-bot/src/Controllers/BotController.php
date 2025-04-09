@@ -68,7 +68,7 @@ class BotController extends Controller
 
     // }
 
-    public function chat()
+    public function handle()
     {
         Log::info("Receive Message");
         $content = file_get_contents('php://input');
