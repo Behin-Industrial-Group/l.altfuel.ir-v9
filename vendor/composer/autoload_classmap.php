@@ -6642,6 +6642,8 @@ return array(
     'Symfony\\Polyfill\\Uuid\\Uuid' => $vendorDir . '/symfony/polyfill-uuid/Uuid.php',
     'TelegramBot\\Controllers\\BotController' => $baseDir . '/packages/behin-telegram-bot/src/Controllers/BotController.php',
     'TelegramBot\\Controllers\\TelegramController' => $baseDir . '/packages/behin-telegram-bot/src/Controllers/TelegramController.php',
+    'TelegramBot\\Models\\TelegramMessage' => $baseDir . '/packages/behin-telegram-bot/src/Models/TelegramMessage.php',
+    'TelegramBot\\Models\\TelegramUser' => $baseDir . '/packages/behin-telegram-bot/src/Models/TelegramUser.php',
     'TelegramBot\\TelegramBotProvider' => $baseDir . '/packages/behin-telegram-bot/src/TelegramBotProvider.php',
     'Termwind\\Actions\\StyleToMethod' => $vendorDir . '/nunomaduro/termwind/src/Actions/StyleToMethod.php',
     'Termwind\\Components\\Anchor' => $vendorDir . '/nunomaduro/termwind/src/Components/Anchor.php',

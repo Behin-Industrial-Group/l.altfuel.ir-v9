@@ -7365,6 +7365,8 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Symfony\\Polyfill\\Uuid\\Uuid' => __DIR__ . '/..' . '/symfony/polyfill-uuid/Uuid.php',
         'TelegramBot\\Controllers\\BotController' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/Controllers/BotController.php',
         'TelegramBot\\Controllers\\TelegramController' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/Controllers/TelegramController.php',
+        'TelegramBot\\Models\\TelegramMessage' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/Models/TelegramMessage.php',
+        'TelegramBot\\Models\\TelegramUser' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/Models/TelegramUser.php',
         'TelegramBot\\TelegramBotProvider' => __DIR__ . '/../..' . '/packages/behin-telegram-bot/src/TelegramBotProvider.php',
         'Termwind\\Actions\\StyleToMethod' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Actions/StyleToMethod.php',
         'Termwind\\Components\\Anchor' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Components/Anchor.php',
