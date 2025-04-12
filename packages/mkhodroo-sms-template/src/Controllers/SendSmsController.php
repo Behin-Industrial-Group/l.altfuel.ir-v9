@@ -24,7 +24,7 @@ class SendSmsController extends Controller
     {
 
         $response = Http::withHeaders([
-            'X-API-KEY' => 'DYQGdkLcS0Gi8dtKH7Z76zAFquEdqzoBW07S31LsFwEJAbRpDuPCq3DhGzWk1PMg',
+            'X-API-KEY' => env('SMS_TOKEN'),
         ])->post('https://iran.altfuel.ir/sms/index.php', [
             'to' => $to,
             'message' => $msg
