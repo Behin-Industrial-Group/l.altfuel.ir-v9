@@ -149,7 +149,7 @@ class BotController extends Controller
 
             list($action, $msgId) = explode(':', $callbackData);
 
-            DB::table('bale_messages')->where('id', $msgId)->update([
+            DB::table('telegram_messages')->where('id', $msgId)->update([
                 'feedback' => $action,
                 'updated_at' => now()
             ]);
