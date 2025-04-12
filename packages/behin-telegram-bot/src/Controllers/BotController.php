@@ -22,14 +22,25 @@ class BotController extends Controller
         $chat_id = $message['chat']['id'] ?? null;
         $text = $message['text'] ?? null;
         $contact = $message['contact'] ?? null;
+        $telegramMessageId = $message['message_id'] ?? null; // ✅ اضافه شد
 
-        if (!$chat_id) return;
+        if (!$chat_id || !$telegramMessageId) return;
+
+        // ✅ چک کن که آیا قبلاً این پیام پردازش شده یا نه
+        $alreadyProcessed = DB::table('telegram_messages')
+            ->where('telegram_message_id', $telegramMessageId)
+            ->where('user_id', $chat_id)
+            ->exists();
+
+        if ($alreadyProcessed) {
+            Log::info("Duplicate message ignored: $telegramMessageId");
+            return;
+        }
 
         $user = TelegramUser::firstOrCreate(['chat_id' => $chat_id]);
 
-        // اگر نام کاربر وجود ندارد
+        // گرفتن نام کاربر
         if (!$user->name) {
-            // اگر متن پیام حاوی نام باشد
             if ($text !== '/start') {
                 $user->name = $text;
                 $user->save();
@@ -48,7 +59,6 @@ class BotController extends Controller
                 return;
             }
 
-            // اگر هنوز نامی وارد نکرده، بپرس
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
                 'text' => "سلام! من صفا هستم 🤖\nدستیار هوش مصنوعی شما در تلگرام.\nبرای شروع لطفاً نام خود را وارد کن."
@@ -56,9 +66,8 @@ class BotController extends Controller
             return;
         }
 
-        // اگر شماره تماس کاربر وجود ندارد
+        // گرفتن شماره تلفن
         if (!$user->phone) {
-            // اگه کاربر شماره فرستاده
             if ($contact && isset($contact['phone_number'])) {
                 $user->phone = $contact['phone_number'];
                 $user->save();
@@ -87,15 +96,25 @@ class BotController extends Controller
             return;
         }
 
-        // اگه نام و شماره کامل بود، بفرست به Langflow
+        // پردازش سوال کاربر
         if ($text && $text !== '/start') {
-            $botResponse = LangflowController::run($text, $chat_id);
+            try {
+                $botResponse = LangflowController::run($text, $chat_id);
+            } catch (\Exception $e) {
+                Log::error("Langflow Error: " . $e->getMessage());
+                $telegram->sendMessage([
+                    'chat_id' => $chat_id,
+                    'text' => "❌ متأسفم، مشکلی پیش اومده. لطفاً دوباره امتحان کن."
+                ]);
+                return;
+            }
 
             $messageId = DB::table('telegram_messages')->insertGetId([
                 'user_id' => $chat_id,
                 'user_message' => $text,
                 'bot_response' => $botResponse,
                 'feedback' => 'none',
+                'telegram_message_id' => $telegramMessageId, // ✅ اضافه شد
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -121,10 +140,10 @@ class BotController extends Controller
             DB::table('telegram_messages')->where('id', $messageId)->update([
                 'telegram_message_id' => $msgTelegramId
             ]);
+
             return;
         }
 
-        // فقط /start زده شده؟ معرفی کن و تمام
         if ($text === '/start') {
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
@@ -132,42 +151,6 @@ class BotController extends Controller
             ]);
             return;
         }
-
     }
 
-    public function handleCallback()
-    {
-        Log::info("Receive Callback");
-        $content = file_get_contents("php://input");
-        $update = json_decode($content, true);
-
-        if (isset($update['callback_query'])) {
-            Log::info($update);
-            $callbackData = $update['callback_query']['data'];
-            $chatId = $update['callback_query']['message']['chat']['id'];
-            $msgTelegramId = $update['callback_query']['message']['message_id'];
-
-            list($action, $msgId) = explode(':', $callbackData);
-
-            DB::table('telegram_messages')->where('id', $msgId)->update([
-                'feedback' => $action,
-                'updated_at' => now()
-            ]);
-
-            $telegram = new TelegramController(config('telegram_bot_config.TOKEN'));
-
-            // حذف دکمه‌ها
-            $telegram->editMessageReplyMarkup([
-                'chat_id' => $chatId,
-                'message_id' => $msgTelegramId,
-                'reply_markup' => json_encode(['inline_keyboard' => []])
-            ]);
-
-            // ارسال پیام تشکر
-            $telegram->sendMessage([
-                'chat_id' => $chatId,
-                'text' => 'ممنون بابت بازخورد شما 🙏'
-            ]);
-        }
-    }
 }
