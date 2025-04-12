@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Translation\MessageCatalogue;
 use Illuminate\Support\Facades\Schema;
 use Mkhodroo\AgencyInfo\Models\AgencyInfo;
+use Mkhodroo\SmsTemplate\Controllers\SendSmsController;
 use Mkhodroo\UserRoles\Models\Access;
 use Mkhodroo\UserRoles\Models\Method;
 use Mkhodroo\UserRoles\Models\Role;
@@ -460,7 +461,14 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
     Route::get('send-sms', function () {
         return view('admin.sms.send');
     });
-    Route::post('send-sms', [MobileVerificationController::class, 'send_newpass_sms']);
+    Route::post('send-sms', function(Request $request, SendSmsController $sms){
+        $request->validate([
+            'to' => 'required',
+            'msg' => 'required'
+        ]);
+        $response = $sms->send($request->to, $request->msg);
+        return $response;
+    });
 
 
     Route::prefix('/hamayesh/')->group(function () {

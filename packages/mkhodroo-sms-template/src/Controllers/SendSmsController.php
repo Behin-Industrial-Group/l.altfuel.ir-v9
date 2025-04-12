@@ -29,7 +29,7 @@ class SendSmsController extends Controller
             'to' => $to,
             'message' => $msg
         ]);
-
+        Log::info($response);
         if ($response->successful()) {
             echo $response->body(); // یا log کن یا ذخیره کن
         } else {
