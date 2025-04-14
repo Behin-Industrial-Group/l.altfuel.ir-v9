@@ -34,11 +34,16 @@
         <input type="text" name="ticket_number" class="form-control" placeholder="مثلاً 1234">
     </div>
 
-    <div class="form-group mb-2">
-        <label for="date">تاریخ ثبت</label>
-        <input type="text" id="date" name="date" class="form-control" placeholder="انتخاب تاریخ">
+    <div class="row">
+        <div class="col-md-6">
+            <label>از تاریخ:</label>
+            <input type="text" id="date_from" name="date_from" class="form-control" placeholder="تاریخ شروع">
+        </div>
+        <div class="col-md-6">
+            <label>تا تاریخ:</label>
+            <input type="text" id="date_to" name="date_to" class="form-control" placeholder="تاریخ پایان">
+        </div>
     </div>
-
 
     <div class="form-group mb-2">
         <label for="agent_id">کارشناس پاسخ‌دهنده</label>
@@ -54,7 +59,16 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#date').persianDatepicker({
+        $('#date_from').persianDatepicker({
+            format: 'YYYY/MM/DD',
+            observer: true,
+            initialValue: false,
+            autoClose: true,
+        });
+    });
+
+    $(document).ready(function() {
+        $('#date_to').persianDatepicker({
             format: 'YYYY/MM/DD',
             observer: true,
             initialValue: false,

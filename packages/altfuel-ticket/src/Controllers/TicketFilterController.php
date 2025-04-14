@@ -4,6 +4,7 @@ namespace Mkhodroo\AltfuelTicket\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use IntlDateFormatter;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketComment;
 use Morilog\Jalali\Jalalian;
@@ -18,9 +19,15 @@ class TicketFilterController extends Controller
             $query->where('id', $request->ticket_number);
         }
 
-        if ($request->filled('date')) {
-            $date = $this->jalaliToGregorian($request->date);
-            $query->whereDate('created_at', $date);
+        if ($request->filled('date_from')) {
+            $from = $this->jalaliToGregorian($request->date_from);
+            dd($from);
+            $query->where('created_at', '>=', $from);
+        }
+
+        if ($request->filled('date_to')) {
+            $to = $this->jalaliToGregorian($request->date_to);
+            $query->where('created_at', '<=', $to);
         }
 
         if ($request->filled('agent_id')) {
@@ -47,58 +54,33 @@ class TicketFilterController extends Controller
 
         $gy = $jy + 621;
 
-        $days_in_jalali_month = [0, 31, 62, 93, 124, 155, 186, 216, 246, 276, 306, 336];
+        $leapJ = $this->isJalaliLeap($jy);
+        $march = ($leapJ) ? 20 : 21;
 
-        $jalali_day_no = 365 * $jy + (int)(($jy + 3) / 4) - (int)(($jy + 99) / 100) + (int)(($jy + 399) / 400);
-        $jalali_day_no += $days_in_jalali_month[$jm - 1] + $jd;
+        $jalaliDays = $this->jalaliDayOfYear($jm, $jd, $leapJ);
 
-        if ($jm > 6) {
-            $jalali_day_no -= ($jm - 7);
-        }
+        $gDate = mktime(0, 0, 0, 3, $march, $gy); // 1 Farvardin = March 20 or 21
+        $gDate += ($jalaliDays - 1) * 86400;
 
-        $g_day_no = $jalali_day_no + 226895;
+        return date('Y-m-d', $gDate);
+    }
 
-        $gy = 1600 + 400 * (int)($g_day_no / 146097);
-        $g_day_no %= 146097;
+    function jalaliDayOfYear($month, $day, $isLeap)
+    {
+        $daysInMonth = [0, 31, 62, 93, 124, 155, 186, 216, 246, 276, 306, 336];
+        return $daysInMonth[$month - 1] + $day;
+    }
 
-        $leap = true;
-        if ($g_day_no >= 36525) {
-            $g_day_no--;
-            $gy += 100 * (int)($g_day_no / 36524);
-            $g_day_no %= 36524;
-
-            if ($g_day_no >= 365) {
-                $g_day_no++;
-            } else {
-                $leap = false;
-            }
-        }
-
-        $gy += 4 * (int)($g_day_no / 1461);
-        $g_day_no %= 1461;
-
-        if ($g_day_no >= 366) {
-            $leap = false;
-            $g_day_no--;
-            $gy += (int)($g_day_no / 365);
-            $g_day_no %= 365;
-        }
-
-        $g_days_in_month = [31, ($leap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        $gm = 0;
-        for (; $gm < 12 && $g_day_no >= $g_days_in_month[$gm]; $gm++) {
-            $g_day_no -= $g_days_in_month[$gm];
-        }
-
-        $gd = $g_day_no + 1;
-
-        return sprintf('%04d-%02d-%02d', $gy, $gm + 1, $gd);
+    function isJalaliLeap($year)
+    {
+        $mod = $year % 33;
+        return in_array($mod, [1, 5, 9, 13, 17, 22, 26, 30]);
     }
 
     function convertPersianNumbers($string)
     {
-        $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-        $english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $persian = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+        $english = ['0','1','2','3','4','5','6','7','8','9'];
         return str_replace($persian, $english, $string);
     }
 
