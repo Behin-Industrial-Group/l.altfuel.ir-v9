@@ -20,7 +20,6 @@ class TicketFilterController extends Controller
 
         if ($request->filled('date')) {
             $date = $this->jalaliToGregorian($request->date);
-            dd($date);
             $query->whereDate('created_at', $date);
         }
 
