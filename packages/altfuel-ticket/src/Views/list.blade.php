@@ -18,9 +18,6 @@
                         <button class="btn btn-info mt-2" onclick="filter()">فیلتر تیکت های جدید و درحال بررسی</button>
                         <button class="btn btn-secondary mt-2" onclick="oldTicket()">فیلتر تیکت های پاسخ داده شده و بسته
                             شده</button>
-                            <br>
-                            <br>
-                        @include('ATView::partial-view.filter-form')
                     @else
                         @include('ATView::partial-view.catagory')
                         <button class="btn btn-info" onclick="filter()">فیلتر</button>
@@ -81,18 +78,6 @@
                 data,
                 function(data) {
                     console.log(data);
-                    update_datatable(data);
-                }
-            )
-        }
-
-        function filterWithAgent() {
-            let data = $('#cat-form').serialize(); // اگر فیلترها داخل همون فرم هستن
-
-            send_ajax_request(
-                "{{ route('ATRoutes.filterByAgent') }}", // این رو باید توی Route تعریف کنی
-                data,
-                function(data) {
                     update_datatable(data);
                 }
             )
@@ -191,5 +176,6 @@
                 }
             )
         }
+
     </script>
 @endsection

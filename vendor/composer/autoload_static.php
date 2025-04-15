@@ -20,10 +20,9 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
-        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '4364d9898253482270d33c3e7d349234' => __DIR__ . '/..' . '/hekmatinasser/notowo/src/helpers.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
-        'a4ecaeafb8cfb009ad0e052c90355e98' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
+        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '508dab6c0a7dfd955e775df925e6d583' => __DIR__ . '/..' . '/hekmatinasser/jalali/src/helpers.php',
         '17d016dc52a631c1e74d2eb8fdd57342' => __DIR__ . '/..' . '/laravel/helpers/src/helpers.php',
@@ -38,7 +37,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
-        'e4e590a9b5afe940db71ee1662c02677' => __DIR__ . '/..' . '/morilog/jalali/src/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
     );
@@ -131,7 +129,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'M' => 
         array (
             'MyAgencyInfo\\' => 13,
-            'Morilog\\Jalali\\' => 15,
             'Monolog\\' => 8,
             'Mkhodroo\\Voip\\' => 14,
             'Mkhodroo\\UserRoles\\' => 19,
@@ -223,7 +220,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         ),
         'A' => 
         array (
-            'Assert\\' => 7,
             'App\\' => 4,
             'AiAssistant\\' => 12,
         ),
@@ -462,10 +458,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'MyAgencyInfo\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/my-agency-info/src',
-        ),
-        'Morilog\\Jalali\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/morilog/jalali/src',
         ),
         'Monolog\\' => 
         array (
@@ -715,10 +707,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         array (
             0 => __DIR__ . '/../..' . '/packages/behin-bale-bot/src',
         ),
-        'Assert\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/beberlei/assert/lib/Assert',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -902,13 +890,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'App\\Traits\\reCAPTCHA' => __DIR__ . '/../..' . '/app/Traits/reCAPTCHA.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
-        'Assert\\Assert' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/Assert.php',
-        'Assert\\Assertion' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/Assertion.php',
-        'Assert\\AssertionChain' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/AssertionChain.php',
-        'Assert\\AssertionFailedException' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/AssertionFailedException.php',
-        'Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/InvalidArgumentException.php',
-        'Assert\\LazyAssertion' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/LazyAssertion.php',
-        'Assert\\LazyAssertionException' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/LazyAssertionException.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'BaleBot\\BaleBotProvider' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/BaleBotProvider.php',
         'BaleBot\\Controllers\\BotController' => __DIR__ . '/../..' . '/packages/behin-bale-bot/src/Controllers/BotController.php',
@@ -4192,7 +4173,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Mkhodroo\\AltfuelTicket\\Controllers\\TicketAssignController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketAssignController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\TicketCatagoryController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketCatagoryController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\TicketCountController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketCountController.php',
-        'Mkhodroo\\AltfuelTicket\\Controllers\\TicketFilterController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketFilterController.php',
         'Mkhodroo\\AltfuelTicket\\Controllers\\TicketStatusController' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Controllers/TicketStatusController.php',
         'Mkhodroo\\AltfuelTicket\\Models\\ActorsTicketCounter' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/ActorsTicketCounter.php',
         'Mkhodroo\\AltfuelTicket\\Models\\CatagoryActor' => __DIR__ . '/../..' . '/packages/altfuel-ticket/src/Models/CatagoryActor.php',
@@ -4444,9 +4424,6 @@ class ComposerStaticInit7ef7fe3f2ddba77c27d92e8a95b8fa50
         'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
         'Monolog\\Test\\TestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/TestCase.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
-        'Morilog\\Jalali\\CalendarUtils' => __DIR__ . '/..' . '/morilog/jalali/src/CalendarUtils.php',
-        'Morilog\\Jalali\\Converter' => __DIR__ . '/..' . '/morilog/jalali/src/Converter.php',
-        'Morilog\\Jalali\\Jalalian' => __DIR__ . '/..' . '/morilog/jalali/src/Jalalian.php',
         'MyAgencyInfo\\Controllers\\EditMyAgencyInfoController' => __DIR__ . '/../..' . '/packages/my-agency-info/src/Controllers/EditMyAgencyInfoController.php',
         'MyAgencyInfo\\PackageServiceProvider' => __DIR__ . '/../..' . '/packages/my-agency-info/src/PackageServiceProvider.php',
         'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',

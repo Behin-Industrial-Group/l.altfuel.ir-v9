@@ -12,7 +12,6 @@ use Mkhodroo\AltfuelTicket\Controllers\ReportController;
 use Mkhodroo\AltfuelTicket\Controllers\ShowTicketController;
 use Mkhodroo\AltfuelTicket\Controllers\TicketAssignController;
 use Mkhodroo\AltfuelTicket\Controllers\TicketCatagoryController;
-use Mkhodroo\AltfuelTicket\Controllers\TicketFilterController;
 use Mkhodroo\AltfuelTicket\Controllers\TicketStatusController;
 
 Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->middleware(['web','auth', 'access'])->group(function(){
@@ -57,7 +56,5 @@ Route::name('ATRoutes.')->prefix(config('ATConfig.route-prefix') . 'tickets')->m
     Route::post('save-improved-answer', [LangflowController::class, 'saveImprovedResponse'])->name('saveImprovedResponse');
     Route::get('download-zip', [CommentAttachmentController::class, 'downloadZip'])->name('download.zip');
     Route::get('ticket-download-zip', [AddTicketCommentAttachmentController::class, 'downloadZip'])->name('ticket.download.zip');
-
-    Route::post('filter', [TicketFilterController::class, 'filterByAgent'])->name('filterByAgent');
 });
 
