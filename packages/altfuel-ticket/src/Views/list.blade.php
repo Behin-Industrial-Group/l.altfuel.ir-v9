@@ -20,7 +20,9 @@
                             شده</button>
                         <br>
                         <br>
-                        @include('ATView::partial-view.filter-form')
+                        @if(auth()->user()->access('جستجو پیشرفته'))
+                            @include('ATView::partial-view.filter-form')
+                        @endif
                     @else
                         @include('ATView::partial-view.catagory')
                         <button class="btn btn-info" onclick="filter()">فیلتر</button>
