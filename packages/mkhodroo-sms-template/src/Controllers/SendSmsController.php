@@ -23,7 +23,7 @@ class SendSmsController extends Controller
     public function send($to, $msg)
     {
 
-        $msg += "\n اتحادیه ملی سوختهای جایگزین";
+        // $msg += "\n اتحادیه ملی سوختهای جایگزین";
         $response = Http::withHeaders([
             'X-API-KEY' => env('SMS_TOKEN'),
         ])->post('https://iran.altfuel.ir/sms/index.php', [
