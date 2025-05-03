@@ -67,9 +67,9 @@ class CreateTicketController extends Controller
             }
         }
         if(Auth::id() != $ticket->user_id){
-            // $message = "کاربر گرامی \n یک پاسخ برای تیکت شماره $ticket->id ثبت شد. \n l.altfuel.ir";
-            // $smsSender = new SendSmsController();
-            // $smsSender->send($ticket->user()->email, $message);
+            $message = "کاربر گرامی \n یک پاسخ برای تیکت شماره $ticket->id ثبت شد. \n l.altfuel.ir";
+            $smsSender = new SendSmsController();
+            $smsSender->send($ticket->user()->email, $message);
         }
         return response([
             'ticket' => $ticket,
