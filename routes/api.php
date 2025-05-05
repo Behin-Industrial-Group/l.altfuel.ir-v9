@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,14 @@ Route::name('blog.')->prefix('blog')->group(function(){
     Route::get('/get', []);
     Route::get('/get-by-catagory/{catagory}', [BlogController::class, 'getByCatagory']);
     Route::get('get-by-id/{id}', [BlogController::class, 'getById'])->name('getById');
+});
+
+Route::get('/test-api', function () {
+    $response = Http::get('https://l.altfuel.ir/api'); // این آدرس را با URL واقعی جایگزین کن
+
+    if ($response->successful()) {
+        return 'API اتصال برقرار شد: Hello World!';
+    } else {
+        return 'اتصال برقرار نشد. کد خطا: ' . $response->status();
+    }
 });
