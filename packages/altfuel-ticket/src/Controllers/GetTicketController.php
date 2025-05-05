@@ -18,6 +18,7 @@ class GetTicketController extends Controller
 
     function getAll()
     {
+        return [ 'data' => []];
         $result = Ticket::get()->each(function ($row) {
             $row->catagory = $row->catagory();
             $row->user = $row->user()?->display_name;

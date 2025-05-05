@@ -12,22 +12,11 @@
             </button>
         @endif
         <div class="row">
-            @if (auth()->id() == 10)
-                <div class="col-12">
-                    @include('QrCodeView::qr-code-input')
-                </div>
-            @endif
             <div class="col-sm-12 p-2">
                 <div class="input-group mb-3 col-sm-8 float-right">
                     <button class="btn btn-success" id="play-btn" style="display: none">پخش</button>
                     <textarea name="text" id="" class="form-control" style="border: none" rows="4" placeholder="متن پیام"></textarea>
                     <div class="input-group-append">
-                        {{-- <div class="input-group-text" id="voice-input" style="cursor: pointer; background:rgb(207, 1, 1); color:white; text-align: center">
-                            <span class="fa fa-microphone" ></span><br>
-                            <span style="writing-mode: vertical-lr;">
-                                نگه دارید
-                            </span>
-                        </div> --}}
                     </div>
                 </div>
                 <div class="col-sm-4 float-left" style="font-size: 15px">
@@ -60,10 +49,6 @@
 </div>
 
 
-<script>
-    $('.filepond').filepond();
-    $('.filepond').filepond('storeAsFile', true);
-</script>
 
 <script type="text/javascript">
     var maxFileSizeInMB = parseInt('{{ config('ATConfig.max-attach-file-size') }}') / 1024;

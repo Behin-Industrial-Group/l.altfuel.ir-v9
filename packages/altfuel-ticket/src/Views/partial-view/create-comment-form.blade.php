@@ -42,11 +42,6 @@
 </div>
 
 
-<script>
-    $('.filepond').filepond();
-    $('.filepond').filepond('storeAsFile', true);
-</script>
-
 <script type="text/javascript">
     var maxFileSizeInMB = parseInt('{{ config('ATConfig.max-attach-file-size') }}') / 1024;
 

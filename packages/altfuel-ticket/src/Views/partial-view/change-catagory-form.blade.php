@@ -24,10 +24,6 @@
 
 
 
-<script>
-    $('.filepond').filepond();
-    $('.filepond').filepond('storeAsFile', true);
-</script>
 
 <script type="text/javascript">
     function change_cat() {
