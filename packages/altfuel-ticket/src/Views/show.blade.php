@@ -37,14 +37,6 @@
                     {{ $comment->text ?? '' }}
                 </p>
                 <br>
-                @empty(!$comment->voice)
-                    <div class="green-player">
-                        <audio controls>
-                            <source src="{{ url("$comment->voice") }}" type="audio/wav">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                @endempty
                 @foreach ($comment->attachments() as $index => $attach)
                     <a href="{{ url("$attach->file") }}" target="_blank">پیوست {{ $index + 1 }}</a>
                     <br>

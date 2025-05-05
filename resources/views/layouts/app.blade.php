@@ -31,26 +31,21 @@
     <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom-style.css')  . '?' . config('app.version') }}">
     <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css')  . '?' . config('app.version') }}">
 
-    {{-- <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/custom.css')  . '?' . config('app.version') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ url('public/dashboard/plugins/datatables/dataTables.bootstrap4.css')  . '?' . config('app.version') }}" />
-    <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/dropzone.min.css')  . '?' . config('app.version') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="{{ url('public/dashboard/toastr/toastr.css')  . '?' . config('app.version') }}">
 
     <link rel="stylesheet" href="{{ Url('public/plugins/persian-datepicker/persian-datepicker.css')  . '?' . config('app.version') }}" />
-    <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.css')  . '?' . config('app.version') }}" />
-    <link rel="stylesheet" href="{{ Url('public/green-player/css/green-audio-player.min.css')  . '?' . config('app.version') }}" />
-    {{-- <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet"> --}}
+    
     <link rel="stylesheet" href="{{ url('public/dashboard/plugins/select2/select2.min.css') }}">
     @yield('style')
 
     <script src="{{ url('public/dashboard/plugins/jquery/jquery.min.js') . '?' . config('app.version') }}"></script>
     <script src="{{ url('public/dashboard/plugins/datatables/jquery.dataTables.js')  . '?' . config('app.version') }}"></script>
     <script src="{{ url('public/dashboard/plugins/datatables/dataTables.bootstrap4.js')  . '?' . config('app.version') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{ url('public/dashboard/toastr/toastr.min.js')  . '?' . config('app.version') }}"></script>
 
     <script src="{{ url('public/js/ajax.js')  . '?' . config('app.version') }}"></script>
     <script src="{{ url('public/js/dataTable.js')  . '?' . config('app.version') }}"></script>
-    <script src="{{ url('public/js/dropzone.js')  . '?' . config('app.version') }}"></script>
     @yield('script_in_head')
 
 </head>
@@ -82,69 +77,24 @@
     </div>
 
         <!-- jQuery UI 1.11.4 -->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="{{ url('public/dashboard/plugins/jQueryUI/jquery-ui.min.js')  . '?' . config('app.version') }}"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
         $.widget.bridge('uibutton', $.ui.button)
         </script>
         <!-- Bootstrap 4 -->
         <script src="{{ url('public/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')  . '?' . config('app.version') }}"></script>
-        <!-- Morris.js charts -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <!-- Sparkline -->
-        <!-- jvectormap -->
-        <!-- jQuery Knob Chart -->
-        <script src="{{ url('public/dashboard/plugins/knob/jquery.knob.js')  . '?' . config('app.version') }}"></script>
-        <!-- daterangepicker -->
-        <script src="{{ url('public/dashboard/plugins/daterangepicker/daterangepicker.js')  . '?' . config('app.version') }}"></script>
-        <!-- datepicker -->
-        <script src="{{ url('public/dashboard/plugins/datepicker/bootstrap-datepicker.js')  . '?' . config('app.version') }}"></script>
-        <!-- Bootstrap WYSIHTML5 -->
-        <script src="{{ url('public/dashboard/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')  . '?' . config('app.version') }}"></script>
-        <!-- Slimscroll -->
-        <!-- FastClick -->
         <!-- AdminLTE App -->
         <script src="{{ url('public/dashboard/dist/js/adminlte.js')  . '?' . config('app.version') }}"></script>
 
-        {{-- <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script> --}}
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> --}}
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script> --}}
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script> --}}
-        <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
-        {{-- <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script> --}}
+        <script src="{{ url('public/dashboard/plugins/html5-buttons/buttons.html5.min.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ Url('public/plugins/persian-datepicker/persian-date.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ Url('public/plugins/persian-datepicker/persian-datepicker.js')  . '?' . config('app.version') }}"></script>
 
         <script src="{{ url('public/dashboard/plugins/select2/select2.full.min.js')}}"></script>
-        <!-- include FilePond library -->
-        {{-- <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script> --}}
-
-        <!-- include FilePond plugins -->
-        {{-- <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script> --}}
-
-        <!-- include FilePond jQuery adapter -->
-        {{-- <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script> --}}
-
-
+        
 
         <script>
-
-            // $(document).ready(function() {
-            //     $('#table').DataTable({
-            //         dom: 'Bfltip',
-            //         buttons: [{
-            //             'extend': 'excel',
-            //             'text': 'Excel',
-            //             className: 'btn btn-info'
-            //         }],
-            //         'ajax': ''
-            //     });
-            //     $('table').attr('style', 'font-weight:bold; font-size: 12px')
-
-            //     initial_view();
-            //     hide_loading();
-            // });
-
             function initial_view(){
                 $('.select2').select2();
                 $('.select2').css('width', '100%')
