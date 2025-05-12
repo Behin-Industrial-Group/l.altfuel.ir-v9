@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\SMSController;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
+use Mkhodroo\SmsTemplate\Controllers\SendSmsController;
 
 class PasswordResetLinkController extends Controller
 {
@@ -23,9 +23,9 @@ class PasswordResetLinkController extends Controller
         return view('auth.forgot-password');
     }
 
-    public function sendCode(Request $r, SMSController $sms)
+    public function sendCode(Request $r, SendSmsController $sms)
     {
-        
+
     }
 
     /**
@@ -36,7 +36,7 @@ class PasswordResetLinkController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $r, SMSController $sms)
+    public function store(Request $r, SendSmsController $sms)
     {
         $r->validate([
             'mobile' => 'required',
