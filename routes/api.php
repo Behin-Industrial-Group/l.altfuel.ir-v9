@@ -34,8 +34,19 @@ Route::name('blog.')->prefix('blog')->group(function(){
     Route::get('get-by-id/{id}', [BlogController::class, 'getById'])->name('getById');
 });
 
+// -------- langflow --------
+
 Route::post('/test-langflow', function () {
     return response()->json([
         'message' => 'Hello World!'
+    ]);
+});
+
+Route::post('/check-national-id', function (Request $request) {
+    $nationalId = $request->input('national_id');
+    return response()->json([
+        'status' => 'success',
+        'received_national_id' => $nationalId,
+        'message' => "کد ملی $nationalId دریافت شد."
     ]);
 });
