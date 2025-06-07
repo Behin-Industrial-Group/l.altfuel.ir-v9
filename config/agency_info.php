@@ -60,6 +60,7 @@ return [
                 '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_ref_id', 'membership_01_pay_file'],
                 '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_ref_id', 'membership_02_pay_file'],
                 '03' => ['membership_03', 'membership_03_pay_date', 'membership_03_ref_id', 'membership_03_pay_file'],
+                '04' => ['membership_04', 'membership_04_pay_date', 'membership_04_ref_id', 'membership_04_pay_file'],
                 'irngv' => ['irngv', 'irngv_pay_date', 'irngv_ref_id', 'irngv_pay_file'],
                 'plate_reader' => ['plate_reader', 'plate_reader_pay_date', 'plate_reader_ref_id', 'plate_reader_pay_file'],
             ],
@@ -142,6 +143,7 @@ return [
                 '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_ref_id', 'membership_01_pay_file'],
                 '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_ref_id', 'membership_02_pay_file'],
                 '03' => ['membership_03', 'membership_03_pay_date', 'membership_03_ref_id', 'membership_03_pay_file'],
+                '04' => ['membership_04', 'membership_04_pay_date', 'membership_04_ref_id', 'membership_04_pay_file'],
             ],
             'fin_fields' => [
                 'fin_details' => ['type' => 'textarea'],
@@ -227,6 +229,7 @@ return [
                 '01' => ['membership_01', 'membership_01_pay_date', 'membership_01_ref_id', 'membership_01_pay_file'],
                 '02' => ['membership_02', 'membership_02_pay_date', 'membership_02_ref_id', 'membership_02_pay_file'],
                 '03' => ['membership_03', 'membership_03_pay_date', 'membership_03_ref_id', 'membership_03_pay_file'],
+                '04' => ['membership_04', 'membership_04_pay_date', 'membership_04_ref_id', 'membership_04_pay_file'],
                 'irngv' => ['irngv', 'irngv_pay_date', 'irngv_ref_id', 'irngv_pay_file'],
             ],
             'fin_fields' => [
