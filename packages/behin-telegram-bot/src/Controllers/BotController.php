@@ -12,10 +12,13 @@ class BotController extends Controller
 {
     public function chat()
     {
+
         Log::info("Receive Message");
         $content = file_get_contents('php://input');
         $update = json_decode($content, true);
-
+        if (isset($update['callback_query'])) {
+            return $this->handleCallback($update);
+        }
         $telegram = new TelegramController(config('telegram_bot_config.TOKEN'));
 
         $message = $update['message'] ?? null;

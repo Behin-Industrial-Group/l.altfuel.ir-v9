@@ -74,6 +74,9 @@ class BotController extends Controller
         Log::info("Receive Message");
         $content = file_get_contents('php://input');
         $update = json_decode($content, true);
+        if (isset($update['callback_query'])) {
+            return $this->handleCallback($update);
+        }
 
         $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
 
