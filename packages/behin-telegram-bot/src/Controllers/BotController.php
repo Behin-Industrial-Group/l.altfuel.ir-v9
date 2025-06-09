@@ -156,4 +156,40 @@ class BotController extends Controller
         }
     }
 
+    public function handleCallback()
+    {
+        Log::info("Receive Callback");
+        $content = file_get_contents("php://input");
+        $update = json_decode($content, true);
+
+        if (isset($update['callback_query'])) {
+            Log::info($update);
+            $callbackData = $update['callback_query']['data'];
+            $chatId = $update['callback_query']['message']['chat']['id'];
+            $msgTelegramId = $update['callback_query']['message']['message_id'];
+
+            list($action, $msgId) = explode(':', $callbackData);
+
+            DB::table('telegram_messages')->where('id', $msgId)->update([
+                'feedback' => $action,
+                'updated_at' => now()
+            ]);
+
+            $telegram = new TelegramController(config('telegram_bot_config.TOKEN'));
+
+            // حذف دکمه‌ها
+            $telegram->editMessageReplyMarkup([
+                'chat_id' => $chatId,
+                'message_id' => $msgTelegramId,
+                'reply_markup' => json_encode(['inline_keyboard' => []])
+            ]);
+
+            // ارسال پیام تشکر
+            $telegram->sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'ممنون بابت بازخورد شما 🙏'
+            ]);
+        }
+    }
+
 }
