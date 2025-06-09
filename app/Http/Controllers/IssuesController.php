@@ -24,12 +24,6 @@ use Exception;
 use SoapClient;
 
 
-define("BASEURL","https://new.payamsms.com/services/v2/?wsdl");
-define("APIKEY","VsQ4_aP39E_oeH4HfXZrHA");
-define("PASS","irngv123");
-define("FROM",20003807);
-
-
 class IssuesController extends Controller
 {
     use reCAPTCHA;

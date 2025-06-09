@@ -17,10 +17,6 @@ class SMSController extends Controller
     private $org;
 
     public function __construct() {
-        $this->url = 'https://payamsms.com/services/rest/index.php';
-        $this->org = 'irngv';
-        $this->user = 'irngv';
-        $this->pass = 'irngv123';
     }
     public function send($to, $msg)
     {
