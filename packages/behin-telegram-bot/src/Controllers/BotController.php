@@ -99,90 +99,59 @@ class BotController extends Controller
             return;
         }
 
+        // پردازش سوال کاربر
+        if ($text && $text !== '/start') {
+            try {
+                $botResponse = LangflowController::run($text, $chat_id);
+            } catch (\Exception $e) {
+                Log::error("Langflow Error: " . $e->getMessage());
+                $telegram->sendMessage([
+                    'chat_id' => $chat_id,
+                    'text' => "❌ متأسفم، مشکلی پیش اومده. لطفاً دوباره امتحان کن."
+                ]);
+                return;
+            }
 
+            $messageId = DB::table('telegram_messages')->insertGetId([
+                'user_id' => $chat_id,
+                'user_message' => $text,
+                'bot_response' => $botResponse,
+                'feedback' => 'none',
+                'telegram_message_id' => $telegramMessageId, // ✅ اضافه شد
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            $keyboard = [
+                'inline_keyboard' => [
+                    [
+                        ['text' => '👍', 'callback_data' => "like:$messageId"],
+                        ['text' => '👎', 'callback_data' => "dislike:$messageId"],
+                    ]
+                ]
+            ];
+
+            $response = $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => $botResponse . "\n\nآیا این پاسخ مفید بود؟",
+                'reply_markup' => json_encode($keyboard)
+            ]);
+
+            $responseData = json_decode($response, true);
+            $msgTelegramId = $responseData['result']['message_id'] ?? null;
+
+            DB::table('telegram_messages')->where('id', $messageId)->update([
+                'telegram_message_id' => $msgTelegramId
+            ]);
+
+            return;
+        }
 
         if ($text === '/start') {
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
                 'text' => "سلام {$user->name} ! من صفا هستم 🤖\nدستیار هوش مصنوعی شما در تلگرام.\nسوالت رو بپرس"
             ]);
-            return;
-        }
-
-        // پردازش سوال کاربر
-        if ($text && $text !== '/start') {
-            // ارسال پیام "⏳ در حال پردازش..."
-            $loadingMessage = $telegram->sendMessage([
-                'chat_id' => $chat_id,
-                'text' => "⏳ در حال پردازش..."
-            ]);
-            $loadingMessageId = json_decode($loadingMessage, true)['result']['message_id'] ?? null;
-
-            try {
-                // اجرای Langflow
-                $botResponse = LangflowController::run($text, $chat_id);
-
-                // حذف پیام لودینگ
-                if ($loadingMessageId) {
-                    $telegram->deleteMessage([
-                        'chat_id' => $chat_id,
-                        'message_id' => $loadingMessageId
-                    ]);
-                }
-
-                // ذخیره در پایگاه داده
-                $messageId = DB::table('telegram_messages')->insertGetId([
-                    'user_id' => $chat_id,
-                    'user_message' => $text,
-                    'bot_response' => $botResponse,
-                    'feedback' => 'none',
-                    'telegram_message_id' => $telegramMessageId,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                // دکمه‌های لایک/دیس‌لایک
-                $keyboard = [
-                    'inline_keyboard' => [
-                        [
-                            ['text' => '👍', 'callback_data' => "like:$messageId"],
-                            ['text' => '👎', 'callback_data' => "dislike:$messageId"],
-                        ]
-                    ]
-                ];
-
-                // ارسال پاسخ نهایی
-                $response = $telegram->sendMessage([
-                    'chat_id' => $chat_id,
-                    'text' => $botResponse . "\n\nآیا این پاسخ مفید بود؟",
-                    'reply_markup' => json_encode($keyboard)
-                ]);
-
-                // ذخیره آیدی پیام ربات
-                $responseData = json_decode($response, true);
-                $msgTelegramId = $responseData['result']['message_id'] ?? null;
-
-                DB::table('telegram_messages')->where('id', $messageId)->update([
-                    'telegram_message_id' => $msgTelegramId
-                ]);
-            } catch (\Exception $e) {
-                Log::error("Langflow Error: " . $e->getMessage());
-
-                // حذف پیام لودینگ در صورت خطا
-                if ($loadingMessageId) {
-                    $telegram->deleteMessage([
-                        'chat_id' => $chat_id,
-                        'message_id' => $loadingMessageId
-                    ]);
-                }
-
-                // پیام خطا
-                $telegram->sendMessage([
-                    'chat_id' => $chat_id,
-                    'text' => "❌ متأسفم، مشکلی پیش اومده. لطفاً دوباره امتحان کن."
-                ]);
-            }
-
             return;
         }
     }
@@ -222,4 +191,5 @@ class BotController extends Controller
             ]);
         }
     }
+
 }
