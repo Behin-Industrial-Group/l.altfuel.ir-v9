@@ -133,7 +133,7 @@ class BotController extends Controller
 
             $response = $telegram->sendMessage([
                 'chat_id' => $chat_id,
-                'text' => $botResponse . "\n\nآیا این پاسخ مفید بود؟",
+                'text' => $botResponse,
                 'reply_markup' => json_encode($keyboard)
             ]);
 
