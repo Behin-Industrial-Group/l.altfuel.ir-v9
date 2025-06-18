@@ -45,7 +45,7 @@
     <script src="{{ url('public/dashboard/toastr/toastr.min.js')  . '?' . config('app.version') }}"></script>
 
     <script src="{{ url('public/js/ajax.js')  . '?' . config('app.version') }}"></script>
-    <script src="{{ url('public/js/dataTable.js')  . '?' . config('app.version') }}"></script>
+    <script src="{{ url('public/js/dataTable.js')  . '?1' . config('app.version') }}"></script>
     @yield('script_in_head')
 
 </head>
