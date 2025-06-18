@@ -45,7 +45,7 @@
     <script src="{{ url('public/dashboard/toastr/toastr.min.js')  . '?' . config('app.version') }}"></script>
 
     <script src="{{ url('public/js/ajax.js')  . '?' . config('app.version') }}"></script>
-    <script src="{{ url('public/js/dataTable.js')  . '?1' . config('app.version') }}"></script>
+    <script src="{{ url('public/js/dataTable.js')  . '?' . config('app.version') }}"></script>
     @yield('script_in_head')
 
 </head>
@@ -87,7 +87,7 @@
         <!-- AdminLTE App -->
         <script src="{{ url('public/dashboard/dist/js/adminlte.js')  . '?' . config('app.version') }}"></script>
 
-        <script src="{{ url('public/dashboard/plugins/html5-buttons/buttons.html5.min.js')  . '?' . config('app.version') }}"></script>
+        {{-- <script src="{{ url('public/dashboard/plugins/html5-buttons/buttons.html5.min.js')  . '?' . config('app.version') }}"></script> --}}
         <script src="{{ Url('public/plugins/persian-datepicker/persian-date.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ Url('public/plugins/persian-datepicker/persian-datepicker.js')  . '?' . config('app.version') }}"></script>
 
