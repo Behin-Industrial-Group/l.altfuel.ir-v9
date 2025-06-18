@@ -1,10 +1,17 @@
-<button type="button" class="btn-close border-0 bg-transparent" style="font-size:32px" data-dismiss="modal" aria-label="Close">&times;</button>
+<button type="button" class="btn-close border-0 bg-transparent" style="font-size:32px" data-dismiss="modal"
+    aria-label="Close">&times;</button>
 <div class="row">
     <div class="col-sm-4">
         شناسه تیکت : {{ $ticket->id }} <br>
-        {{ $ticket->user()?->display_name }} @if($ticket->user()->role_id == config('user_profile.agency_role')) <i style="color:royalblue" class="fa fa-check-circle"></i> @endif  <br>
+        {{ $ticket->user()?->display_name }} @if ($ticket->user()->role_id == config('user_profile.agency_role'))
+            <i style="color:royalblue" class="fa fa-check-circle"></i>
+        @endif <br>
         شماره همراه : {{ $ticket->user()->email ?? '' }} <br>
-        کارشناس : @if ($ticket->actor_id) {{ $ticket->actor()?->display_name }} @else تخصیص داده نشده @endif
+        کارشناس : @if ($ticket->actor_id)
+            {{ $ticket->actor()?->display_name }}
+        @else
+            تخصیص داده نشده
+        @endif
     </div>
     <div class="row col-sm-8">
         @foreach (config('ATConfig.status') as $key => $status)
@@ -42,7 +49,7 @@
                     <br>
                 @endforeach
                 @if ($comment->attachments()->count() > 1)
-                    <a href="{{ route('ATRoutes.download.zip', [ 'id' => $comment->id ]) }}"  class="btn btn-primary">
+                    <a href="{{ route('ATRoutes.download.zip', ['id' => $comment->id]) }}" class="btn btn-primary">
                         {{ trans('دانلود همه به صورت یکجا') }}
                     </a>
                 @endif
@@ -52,7 +59,7 @@
         </div>
         <div id="end"></div>
     @endforeach
-    <a href="{{ route('ATRoutes.ticket.download.zip', [ 'id' => $ticket->id ]) }}"  class="btn btn-primary">
+    <a href="{{ route('ATRoutes.ticket.download.zip', ['id' => $ticket->id]) }}" class="btn btn-primary">
         {{ trans('دانلود همه پیوست ها به صورت یکجا') }}
     </a>
 </div>
@@ -83,33 +90,35 @@
 
 
 <script>
-    change_status_btn_color()
+    $(document).ready(function() {
+        change_status_btn_color()
 
-    function change_status_btn_color() {
-        url = "{{ route('ATRoutes.get.status', ['id' => 'id']) }}"
-        url = url.replace('id', '{{ $ticket->ticket_id }}')
-        send_ajax_get_request(
-            url,
-            function(res) {
-                $('.status-btn').css('background', '#f8f9fa')
-                console.log(res);
-                $('#' + res).css('background', 'red')
-            }
-        )
-    }
+        function change_status_btn_color() {
+            url = "{{ route('ATRoutes.get.status', ['id' => 'id']) }}"
+            url = url.replace('id', '{{ $ticket->ticket_id }}')
+            send_ajax_get_request(
+                url,
+                function(res) {
+                    $('.status-btn').css('background', '#f8f9fa')
+                    console.log(res);
+                    $('#' + res).css('background', 'red')
+                }
+            )
+        }
 
-    function change_status(status_key) {
-        fd = new FormData()
-        fd.append('ticket_id', '{{ $ticket->ticket_id }}')
-        fd.append('status_key', status_key)
-        send_ajax_formdata_request(
-            "{{ route('ATRoutes.changeStatus') }}",
-            fd,
-            function(res) {
-                console.log(res);
-                change_status_btn_color()
-                filter();
-            }
-        )
-    }
+        function change_status(status_key) {
+            fd = new FormData()
+            fd.append('ticket_id', '{{ $ticket->ticket_id }}')
+            fd.append('status_key', status_key)
+            send_ajax_formdata_request(
+                "{{ route('ATRoutes.changeStatus') }}",
+                fd,
+                function(res) {
+                    console.log(res);
+                    change_status_btn_color()
+                    filter();
+                }
+            )
+        }
+    })
 </script>

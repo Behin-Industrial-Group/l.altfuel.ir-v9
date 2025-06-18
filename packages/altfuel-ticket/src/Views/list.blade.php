@@ -20,7 +20,7 @@
                             شده</button>
                         <br>
                         <br>
-                        @if(auth()->user()->access('جستجو پیشرفته'))
+                        @if (auth()->user()->access('جستجو پیشرفته'))
                             @include('ATView::partial-view.filter-form')
                         @endif
                     @else
@@ -52,146 +52,148 @@
 
 @section('script')
     <script>
-        function filterAll() {
-            data = $('#cat-form').serialize();
-            send_ajax_request(
-                "{{ route('ATRoutes.get.getAllByCatagory') }}",
-                data,
-                function(data) {
-                    console.log(data);
-                    update_datatable(data);
-                }
-            )
-        }
-
-        function filter() {
-            data = $('#cat-form').serialize();
-            send_ajax_request(
-                "{{ route('ATRoutes.get.getByCatagory') }}",
-                data,
-                function(data) {
-                    console.log(data);
-                    update_datatable(data);
-                }
-            )
-        }
-
-        function oldTicket() {
-            data = $('#cat-form').serialize();
-            send_ajax_request(
-                "{{ route('ATRoutes.get.oldGetByCatagory') }}",
-                data,
-                function(data) {
-                    console.log(data);
-                    update_datatable(data);
-                }
-            )
-        }
-
-        function filterWithAgent() {
-            let data = $('#cat-form').serialize(); // اگر فیلترها داخل همون فرم هستن
-
-            send_ajax_request(
-                "{{ route('ATRoutes.filterByAgent') }}", // این رو باید توی Route تعریف کنی
-                data,
-                function(data) {
-                    update_datatable(data);
-                }
-            )
-        }
-
-        var table = create_datatable(
-            'tickets-table',
-            "{{ route('ATRoutes.get.getAll') }}",
-            [{
-                    data: 'id'
-                },
-                {
-                    data: 'title',
-                    render: function(title) {
-                        return `<a href="#">${title}</a>`;
+        $(document).ready(function() {
+            function filterAll() {
+                data = $('#cat-form').serialize();
+                send_ajax_request(
+                    "{{ route('ATRoutes.get.getAllByCatagory') }}",
+                    data,
+                    function(data) {
+                        console.log(data);
+                        update_datatable(data);
                     }
-                },
-                {
-                    data: 'user',
-                    render: function(data, type, row) {
-                        if (row.user_level == 2) {
-                            return data + ' <i style="color:royalblue" class="fa fa-check-circle"></i>'
+                )
+            }
+
+            function filter() {
+                data = $('#cat-form').serialize();
+                send_ajax_request(
+                    "{{ route('ATRoutes.get.getByCatagory') }}",
+                    data,
+                    function(data) {
+                        console.log(data);
+                        update_datatable(data);
+                    }
+                )
+            }
+
+            function oldTicket() {
+                data = $('#cat-form').serialize();
+                send_ajax_request(
+                    "{{ route('ATRoutes.get.oldGetByCatagory') }}",
+                    data,
+                    function(data) {
+                        console.log(data);
+                        update_datatable(data);
+                    }
+                )
+            }
+
+            function filterWithAgent() {
+                let data = $('#cat-form').serialize(); // اگر فیلترها داخل همون فرم هستن
+
+                send_ajax_request(
+                    "{{ route('ATRoutes.filterByAgent') }}", // این رو باید توی Route تعریف کنی
+                    data,
+                    function(data) {
+                        update_datatable(data);
+                    }
+                )
+            }
+
+            var table = create_datatable(
+                'tickets-table',
+                "{{ route('ATRoutes.get.getAll') }}",
+                [{
+                        data: 'id'
+                    },
+                    {
+                        data: 'title',
+                        render: function(title) {
+                            return `<a href="#">${title}</a>`;
                         }
-                        return data
-                    }
-                },
-                {
-                    data: 'catagory'
-                },
-                {
-                    data: 'actor'
-                },
-                {
-                    data: 'status',
-                    render: function(data) {
-                        if (data == "{{ config('ATConfig.status.new') }}") {
-                            return '1-' + data
-                        } else if (data == "{{ config('ATConfig.status.in_progress') }}") {
-                            return '2-' + data
-                        } else if (data == "{{ config('ATConfig.status.answered') }}") {
-                            return '3-' + data
-                        } else if (data == "{{ config('ATConfig.status.closed') }}") {
-                            return '4-' + data
-                        } else {
+                    },
+                    {
+                        data: 'user',
+                        render: function(data, type, row) {
+                            if (row.user_level == 2) {
+                                return data + ' <i style="color:royalblue" class="fa fa-check-circle"></i>'
+                            }
                             return data
                         }
-                    }
-                },
-                {
-                    data: 'updated_at',
-                    render: function(data) {
-                        datetime = new Date(data);
-                        date = datetime.toLocaleDateString('fa-IR');
-                        time = datetime.toLocaleTimeString('fa-IR');
-                        return '<span dir="auto" style="float: left">' + date + ' ' + time + '</span>';
-                    }
-                },
-                // {data: 'score'}
-            ],
-            null,
-            [
-                [5, 'asc'],
-                [6, 'desc']
-            ]
-        );
+                    },
+                    {
+                        data: 'catagory'
+                    },
+                    {
+                        data: 'actor'
+                    },
+                    {
+                        data: 'status',
+                        render: function(data) {
+                            if (data == "{{ config('ATConfig.status.new') }}") {
+                                return '1-' + data
+                            } else if (data == "{{ config('ATConfig.status.in_progress') }}") {
+                                return '2-' + data
+                            } else if (data == "{{ config('ATConfig.status.answered') }}") {
+                                return '3-' + data
+                            } else if (data == "{{ config('ATConfig.status.closed') }}") {
+                                return '4-' + data
+                            } else {
+                                return data
+                            }
+                        }
+                    },
+                    {
+                        data: 'updated_at',
+                        render: function(data) {
+                            datetime = new Date(data);
+                            date = datetime.toLocaleDateString('fa-IR');
+                            time = datetime.toLocaleTimeString('fa-IR');
+                            return '<span dir="auto" style="float: left">' + date + ' ' + time + '</span>';
+                        }
+                    },
+                    // {data: 'score'}
+                ],
+                null,
+                [
+                    [5, 'asc'],
+                    [6, 'desc']
+                ]
+            );
 
-        send_ajax_get_request(
-            "{{ route('ATRoutes.get.getMyTickets') }}",
-            function(data) {
-                update_datatable(data);
-            }
-        )
-
-        table.on('click', 'tr', function() {
-            var data = table.row(this).data();
-            if (data != undefined) {
-                show_comment_modal(data.id, data.title, data.user_id);
-            }
-        })
-
-        function show_comment_modal(ticket_id, title, user) {
-            var fd = new FormData();
-            fd.append('ticket_id', ticket_id);
-            send_ajax_formdata_request(
-                "{{ route('ATRoutes.show.ticket') }}",
-                fd,
-                function(body) {
-                    open_admin_modal_with_data(body, title, function() {
-                        $(".direct-chat-messages").animate({
-                            scrollTop: $('.direct-chat-messages').prop("scrollHeight")
-                        }, 1);
-                    });
-                },
+            send_ajax_get_request(
+                "{{ route('ATRoutes.get.getMyTickets') }}",
                 function(data) {
-                    show_error(data);
+                    update_datatable(data);
                 }
             )
-        }
+
+            table.on('click', 'tr', function() {
+                var data = table.row(this).data();
+                if (data != undefined) {
+                    show_comment_modal(data.id, data.title, data.user_id);
+                }
+            })
+
+            function show_comment_modal(ticket_id, title, user) {
+                var fd = new FormData();
+                fd.append('ticket_id', ticket_id);
+                send_ajax_formdata_request(
+                    "{{ route('ATRoutes.show.ticket') }}",
+                    fd,
+                    function(body) {
+                        open_admin_modal_with_data(body, title, function() {
+                            $(".direct-chat-messages").animate({
+                                scrollTop: $('.direct-chat-messages').prop("scrollHeight")
+                            }, 1);
+                        });
+                    },
+                    function(data) {
+                        show_error(data);
+                    }
+                )
+            }
+        })
     </script>
 @endsection
