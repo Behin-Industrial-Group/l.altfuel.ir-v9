@@ -11,18 +11,18 @@ function create_datatable(element_id, url ='', cols, rowCallback = null, order= 
             url: url,
         },
         columns: cols,
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                exportOptions: {
-                    columns: ':visible'
-                },
-                className: 'btn btn-danger',
-                attr:{
-                    style: 'direction: ltr'
-                }
-            }
-        ],
+        // buttons: [
+        //     {
+        //         extend: 'excelHtml5',
+        //         exportOptions: {
+        //             columns: ':visible'
+        //         },
+        //         className: 'btn btn-danger',
+        //         attr:{
+        //             style: 'direction: ltr'
+        //         }
+        //     }
+        // ],
         "displayLength": 25,
         // language: {
         //     // url: '../resources/lang/fa.json'
