@@ -3,7 +3,7 @@
 use Registration\RegistrationServiceProvider;
 
 return [
-    'version' => 'v=9.1.24',
+    'version' => 'v=9.1.23',
 
     'agencies' => [
         'high-pressure' => [
