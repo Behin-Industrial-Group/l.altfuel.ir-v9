@@ -3,6 +3,7 @@
 namespace Mkhodroo\AltfuelTicket\Controllers;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class GetTicketController extends Controller
 
     function getAll()
     {
-        return [ 'data' => []];
+        return ['data' => []];
         $result = Ticket::get()->each(function ($row) {
             $row->catagory = $row->catagory();
             $row->user = $row->user()?->display_name;
@@ -50,7 +51,7 @@ class GetTicketController extends Controller
             });
         }
         $category = CatagoryController::get($catagory_id)->name;
-        return Ticket::where('user_id', Auth::id())->where('cat_id', $catagory_id)->get()->each(function ($row) use ($category){
+        return Ticket::where('user_id', Auth::id())->where('cat_id', $catagory_id)->get()->each(function ($row) use ($category) {
             $row->catagory = $category;
             $row->user = $row->user()?->display_name;
             $row->actor = $row->actor()?->display_name;
@@ -63,14 +64,21 @@ class GetTicketController extends Controller
         if (auth()->user()->access("Ticket-Actors")) {
             // $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
             $category = CatagoryController::get($r->catagory)->name;
+
             return Ticket::where('cat_id', $r->catagory)
-            ->whereIn('status', [ config('ATConfig.status.new'), config('ATConfig.status.in_progress') ])
-            ->get()->each(function ($row) use ($category) {
-                $row->catagory = $category;
-                $row->user = $row->user()?->display_name;
-                $row->actor = $row->actor()?->display_name;
-                // $row->user_level = $row->user()->level();
-            });
+                ->whereIn('status', [config('ATConfig.status.new'), config('ATConfig.status.in_progress')])
+                ->select('id', 'title', 'status', 'user_id', 'updated_at')
+                ->get()
+                ->map(function ($row) use ($category) {
+                    return [
+                        'id' => $row->id,
+                        'title' => $row->title,
+                        'user' => $row->user()?->display_name,
+                        'catagory' => $category,
+                        'status' => $row->status,
+                        'updated_at' => verta($row->updated_at)->format('Y-m-d H:i'),
+                    ];
+                });
         }
         return $this->getMyTicketsByCatagory($r->catagory);
     }
@@ -81,13 +89,19 @@ class GetTicketController extends Controller
             // $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
             $category = CatagoryController::get($r->catagory)->name;
             return Ticket::where('cat_id', $r->catagory)
-            ->whereIn('status', [ config('ATConfig.status.answered'), config('ATConfig.status.closed') ])
-            ->get()->each(function ($row) use ($category) {
-                $row->catagory = $category;
-                $row->user = $row->user()?->display_name;
-                $row->actor = $row->actor()?->display_name;
-                // $row->user_level = $row->user()->level();
-            }, 2);
+                ->whereIn('status', [config('ATConfig.status.answered'), config('ATConfig.status.closed')])
+                ->select('id', 'title', 'status', 'user_id', 'updated_at')
+                ->get()
+                ->map(function ($row) use ($category) {
+                    return [
+                        'id' => $row->id,
+                        'title' => $row->title,
+                        'user' => $row->user()?->display_name,
+                        'catagory' => $category,
+                        'status' => $row->status,
+                        'updated_at' => verta($row->updated_at)->format('Y-m-d H:i'),
+                    ];
+                });
         }
         return $this->getMyTicketsByCatagory($r->catagory);
     }
@@ -98,12 +112,18 @@ class GetTicketController extends Controller
             // $actors = CatagoryActor::where('user_id', Auth::id())->pluck('cat_id');
             $category = CatagoryController::get($r->catagory)->name;
             return Ticket::where('cat_id', $r->catagory)
-            ->get()->each(function ($row) use ($category) {
-                $row->catagory = $category;
-                $row->user = $row->user()?->display_name;
-                $row->actor = $row->actor()?->display_name;
-                // $row->user_level = $row->user()->level();
-            }, 2);
+                ->select('id', 'title', 'status', 'user_id', 'updated_at')
+                ->get()
+                ->map(function ($row) use ($category) {
+                    return [
+                        'id' => $row->id,
+                        'title' => $row->title,
+                        'user' => $row->user()?->display_name,
+                        'catagory' => $category,
+                        'status' => $row->status,
+                        'updated_at' => verta($row->updated_at)->format('Y-m-d H:i'),
+                    ];
+                });
         }
         return $this->getMyTicketsByCatagory($r->catagory);
     }
