@@ -68,7 +68,7 @@
                 [5, "desc"]
             ],
             "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.13.5/i18n/fa.json"
+                "url": "{{ url('public/js/fa.json') }}"
             },
             columns: [{
                     data: 'id'
