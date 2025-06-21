@@ -73,6 +73,8 @@
     </div>
 
         
+        <!-- Bootstrap 4 -->
+        <script src="{{ url('public/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')  . '?' . config('app.version') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ url('public/dashboard/dist/js/adminlte.js')  . '?' . config('app.version') }}"></script>
 
