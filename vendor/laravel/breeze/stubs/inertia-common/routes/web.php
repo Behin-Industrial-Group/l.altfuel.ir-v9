@@ -26,6 +26,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+    return 'asd';
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
