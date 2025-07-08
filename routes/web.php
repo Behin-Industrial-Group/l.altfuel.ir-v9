@@ -94,7 +94,7 @@ Route::get('/', function () {
 Route::get('hidro', [HidroController::class, 'createApi']);
 
 Route::get('/dashboard', function () {
-    return route('admin.index');
+    return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
