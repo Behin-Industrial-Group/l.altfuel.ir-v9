@@ -94,7 +94,7 @@ Route::get('/', function () {
 Route::get('hidro', [HidroController::class, 'createApi']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return route('admin.index');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
@@ -108,7 +108,7 @@ Route::post('/answer', [IssuesController::class, 'showanswer']);
 
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/', [HomeController::class, 'index'])->name('index');
 
     Route::post('/setComments', [CommentsController::class, 'set']);
 
