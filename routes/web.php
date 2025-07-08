@@ -108,7 +108,7 @@ Route::post('/answer', [IssuesController::class, 'showanswer']);
 
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('index');
+    Route::get('/', [HomeController::class, 'index']);
 
     Route::post('/setComments', [CommentsController::class, 'set']);
 
