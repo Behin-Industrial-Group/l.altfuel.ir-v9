@@ -88,6 +88,7 @@ Route::get('generate-code/', function () {
 });
 
 Route::get('/', function () {
+    return redirect()->route('logout');
     return view('auth.login');
 });
 
