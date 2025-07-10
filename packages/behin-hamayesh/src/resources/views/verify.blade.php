@@ -23,12 +23,12 @@
 
             <form action="javascript:void(0)" id="verify-form" method="POST">
                 @csrf
-                <div class="form-group">
+                {{-- <div class="form-group">
                     @include('QrCodeView::qr-code-input')
                     <button type="submit" class="btn btn-primary w-100" onclick="verify()">پذیرش</button>
-                </div>
+                </div> --}}
                 <div class="form-group p-0 mb-0">
-                    <label for="national_code mb-0" style="margin-bottom: 0 ! important">National Code</label>
+                    <label for="national_code mb-0" style="margin-bottom: 0 ! important">کدملی</label>
                     <input type="text" class="form-control" name="national_code" id="national_code">
                 </div>
                 <button type="submit" class="btn btn-primary w-100" onclick="verify()">پذیرش</button>

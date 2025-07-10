@@ -54,7 +54,7 @@ class EventVerificationController extends Controller
                         'role' => (string)trim($data['role']),
                         'type' => (string)trim($data['type']),
                         'status' => (string)trim($data['status']),
-                        'mobile' => (string)trim($data['mobile'])
+                        // 'mobile' => (string)trim($data['mobile'])
                     ]);
                 }
 
