@@ -118,7 +118,6 @@
             }
         }
 
-        console.log('send1');
         // f.append("nonce", window.nonce);
         send_ajax_formdata_request(
             "{{ route('ATRoutes.store') }}",
@@ -127,7 +126,6 @@
                 ticket = response.ticket;
                 show_message(response.message)
                 show_message("لطفا منتظر بمانید")
-                console.log(response);
                 if (typeof(show_comment_modal) === "function") {
                     show_comment_modal(ticket.id, ticket.title, ticket.user_id)
                 } else {

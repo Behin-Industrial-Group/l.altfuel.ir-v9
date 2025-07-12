@@ -34,11 +34,15 @@ class TicketFilterController extends Controller
             $query->whereIn('id', $ticketIds);
         }
 
-        $result = $query->get()->each(function ($row) {
-            $row->catagory = $row->catagory()['name'] ?? '-';
-            $row->user = $row->user()?->display_name ?? '-';
-            $row->actor = $row->actor()?->display_name ?? '-';
-            // $row->user_level = $row->user()->level(); // فعال‌سازی در صورت نیاز
+        $result = $query->get()->map(function ($row) {
+            return [
+                'id' => $row->id,
+                'title' => $row->title,
+                'user' => $row->user()?->display_name,
+                'catagory' => $row->catagory()['name'] ?? '-',
+                'status' => $row->status,
+                'updated_at' => verta($row->updated_at)->format('Y-m-d H:i'),
+            ];
         });
 
         return response()->json($result);

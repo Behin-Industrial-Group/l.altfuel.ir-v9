@@ -48,54 +48,13 @@ use function PHPSTORM_META\type;
 |
 */
 
-// Route::get('pass', function(){
-//     return password_hash('', 1);
-// });
-
-
-Route::get('tst', function () {
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://voip.altfuel.ir/test.php');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, False);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, False);
-    $er = curl_error($ch);
-    $result = curl_exec($ch);
-    return $result;
-});
-
-Route::get('test', function (SMSController $sms) {
-    $excel = SimpleXLSX::parse(public_path('raste.xlsx'));
-    $rows = $excel->rows();
-    echo "<pre>";
-    for ($i = 0; $i < count($rows); $i++) {
-        $raste = $rows[$i][6];
-        $str = '';
-        if(str_contains($raste, "خودرو" )){
-            $str .= "khodro";
-        }
-        echo "$raste \t $str <br>";
-        // sleep(3);
-        // $sms->send($mobile, $body);
-    }
-});
-
-Route::get('hamayesh/barname', function () {
-    header("Location: http://altfuel.ir/wp-content/uploads/2022/06/همایش-1401-VER-24.pdf");
-});
-
 Route::get('/migrate', function () {
     Artisan::call('config:cache');
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
-    Artisan::call('migrate');
+    // Artisan::call('migrate');
 });
 
-Route::get('/run-schedule', function () {
-    echo date("Y-m-d H:i");
-    echo "<pre>";
-    Artisan::call('schedule:run');
-});
 
 
 Route::post('/mv/send-code', [MobileVerificationController::class, 'send_code_sms']);
@@ -129,13 +88,14 @@ Route::get('generate-code/', function () {
 });
 
 Route::get('/', function () {
+    return redirect()->route('logout');
     return view('auth.login');
 });
 
 Route::get('hidro', [HidroController::class, 'createApi']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
@@ -143,60 +103,10 @@ require __DIR__ . '/irngv.php';
 require __DIR__ . '/asnaf_lpg.php';
 
 
-Route::get('/rsgs', function () {
-    header("Location: http://altfuel.ir/wp-content/uploads/2020/12/%D8%B1%D8%A7%D9%87%D9%86%D9%85%D8%A7%DB%8C-%D9%85%D8%B1%D8%A7%DA%A9%D8%B2-%D8%AE%D8%AF%D9%85%D8%A7%D8%AA-%D9%85%D8%AA%D9%82%D8%A7%D8%B6%DB%8C-%D8%B5%D8%AF%D9%88%D8%B1-%DA%AF%D9%88%D8%A7%D9%87%DB%8C-%D8%B3%D9%84%D8%A7%D9%85%D8%AA-01-1.pdf");
-});
-
-Route::get('/tel', [TelegramController::class, 'test']);
-Route::get('/webhook', [TelegramController::class, 'webhook']);
-
-Route::post('/shopinglable', [ShopingController::class, 'index']);
-Route::get('/shopinglable/verify', [ShopingController::class, 'verify']);
-
-Route::any('/irobot', [IssuesRobotController::class, 'getRequest']);
-
-Route::get('/issues', function () {
-    return view('ticket');
-});
-// Route::get( '/issues/{id}', [IssuesController::class, 'issuesCatagoryForm']);
-// Route::get( '/issues/survay/{id}', [IssuesController::class, 'SetSurvay']);
-// Route::post( '/issues', [IssuesController::class, 'Register']);
 
 Route::get('/answer', [IssuesController::class, 'answerform']);
 Route::post('/answer', [IssuesController::class, 'showanswer']);
 
-Route::get('/platereader', [DownloadController::class, 'PlatereaderForm']);
-Route::post('/platereaderdownload', [DownloadController::class, 'Platereader']);
-
-//*** BIMEH MARAKEZ
-/*
-Route::get( '/bimeh', 'BimehController@index' );
-Route::post( '/bimeh', 'BimehController@calculatePrice' );
-Route::post( '/bimeh/pay', 'BimehController@pay' );
-Route::get( '/bimeh/success/{codeEtehadie}/{price}/{pType}/{number}', 'BimehController@success' );
-*/
-
-Route::prefix('/hamayesh/')->group(function () {
-    Route::get('workshop', [HamayeshController::class, 'register_workshop_form']);
-});
-
-
-Route::prefix('/takmili')->group(function () {
-    Route::get('/', [BimehController::class, 'registerForm'])->name('takmiliform');
-    Route::post('/', [BimehController::class, 'register']);
-    Route::get('/success/{key}/{price}', [BimehController::class, 'takmiliSuccess']);
-
-    Route::get('/login', [BimehController::class, 'loginForm']);
-    Route::post('/login', [BimehController::class, 'show']);
-});
-
-// Route::prefix('/bedehi')->group(function () {
-//     Route::get('/', [FinController::class, 'bedehiHomePage']);
-//     Route::post('/', [FinController::class, 'confirmBedehi'])->name('confirm-bedehi');
-//     Route::post('/pay', [FinController::class, 'pay'])->name('bedehi-pay');
-//     Route::get('/success/{type}/{code}/{price}', [FinController::class, 'success']);
-//     Route::get('/{type}/{nid}/{mobile}/{code}', [FinController::class, 'confirmForm'])->name('confirm-form');
-// });
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(function () {
     Route::get('/', [HomeController::class, 'index']);
@@ -297,10 +207,6 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
         Route::post('/add', 'ContractorsController@addmarkaz');
     });
 
-    Route::prefix('/search-issue')->group(function () {
-        //ISSUES SEARCH
-        Route::get('/{catagory}/{field}/{q}', [IssuesController::class, 'search']);
-    });
 
     Route::prefix('/search-box')->group(function () {
         //ISSUES SEARCH
@@ -316,43 +222,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
     });
 
 
-    Route::prefix('/issues')->group(function () {
-        Route::get('/catagories', [IssuesController::class, 'catagories_form']);
-        Route::get('/add-catagory', [IssuesController::class, 'add_catagory']);
-        Route::get('/createIssue', [IssuesController::class, 'create_issue_form']);
-        Route::post('/createIssue', [IssuesController::class, 'create_issue']);
-        Route::post('/create-new-issue', [IssuesController::class, 'register_issue']);
-        Route::post('/reg-answer', [IssuesController::class, 'RegisterAnswer']);
-        Route::post('/set-comment', [CommentsController::class, 'set']);
-        Route::post('/sendto', [IssuesController::class, 'sendto']);
 
-        Route::prefix('/show')->group(function () {
-            Route::prefix('/{catagory}')->group(function () {
-                Route::get('/', [IssuesController::class, 'issues_show']);
-                Route::get('/{tracking}', [IssuesController::class, 'issues_show']);
-                Route::get('/national-id/{q}', [IssuesController::class, 'issue_show']);
-                Route::post('/national-id/{id}', [IssuesController::class, 'Reganswer']);
-            });
-        });
-
-        Route::prefix('/get')->group(function () {
-            Route::get('/{catagory}', [IssuesController::class, 'GetIssues']);
-            Route::get('/{catagory}/{tracking}', [IssuesController::class, 'GetIssues']);
-        });
-
-        Route::get('/get-issues-no/{no}', [IssuesController::class, 'GetIssuesNumberDatalist']);
-        Route::post('/set-related-issue/{issue_id}', [IssuesController::class, 'SetRelatedIssue']);
-    });
-
-    Route::prefix('/videos')->group(function () {
-        Route::get('show/{catagory}', [VideosController::class, 'showList']);
-
-        Route::get('add', [VideosController::class, 'addForm']);
-        Route::post('add', [VideosController::class, 'add']);
-
-        Route::get('addCatagory', [VideosController::class, 'addCatagoryForm']);
-        Route::post('addCatagory', [VideosController::class, 'addCatagory']);
-    });
 
     Route::get('/smstemplate', function () {
         return view('admin.smstemplate');
@@ -364,12 +234,6 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
         });
     });
 
-    Route::prefix('/whatsapp')->group(function () {
-        Route::get('/writeMsg', function () {
-            return view('admin.sendMessage.write');
-        });
-        Route::post('/sendMsg', 'WhatsappController@sendMessage');
-    });
 
 
 
@@ -401,9 +265,6 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
         });
     });
 
-    Route::prefix('/takmili')->group(function () {
-        Route::get('/registerors', [BimehController::class, 'showAll']);
-    });
 
     Route::prefix('/ins')->group(function () {
         Route::get('asign/ins/form', [InsController::class, 'asignInsForm']);
@@ -427,18 +288,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
         Route::get('/number-of-unread', [MessageController::class, 'numberOfUnread']);
     });
 
-    Route::prefix('/robot')->group(function () {
-        Route::get('/add', [IssuesRobotController::class, 'AddCatagoryForm']);
-        Route::get('/edit', [IssuesRobotController::class, 'EditAnswerForm']);
-        Route::post('/edit', [IssuesRobotController::class, 'EditAnswer']);
 
-        Route::get('/get/catagory', [IssuesRobotController::class, 'GetCatagory']);
-        Route::get('/get/answer/{value}', [IssuesRobotController::class, 'GetAnswer']);
-        Route::post('/set', [IssuesRobotController::class, 'Store']);
-        Route::get('/receive_answer/{id}', [IssuesRobotController::class, 'RecieveAnswer']);
-    });
-
-    Route::get('/chang', [IssuesController::class, 'chang']);
 
     Route::prefix('/disable')->group(function () {
         Route::get('/', [DisableAppController::class, 'Index']);
@@ -481,4 +331,6 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
 
     require __DIR__ . '/report.php';
     require __DIR__ . '/voip.php';
+    
 });
+require __DIR__ . '/queue.php';

@@ -13,8 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ url('public/dashboard/plugins/font-awesome/css/font-awesome.min.css')  . '?' . config('app.version') }}">
-    <!-- Ionicons -->
-    {{-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/adminlte.min.css')  . '?' . config('app.version') }}">
     <!-- Date Picker -->
@@ -23,8 +21,6 @@
     <link rel="stylesheet" href="{{ url('public/dashboard/plugins/daterangepicker/daterangepicker-bs3.css')  . '?' . config('app.version') }}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ url('public/dashboard/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')  . '?' . config('app.version') }}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- bootstrap rtl -->
     <link rel="stylesheet" href="{{ url('public/dashboard/dist/css/bootstrap-rtl.min.css')  . '?' . config('app.version') }}">
     <!-- template rtl version -->
@@ -76,18 +72,13 @@
         </aside>
     </div>
 
-        <!-- jQuery UI 1.11.4 -->
-        <script src="{{ url('public/dashboard/plugins/jQueryUI/jquery-ui.min.js')  . '?' . config('app.version') }}"></script>
-        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-        <script>
-        $.widget.bridge('uibutton', $.ui.button)
-        </script>
+        
         <!-- Bootstrap 4 -->
         <script src="{{ url('public/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')  . '?' . config('app.version') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ url('public/dashboard/dist/js/adminlte.js')  . '?' . config('app.version') }}"></script>
 
-        <script src="{{ url('public/dashboard/plugins/html5-buttons/buttons.html5.min.js')  . '?' . config('app.version') }}"></script>
+        {{-- <script src="{{ url('public/dashboard/plugins/html5-buttons/buttons.html5.min.js')  . '?' . config('app.version') }}"></script> --}}
         <script src="{{ Url('public/plugins/persian-datepicker/persian-date.js')  . '?' . config('app.version') }}"></script>
         <script src="{{ Url('public/plugins/persian-datepicker/persian-datepicker.js')  . '?' . config('app.version') }}"></script>
 

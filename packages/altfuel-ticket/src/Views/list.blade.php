@@ -20,7 +20,7 @@
                             شده</button>
                         <br>
                         <br>
-                        @if(auth()->user()->access('جستجو پیشرفته'))
+                        @if (auth()->user()->access('جستجو پیشرفته'))
                             @include('ATView::partial-view.filter-form')
                         @endif
                     @else
@@ -38,12 +38,23 @@
                         <th>عنوان</th>
                         <th>ثبت کننده</th>
                         <th>دسته بندی</th>
-                        <th>کارشناس</th>
                         <th>وضعیت</th>
                         <th>آخرین تغییرات</th>
                         {{-- <th>امتیاز</th> --}}
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach ($myTickets as $ticket)
+                        <tr>
+                            <td>{{ $ticket->id }}</td>
+                            <td>{{ $ticket->title }}</td>
+                            <td>{{ $ticket->user }}</td>
+                            <td>{{ $ticket->catagory }}</td>
+                            <td>{{ $ticket->status }}</td>
+                            <td dir="ltr">{{ verta($ticket->updated_at)->format('Y-m-d H:i') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
 
@@ -52,17 +63,33 @@
 
 @section('script')
     <script>
-        function filterAll() {
-            data = $('#cat-form').serialize();
-            send_ajax_request(
-                "{{ route('ATRoutes.get.getAllByCatagory') }}",
-                data,
-                function(data) {
-                    console.log(data);
-                    update_datatable(data);
+        var table = $('#tickets-table').DataTable({
+            "order": [
+                [5, "desc"]
+            ],
+            "language": {
+                "url": "{{ url('public/js/fa.json') }}"
+            },
+            columns: [{
+                    data: 'id'
+                },
+                {
+                    data: 'title'
+                },
+                {
+                    data: 'user'
+                },
+                {
+                    data: 'catagory'
+                },
+                {
+                    data: 'status'
+                },
+                {
+                    data: 'updated_at'
                 }
-            )
-        }
+            ]
+        })
 
         function filter() {
             data = $('#cat-form').serialize();
@@ -75,6 +102,25 @@
                 }
             )
         }
+
+        table.on('click', 'tr', function() {
+            data = table.row(this).data();
+            show_comment_modal(data.id, data.title, data.user);
+        })
+
+        function filterAll() {
+            data = $('#cat-form').serialize();
+            send_ajax_request(
+                "{{ route('ATRoutes.get.getAllByCatagory') }}",
+                data,
+                function(data) {
+                    console.log(data);
+                    update_datatable(data);
+                }
+            )
+        }
+
+
 
         function oldTicket() {
             data = $('#cat-form').serialize();
@@ -100,80 +146,6 @@
             )
         }
 
-        var table = create_datatable(
-            'tickets-table',
-            "{{ route('ATRoutes.get.getAll') }}",
-            [{
-                    data: 'id'
-                },
-                {
-                    data: 'title',
-                    render: function(title) {
-                        return `<a href="#">${title}</a>`;
-                    }
-                },
-                {
-                    data: 'user',
-                    render: function(data, type, row) {
-                        if (row.user_level == 2) {
-                            return data + ' <i style="color:royalblue" class="fa fa-check-circle"></i>'
-                        }
-                        return data
-                    }
-                },
-                {
-                    data: 'catagory'
-                },
-                {
-                    data: 'actor'
-                },
-                {
-                    data: 'status',
-                    render: function(data) {
-                        if (data == "{{ config('ATConfig.status.new') }}") {
-                            return '1-' + data
-                        } else if (data == "{{ config('ATConfig.status.in_progress') }}") {
-                            return '2-' + data
-                        } else if (data == "{{ config('ATConfig.status.answered') }}") {
-                            return '3-' + data
-                        } else if (data == "{{ config('ATConfig.status.closed') }}") {
-                            return '4-' + data
-                        } else {
-                            return data
-                        }
-                    }
-                },
-                {
-                    data: 'updated_at',
-                    render: function(data) {
-                        datetime = new Date(data);
-                        date = datetime.toLocaleDateString('fa-IR');
-                        time = datetime.toLocaleTimeString('fa-IR');
-                        return '<span dir="auto" style="float: left">' + date + ' ' + time + '</span>';
-                    }
-                },
-                // {data: 'score'}
-            ],
-            null,
-            [
-                [5, 'asc'],
-                [6, 'desc']
-            ]
-        );
-
-        send_ajax_get_request(
-            "{{ route('ATRoutes.get.getMyTickets') }}",
-            function(data) {
-                update_datatable(data);
-            }
-        )
-
-        table.on('click', 'tr', function() {
-            var data = table.row(this).data();
-            if (data != undefined) {
-                show_comment_modal(data.id, data.title, data.user_id);
-            }
-        })
 
         function show_comment_modal(ticket_id, title, user) {
             var fd = new FormData();

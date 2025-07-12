@@ -9,13 +9,13 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Mkhodroo\AltfuelTicket\Jobs\SendTicketSmsJob;
 use Mkhodroo\AltfuelTicket\Models\CatagoryActor;
 use Mkhodroo\AltfuelTicket\Models\CommentAttachments;
 use Mkhodroo\AltfuelTicket\Models\ImprovedAnswer;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketComment;
 use Mkhodroo\AltfuelTicket\Requests\TicketRequest;
-use Mkhodroo\SmsTemplate\Controllers\SendSmsController;
 
 class CreateTicketController extends Controller
 {
@@ -67,10 +67,9 @@ class CreateTicketController extends Controller
             }
         }
         if(Auth::id() != $ticket->user_id){
-            $message = "کاربر گرامی \n یک پاسخ برای تیکت شماره $ticket->id ثبت شد. \n l.altfuel.ir";
-            $smsSender = new SendSmsController();
-            $smsSender->send($ticket->user()->email, $message);
+            SendTicketSmsJob::dispatch($ticket->user()->email, $ticket->id);
         }
+        
         return response([
             'ticket' => $ticket,
             'message' => "ثبت شد"

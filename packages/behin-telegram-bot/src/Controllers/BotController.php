@@ -64,7 +64,7 @@ class BotController extends Controller
 
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
-                'text' => "سلام! من صفا هستم 🤖\nدستیار هوش مصنوعی شما در تلگرام.\nبرای شروع لطفاً نام خود را وارد کن."
+                'text' => "سلام! من پاکو هستم 🤖\nدستیار هوش مصنوعی شما در تلگرام.\nبرای شروع لطفاً نام خود را وارد کن."
             ]);
             return;
         }
@@ -133,7 +133,7 @@ class BotController extends Controller
 
             $response = $telegram->sendMessage([
                 'chat_id' => $chat_id,
-                'text' => $botResponse . "\n\nآیا این پاسخ مفید بود؟",
+                'text' => $botResponse,
                 'reply_markup' => json_encode($keyboard)
             ]);
 
@@ -150,7 +150,7 @@ class BotController extends Controller
         if ($text === '/start') {
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
-                'text' => "سلام {$user->name} ! من صفا هستم 🤖\nدستیار هوش مصنوعی شما در تلگرام.\nسوالت رو بپرس"
+                'text' => "سلام {$user->name} ! من پاکو هستم 🤖\nدستیار هوش مصنوعی شما در تلگرام.\nچه کمکی از دستم بر میاد"
             ]);
             return;
         }

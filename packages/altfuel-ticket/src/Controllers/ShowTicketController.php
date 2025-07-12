@@ -13,9 +13,10 @@ class ShowTicketController extends Controller
 {
     function list(): View
     {
-        $render = new TicketAssignController();
-        $render->updateActorIdToNull();
-        return view('ATView::list');
+        // $render = new TicketAssignController();
+        // $render->updateActorIdToNull();
+        $myTickets = (new GetTicketController())->getMyTickets();
+        return view('ATView::list', compact('myTickets'));
     }
 
     function show(Request $r)

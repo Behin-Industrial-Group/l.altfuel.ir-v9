@@ -1,115 +1,135 @@
-<button type="button" class="btn-close border-0 bg-transparent" style="font-size:32px" data-dismiss="modal" aria-label="Close">&times;</button>
-<div class="row">
-    <div class="col-sm-4">
-        شناسه تیکت : {{ $ticket->id }} <br>
-        {{ $ticket->user()?->display_name }} @if($ticket->user()->role_id == config('user_profile.agency_role')) <i style="color:royalblue" class="fa fa-check-circle"></i> @endif  <br>
-        شماره همراه : {{ $ticket->user()->email ?? '' }} <br>
-        کارشناس : @if ($ticket->actor_id) {{ $ticket->actor()?->display_name }} @else تخصیص داده نشده @endif
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-start mb-3">
+        <h5 class="mb-0">شناسه تیکت: <strong>{{ $ticket->id }}</strong></h5>
+        <button type="button" class="btn btn-sm" onclick="closeModal()" data-bs-dismiss="modal"
+            aria-label="Close"><i class="fa fa-times"></i></button>
     </div>
-    <div class="row col-sm-8">
-        @foreach (config('ATConfig.status') as $key => $status)
-            <div class="col-sm-3 p-1">
-                <button class="btn col-sm-12 status-btn" id="{{ $key }}"
-                    onclick="change_status('{{ $key }}')">{{ __($status) }}
-                </button>
+
+    <div class="row g-4">
+        <!-- اطلاعات کاربر -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <p class="mb-2">
+                        <strong>کاربر:</strong> {{ $ticket->user()?->display_name }}
+                        @if ($ticket->user()->role_id == config('user_profile.agency_role'))
+                            <i class="fa fa-check-circle text-primary"></i>
+                        @endif
+                    </p>
+                    <p class="mb-2"><strong>شماره همراه:</strong> {{ $ticket->user()->email ?? '' }}</p>
+                    <p class="mb-0">
+                        <strong>کارشناس:</strong>
+                        {{ $ticket->actor_id ? $ticket->actor()?->display_name : 'تخصیص داده نشده' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- وضعیت‌ها -->
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="row g-2">
+                        @foreach (config('ATConfig.status') as $key => $status)
+                            <div class="col-6 col-md-3">
+                                <button class="btn btn-outline-secondary w-100 status-btn" id="{{ $key }}"
+                                    onclick="change_status('{{ $key }}')">{{ __($status) }}</button>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- بخش نظرات -->
+    <hr class="my-4">
+    <p>پیام ها</p>
+    <div class="direct-chat-messages overflow-auto border rounded p-3 bg-light" style="height: 500px">
+        @foreach ($ticket->comments() as $comment)
+            <div class="direct-chat-msg {{ $comment->user()->id === auth()->user()->id ? 'text-end' : '' }}">
+                <div class="d-flex align-items-start mb-2">
+                    <div class="p-3 rounded shadow-sm w-100 {{ $comment->user()->id === auth()->user()->id ? 'bg-success' : 'bg-white' }}">
+                        <div class="d-flex justify-content-between">
+                            <small>{{ $comment->user()?->display_name ?? '' }}</small>
+                            <small class="text-muted">{{ verta($comment->created_at) }}</small>
+                        </div>
+                        <hr>
+                        <div style="white-space: pre-line">{{ $comment->text ?? '' }}</div>
+
+                        @foreach ($comment->attachments() as $index => $attach)
+                            <a class="d-block mt-2" href="{{ url($attach->file) }}" target="_blank">پیوست
+                                {{ $index + 1 }}</a>
+                        @endforeach
+
+                        @if ($comment->attachments()->count() > 1)
+                            <a href="{{ route('ATRoutes.download.zip', ['id' => $comment->id]) }}"
+                                class="btn btn-sm btn-outline-primary mt-2">دانلود همه به صورت یکجا</a>
+                        @endif
+                    </div>
+                </div>
             </div>
         @endforeach
-    </div>
-    @include('ATView::partial-view.score', ['ticket_id' => $ticket->ticket_id])
-</div>
-<hr>
-<div class="direct-chat-messages" style="height: 500px">
-    @foreach ($ticket->comments() as $comment)
-        <div class="direct-chat-msg {{ $comment->user()->id === auth()->user()->id ? 'right' : '' }}">
-            <div class="direct-chat-infos clearfix">
 
+        <div class="mt-3">
+            <a href="{{ route('ATRoutes.ticket.download.zip', ['id' => $ticket->id]) }}"
+                class="btn btn-outline-primary">دانلود همه پیوست‌ها</a>
+        </div>
+    </div>
+
+    <!-- فرم کامنت یا فرم بسته بودن تیکت -->
+    <div class="mt-4">
+        @if ($ticket->status === config('ATConfig.status.closed'))
+            <div class="alert alert-danger text-center">
+                {{ __('This ticket is closed') }}
             </div>
-            <img class="direct-chat-img" src="{{ url('public/dashboard/dist/img/avatar5.png') }}"
-                alt="message user image">
-            <div class="direct-chat-text">
-                <div>
-                    <span class="direct-chat-name">{{ $comment->user()?->display_name ?? '' }}</span>
-                    <span class="direct-chat-timestamp float-left">{{ verta($comment->created_at) }}</span>
+        @else
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="card-body">
+                    @include('ATView::partial-view.add-comment-form', [
+                        'form_id' => 'comment-form',
+                        'ticket_id' => $ticket->ticket_id,
+                    ])
                 </div>
-
-                <hr>
-                <p style="white-space: pre-line">
-                    {{ $comment->text ?? '' }}
-                </p>
-                <br>
-                @foreach ($comment->attachments() as $index => $attach)
-                    <a href="{{ url("$attach->file") }}" target="_blank">پیوست {{ $index + 1 }}</a>
-                    <br>
-                @endforeach
-                @if ($comment->attachments()->count() > 1)
-                    <a href="{{ route('ATRoutes.download.zip', [ 'id' => $comment->id ]) }}"  class="btn btn-primary">
-                        {{ trans('دانلود همه به صورت یکجا') }}
-                    </a>
-                @endif
-
             </div>
 
-        </div>
-        <div id="end"></div>
-    @endforeach
-    <a href="{{ route('ATRoutes.ticket.download.zip', [ 'id' => $ticket->id ]) }}"  class="btn btn-primary">
-        {{ trans('دانلود همه پیوست ها به صورت یکجا') }}
-    </a>
+            @if (auth()->user()->access('change-catagory'))
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        @include('ATView::partial-view.change-catagory-form', [
+                            'form_id' => 'chage-cat-form',
+                            'ticket_id' => $ticket->ticket_id,
+                        ])
+                    </div>
+                </div>
+            @endif
+        @endif
+    </div>
 </div>
-
-
-@if ($ticket->status === config('ATConfig.status.closed'))
-    <div class="alert alert-danger">
-        {{ __('This ticket is closed') }}
-    </div>
-@else
-    <div class="card-body">
-        @include('ATView::partial-view.add-comment-form', [
-            'form_id' => 'comment-form',
-            'ticket_id' => $ticket->ticket_id,
-        ])
-    </div>
-
-    @if (auth()->user()->access('change-catagory'))
-        <div class="card-body">
-            @include('ATView::partial-view.change-catagory-form', [
-                'form_id' => 'chage-cat-form',
-                'ticket_id' => $ticket->ticket_id,
-            ])
-        </div>
-    @endif
-@endif
-
-
 
 <script>
-    change_status_btn_color()
+    change_status_btn_color();
 
     function change_status_btn_color() {
-        url = "{{ route('ATRoutes.get.status', ['id' => 'id']) }}"
-        url = url.replace('id', '{{ $ticket->ticket_id }}')
-        send_ajax_get_request(
-            url,
-            function(res) {
-                $('.status-btn').css('background', '#f8f9fa')
-                console.log(res);
-                $('#' + res).css('background', 'red')
-            }
-        )
+        let url = "{{ route('ATRoutes.get.status', ['id' => 'id']) }}".replace('id', '{{ $ticket->ticket_id }}');
+        send_ajax_get_request(url, function(res) {
+            $('.status-btn').css('background', '#f8f9fa');
+            $('#' + res).css('background', '#fa7f69');
+        });
     }
 
-    function change_status(status_key) {
-        fd = new FormData()
-        fd.append('ticket_id', '{{ $ticket->ticket_id }}')
-        fd.append('status_key', status_key)
-        send_ajax_formdata_request(
-            "{{ route('ATRoutes.changeStatus') }}",
-            fd,
-            function(res) {
-                console.log(res);
-                change_status_btn_color()
-                filter();
-            }
-        )
+    window.change_status = function(status_key) {
+        const fd = new FormData();
+        fd.append('ticket_id', '{{ $ticket->ticket_id }}');
+        fd.append('status_key', status_key);
+        send_ajax_formdata_request("{{ route('ATRoutes.changeStatus') }}", fd, function(res) {
+            console.log(res);
+            change_status_btn_color();
+            filter();
+        });
+    }
+
+    function closeModal() {
+        $('#admin-modal').modal('hide');
     }
 </script>
