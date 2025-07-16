@@ -8,10 +8,13 @@
             </div>
             <div class="card-body">
                 {{-- 🔔 اطلاعیه تماس --}}
-                <div class="alert alert-warning text-right" role="alert" style="font-size: 14px;">
+                <div class="alert alert-success text-right" role="alert" style="font-size: 14px;">
+                    در حال حاضر خطوط اصلی اتحادیه فعال هستند <br> <strong>02191013791</strong> <br> <strong>02191012961</strong>
+                </div>
+                {{-- <div class="alert alert-warning text-right" role="alert" style="font-size: 14px;">
                     در صورتی که موفق به تماس با خطوط اصلی نشدید، لطفاً با شماره پشتیبان <strong>02191012988</strong> تماس
                     بگیرید.
-                </div>
+                </div> --}}
                 <form action="javascript:void(0)" method="post" id="login-form">
                     @csrf
                     <div class="input-group mb-3">
