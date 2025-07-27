@@ -109,6 +109,9 @@ Route::post('/answer', [IssuesController::class, 'showanswer']);
 
 
 Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(function () {
+
+    Route::get('/agency-info-excel', [AgencyController::class, 'getStructuredAgencyData']);
+
     Route::get('/', [HomeController::class, 'index']);
 
     Route::post('/setComments', [CommentsController::class, 'set']);
@@ -331,6 +334,6 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'access'])->group(functi
 
     require __DIR__ . '/report.php';
     require __DIR__ . '/voip.php';
-    
+
 });
 require __DIR__ . '/queue.php';
