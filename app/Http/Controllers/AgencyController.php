@@ -105,7 +105,7 @@ class AgencyController extends Controller
 
         // گرفتن اطلاعات شهرها و استان‌ها
         $cities = DB::table('cities')->get()->keyBy('id');
-        $provinces = DB::table('province')->get()->keyBy('id');
+        $provinces = DB::table('Province')->get()->keyBy('id');
 
         // گرفتن اطلاعات key-value
         $rawData = DB::table('agency_info')
