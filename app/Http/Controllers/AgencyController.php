@@ -99,13 +99,15 @@ class AgencyController extends Controller
             'description',
             'province',
             'city',
+            'agency_code',
             'enable',
         ];
 
-        // گرفتن اطلاعات شهرها (کلید بر اساس id برای دسترسی سریع)
+        // گرفتن اطلاعات شهرها و استان‌ها
         $cities = DB::table('cities')->get()->keyBy('id');
+        $provinces = DB::table('province')->get()->keyBy('id');
 
-        // گرفتن اطلاعات موردنظر از جدول agency_info
+        // گرفتن اطلاعات key-value
         $rawData = DB::table('agency_info')
             ->whereIn('key', $desiredKeys)
             ->get();
@@ -113,28 +115,23 @@ class AgencyController extends Controller
         // گروه‌بندی بر اساس parent_id
         $grouped = $rawData->groupBy('parent_id');
 
-        // تبدیل key-value به ساختار جدولی
-        $structured = $grouped->map(function ($items, $parentId) use ($desiredKeys, $cities) {
+        // ساختن خروجی نهایی
+        $structured = $grouped->map(function ($items, $parentId) use ($desiredKeys, $cities, $provinces) {
             $row = ['parent_id' => $parentId];
 
             foreach ($desiredKeys as $key) {
                 $value = $items->firstWhere('key', $key)->value ?? null;
 
-                // تبدیل آیدی شهر و استان به نام
-                if ($key === 'city' || $key === 'province') {
+                if ($key === 'city') {
                     $cityId = intval($value);
-                    if (isset($cities[$cityId])) {
-                        if ($key === 'city') {
-                            $value = $cities[$cityId]->city;
-                        } elseif ($key === 'province') {
-                            $value = $cities[$cityId]->province ?? 'نامشخص';
-                        }
-                    } else {
-                        $value = 'نامشخص';
-                    }
+                    $value = $cities[$cityId]->name ?? 'نامشخص';
                 }
 
-                // تبدیل enable به متن
+                if ($key === 'province') {
+                    $provinceId = intval($value);
+                    $value = $provinces[$provinceId]->name ?? 'نامشخص';
+                }
+
                 if ($key === 'enable') {
                     $value = match ($value) {
                         '1', 1 => 'فعال',
