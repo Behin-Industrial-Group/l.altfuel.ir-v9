@@ -129,7 +129,7 @@ class AgencyController extends Controller
 
                 if ($key === 'province') {
                     $provinceId = intval($value);
-                    $value = $provinces[$provinceId]->Name ?? 'نامشخص';
+                    $value = $provinces[$provinceId]->name ?? 'نامشخص';
                 }
 
                 if ($key === 'enable') {
