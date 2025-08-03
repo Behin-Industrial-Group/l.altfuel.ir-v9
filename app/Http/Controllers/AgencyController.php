@@ -84,9 +84,6 @@ class AgencyController extends Controller
 
     public function getStructuredAgencyData()
     {
-
-    // , 'membership_96', 'membership_97', 'membership_98', 'membership_99', 'membership_00', 'membership_01', 'membership_02', 'debt1'
-
         $desiredKeys = [
             'customer_type',
             'firstname',
@@ -102,10 +99,13 @@ class AgencyController extends Controller
             'description',
             'province',
             'city',
-            'agency_code'
+            'enable',
         ];
 
-        // دریافت فقط key‌های مورد نظر
+        // گرفتن اطلاعات شهرها (کلید بر اساس id برای دسترسی سریع)
+        $cities = DB::table('cities')->get()->keyBy('id');
+
+        // گرفتن اطلاعات موردنظر از جدول agency_info
         $rawData = DB::table('agency_info')
             ->whereIn('key', $desiredKeys)
             ->get();
@@ -113,22 +113,45 @@ class AgencyController extends Controller
         // گروه‌بندی بر اساس parent_id
         $grouped = $rawData->groupBy('parent_id');
 
-        // ساختن داده ساختاریافته
-        $structured = $grouped->map(function ($items, $parentId) use ($desiredKeys) {
+        // تبدیل key-value به ساختار جدولی
+        $structured = $grouped->map(function ($items, $parentId) use ($desiredKeys, $cities) {
             $row = ['parent_id' => $parentId];
-            foreach ($desiredKeys as $key) {
-                $row[$key] = $items->firstWhere('key', $key)->value ?? null;
-            }
-            return $row;
-        })->values(); // تبدیل از collection به array ساده
 
-        // گزینه 1: برای ارسال به ویو blade
+            foreach ($desiredKeys as $key) {
+                $value = $items->firstWhere('key', $key)->value ?? null;
+
+                // تبدیل آیدی شهر و استان به نام
+                if ($key === 'city' || $key === 'province') {
+                    $cityId = intval($value);
+                    if (isset($cities[$cityId])) {
+                        if ($key === 'city') {
+                            $value = $cities[$cityId]->city;
+                        } elseif ($key === 'province') {
+                            $value = $cities[$cityId]->province ?? 'نامشخص';
+                        }
+                    } else {
+                        $value = 'نامشخص';
+                    }
+                }
+
+                // تبدیل enable به متن
+                if ($key === 'enable') {
+                    $value = match ($value) {
+                        '1', 1 => 'فعال',
+                        '0', 0 => 'غیرفعال',
+                        default => 'نامشخص',
+                    };
+                }
+
+                $row[$key] = $value;
+            }
+
+            return $row;
+        })->values();
+
         return view('admin.agenciesInfoExcel', [
             'agencies' => $structured,
             'columns' => $desiredKeys,
         ]);
-
-        // گزینه 2: برای API یا Vue / React یا AJAX
-        // return response()->json($structured);
     }
 }

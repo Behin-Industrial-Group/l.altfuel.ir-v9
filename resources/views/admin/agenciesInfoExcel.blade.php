@@ -34,7 +34,7 @@
 <script>
     $(document).ready(function() {
         $('#agency-table').DataTable({
-            pageLength: 25,
+            pageLength: 2500,
             responsive: true,
             language: {
                 search: "جستجو:",
