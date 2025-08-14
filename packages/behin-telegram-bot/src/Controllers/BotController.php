@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Mkhodroo\AltfuelTicket\Controllers\LangflowController;
 use TelegramBot\Models\TelegramUser;
+use TelegramTicket\Models\TelegramTicket;
 
 class BotController extends Controller
 {
@@ -175,6 +176,30 @@ class BotController extends Controller
                 'updated_at' => now()
             ]);
 
+            if ($action === 'dislike') {
+                $lastMessages = DB::table('telegram_messages')
+                    ->where('user_id', $chatId)
+                    ->orderByDesc('id')
+                    ->limit(3)
+                    ->get()
+                    ->reverse();
+
+                $compiledMessages = "📩 پیام‌های اخیر کاربر:\n";
+                foreach ($lastMessages as $msg) {
+                    $compiledMessages .= "👤 کاربر: {$msg->user_message}\n🤖 ربات: {$msg->bot_response}\n\n";
+                }
+
+                // ✅ ایجاد تیکت با استفاده از مدل پکیج
+                TelegramTicket::create([
+                    'user_id' => $chatId,
+                    'messages' => $compiledMessages,
+                    'status' => 'open',
+                ]);
+
+                Log::info("تیکت جدید برای پشتیبانی ثبت شد:\n" . $compiledMessages);
+            }
+
+
             $telegram = new TelegramController(config('telegram_bot_config.TOKEN'));
 
             // حذف دکمه‌ها
@@ -191,5 +216,4 @@ class BotController extends Controller
             ]);
         }
     }
-
 }
