@@ -58,8 +58,7 @@
             "ExcelReader\\": "packages/behin-excel-reader/src/",
             "Behin\\Hamayesh\\": "packages/behin-hamayesh/src/",
             "Registration\\": "packages/behin-registration/src/",
-            "Behin\\Complaint\\": "packages/behin-complaint/src/",
-            "TelegramTicket\\": "packages/behin-telegram-ticket/src/"
+            "Behin\\Complaint\\": "packages/behin-complaint/src/"
         }
     },
     "autoload-dev": {

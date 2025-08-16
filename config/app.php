@@ -252,7 +252,6 @@ return [
         Behin\Complaint\ComplaintProvider::class,
         Behin\Hamayesh\BehinHamayeshServiceProvider::class,
         RegistrationServiceProvider::class,
-        \TelegramTicket\TelegramTicketProvider::class,
 
         // \Mkhodroo\CaseInsensitiveTranslate\CaseInsensitiveTranslateProvider::class,
         // MKhodroo\UserRoles\UserRolesServiceProvider::class,
