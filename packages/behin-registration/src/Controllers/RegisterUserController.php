@@ -54,12 +54,12 @@ class RegisterUserController extends Controller
                 'status' => 'failed'
             ]);
         }else{
+            SendVerifyRegisterSmsJob::dispatch($registerUser->mobile, $registerUser->name, $registerUser->price);
             $registerUser->update([
                 'ref_id' => $result,
                 'status' => 'success'
             ]);
         }
-        SendVerifyRegisterSmsJob::dispatch($registerUser->mobile, $registerUser->name, $registerUser->price);
         return view('RegistrationViews::verify', ['refId' => $result]);
 
     }

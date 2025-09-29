@@ -26,7 +26,7 @@ class SendVerifyRegisterSmsJob implements ShouldQueue
 
     public function handle(): void
     {
-        $message = "{$this->name} با موبایل {$this->mobile} درخواست ثبت نام در پکیج {$this->package} را ارسال کرده است.";
+        $message = "{$this->name} با موبایل {$this->mobile} در آزمون {number_format($this->package)} ثبت نام کرد.";
 
         $smsSender = new SendSmsController();
         $smsSender->send($this->mobile, $message);
