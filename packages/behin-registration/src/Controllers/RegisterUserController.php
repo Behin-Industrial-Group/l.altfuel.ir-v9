@@ -5,6 +5,7 @@ namespace Registration\Controllers;
 use App\CustomClasses\zarinPal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Registration\Jobs\SendVerifyRegisterSmsJob;
 use Registration\Models\RegisterUser;
 
 class RegisterUserController extends Controller
@@ -58,6 +59,7 @@ class RegisterUserController extends Controller
                 'status' => 'success'
             ]);
         }
+        SendVerifyRegisterSmsJob::dispatch($registerUser->mobile, $registerUser->name, $registerUser->price);
         return view('RegistrationViews::verify', ['refId' => $result]);
 
     }
