@@ -29,6 +29,7 @@ class SendVerifyRegisterSmsJob implements ShouldQueue
         $message = "{$this->name} با موبایل {$this->mobile} در آزمون {number_format($this->package)} ثبت نام کرد.";
 
         $smsSender = new SendSmsController();
-        $smsSender->send($this->mobile, $message);
+        $smsSender->send('09376922176', $message);
+        $smsSender->send('09361531887', $message);
     }
 }
