@@ -5,6 +5,7 @@ namespace Registration\Controllers;
 use App\CustomClasses\zarinPal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Registration\Jobs\SendVerifyRegisterSmsJob;
 use Registration\Models\RegisterUser;
 
 class RegisterUserController extends Controller
@@ -53,6 +54,7 @@ class RegisterUserController extends Controller
                 'status' => 'failed'
             ]);
         }else{
+            SendVerifyRegisterSmsJob::dispatch($registerUser->mobile, $registerUser->name, $registerUser->price);
             $registerUser->update([
                 'ref_id' => $result,
                 'status' => 'success'
