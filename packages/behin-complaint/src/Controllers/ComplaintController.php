@@ -1,10 +1,10 @@
 <?php
 
-namespace Behin\Compliant\Controllers;
+namespace Behin\Complaint\Controllers;
 
 use App\Http\Controllers\Controller;
 use Behin\Complaint\Mail\ComplaintSubmitted;
-use Behin\Compliant\Models\Complaint;
+use Behin\Complaint\Models\Complaint;
 use FileService\Controllers\FileServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;

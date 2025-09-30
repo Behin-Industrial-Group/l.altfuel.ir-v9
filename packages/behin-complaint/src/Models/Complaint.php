@@ -1,6 +1,6 @@
 <?php
 
-namespace Behin\Compliant\Models;
+namespace Behin\Complaint\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
