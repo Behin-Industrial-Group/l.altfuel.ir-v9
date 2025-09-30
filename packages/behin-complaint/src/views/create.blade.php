@@ -1,12 +1,12 @@
 @extends('layouts.welcome')
 
 @section('content')
-    <div class="container">
-
-
-        <div class="register-box card p-2">
-            <h2 style="text-align: center">فرم ثبت شکایت</h2>
-            <hr>
+    <div class="complaint-wrapper">
+        <div class="complaint-card">
+            <div class="complaint-card__header">
+                <h2>فرم ثبت شکایت</h2>
+                <p>لطفاً اطلاعات خود را با دقت تکمیل کنید تا همکاران ما در اسرع وقت پیگیری کنند.</p>
+            </div>
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -19,97 +19,95 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('complaint.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('complaint.store') }}" method="POST" enctype="multipart/form-data" class="complaint-form">
                 @csrf
-                <div class="form-group">
-                    <label>نام و نام خانوادگی:</label>
-                    <input type="text" name="first_name_last_name" class="form-control"
-                        value="{{ old('first_name_last_name') }}" required>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="first_name_last_name">نام و نام خانوادگی</label>
+                        <input id="first_name_last_name" type="text" name="first_name_last_name" class="input-control"
+                            value="{{ old('first_name_last_name') }}" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="national_code">کد ملی</label>
+                        <input id="national_code" type="text" name="national_code" class="input-control"
+                            value="{{ old('national_code') }}" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="mobile">موبایل</label>
+                        <input id="mobile" type="text" name="mobile" class="input-control" value="{{ old('mobile') }}"
+                            required>
+                    </div>
+                    <div class="form-field">
+                        <label for="vin">شماره VIN خودرو</label>
+                        <span class="field-hint">شماره وین در برگ سبز و کارت خودرو درج شده است.</span>
+                        <input id="vin" type="text" name="vin" class="input-control" value="{{ old('vin') }}">
+                    </div>
+                    <div class="form-field">
+                        <label for="business_name">نام واحد صنفی</label>
+                        <input id="business_name" type="text" name="business_name" class="input-control"
+                            value="{{ old('business_name') }}" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="manager_name">نام مدیر واحد صنفی</label>
+                        <input id="manager_name" type="text" name="manager_name" class="input-control"
+                            value="{{ old('manager_name') }}" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="state">استان</label>
+                        <input id="state" type="text" name="state" class="input-control" value="{{ old('state') }}"
+                            required>
+                    </div>
+                    <div class="form-field">
+                        <label for="city">شهر</label>
+                        <input id="city" type="text" name="city" class="input-control" value="{{ old('city') }}" required>
+                    </div>
+                    <div class="form-field form-field--full">
+                        <label for="address">آدرس</label>
+                        <textarea id="address" name="address" class="input-control input-control--textarea" rows="3" required>{{ old('address') }}</textarea>
+                    </div>
+                    <div class="form-field">
+                        <label for="center_type">نوع مرکز</label>
+                        <select name="center_type" id="center_type" class="input-control">
+                            <option value="مرکز خدمات فنی" {{ old('center_type') == 'مرکز خدمات فنی' ? 'selected' : '' }}>خدمات فنی (پرفشار)</option>
+                            <option value="آزمایشگاه هیدرواستاتیک"
+                                {{ old('center_type') == 'آزمایشگاه هیدرواستاتیک' ? 'selected' : '' }}>آزمایشگاه هیدرواستاتیک</option>
+                            <option value="مرکز کم فشار" {{ old('center_type') == 'مرکز کم فشار' ? 'selected' : '' }}>کم فشار</option>
+                            <option value="نمیدانم" {{ old('center_type') == 'نمیدانم' ? 'selected' : '' }}>نمیدانم</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="complaint_subject">موضوع شکایت</label>
+                        <select name="complaint_subject" id="complaint_subject" class="input-control">
+                            <option value="ارجاع از معاینه فنی"
+                                {{ old('complaint_subject') == 'ارجاع از معاینه فنی' ? 'selected' : '' }}>ارجاع از معاینه فنی</option>
+                            <option value="تبدیل یا تعویض مخزن دولتی"
+                                {{ old('complaint_subject') == 'تبدیل یا تعویض مخزن دولتی' ? 'selected' : '' }}>تبدیل یا تعویض مخزن دولتی</option>
+                            <option value="تبدیل یا درخواست گواهی سلامت آزاد"
+                                {{ old('complaint_subject') == 'تبدیل یا درخواست گواهی سلامت آزاد' ? 'selected' : '' }}>تبدیل یا درخواست گواهی سلامت آزاد</option>
+                            <option value="تعمیر سیستم گازسوز"
+                                {{ old('complaint_subject') == 'تعمیر سیستم گازسوز' ? 'selected' : '' }}>تعمیر سیستم گازسوز</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="visit_date">تاریخ مراجعه</label>
+                        <input id="visit_date" type="text" name="visit_date" class="input-control persian-date"
+                            value="{{ old('visit_date') }}" required>
+                    </div>
+                    <div class="form-field form-field--full">
+                        <label for="description">توضیحات</label>
+                        <span class="field-hint">توضیحات کامل باعث رسیدگی سریع‌تر می‌شود.</span>
+                        <textarea id="description" name="description" class="input-control input-control--textarea" rows="4">{{ old('description') }}</textarea>
+                    </div>
+                    <div class="form-field form-field--full">
+                        <label for="file">پیوست</label>
+                        <span class="field-hint">فاکتور یا مدارک مرتبط را ارسال کنید.</span>
+                        <label class="file-upload">
+                            <input id="file" type="file" name="file">
+                            <span class="file-upload__label">انتخاب فایل</span>
+                        </label>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>کد ملی:</label>
-                    <input type="text" name="national_code" class="form-control" value="{{ old('national_code') }}"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label>موبایل:</label>
-                    <input type="text" name="mobile" class="form-control" value="{{ old('mobile') }}" required>
-                </div>
-                <div class="form-group">
-                    <label>شماره VIN خودرو:</label>
-                    <small>شماره وین در برگ سبز خودرو و در کارت خودرو ثبت است. در کارت خودروهای قدیمی پشت کارت به صورت عمودی و در کارت خودروهای جدید جلوی کارت ثبت و جلوی آن نوشته شده vin</small>
-                    <input type="text" name="vin" class="form-control" value="{{ old('vin') }}">
-                </div>
-                <div class="form-group">
-                    <label>نام واحد صنفی:</label>
-                    <input type="text" name="business_name" class="form-control" value="{{ old('business_name') }}"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label>نام مدیر واحد صنفی:</label>
-                    <input type="text" name="manager_name" class="form-control" value="{{ old('manager_name') }}"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label>استان:</label>
-                    <input type="text" name="state" class="form-control" value="{{ old('state') }}" required>
-                </div>
-                <div class="form-group">
-                    <label>شهر:</label>
-                    <input type="text" name="city" class="form-control" value="{{ old('city') }}" required>
-                </div>
-                <div class="form-group">
-                    <label>آدرس:</label>
-                    <textarea name="address" class="form-control" required>{{ old('address') }}</textarea>
-                </div>
-                <div class="form-group">
-                    <label>نوع مرکز:</label>
-                    <select name="center_type" id="center_type">
-                        <option value="مرکز خدمات فنی" {{ old('center_type') == 'مرکز خدمات فنی' ? 'selected' : '' }}>خدمات
-                            فنی (پرفشار)</option>
-                        <option value="آزمایشگاه هیدرواستاتیک"
-                            {{ old('center_type') == 'آزمایشگاه هیدرواستاتیک' ? 'selected' : '' }}>آزمایشگاه هیدرواستاتیک
-                        </option>
-                        <option value="مرکز کم فشار" {{ old('center_type') == 'مرکز کم فشار' ? 'selected' : '' }}>کم فشار
-                        </option>
-                        <option value="نمیدانم" {{ old('center_type') == 'نمیدانم' ? 'selected' : '' }}>نمیدانم</option>
-                    </select>
-
-                </div>
-                <div class="form-group">
-                    <label>موضوع شکایت:</label>
-                    <select name="complaint_subject" id="complaint_subject">
-                        <option value="ارجاع از معاینه فنی"
-                            {{ old('complaint_subject') == 'ارجاع از معاینه فنی' ? 'selected' : '' }}>ارجاع از معاینه فنی
-                        </option>
-                        <option value="تبدیل یا تعویض مخزن دولتی"
-                            {{ old('complaint_subject') == 'تبدیل یا تعویض مخزن دولتی' ? 'selected' : '' }}>تبدیل یا تعویض
-                            مخزن دولتی</option>
-                        <option value="تبدیل یا درخواست گواهی سلامت آزاد"
-                            {{ old('complaint_subject') == 'تبدیل یا درخواست گواهی سلامت آزاد' ? 'selected' : '' }}>تبدیل
-                            یا درخواست گواهی سلامت آزاد</option>
-                        <option value="تعمیر سیستم گازسوز"
-                            {{ old('complaint_subject') == 'تعمیر سیستم گازسوز' ? 'selected' : '' }}>تعمیر سیستم گازسوز
-                        </option>
-                    </select>
-
-                </div>
-                <div class="form-group">
-                    <label>تاریخ مراجعه:</label>
-                    <input type="text" name="visit_date" class="form-control persian-date"
-                        value="{{ old('visit_date') }}" required>
-                </div>
-                <div class="form-group">
-                    <label>توضیحات:</label>
-                    <small>لطفا توضیح کامل درج بفرمایید فرمهای ناقص رسیدگی نخواهند شد</small>
-                    <textarea name="description" class="form-control">{{ old('description') }}</textarea>
-                </div>
-                <div class="form-group">
-                    <label>پیوست:</label>
-                    <small>ارسال فاکتور و سایر مدارک</small>
-                    <input type="file" name="file" id="">
-                </div>
-                <button type="submit" class="btn btn-primary">ثبت شکایت</button>
+                <button type="submit" class="submit-btn">ثبت شکایت</button>
             </form>
         </div>
     </div>
@@ -118,4 +116,154 @@
     <script>
         initial_view()
     </script>
+@endsection
+@section('style')
+    <style>
+        .complaint-wrapper {
+            width: min(880px, 100%);
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .complaint-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+            border-radius: 24px;
+            padding: clamp(2rem, 5vw, 3rem);
+            box-shadow: 0 25px 60px rgba(15, 37, 64, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .complaint-card__header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .complaint-card__header h2 {
+            font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+            font-weight: 700;
+            color: #0d2136;
+            margin-bottom: 0.75rem;
+        }
+
+        .complaint-card__header p {
+            color: #5f6c7b;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .complaint-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .form-field--full {
+            grid-column: 1 / -1;
+        }
+
+        .form-field label {
+            font-weight: 600;
+            color: #14283c;
+            font-size: 0.95rem;
+        }
+
+        .field-hint {
+            font-size: 0.8rem;
+            color: #7b8897;
+        }
+
+        .input-control {
+            border-radius: 14px;
+            border: 1px solid rgba(13, 33, 54, 0.1);
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: inset 0 1px 3px rgba(13, 33, 54, 0.05);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .input-control:focus {
+            outline: none;
+            border-color: #1d72f2;
+            box-shadow: 0 0 0 4px rgba(29, 114, 242, 0.15);
+        }
+
+        .input-control--textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px dashed rgba(29, 114, 242, 0.5);
+            border-radius: 14px;
+            color: #1d72f2;
+            font-weight: 600;
+            cursor: pointer;
+            background: rgba(29, 114, 242, 0.08);
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .file-upload:hover {
+            border-color: #1d72f2;
+            background: rgba(29, 114, 242, 0.12);
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            align-self: flex-end;
+            padding: 0.9rem 2.6rem;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #1d72f2, #16c7c0);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 15px 35px rgba(29, 114, 242, 0.25);
+        }
+
+        .submit-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(29, 114, 242, 0.25);
+        }
+
+        @media (max-width: 576px) {
+            .complaint-wrapper {
+                padding: 1.5rem 1rem;
+            }
+
+            .complaint-card {
+                padding: 1.8rem 1.4rem;
+            }
+        }
+    </style>
 @endsection
