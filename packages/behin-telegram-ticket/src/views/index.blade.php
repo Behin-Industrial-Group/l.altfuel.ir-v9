@@ -2,21 +2,34 @@
 
 @section('content')
     <div class="container">
-        <h3>تیکت‌های باز</h3>
-        @foreach ($tickets as $ticket)
-            <div class="card mb-3">
-                <div class="card-body">
-                    <pre>{{ $ticket->messages }}</pre>
-
-                    <form action="{{ route('telegram-tickets.reply', $ticket->id) }}" method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <textarea name="reply" class="form-control" rows="3" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-2">ارسال پاسخ</button>
-                    </form>
-                </div>
-            </div>
-        @endforeach
+        <h3>لیست تیکت‌ها</h3>
+        @if ($tickets->isEmpty())
+            <p>هیچ تیکتی برای نمایش وجود ندارد.</p>
+        @else
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>نام کاربر</th>
+                        <th>آخرین پیام</th>
+                        <th>وضعیت</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($tickets as $ticket)
+                        <tr>
+                            <td>{{ $ticket->id }}</td>
+                            <td>{{ $ticket->user_id }}</td> {{-- Assuming user_id can act as a name or you have a relation --}}
+                            <td>{{ Str::limit($ticket->messages, 50) }}</td>
+                            <td>{{ $ticket->status == 'open' ? 'باز' : 'بسته' }}</td>
+                            <td>
+                                <a href="{{ route('telegram-tickets.show', $ticket->id) }}" class="btn btn-info btn-sm">مشاهده</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 @endsection
