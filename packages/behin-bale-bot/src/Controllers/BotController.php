@@ -88,6 +88,18 @@ class BotController extends Controller
 
         if (!$chat_id) return;
 
+        // اگر تیکت باز برای کاربر وجود دارد، پیام را به تیکت اضافه کن
+        $openTicket = TelegramTicket::where('user_id', $chat_id)->where('status', 'open')->first();
+        if ($openTicket) {
+            $openTicket->messages .= "\n\n👤 کاربر:\n" . $text;
+            $openTicket->save();
+            $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => 'پیام شما به پشتیبانی ارسال شد. منتظر پاسخ کارشناس باشید.'
+            ]);
+            return;
+        }
+
         $user = BaleUser::firstOrCreate(['chat_id' => $chat_id]);
 
         // اگر نام کاربر وجود ندارد
