@@ -118,7 +118,7 @@
                             <button class="hint-toggle" type="button" aria-label="نمایش راهنمای پیوست" aria-expanded="false"
                                 aria-controls="hint-file" data-target="hint-file">
                                 <span class="sr-only">نمایش یا پنهان کردن راهنمای پیوست</span>
-                                ؟
+                                ?
                             </button>
                         </div>
                         <span class="field-hint" id="hint-file">فاکتور یا مدارک مرتبط را ارسال کنید.</span>
