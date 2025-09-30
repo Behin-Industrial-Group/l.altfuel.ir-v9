@@ -1,10 +1,7 @@
 <?php
 
-use Behin\Compliant\Controllers\ComplaintController;
+use Behin\Complaint\Controllers\ComplaintController;
 use Illuminate\Support\Facades\Route;
-use Mkhodroo\Cities\Controllers\CityController;
-use Mkhodroo\Cities\Controllers\CityViewController;
-use Mkhodroo\Cities\Controllers\ProvinceController;
 
 Route::name('complaint.')->prefix('complaint')->middleware(['web'])->group(function () {
     Route::get('create', [ComplaintController::class, 'create'])->name('create');

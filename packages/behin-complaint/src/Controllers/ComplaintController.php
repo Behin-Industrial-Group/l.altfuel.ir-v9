@@ -1,10 +1,10 @@
 <?php
 
-namespace Behin\Compliant\Controllers;
+namespace Behin\Complaint\Controllers;
 
 use App\Http\Controllers\Controller;
 use Behin\Complaint\Mail\ComplaintSubmitted;
-use Behin\Compliant\Models\Complaint;
+use Behin\Complaint\Models\Complaint;
 use FileService\Controllers\FileServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -23,6 +23,7 @@ class ComplaintController extends Controller
             'first_name_last_name' => 'required|string|max:255',
             'national_code' => 'required|string|size:10',
             'mobile' => 'required|string|size:11',
+            'vin' => 'nullable|string|max:50',
             'business_name' => 'required|string|max:255',
             'manager_name' => 'required|string|max:255',
             'state' => 'required|string|max:255',
