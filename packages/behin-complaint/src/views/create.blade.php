@@ -102,24 +102,24 @@
                     </div>
                     <div class="form-field form-field--full">
                         <div class="form-field__label">
+                            <label for="description">توضیحات</label>
                             <button class="hint-toggle" type="button" aria-label="نمایش راهنمای توضیحات"
                                 aria-expanded="false" aria-controls="hint-description" data-target="hint-description">
                                 <span class="sr-only">نمایش یا پنهان کردن راهنمای توضیحات</span>
-                                ؟
+                                ?
                             </button>
-                            <label for="description">توضیحات</label>
                         </div>
-                        <span class="field-hint" id="hint-description">توضیحات کامل باعث رسیدگی سریع‌تر می‌شود.</span>
+                        <span class="field-hint" id="hint-description">لطفا توضیح کامل درج بفرمایید فرمهای ناقص رسیدگی نخواهند شد</span>
                         <textarea id="description" name="description" class="input-control input-control--textarea" rows="4">{{ old('description') }}</textarea>
                     </div>
                     <div class="form-field form-field--full">
                         <div class="form-field__label">
+                            <label for="file">پیوست</label>
                             <button class="hint-toggle" type="button" aria-label="نمایش راهنمای پیوست" aria-expanded="false"
                                 aria-controls="hint-file" data-target="hint-file">
                                 <span class="sr-only">نمایش یا پنهان کردن راهنمای پیوست</span>
                                 ؟
                             </button>
-                            <label for="file">پیوست</label>
                         </div>
                         <span class="field-hint" id="hint-file">فاکتور یا مدارک مرتبط را ارسال کنید.</span>
                         <label class="file-upload">
