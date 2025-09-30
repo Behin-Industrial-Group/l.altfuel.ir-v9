@@ -249,7 +249,7 @@ return [
         \FileService\FileServiceProvider::class,
         \QrCodeScanner\QrCodeScannerProvider::class,
         \ExcelReader\ExcelReaderServiceProvider::class,
-        Behin\Complaint\ComplaintProvider::class,
+        \Behin\Complaint\ComplaintProvider::class,
         Behin\Hamayesh\BehinHamayeshServiceProvider::class,
         RegistrationServiceProvider::class,
         \TelegramTicket\TelegramTicketProvider::class,
