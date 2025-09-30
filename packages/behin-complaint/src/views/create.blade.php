@@ -39,12 +39,12 @@
                     </div>
                     <div class="form-field">
                         <div class="form-field__label">
+                            <label for="vin">شماره VIN خودرو</label>
                             <button class="hint-toggle" type="button" aria-label="نمایش راهنمای شماره VIN خودرو"
                                 aria-expanded="false" aria-controls="hint-vin" data-target="hint-vin">
                                 <span class="sr-only">نمایش یا پنهان کردن راهنمای شماره VIN خودرو</span>
-                                <i class="fa-regular fa-circle-question"></i>
+                                ?
                             </button>
-                            <label for="vin">شماره VIN خودرو</label>
                         </div>
                         <span class="field-hint" id="hint-vin">شماره وین در برگ سبز خودرو و در کارت خودرو ثبت است. در کارت خودروهای قدیمی پشت کارت به صورت عمودی و در کارت خودروهای جدید جلوی کارت ثبت و جلوی آن نوشته شده vin</span>
                         <input id="vin" type="text" name="vin" class="input-control" value="{{ old('vin') }}" required>
