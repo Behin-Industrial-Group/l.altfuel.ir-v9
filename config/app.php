@@ -224,7 +224,7 @@ return [
         Livewire\LivewireServiceProvider::class,
         App\Providers\FinanceServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
-        BinshopsBlog\BinshopsBlogServiceProvider::class,
+        // BinshopsBlog\BinshopsBlogServiceProvider::class,
         Mkhodroo\AltfuelTicket\AltfuelTicketServiceProvider::class,
         \Mkhodroo\UserRoles\UserRolesServiceProvider::class,
         \Mkhodroo\Voip\VoipServiceProvider::class,
