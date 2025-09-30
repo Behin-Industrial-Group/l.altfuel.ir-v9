@@ -40,7 +40,7 @@
                     <div class="form-field">
                         <label for="vin">شماره VIN خودرو</label>
                         <span class="field-hint">شماره وین در برگ سبز و کارت خودرو درج شده است.</span>
-                        <input id="vin" type="text" name="vin" class="input-control" value="{{ old('vin') }}">
+                        <input id="vin" type="text" name="vin" class="input-control" value="{{ old('vin') }}" required>
                     </div>
                     <div class="form-field">
                         <label for="business_name">نام واحد صنفی</label>
