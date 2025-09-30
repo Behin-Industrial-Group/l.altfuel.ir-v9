@@ -38,8 +38,15 @@
                             required>
                     </div>
                     <div class="form-field">
-                        <label for="vin">شماره VIN خودرو</label>
-                        <span class="field-hint">شماره وین در برگ سبز و کارت خودرو درج شده است.</span>
+                        <div class="form-field__label">
+                            <button class="hint-toggle" type="button" aria-label="نمایش راهنمای شماره VIN خودرو"
+                                aria-expanded="false" aria-controls="hint-vin" data-target="hint-vin">
+                                <span class="sr-only">نمایش یا پنهان کردن راهنمای شماره VIN خودرو</span>
+                                ؟
+                            </button>
+                            <label for="vin">شماره VIN خودرو</label>
+                        </div>
+                        <span class="field-hint" id="hint-vin">شماره وین در برگ سبز و کارت خودرو درج شده است.</span>
                         <input id="vin" type="text" name="vin" class="input-control" value="{{ old('vin') }}" required>
                     </div>
                     <div class="form-field">
@@ -94,13 +101,27 @@
                             value="{{ old('visit_date') }}" required>
                     </div>
                     <div class="form-field form-field--full">
-                        <label for="description">توضیحات</label>
-                        <span class="field-hint">توضیحات کامل باعث رسیدگی سریع‌تر می‌شود.</span>
+                        <div class="form-field__label">
+                            <button class="hint-toggle" type="button" aria-label="نمایش راهنمای توضیحات"
+                                aria-expanded="false" aria-controls="hint-description" data-target="hint-description">
+                                <span class="sr-only">نمایش یا پنهان کردن راهنمای توضیحات</span>
+                                ؟
+                            </button>
+                            <label for="description">توضیحات</label>
+                        </div>
+                        <span class="field-hint" id="hint-description">توضیحات کامل باعث رسیدگی سریع‌تر می‌شود.</span>
                         <textarea id="description" name="description" class="input-control input-control--textarea" rows="4">{{ old('description') }}</textarea>
                     </div>
                     <div class="form-field form-field--full">
-                        <label for="file">پیوست</label>
-                        <span class="field-hint">فاکتور یا مدارک مرتبط را ارسال کنید.</span>
+                        <div class="form-field__label">
+                            <button class="hint-toggle" type="button" aria-label="نمایش راهنمای پیوست" aria-expanded="false"
+                                aria-controls="hint-file" data-target="hint-file">
+                                <span class="sr-only">نمایش یا پنهان کردن راهنمای پیوست</span>
+                                ؟
+                            </button>
+                            <label for="file">پیوست</label>
+                        </div>
+                        <span class="field-hint" id="hint-file">فاکتور یا مدارک مرتبط را ارسال کنید.</span>
                         <label class="file-upload">
                             <input id="file" type="file" name="file">
                             <span class="file-upload__label">انتخاب فایل</span>
@@ -115,6 +136,21 @@
 @section('script')
     <script>
         initial_view()
+        document.querySelectorAll('.hint-toggle').forEach((button) => {
+            const targetId = button.getAttribute('data-target');
+            const hint = document.getElementById(targetId);
+
+            if (!hint) {
+                return;
+            }
+
+            hint.classList.add('field-hint--hidden');
+
+            button.addEventListener('click', () => {
+                const isVisible = hint.classList.toggle('field-hint--visible');
+                button.setAttribute('aria-expanded', isVisible);
+            });
+        });
     </script>
 @endsection
 @section('style')
@@ -174,15 +210,72 @@
             grid-column: 1 / -1;
         }
 
+        .form-field__label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #14283c;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
         .form-field label {
             font-weight: 600;
             color: #14283c;
             font-size: 0.95rem;
         }
 
+        .hint-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 50%;
+            border: 1px solid #1d72f2;
+            background-color: #f0f6ff;
+            color: #1d72f2;
+            font-size: 1rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .hint-toggle:hover,
+        .hint-toggle:focus {
+            background-color: #1d72f2;
+            color: #ffffff;
+            border-color: #1357b8;
+            outline: none;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
         .field-hint {
-            font-size: 0.8rem;
-            color: #7b8897;
+            display: block;
+            font-size: 0.85rem;
+            color: #1d72f2;
+            background-color: #eaf3ff;
+            padding: 0.6rem 0.9rem;
+            border-radius: 12px;
+            line-height: 1.7;
+        }
+
+        .field-hint--hidden {
+            display: none;
+        }
+
+        .field-hint--visible {
+            display: block;
         }
 
         .input-control {
