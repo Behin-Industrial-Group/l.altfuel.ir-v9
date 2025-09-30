@@ -197,7 +197,7 @@ class BotController extends Controller
         }
     }
 
-    public function handleCallback()
+    public function handleCallback($update)
     {
         Log::info("Receive Callback");
         $content = file_get_contents("php://input");
@@ -239,6 +239,9 @@ class BotController extends Controller
                 Log::info("تیکت جدید برای پشتیبانی ثبت شد:\n" . $compiledMessages);
             }
 
+            // Only send thank you if no open ticket exists
+            $hasOpenTicket = TelegramTicket::where('user_id', $chatId)->where('status', 'open')->exists();
+
             $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
 
             // حذف دکمه‌ها
@@ -249,10 +252,12 @@ class BotController extends Controller
             ]);
 
             // ارسال پیام تشکر
-            $telegram->sendMessage([
-                'chat_id' => $chatId,
-                'text' => 'ممنون بابت بازخورد شما 🙏'
-            ]);
+            if (!$hasOpenTicket) {
+                $telegram->sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => 'ممنون بابت بازخورد شما 🙏'
+                ]);
+            }
         }
     }
 }

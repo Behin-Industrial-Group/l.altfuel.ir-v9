@@ -24,13 +24,15 @@ class TelegramTicketController extends Controller
     public function reply($id, Request $request)
     {
         $ticket = TelegramTicket::findOrFail($id);
-        $ticket->reply = $request->input('reply');
+        $agentReply = $request->input('reply');
+        $ticket->messages .= "\n\n👨‍💼 پاسخ پشتیبان:\n" . $agentReply;
+        $ticket->save();
 
         // ارسال پیام به کاربر تلگرام
         $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
         $telegram->sendMessage([
             'chat_id' => $ticket->user_id,
-            'text' => "👨‍💼 پاسخ پشتیبان:\n{$ticket->reply}"
+            'text' => "👨‍💼 پاسخ پشتیبان:\n{$agentReply}"
         ]);
 
         return redirect()->route('telegram-tickets.show', $ticket->id)->with('success', 'پاسخ ارسال شد.');
