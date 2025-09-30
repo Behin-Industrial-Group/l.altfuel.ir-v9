@@ -101,10 +101,12 @@
                 </div>
                 <div class="form-group">
                     <label>توضیحات:</label>
+                    <small>لطفا توضیح کامل درج بفرمایید فرمهای ناقص رسیدگی نخواهند شد</small>
                     <textarea name="description" class="form-control">{{ old('description') }}</textarea>
                 </div>
                 <div class="form-group">
                     <label>پیوست:</label>
+                    <small>ارسال فاکتور و سایر مدارک</small>
                     <input type="file" name="file" id="">
                 </div>
                 <button type="submit" class="btn btn-primary">ثبت شکایت</button>
