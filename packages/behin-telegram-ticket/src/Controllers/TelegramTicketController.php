@@ -5,7 +5,7 @@ namespace TelegramTicket\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use TelegramTicket\Models\TelegramTicket;
-use TelegramBot\Controllers\TelegramController;
+use BaleBot\Controllers\TelegramController;
 
 class TelegramTicketController extends Controller
 {
@@ -23,7 +23,7 @@ class TelegramTicketController extends Controller
         $ticket->save();
 
         // ارسال پیام به کاربر تلگرام
-        $telegram = new TelegramController(config('telegram_bot_config.TOKEN'));
+        $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
         $telegram->sendMessage([
             'chat_id' => $ticket->user_id,
             'text' => "👨‍💼 پاسخ پشتیبان:\n{$ticket->reply}"
