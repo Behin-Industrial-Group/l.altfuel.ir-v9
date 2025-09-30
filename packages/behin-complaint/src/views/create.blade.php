@@ -36,6 +36,10 @@
                     <input type="text" name="mobile" class="form-control" value="{{ old('mobile') }}" required>
                 </div>
                 <div class="form-group">
+                    <label>شماره VIN خودرو:</label>
+                    <input type="text" name="vin" class="form-control" value="{{ old('vin') }}">
+                </div>
+                <div class="form-group">
                     <label>نام واحد صنفی:</label>
                     <input type="text" name="business_name" class="form-control" value="{{ old('business_name') }}"
                         required>

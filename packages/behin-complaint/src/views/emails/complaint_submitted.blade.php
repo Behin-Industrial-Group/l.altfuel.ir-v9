@@ -48,6 +48,7 @@
         <p><strong>نام و نام خانوادگی:</strong> {{ $data['first_name_last_name'] ?? '' }}</p>
         <p><strong>کد ملی:</strong> {{ $data['national_code'] ?? '' }}</p>
         <p><strong>موبایل:</strong> {{ $data['mobile'] ?? '' }}</p>
+        <p><strong>شماره VIN خودرو:</strong> {{ $data['vin'] ?? '' }}</p>
         <p><strong>نام واحد صنفی:</strong> {{ $data['business_name'] ?? '' }}</p>
         <p><strong>نام مدیر واحد صنفی:</strong> {{ $data['manager_name'] ?? '' }}</p>
         <p><strong>استان:</strong> {{ $data['state'] ?? '' }}</p>

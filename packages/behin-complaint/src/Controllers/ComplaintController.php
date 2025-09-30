@@ -23,6 +23,7 @@ class ComplaintController extends Controller
             'first_name_last_name' => 'required|string|max:255',
             'national_code' => 'required|string|size:10',
             'mobile' => 'required|string|size:11',
+            'vin' => 'nullable|string|max:50',
             'business_name' => 'required|string|max:255',
             'manager_name' => 'required|string|max:255',
             'state' => 'required|string|max:255',
