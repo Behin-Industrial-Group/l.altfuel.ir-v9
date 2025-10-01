@@ -92,7 +92,7 @@ class BotController extends Controller
         $openTicket = TelegramTicket::where('user_id', $chat_id)->whereIn('status', ['open', 'answered'])->first();
         if ($openTicket) {
             $openTicket->messages .= "\n\n👤 کاربر:\n" . $text;
-            $openTicket->status = 'answered';
+            $openTicket->status = 'open';
             $openTicket->save();
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
