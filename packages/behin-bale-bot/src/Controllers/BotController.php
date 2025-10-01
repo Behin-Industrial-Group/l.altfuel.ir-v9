@@ -89,9 +89,10 @@ class BotController extends Controller
         if (!$chat_id) return;
 
         // اگر تیکت باز برای کاربر وجود دارد، پیام را به تیکت اضافه کن
-        $openTicket = TelegramTicket::where('user_id', $chat_id)->where('status', 'open')->first();
+        $openTicket = TelegramTicket::where('user_id', $chat_id)->whereIn('status', ['open', 'answered'])->first();
         if ($openTicket) {
             $openTicket->messages .= "\n\n👤 کاربر:\n" . $text;
+            $openTicket->staus = 'answered';
             $openTicket->save();
             $telegram->sendMessage([
                 'chat_id' => $chat_id,
