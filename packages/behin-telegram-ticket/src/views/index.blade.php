@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 @section('content')
     <div class="container">
         <h3>لیست تیکت‌ها</h3>
+
+        <div class="mb-3">
+            <a href="{{ route('telegram-tickets.index', ['status' => 'open']) }}"
+                class="btn btn-sm {{ ($status ?? 'open') === 'open' ? 'btn-primary' : 'btn-outline-primary' }}">تیکت‌های باز</a>
+            <a href="{{ route('telegram-tickets.index', ['status' => 'answered']) }}"
+                class="btn btn-sm {{ ($status ?? 'open') === 'answered' ? 'btn-primary' : 'btn-outline-primary' }}">تیکت‌های پاسخ داده‌شده</a>
+            <a href="{{ route('telegram-tickets.index', ['status' => 'closed']) }}"
+                class="btn btn-sm {{ ($status ?? 'open') === 'closed' ? 'btn-primary' : 'btn-outline-primary' }}">تیکت‌های بسته شده</a>
+            <a href="{{ route('telegram-tickets.index', ['status' => 'all']) }}"
+                class="btn btn-sm {{ ($status ?? 'open') === 'all' ? 'btn-secondary' : 'btn-outline-secondary' }}">همه تیکت‌ها</a>
+        </div>
+
         @if ($tickets->isEmpty())
             <p>هیچ تیکتی برای نمایش وجود ندارد.</p>
         @else
@@ -22,7 +38,24 @@
                             <td>{{ $ticket->id }}</td>
                             <td>{{ $ticket->user_id }}</td> {{-- Assuming user_id can act as a name or you have a relation --}}
                             <td>{{ Str::limit($ticket->messages, 50) }}</td>
-                            <td>{{ $ticket->status == 'open' ? 'باز' : 'بسته' }}</td>
+                            <td>
+                                @switch($ticket->status)
+                                    @case('open')
+                                        باز
+                                    @break
+
+                                    @case('answered')
+                                        پاسخ داده‌شده
+                                    @break
+
+                                    @case('closed')
+                                        بسته شده
+                                    @break
+
+                                    @default
+                                        -
+                                @endswitch
+                            </td>
                             <td>
                                 <a href="{{ route('telegram-tickets.show', $ticket->id) }}" class="btn btn-info btn-sm">مشاهده</a>
                             </td>

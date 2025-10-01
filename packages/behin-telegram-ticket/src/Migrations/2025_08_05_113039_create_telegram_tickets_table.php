@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->text('messages');
             $table->text('reply')->nullable();
-            $table->enum('status', ['open', 'closed'])->default('open');
+            $table->enum('status', ['open', 'answered', 'closed'])->default('open');
             $table->timestamps();
         });
     }

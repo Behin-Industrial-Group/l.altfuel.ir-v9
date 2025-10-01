@@ -9,10 +9,21 @@ use BaleBot\Controllers\TelegramController;
 
 class TelegramTicketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = TelegramTicket::latest()->get();
-        return view('telegram-ticket::index', compact('tickets'));
+        $status = $request->query('status', 'open');
+
+        if (!in_array($status, ['open', 'answered', 'closed', 'all'])) {
+            $status = 'open';
+        }
+
+        $tickets = TelegramTicket::latest()
+            ->when($status !== 'all', function ($query) use ($status) {
+                $query->where('status', $status);
+            })
+            ->get();
+
+        return view('telegram-ticket::index', compact('tickets', 'status'));
     }
 
     public function show($id)
@@ -26,6 +37,8 @@ class TelegramTicketController extends Controller
         $ticket = TelegramTicket::findOrFail($id);
         $agentReply = $request->input('reply');
         $ticket->messages .= "\n\n👨‍💼 پاسخ پشتیبان:\n" . $agentReply;
+        $ticket->reply = $agentReply;
+        $ticket->status = 'answered';
         $ticket->save();
 
         // ارسال پیام به کاربر تلگرام
