@@ -88,6 +88,18 @@ class BotController extends Controller
 
         if (!$chat_id) return;
 
+        // اگر تیکت باز برای کاربر وجود دارد، پیام را به تیکت اضافه کن
+        $openTicket = TelegramTicket::where('user_id', $chat_id)->where('status', 'open')->first();
+        if ($openTicket) {
+            $openTicket->messages .= "\n\n👤 کاربر:\n" . $text;
+            $openTicket->save();
+            $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => 'پیام شما به پشتیبانی ارسال شد. منتظر پاسخ کارشناس باشید.'
+            ]);
+            return;
+        }
+
         $user = BaleUser::firstOrCreate(['chat_id' => $chat_id]);
 
         // اگر نام کاربر وجود ندارد
@@ -197,7 +209,7 @@ class BotController extends Controller
         }
     }
 
-    public function handleCallback()
+    public function handleCallback($update)
     {
         Log::info("Receive Callback");
         $content = file_get_contents("php://input");
@@ -239,6 +251,9 @@ class BotController extends Controller
                 Log::info("تیکت جدید برای پشتیبانی ثبت شد:\n" . $compiledMessages);
             }
 
+            // Only send thank you if no open ticket exists
+            $hasOpenTicket = TelegramTicket::where('user_id', $chatId)->where('status', 'open')->exists();
+
             $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
 
             // حذف دکمه‌ها
@@ -249,10 +264,12 @@ class BotController extends Controller
             ]);
 
             // ارسال پیام تشکر
-            $telegram->sendMessage([
-                'chat_id' => $chatId,
-                'text' => 'ممنون بابت بازخورد شما 🙏'
-            ]);
+            if (!$hasOpenTicket) {
+                $telegram->sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => 'ممنون بابت بازخورد شما 🙏'
+                ]);
+            }
         }
     }
 }
