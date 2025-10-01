@@ -6,12 +6,30 @@
             <div class="card-body">
                 <h5 class="card-title">Ticket ID: {{ $ticket->id }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">User ID: {{ $ticket->user_id }}</h6>
-                <p class="card-text">وضعیت: {{ $ticket->status == 'open' ? 'باز' : 'بسته' }}</p>
+                <p class="card-text">
+                    وضعیت:
+                    @switch($ticket->status)
+                        @case('open')
+                            باز
+                        @break
+
+                        @case('answered')
+                            پاسخ داده‌شده
+                        @break
+
+                        @case('closed')
+                            بسته شده
+                        @break
+
+                        @default
+                            -
+                    @endswitch
+                </p>
                 <hr>
                 <p><strong>مکالمه:</strong></p>
                 <pre>{{ $ticket->messages }}</pre>
 
-                @if ($ticket->status == 'open')
+                @if ($ticket->status !== 'closed')
                     <form action="{{ route('telegram-tickets.reply', $ticket->id) }}" method="POST">
                         @csrf
                         <div class="form-group mt-3">
@@ -26,9 +44,10 @@
                     </form>
                 @else
                     <p class="mt-3">این تیکت بسته شده است.</p>
-                    @if ($ticket->reply)
-                        <p>پاسخ پشتیبان: {{ $ticket->reply }}</p>
-                    @endif
+                @endif
+
+                @if ($ticket->reply)
+                    <p class="mt-3">آخرین پاسخ پشتیبان: {{ $ticket->reply }}</p>
                 @endif
             </div>
         </div>
