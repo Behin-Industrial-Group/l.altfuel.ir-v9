@@ -36,8 +36,8 @@
                     @foreach ($tickets as $ticket)
                         <tr>
                             <td>{{ $ticket->id }}</td>
-                            <td>{{ $ticket->user_id }}</td> {{-- Assuming user_id can act as a name or you have a relation --}}
-                            <td>{{ Str::limit($ticket->messages, 50) }}</td>
+                            <td>{{ $ticket->user_id }}</td>
+                            <td>{{ Str::limit(optional($ticket->latestMessage)->message, 50) }}</td>
                             <td>
                                 @switch($ticket->status)
                                     @case('open')
