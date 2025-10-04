@@ -34,6 +34,10 @@ class TicketFilterController extends Controller
             $query->whereIn('id', $ticketIds);
         }
 
+        if ($request->filled('filter_catagory')) {
+            $query->where('cat_id', $request->filter_catagory);
+        }
+
         $result = $query->get()->map(function ($row) {
             return [
                 'id' => $row->id,

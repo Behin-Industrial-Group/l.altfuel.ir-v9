@@ -55,6 +55,18 @@
         </select>
     </div>
 
+    <div class="form-group mb-2">
+        <label for="filter_child_cat">دسته بندی</label>
+        <div class="row">
+            <div class="col-md-6 mb-2 mb-md-0">
+                <select id="filter_parent_cat" class="form-control"></select>
+            </div>
+            <div class="col-md-6">
+                <select name="filter_catagory" id="filter_child_cat" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+
     <button class="btn btn-warning mt-2" onclick="filterWithAgent()">جستجو</button>
 </div>
 <script>
@@ -73,6 +85,67 @@
             observer: true,
             initialValue: false,
             autoClose: true,
+        });
+    });
+
+    $(document).ready(function() {
+        var parentCat = $('#filter_parent_cat');
+        var childCat = $('#filter_child_cat');
+
+        function setDefaultOptions() {
+            parentCat.html('');
+            parentCat.append(new Option('انتخاب دسته بندی', ''));
+
+            childCat.html('');
+            childCat.append(new Option('انتخاب زیر دسته', ''));
+        }
+
+        setDefaultOptions();
+
+        function loadChildren(parentId) {
+            if (!parentId) {
+                childCat.html('');
+                childCat.append(new Option('انتخاب زیر دسته', ''));
+                return;
+            }
+
+            @if (auth()->user()->access('new-tickets-counter'))
+                var url = "{{ route('ATRoutes.catagory.getChildrenByParentId', ['parent_id' => 'parent_id', 'count' => 'count']) }}";
+            @else
+                var url = "{{ route('ATRoutes.catagory.getChildrenByParentId', ['parent_id' => 'parent_id']) }}";
+            @endif
+
+            url = url.replace('parent_id', parentId);
+            childCat.html('');
+            childCat.append(new Option('انتخاب زیر دسته', ''));
+
+            send_ajax_get_request(
+                url,
+                function(data) {
+                    data.forEach(element => {
+                        if (element.count) {
+                            childCat.append(new Option(element.name + '(' + element.count + ')', element.id));
+                        } else {
+                            childCat.append(new Option(element.name, element.id));
+                        }
+                    });
+                }
+            );
+        }
+
+        send_ajax_get_request(
+            "{{ route('ATRoutes.catagory.getAllParent') }}",
+            function(data) {
+                data.forEach(element => {
+                    parentCat.append(new Option(element.name, element.id));
+                });
+
+                parentCat.trigger('change');
+            }
+        );
+
+        parentCat.on('change', function() {
+            loadChildren($(this).val());
         });
     });
 
