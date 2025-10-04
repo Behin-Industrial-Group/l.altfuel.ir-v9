@@ -4,11 +4,11 @@ namespace BaleBot\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use BaleBot\Models\BaleUser;
 use Mkhodroo\AltfuelTicket\Controllers\LangflowController;
 use TelegramTicket\Models\TelegramTicket;
+use TelegramTicket\Models\TelegramTicketMessage;
 
 class BotController extends Controller
 {
@@ -113,6 +113,7 @@ class BotController extends Controller
                 'message' => $messageContent,
                 'reply_to_message_id' => $replyTarget?->id,
                 'platform_message_id' => $incomingMessageId,
+                'platform' => 'bale',
             ]);
 
             $openTicket->status = 'open';
@@ -195,22 +196,56 @@ class BotController extends Controller
 
         // اگه نام و شماره کامل بود، بفرست به Langflow
         if ($text && $text !== '/start') {
+            $conversationTicket = TelegramTicket::firstOrCreate(
+                [
+                    'user_id' => $chat_id,
+                    'is_bot_generated' => true,
+                ],
+                [
+                    'status' => 'closed',
+                ]
+            );
+
+            $replyTarget = null;
+            if ($replyToPlatformId) {
+                $replyTarget = $conversationTicket->messages()
+                    ->where('platform_message_id', $replyToPlatformId)
+                    ->first();
+            }
+
+            $userMessage = null;
+            if ($incomingMessageId) {
+                $userMessage = $conversationTicket->messages()
+                    ->where('platform_message_id', $incomingMessageId)
+                    ->first();
+            }
+
+            if (!$userMessage) {
+                $userMessage = $conversationTicket->messages()->create([
+                    'sender_id' => $chat_id,
+                    'sender_type' => 'user',
+                    'message' => $text,
+                    'reply_to_message_id' => $replyTarget?->id,
+                    'platform_message_id' => $incomingMessageId,
+                    'platform' => 'bale',
+                ]);
+            }
+
             $botResponse = LangflowController::run($text, $chat_id);
 
-            $messageId = DB::table('bale_messages')->insertGetId([
-                'user_id' => $chat_id,
-                'user_message' => $text,
-                'bot_response' => $botResponse,
+            $botMessage = $conversationTicket->messages()->create([
+                'sender_type' => 'bot',
+                'message' => $botResponse,
+                'reply_to_message_id' => $userMessage->id,
+                'platform' => 'bale',
                 'feedback' => 'none',
-                'created_at' => now(),
-                'updated_at' => now(),
             ]);
 
             $keyboard = [
                 'inline_keyboard' => [
                     [
-                        ['text' => '👍', 'callback_data' => "like:$messageId"],
-                        ['text' => '👎', 'callback_data' => "dislike:$messageId"],
+                        ['text' => '👍', 'callback_data' => "bale_feedback:like:{$botMessage->id}"],
+                        ['text' => '👎', 'callback_data' => "bale_feedback:dislike:{$botMessage->id}"],
                     ]
                 ]
             ];
@@ -224,9 +259,11 @@ class BotController extends Controller
             $responseData = json_decode($response, true);
             $msgTelegramId = $responseData['result']['message_id'] ?? null;
 
-            DB::table('bale_messages')->where('id', $messageId)->update([
-                'telegram_message_id' => $msgTelegramId
-            ]);
+            if ($msgTelegramId) {
+                $botMessage->platform_message_id = $msgTelegramId;
+                $botMessage->save();
+            }
+
             return;
         }
 
@@ -246,72 +283,81 @@ class BotController extends Controller
         $content = file_get_contents("php://input");
         $update = json_decode($content, true);
 
-        if (isset($update['callback_query'])) {
-            Log::info($update);
-            $callbackData = $update['callback_query']['data'];
-            $chatId = $update['callback_query']['message']['chat']['id'];
-            $msgTelegramId = $update['callback_query']['message']['message_id'];
+        if (!isset($update['callback_query'])) {
+            return;
+        }
 
-            list($action, $msgId) = explode(':', $callbackData);
+        Log::info($update);
 
-            DB::table('bale_messages')->where('id', $msgId)->update([
-                'feedback' => $action,
-                'updated_at' => now()
+        $callbackData = $update['callback_query']['data'] ?? '';
+        if (strpos($callbackData, 'bale_feedback:') !== 0) {
+            return;
+        }
+
+        $chatId = $update['callback_query']['message']['chat']['id'] ?? null;
+        $msgTelegramId = $update['callback_query']['message']['message_id'] ?? null;
+
+        $parts = explode(':', $callbackData);
+        if (count($parts) !== 3) {
+            return;
+        }
+
+        [, $action, $msgId] = $parts;
+
+        $botMessage = TelegramTicketMessage::with('ticket')->find($msgId);
+        if (!$botMessage || $botMessage->sender_type !== 'bot') {
+            return;
+        }
+
+        $botMessage->feedback = $action;
+        $botMessage->save();
+
+        if ($action === 'dislike' && $botMessage->ticket) {
+            $conversationTicket = $botMessage->ticket;
+
+            $messagesToCopy = $conversationTicket->messages()
+                ->orderByDesc('id')
+                ->take(6)
+                ->get()
+                ->reverse();
+
+            $supportTicket = TelegramTicket::create([
+                'user_id' => $conversationTicket->user_id,
+                'status' => 'open',
             ]);
 
-            if ($action === 'dislike') {
-                $lastMessages = DB::table('bale_messages')
-                    ->where('user_id', $chatId)
-                    ->orderByDesc('id')
-                    ->limit(3)
-                    ->get()
-                    ->reverse();
-
-                $compiledMessages = "📩 پیام‌های اخیر کاربر:\n";
-                foreach ($lastMessages as $msg) {
-                    $compiledMessages .= "👤 کاربر: {$msg->user_message}\n🤖 ربات: {$msg->bot_response}\n\n";
-                }
-
-                // ✅ ایجاد تیکت با استفاده از مدل پکیج
-                $ticket = TelegramTicket::create([
-                    'user_id' => $chatId,
-                    'status' => 'open',
+            $idMap = [];
+            foreach ($messagesToCopy as $message) {
+                $newMessage = $supportTicket->messages()->create([
+                    'sender_id' => $message->sender_id,
+                    'sender_type' => $message->sender_type,
+                    'message' => $message->message,
+                    'reply_to_message_id' => $message->reply_to_message_id ? ($idMap[$message->reply_to_message_id] ?? null) : null,
+                    'platform_message_id' => $message->platform_message_id,
+                    'platform' => $message->platform,
+                    'feedback' => $message->feedback,
                 ]);
 
-                foreach ($lastMessages as $msg) {
-                    if (!empty($msg->user_message)) {
-                        $ticket->messages()->create([
-                            'sender_id' => $chatId,
-                            'sender_type' => 'user',
-                            'message' => $msg->user_message,
-                        ]);
-                    }
-
-                    if (!empty($msg->bot_response)) {
-                        $ticket->messages()->create([
-                            'sender_type' => 'bot',
-                            'message' => $msg->bot_response,
-                            'platform_message_id' => $msg->telegram_message_id,
-                        ]);
-                    }
-                }
-
-                Log::info("تیکت جدید برای پشتیبانی ثبت شد:\n" . $compiledMessages);
+                $idMap[$message->id] = $newMessage->id;
             }
+        }
 
-            // Only send thank you if no open ticket exists
-            $hasOpenTicket = TelegramTicket::where('user_id', $chatId)->where('status', 'open')->exists();
+        $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
 
-            $telegram = new TelegramController(config('bale_bot_config.TOKEN'));
-
-            // حذف دکمه‌ها
+        if ($chatId && $msgTelegramId) {
             $telegram->editMessageReplyMarkup([
                 'chat_id' => $chatId,
                 'message_id' => $msgTelegramId,
                 'reply_markup' => json_encode(['inline_keyboard' => []])
             ]);
+        }
 
-            // ارسال پیام تشکر
+        if ($chatId) {
+            $hasOpenTicket = TelegramTicket::where('user_id', $chatId)
+                ->where('status', 'open')
+                ->where('is_bot_generated', false)
+                ->exists();
+
             if (!$hasOpenTicket) {
                 $telegram->sendMessage([
                     'chat_id' => $chatId,

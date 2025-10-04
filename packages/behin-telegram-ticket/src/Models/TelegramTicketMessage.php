@@ -13,6 +13,12 @@ class TelegramTicketMessage extends Model
         'message',
         'reply_to_message_id',
         'platform_message_id',
+        'platform',
+        'feedback',
+    ];
+
+    protected $casts = [
+        'feedback' => 'string',
     ];
 
     public function ticket()

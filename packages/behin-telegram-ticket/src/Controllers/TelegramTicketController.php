@@ -19,6 +19,7 @@ class TelegramTicketController extends Controller
         }
 
         $tickets = TelegramTicket::with('latestMessage')
+            ->where('is_bot_generated', false)
             ->latest()
             ->when($status !== 'all', function ($query) use ($status) {
                 $query->where('status', $status);
@@ -30,13 +31,17 @@ class TelegramTicketController extends Controller
 
     public function show($id)
     {
-        $ticket = TelegramTicket::with(['messages.replyTo'])->findOrFail($id);
+        $ticket = TelegramTicket::with(['messages.replyTo'])
+            ->where('is_bot_generated', false)
+            ->findOrFail($id);
         return view('telegram-ticket::show', compact('ticket'));
     }
 
     public function reply($id, Request $request)
     {
-        $ticket = TelegramTicket::with('messages')->findOrFail($id);
+        $ticket = TelegramTicket::with('messages')
+            ->where('is_bot_generated', false)
+            ->findOrFail($id);
 
         if ($ticket->status === 'closed') {
             return redirect()->back()->withErrors(['reply' => 'این تیکت بسته شده است و امکان پاسخ وجود ندارد.']);
@@ -65,6 +70,7 @@ class TelegramTicketController extends Controller
             'sender_type' => 'agent',
             'message' => $agentReply,
             'reply_to_message_id' => $replyToMessage?->id,
+            'platform' => 'panel',
         ]);
 
         $ticket->status = 'answered';
@@ -97,7 +103,7 @@ class TelegramTicketController extends Controller
 
     public function closeTicket($id)
     {
-        $ticket = TelegramTicket::findOrFail($id);
+        $ticket = TelegramTicket::where('is_bot_generated', false)->findOrFail($id);
         $ticket->status = 'closed';
         $ticket->save();
 
