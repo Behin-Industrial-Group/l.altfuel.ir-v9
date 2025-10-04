@@ -3,7 +3,9 @@
 namespace Mkhodroo\AltfuelTicket\Controllers;
 
 use App\Http\Controllers\Controller;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use IntlDateFormatter;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketComment;
@@ -55,15 +57,9 @@ class TicketFilterController extends Controller
         $jm = (int)$jm;
         $jd = (int)$jd;
 
-        $gy = $jy + 621;
-
-        $leapJ = $this->isJalaliLeap($jy);
-        $march = ($leapJ) ? 20 : 21;
-
-        $jalaliDays = $this->jalaliDayOfYear($jm, $jd, $leapJ);
-
-        $gDate = mktime(0, 0, 0, 3, $march, $gy); // 1 Farvardin = March 20 or 21
-        $gDate += ($jalaliDays - 1) * 86400;
+        $gDate = Verta::jalaliToGregorian($jy, $jm, $jd);
+        $gDate = $gDate[0] . '-' . $gDate[1] . '-' . $gDate[2];
+        Log::info($gDate);
 
         return date('Y-m-d', $gDate);
     }
