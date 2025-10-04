@@ -85,19 +85,49 @@ class BotController extends Controller
         $chat_id = $message['chat']['id'] ?? null;
         $text = $message['text'] ?? null;
         $contact = $message['contact'] ?? null;
+        $incomingMessageId = $message['message_id'] ?? null;
+        $replyToPlatformId = $message['reply_to_message']['message_id'] ?? null;
 
         if (!$chat_id) return;
 
         // اگر تیکت باز برای کاربر وجود دارد، پیام را به تیکت اضافه کن
         $openTicket = TelegramTicket::where('user_id', $chat_id)->whereIn('status', ['open', 'answered'])->first();
         if ($openTicket) {
-            $openTicket->messages .= "\n\n👤 کاربر:\n" . $text;
+            if ($incomingMessageId && $openTicket->messages()->where('platform_message_id', $incomingMessageId)->exists()) {
+                Log::info("Duplicate ticket message ignored: $incomingMessageId");
+                return;
+            }
+
+            $replyTarget = null;
+            if ($replyToPlatformId) {
+                $replyTarget = $openTicket->messages()
+                    ->where('platform_message_id', $replyToPlatformId)
+                    ->first();
+            }
+
+            $messageContent = $text ?? '[بدون متن]';
+
+            $openTicket->messages()->create([
+                'sender_id' => $chat_id,
+                'sender_type' => 'user',
+                'message' => $messageContent,
+                'reply_to_message_id' => $replyTarget?->id,
+                'platform_message_id' => $incomingMessageId,
+            ]);
+
             $openTicket->status = 'open';
             $openTicket->save();
-            $telegram->sendMessage([
+
+            $ackPayload = [
                 'chat_id' => $chat_id,
                 'text' => 'پیام شما به پشتیبانی ارسال شد. منتظر پاسخ کارشناس باشید.'
-            ]);
+            ];
+
+            if ($incomingMessageId) {
+                $ackPayload['reply_to_message_id'] = $incomingMessageId;
+            }
+
+            $telegram->sendMessage($ackPayload);
             return;
         }
 
@@ -243,11 +273,28 @@ class BotController extends Controller
                 }
 
                 // ✅ ایجاد تیکت با استفاده از مدل پکیج
-                TelegramTicket::create([
+                $ticket = TelegramTicket::create([
                     'user_id' => $chatId,
-                    'messages' => $compiledMessages,
                     'status' => 'open',
                 ]);
+
+                foreach ($lastMessages as $msg) {
+                    if (!empty($msg->user_message)) {
+                        $ticket->messages()->create([
+                            'sender_id' => $chatId,
+                            'sender_type' => 'user',
+                            'message' => $msg->user_message,
+                        ]);
+                    }
+
+                    if (!empty($msg->bot_response)) {
+                        $ticket->messages()->create([
+                            'sender_type' => 'bot',
+                            'message' => $msg->bot_response,
+                            'platform_message_id' => $msg->telegram_message_id,
+                        ]);
+                    }
+                }
 
                 Log::info("تیکت جدید برای پشتیبانی ثبت شد:\n" . $compiledMessages);
             }
