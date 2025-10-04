@@ -93,6 +93,7 @@
                                 <div class="message-reply-chip">
                                     <span class="material-icon">↩</span>
                                     <span class="text-truncate">{{ Str::limit($message->replyTo->message, 120) }}</span>
+
                                 </div>
                             @endif
 
@@ -135,6 +136,7 @@
                         <div class="form-group mt-3 material-textarea-group">
                             <textarea name="reply" id="reply" class="material-textarea" rows="4" placeholder=" " required>{{ old('reply') }}</textarea>
                             <label for="reply" class="material-label">پیام شما</label>
+
                         </div>
 
                         <button type="submit" class="md-raised-button md-raised-button-primary mt-3">ارسال پاسخ</button>
@@ -481,6 +483,7 @@
             .message-bubble {
                 max-width: 100%;
             }
+
         }
     </style>
 @endpush
