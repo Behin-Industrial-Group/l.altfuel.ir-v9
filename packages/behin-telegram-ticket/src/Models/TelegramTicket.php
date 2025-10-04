@@ -9,7 +9,12 @@ class TelegramTicket extends Model
 {
     protected $fillable = [
         'user_id',
-        'status'
+        'status',
+        'is_bot_generated',
+    ];
+
+    protected $casts = [
+        'is_bot_generated' => 'boolean',
     ];
 
     public function messages()
