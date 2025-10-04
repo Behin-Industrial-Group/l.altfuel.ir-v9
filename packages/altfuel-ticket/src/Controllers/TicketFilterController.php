@@ -10,6 +10,8 @@ use IntlDateFormatter;
 use Mkhodroo\AltfuelTicket\Models\Ticket;
 use Mkhodroo\AltfuelTicket\Models\TicketComment;
 use Morilog\Jalali\Jalalian;
+use Carbon\Carbon;
+
 
 class TicketFilterController extends Controller
 {
@@ -22,7 +24,9 @@ class TicketFilterController extends Controller
         }
 
         if ($request->filled('date_from')) {
-            $from = $this->jalaliToGregorian($request->date_from);
+            // $from = $this->jalaliToGregorian($request->date_from);
+            $from = Carbon::createFromTimestamp($request->date_from_alt / 1000);
+            Log::info($from);
             $query->where('created_at', '>=', $from);
         }
 
