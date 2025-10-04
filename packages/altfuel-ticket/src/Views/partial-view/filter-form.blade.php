@@ -43,6 +43,7 @@
         <div class="col-md-6">
             <label>تا تاریخ:</label>
             <input type="text" id="date_to" name="date_to" class="form-control" placeholder="تاریخ پایان">
+            <input type="hidden" id="date_to_alt" name="date_to_alt" class="form-control" placeholder="تاریخ پایان">
         </div>
     </div>
 
@@ -87,6 +88,7 @@
             observer: true,
             initialValue: false,
             autoClose: true,
+            altField: "#date_to_alt",
         });
     });
 
