@@ -29,7 +29,7 @@ class TicketFilterController extends Controller
         }
 
         if ($request->filled('date_to')) {
-            $to = Carbon::createFromTimestamp($request->date_to_alt / 1000)->startOfDay();
+            $to = Carbon::createFromTimestamp($request->date_to_alt / 1000)->endOfDay();
             $query->where('created_at', '<=', $to);
         }
 
