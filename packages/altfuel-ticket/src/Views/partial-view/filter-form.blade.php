@@ -38,6 +38,7 @@
         <div class="col-md-6">
             <label>از تاریخ:</label>
             <input type="text" id="date_from" name="date_from" class="form-control" placeholder="تاریخ شروع">
+            <input type="hidden" id="date_from_alt" name="date_from_alt" class="form-control" placeholder="تاریخ شروع">
         </div>
         <div class="col-md-6">
             <label>تا تاریخ:</label>
@@ -76,6 +77,7 @@
             observer: true,
             initialValue: false,
             autoClose: true,
+            altField: "#date_from_alt",
         });
     });
 
