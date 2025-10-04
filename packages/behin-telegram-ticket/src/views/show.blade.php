@@ -153,7 +153,7 @@
     </div>
 @endsection
 
-@push('styles')
+@section('style')
     <style>
         .ticket-wrapper {
             max-width: 960px;
@@ -486,9 +486,9 @@
 
         }
     </style>
-@endpush
+@endsection
 
-@push('scripts')
+@section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const replyInput = document.getElementById('reply_to_message_id');
@@ -549,4 +549,4 @@
             }
         });
     </script>
-@endpush
+@endsection
